@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "allowJs": true,
+    "typeRoots": [
+      "../../Libs/Puerts/Typing",
+      "../../../Gen/Typing",
+    ],
+    "checkJs": false,
+    "outDir": "./FakePath"
+  },
+}
