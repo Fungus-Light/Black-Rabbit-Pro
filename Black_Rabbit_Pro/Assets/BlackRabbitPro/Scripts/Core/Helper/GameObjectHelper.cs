@@ -6,7 +6,7 @@ public class GameObjectHelper
 {
     public static Transform GetTransformByName(string name)
     {
-        string realname = "$" + name;
+        string realname = "$_" + name;
 
         GameObject obj = GameObject.Find(realname);
 
