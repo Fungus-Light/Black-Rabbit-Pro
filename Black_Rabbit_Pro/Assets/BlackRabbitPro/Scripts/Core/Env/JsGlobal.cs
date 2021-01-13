@@ -21,6 +21,7 @@ public class JsGlobal : MonoBehaviour
             catch (System.Exception e)
             {
                 Debug.LogError("JSGlobal Error When Load>> " + scripts[i].name);
+                Debug.LogError(e.Message);
             }
         }
     }
@@ -28,6 +29,9 @@ public class JsGlobal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (env != null)
+        {
+            env.Tick();
+        }
     }
 }

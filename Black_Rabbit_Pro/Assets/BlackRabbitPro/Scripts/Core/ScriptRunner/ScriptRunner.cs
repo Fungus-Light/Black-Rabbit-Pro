@@ -1,21 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Puerts;
+using System;
 
 public class ScriptRunner : MonoBehaviour
 {
-    [SerializeField]
-    [Tooltip("脚本队列，依次加载")]
-    private TextAsset[] Scripts;
+    public TextAsset Script;
 
     internal static JsEnv jsEnv = null;
-    
+
+    public Action JsStart;
+    public Action JsUpdate;
+    public Action JsOnDestroy;
 
     private void Awake()
     {
         jsEnv = RunEnv.GlobalJsEnv;
         
+        if (Script != null)
+        {
+            jsEnv.Eval(Script.text, Script.name);
+        }
 
     }
 

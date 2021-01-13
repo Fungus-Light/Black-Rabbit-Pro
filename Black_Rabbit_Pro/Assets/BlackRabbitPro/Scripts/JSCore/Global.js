@@ -16,6 +16,6 @@ const Debug = {
 const Vector2 = UnityEngine.Vector2
 const Vector3 = UnityEngine.Vector3
 
-const ReadTextFile = FileHelper.ReadTextFile
 const T = $typeof
 const $ = GameObjectHelper.GetTransformByName
+const ReadTextFile = FileHelper.ReadTextFile
