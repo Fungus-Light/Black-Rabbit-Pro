@@ -9,7 +9,6 @@ declare global {
      * UnityEngine.Vector2的重命名
      */
     class Vector2 extends UnityEngine.Vector2 { }
-    class AudioSource extends UnityEngine.AudioSource { }
     /**
      * 读取一个data文件夹下的文本文件并返回其内容
      * 

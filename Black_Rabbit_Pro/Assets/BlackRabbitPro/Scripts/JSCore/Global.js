@@ -1,3 +1,9 @@
+/**
+ * 这个是全局提供的函数以及类
+ * 具体的注释和定义将会在Global.d.ts提供
+ */
+
+//引入模块
 const { UnityEngine, FileHelper, GameObjectHelper } = require('csharp');
 const { $typeof } = require("puerts");
 
@@ -9,7 +15,6 @@ const Debug = {
 
 const Vector2 = UnityEngine.Vector2
 const Vector3 = UnityEngine.Vector3
-const AudioSource = UnityEngine.AudioSource
 
 const ReadTextFile = FileHelper.ReadTextFile
 const T = $typeof
