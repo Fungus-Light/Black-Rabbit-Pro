@@ -8,8 +8,8 @@ public class GameEntrance : MonoBehaviour
 {
     private JsEnv env;
 
-    [Header("Entrance File")]
-    public string ModName;
+    [Header("Entrance Mod Name")]
+    public string StartScript = "GameEntrance";
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class GameEntrance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        env.Eval("require(\"main\")");
+        env.Eval("require(\"" + StartScript + "\")");
     }
 
 }

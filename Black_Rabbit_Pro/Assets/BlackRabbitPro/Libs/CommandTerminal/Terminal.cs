@@ -15,6 +15,8 @@ namespace CommandTerminal
     public class Terminal : MonoBehaviour
     {
         [Header("Window")]
+        public bool DontDestroy = true;
+
         [Range(0, 1)]
         [SerializeField]
         float MaxHeight = 0.7f;
@@ -159,6 +161,11 @@ namespace CommandTerminal
 
         void Start()
         {
+            if (DontDestroy)
+            {
+                DontDestroyOnLoad(this.gameObject);
+            }
+
             if (ConsoleFont == null)
             {
                 ConsoleFont = Font.CreateDynamicFontFromOSFont("Courier New", 16);

@@ -4,7 +4,6 @@ exports.Init = void 0;
 const Common_1 = require("Utils/Common");
 class LevelLoader {
     constructor(bindTo, name, Level) {
-        this.speed = 50;
         this.bindTo = bindTo;
         Level.name = name;
         Level.root = bindTo.transform;

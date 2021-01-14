@@ -6,7 +6,6 @@ class LevelLoader {
 
     public bindTo: JsBehaviour;
     public Level: IGameLevel;
-    public speed = 50
 
     constructor(bindTo: JsBehaviour, name: string, Level: IGameLevel) {
         this.bindTo = bindTo;
