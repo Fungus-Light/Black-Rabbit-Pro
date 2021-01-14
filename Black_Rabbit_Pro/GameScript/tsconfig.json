@@ -2,18 +2,16 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
-    "moduleResolution": "node",
     "jsx": "react",
     "sourceMap": true,
     "noImplicitAny": true,
     "typeRoots": [
       "../Assets/BlackRabbitPro/Libs/Puerts/Typing",
       "../Assets/Gen/Typing",
-      "./node_modules/@types"
+      "./node_modules/@types",
+      "@types"
     ],
     "outDir": "output",
-    "baseUrl": "SRC",
-    "declaration": true,
-    "declarationDir": "./def"
+    "baseUrl": "Level"
   }
 }

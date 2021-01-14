@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Init = void 0;
 const Common_1 = require("Utils/Common");
+let _level = null;
+let _name = "";
 class LevelLoader {
     constructor(bindTo, name, Level) {
         this.bindTo = bindTo;
@@ -13,7 +14,7 @@ class LevelLoader {
         this.bindTo.JsOnDestroy = () => this.OnDestroy();
     }
     OnStart() {
-        Common_1.Debug.LogWarning("Start Level " + this.Level.name);
+        Common_1.Debug.LogWarning("Start Load Level " + this.Level.name);
         this.Level.OnStart();
     }
     OnUpdate() {
@@ -24,8 +25,13 @@ class LevelLoader {
         this.Level.OnDestroy();
     }
 }
-function Init(bindTo, name, Level) {
-    new LevelLoader(bindTo, name, Level);
+function Init(bindTo) {
+    new LevelLoader(bindTo, _name, _level);
 }
 exports.Init = Init;
+function SetLevel(name, Level) {
+    _name = name;
+    _level = Level;
+}
+exports.SetLevel = SetLevel;
 //# sourceMappingURL=LevelLoader.js.map

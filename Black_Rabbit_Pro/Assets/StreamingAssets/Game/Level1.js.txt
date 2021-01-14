@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Common_1 = require("Utils/Common");
+const Common_1 = require("JS/Utils/Common");
 function Create() { return new Level1(); }
 exports.Create = Create;
 /*===============================================*/

@@ -1,13 +1,16 @@
-import { JsBehaviour } from "csharp"
+import { LevelRunner } from "csharp"
 import { IGameLevel } from "Interface/IGameLevel";
 import { Debug } from "Utils/Common"
 
+let _level: IGameLevel = null;
+let _name: string = "";
+
 class LevelLoader {
 
-    public bindTo: JsBehaviour;
+    public bindTo: LevelRunner;
     public Level: IGameLevel;
 
-    constructor(bindTo: JsBehaviour, name: string, Level: IGameLevel) {
+    constructor(bindTo: LevelRunner, name: string, Level: IGameLevel) {
         this.bindTo = bindTo;
         Level.name = name;
         Level.root = bindTo.transform
@@ -18,7 +21,7 @@ class LevelLoader {
     }
 
     public OnStart() {
-        Debug.LogWarning("Start Level " + this.Level.name);
+        Debug.LogWarning("Start Load Level " + this.Level.name);
         this.Level.OnStart()
     }
 
@@ -32,10 +35,16 @@ class LevelLoader {
     }
 }
 
-function Init(bindTo: JsBehaviour, name: string, Level: IGameLevel) {
-    new LevelLoader(bindTo, name, Level);
+function Init(bindTo: LevelRunner) {
+    new LevelLoader(bindTo, _name, _level);
+}
+
+function SetLevel(name: string, Level: IGameLevel) {
+    _name = name;
+    _level = Level;
 }
 
 export {
-    Init
+    Init,
+    SetLevel
 }

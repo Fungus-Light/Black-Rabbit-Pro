@@ -2902,6 +2902,22 @@ declare module 'csharp' {
             
         }
         
+        class LevelRunner extends UnityEngine.MonoBehaviour {
+            
+            public LevelModName: string;
+            
+            public LevelLoaderName: string;
+            
+            public JsStart: System.Action;
+            
+            public JsUpdate: System.Action;
+            
+            public JsOnDestroy: System.Action;
+            
+            public constructor();
+            
+        }
+        
         class FileHelper extends System.Object {
             
             public constructor();
