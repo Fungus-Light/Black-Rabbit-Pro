@@ -7,6 +7,9 @@
 
 using System;
 using System.Collections.Generic;
+#if CSHARP_7_3_OR_NEWER
+using System.Threading.Tasks;
+#endif
 
 namespace Puerts
 {
@@ -37,7 +40,7 @@ namespace Puerts
 
         public JsEnv(ILoader loader, int debugPort = -1)
         {
-            const int libVersionExpect = 7;
+            const int libVersionExpect = 8;
             int libVersion = PuertsDLL.GetLibVersion();
             if (libVersion != libVersionExpect)
             {
@@ -167,6 +170,22 @@ namespace Puerts
 #if THREAD_SAFE
             }
 #endif
+        }
+
+        public void ClearModuleCache ()
+        {
+            Eval("global.clearModuleCache()");
+        }
+
+        public static void ClearAllModuleCaches () 
+        {
+            lock (jsEnvs)
+            {
+                foreach (var jsEnv in jsEnvs)
+                {
+                    jsEnv.ClearModuleCache();
+                }
+            }
         }
 
         public void AddLazyStaticWrapLoader(Type type, Func<TypeRegisterInfo> lazyStaticWrapLoader)
@@ -460,8 +479,19 @@ namespace Puerts
 #if THREAD_SAFE
             lock(this) {
 #endif
+            CheckLiveness();
             ReleasePendingJSFunctions();
-            PuertsDLL.InspectorTick(isolate);
+            if (PuertsDLL.InspectorTick(isolate))
+            {
+#if CSHARP_7_3_OR_NEWER
+                if (waitDebugerTaskSource != null)
+                {
+                    var tmp = waitDebugerTaskSource;
+                    waitDebugerTaskSource = null;
+                    tmp.SetResult(true);
+                }
+#endif
+            }
             tickHandler.ForEach(fn =>
             {
                 IntPtr resultInfo = PuertsDLL.InvokeJSFunction(fn, false);
@@ -487,6 +517,15 @@ namespace Puerts
             }
 #endif
         }
+
+#if CSHARP_7_3_OR_NEWER
+        TaskCompletionSource<bool> waitDebugerTaskSource;
+        public Task WaitDebuggerAsync()
+        {
+            waitDebugerTaskSource = new TaskCompletionSource<bool>();
+            return waitDebugerTaskSource.Task;
+        }
+#endif
 
         /*[MonoPInvokeCallback(typeof(LogCallback))]
         private static void LogCallback(string msg)
