@@ -1,8 +1,8 @@
-import { JsBehaviour } from "csharp"
+import { JsBehaviour, UnityEngine } from "csharp"
 
 interface IGameLevel {
     name: string,
-    bindTo: JsBehaviour,
+    root: UnityEngine.Transform,
     OnStart(): void,
     OnUpdate(): void,
     OnDestroy(): void
@@ -11,3 +11,4 @@ interface IGameLevel {
 export {
     IGameLevel
 }
+

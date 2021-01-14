@@ -1,6 +1,6 @@
 import { JsBehaviour } from "csharp"
 import { IGameLevel } from "Interface/IGameLevel";
-import { GameTime, Vector3, } from "Utils/Common"
+import { Debug } from "Utils/Common"
 
 class LevelLoader {
 
@@ -11,6 +11,7 @@ class LevelLoader {
     constructor(bindTo: JsBehaviour, name: string, Level: IGameLevel) {
         this.bindTo = bindTo;
         Level.name = name;
+        Level.root = bindTo.transform
         this.Level = Level;
         this.bindTo.JsStart = () => this.OnStart();
         this.bindTo.JsUpdate = () => this.OnUpdate();
@@ -18,17 +19,17 @@ class LevelLoader {
     }
 
     public OnStart() {
-        console.log("Start level " + this.Level.name)
+        Debug.LogWarning("Start Level " + this.Level.name);
+        this.Level.OnStart()
     }
 
     public OnUpdate() {
-        //js不支持操作符重载所以Vector3的乘这么用
-        let r = Vector3.op_Multiply(Vector3.up, GameTime.deltaTime * this.speed);
-        this.bindTo.transform.Rotate(r);
+        this.Level.OnUpdate()
     }
 
     public OnDestroy() {
-        console.log('Destroy...' + this.Level.name);
+        Debug.LogWarning('Destroy...' + this.Level.name);
+        this.Level.OnDestroy()
     }
 }
 

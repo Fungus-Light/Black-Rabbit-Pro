@@ -1,1 +1,1 @@
-{"version":3,"file":"Level1.js","sourceRoot":"","sources":["../../SRC/DemoLevel/Level1.ts"],"names":[],"mappings":";;AAGA,MAAM,MAAM;IAGR,OAAO;IAEP,CAAC;IACD,QAAQ;IAER,CAAC;IACD,SAAS;IAET,CAAC;CAEJ"}
+{"version":3,"file":"Level1.js","sourceRoot":"","sources":["../../SRC/DemoLevel/Level1.ts"],"names":[],"mappings":";;;AAGA,SAAS,MAAM,KAAK,OAAO,IAAI,MAAM,EAAE,CAAC,CAAC,CAAC;AACjC,wBAAM;AAEf,mDAAmD;AAEnD,MAAM,MAAM;IAGR,OAAO;IAEP,CAAC;IACD,QAAQ;IAER,CAAC;IACD,SAAS;IAET,CAAC;CAEJ"}

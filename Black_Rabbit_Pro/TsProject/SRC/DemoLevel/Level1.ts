@@ -1,9 +1,14 @@
-import { JsBehaviour } from "csharp";
 import { IGameLevel } from "Interface/IGameLevel";
+import { Transform } from "Utils/Common"
+
+function Create() { return new Level1(); }
+export { Create }
+
+/*===============================================*/
 
 class Level1 implements IGameLevel {
     name: string;
-    bindTo: JsBehaviour;
+    root: Transform;
     OnStart(): void {
 
     }
@@ -15,3 +20,4 @@ class Level1 implements IGameLevel {
     }
 
 }
+

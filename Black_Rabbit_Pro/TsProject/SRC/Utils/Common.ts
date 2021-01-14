@@ -1,4 +1,4 @@
-import { UnityEngine } from "csharp";
+import { UnityEngine, GameObjectHelper } from "csharp";
 
 import { $typeof } from "puerts"
 
@@ -8,14 +8,21 @@ class Vector3 extends UnityEngine.Vector3 { }
 
 class Vector2 extends UnityEngine.Vector2 { }
 
-const T = $typeof
+class Transform extends UnityEngine.Transform { }
 
 class GameTime extends UnityEngine.Time { }
+
+
+const T = $typeof
+
+const $ = GameObjectHelper.GetTransformByName
 
 export {
     Debug,
     Vector3,
     Vector2,
+    GameTime,
+    Transform,
     T,
-    GameTime
+    $,
 }

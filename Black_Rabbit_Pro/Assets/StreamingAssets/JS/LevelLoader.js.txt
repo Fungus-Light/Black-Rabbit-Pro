@@ -7,21 +7,22 @@ class LevelLoader {
         this.speed = 50;
         this.bindTo = bindTo;
         Level.name = name;
+        Level.root = bindTo.transform;
         this.Level = Level;
         this.bindTo.JsStart = () => this.OnStart();
         this.bindTo.JsUpdate = () => this.OnUpdate();
         this.bindTo.JsOnDestroy = () => this.OnDestroy();
     }
     OnStart() {
-        console.log("Start level " + this.Level.name);
+        Common_1.Debug.LogWarning("Start Level " + this.Level.name);
+        this.Level.OnStart();
     }
     OnUpdate() {
-        //js不支持操作符重载所以Vector3的乘这么用
-        let r = Common_1.Vector3.op_Multiply(Common_1.Vector3.up, Common_1.GameTime.deltaTime * this.speed);
-        this.bindTo.transform.Rotate(r);
+        this.Level.OnUpdate();
     }
     OnDestroy() {
-        console.log('Destroy...' + this.Level.name);
+        Common_1.Debug.LogWarning('Destroy...' + this.Level.name);
+        this.Level.OnDestroy();
     }
 }
 function Init(bindTo, name, Level) {
