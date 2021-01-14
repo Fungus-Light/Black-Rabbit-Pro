@@ -9,21 +9,21 @@ class Rotate {
     constructor(bindTo: CS.JsBehaviour) {
         this.bindTo = bindTo;
         this.bindTo.JsStart = () => this.OnStart();
-        this.bindTo.JsUpdate = () => this.onUpdate();
-        this.bindTo.JsOnDestroy = () => this.onDestroy();
+        this.bindTo.JsUpdate = () => this.OnUpdate();
+        this.bindTo.JsOnDestroy = () => this.OnDestroy();
     }
 
-    OnStart() {
+    public OnStart() {
         console.log("Start it ")
     }
 
-    onUpdate() {
+    public OnUpdate() {
         //js不支持操作符重载所以Vector3的乘这么用
         let r = CS.UnityEngine.Vector3.op_Multiply(CS.UnityEngine.Vector3.up, CS.UnityEngine.Time.deltaTime * this.speed);
         this.bindTo.transform.Rotate(r);
     }
 
-    onDestroy() {
+    public OnDestroy() {
         console.log('onDestroy...');
     }
 }

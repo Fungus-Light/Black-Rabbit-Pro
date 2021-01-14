@@ -1,29 +1,31 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Init = void 0;
-const CS = require("csharp");
-class Rotate {
-    constructor(bindTo) {
+const Common_1 = require("Utils/Common");
+class LevelLoader {
+    constructor(bindTo, name, Level) {
         this.speed = 50;
         this.bindTo = bindTo;
+        Level.name = name;
+        this.Level = Level;
         this.bindTo.JsStart = () => this.OnStart();
         this.bindTo.JsUpdate = () => this.OnUpdate();
         this.bindTo.JsOnDestroy = () => this.OnDestroy();
     }
     OnStart() {
-        console.log("Start it ");
+        console.log("Start level " + this.Level.name);
     }
     OnUpdate() {
         //js不支持操作符重载所以Vector3的乘这么用
-        let r = CS.UnityEngine.Vector3.op_Multiply(CS.UnityEngine.Vector3.up, CS.UnityEngine.Time.deltaTime * this.speed);
+        let r = Common_1.Vector3.op_Multiply(Common_1.Vector3.up, Common_1.GameTime.deltaTime * this.speed);
         this.bindTo.transform.Rotate(r);
     }
     OnDestroy() {
-        console.log('onDestroy...');
+        console.log('Destroy...' + this.Level.name);
     }
 }
-function Init(bindTo) {
-    new Rotate(bindTo);
+function Init(bindTo, name, Level) {
+    new LevelLoader(bindTo, name, Level);
 }
 exports.Init = Init;
-//# sourceMappingURL=MonoTest.js.map
+//# sourceMappingURL=LevelLoader.js.map

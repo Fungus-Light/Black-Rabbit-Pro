@@ -15,7 +15,7 @@ public class JavaScriptLoader : Puerts.ILoader
     {
         if (filepath.StartsWith("puerts/")) return true;
 #if UNITY_EDITOR
-        Debug.Log(Path.Combine(Application.streamingAssetsPath + "/JS", filepath).Replace("\\", "/"));
+        //Debug.Log(Path.Combine(Application.streamingAssetsPath + "/JS", filepath).Replace("\\", "/"));
         return File.Exists(Path.Combine(Application.streamingAssetsPath, "JS", filepath + ".txt").Replace("\\", "/"));
 #else
 			return true;
@@ -38,7 +38,7 @@ public class JavaScriptLoader : Puerts.ILoader
             var asset = Resources.Load<TextAsset>(filepath);
             return asset.text;
         }
-        Debug.Log(Path.Combine(Application.streamingAssetsPath + "/JS", filepath).Replace("\\", "/"));
+        //Debug.Log(Path.Combine(Application.streamingAssetsPath + "/JS", filepath).Replace("\\", "/"));
         return File.ReadAllText(Path.Combine(Application.streamingAssetsPath + "/JS", filepath + ".txt").Replace("\\", "/"));
     }
 

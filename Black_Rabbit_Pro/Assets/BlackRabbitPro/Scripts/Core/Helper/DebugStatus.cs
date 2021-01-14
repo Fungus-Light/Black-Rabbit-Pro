@@ -13,7 +13,7 @@ public class DebugStatus : MonoBehaviour
     {
         int w = Screen.width, h = Screen.height;
         GUIStyle style = new GUIStyle();
-        Rect rect = new Rect(20, 20, w, h * 2 / 100);
+        Rect rect = new Rect(20, h - 20, w, h * 2 / 100);
         style.alignment = TextAnchor.UpperLeft;
         style.fontSize = h * 2 / 100;
         style.normal.textColor = Color.white;

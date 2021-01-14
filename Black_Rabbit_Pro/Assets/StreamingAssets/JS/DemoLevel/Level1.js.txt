@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class Level1 {
+    OnStart() {
+    }
+    OnUpdate() {
+    }
+    OnDestroy() {
+    }
+}
+//# sourceMappingURL=Level1.js.map
