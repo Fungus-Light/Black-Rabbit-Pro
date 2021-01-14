@@ -2,48 +2,45 @@
 using Puerts;
 using System;
 
-namespace PuertsTest
+
+public delegate void ModuleInit(JsBehaviour monoBehaviour);
+
+//只是演示纯用js实现MonoBehaviour逻辑的可能，
+//但从性能角度这并不是最佳实践，会导致过多的跨语言调用
+public class JsBehaviour : MonoBehaviour
 {
-    public delegate void ModuleInit(JsBehaviour monoBehaviour);
+    public string ModuleName;//可配置加载的js模块
 
-    //只是演示纯用js实现MonoBehaviour逻辑的可能，
-    //但从性能角度这并不是最佳实践，会导致过多的跨语言调用
-    public class JsBehaviour : MonoBehaviour
+    public Action JsStart;
+    public Action JsUpdate;
+    public Action JsOnDestroy;
+
+    static JsEnv jsEnv;
+
+    void Awake()
     {
-        public string ModuleName;//可配置加载的js模块
+        if (jsEnv == null) jsEnv = new JsEnv(new JavaScriptLoader(""));
 
-        public Action JsStart;
-        public Action JsUpdate;
-        public Action JsOnDestroy;
+        var init = jsEnv.Eval<ModuleInit>("const " + ModuleName + " = require('" + ModuleName + "'); " + ModuleName + ".Init;");
 
-        static JsEnv jsEnv;
+        init?.Invoke(this);
+    }
 
-        void Awake()
-        {
-            //JsLoader loader = new JsLoader("JS");
-            if (jsEnv == null) jsEnv = new JsEnv();
+    void Start()
+    {
+        if (JsStart != null) JsStart();
+    }
 
-            var init = jsEnv.Eval<ModuleInit>("const m = require('" + ModuleName + "'); m.init;");
+    void Update()
+    {
+        if (JsUpdate != null) JsUpdate();
+    }
 
-            if (init != null) init(this);
-        }
-
-        void Start()
-        {
-            if (JsStart != null) JsStart();
-        }
-
-        void Update()
-        {
-            if (JsUpdate != null) JsUpdate();
-        }
-
-        void OnDestroy()
-        {
-            if (JsOnDestroy != null) JsOnDestroy();
-            JsStart = null;
-            JsUpdate = null;
-            JsOnDestroy = null;
-        }
+    void OnDestroy()
+    {
+        if (JsOnDestroy != null) JsOnDestroy();
+        JsStart = null;
+        JsUpdate = null;
+        JsOnDestroy = null;
     }
 }

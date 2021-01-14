@@ -12,7 +12,7 @@ public class RunEnv : MonoBehaviour
         {
             if (globalJsEnv == null)
             {
-                globalJsEnv = new JsEnv();
+                globalJsEnv = new JsEnv(new JavaScriptLoader(""));
             }
             return globalJsEnv;
         }

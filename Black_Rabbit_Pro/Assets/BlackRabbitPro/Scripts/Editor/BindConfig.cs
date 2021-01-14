@@ -35,6 +35,7 @@ public class BindConfig
                 typeof(Behaviour),
                 typeof(MonoBehaviour),
                 typeof(System.IO.Path),
+                typeof(JsBehaviour),
 
                 typeof(FileHelper),
                 typeof(GameObjectHelper)

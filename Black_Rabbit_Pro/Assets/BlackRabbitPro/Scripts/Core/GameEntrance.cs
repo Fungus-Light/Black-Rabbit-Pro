@@ -9,7 +9,7 @@ public class GameEntrance : MonoBehaviour
     private JsEnv env;
 
     [Header("Entrance File")]
-    public TextAsset EntranceScript;
+    public string ModName;
 
     private void Awake()
     {
@@ -23,11 +23,7 @@ public class GameEntrance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        env.Eval(EntranceScript.text,EntranceScript.name);
+        env.Eval("require(\"main\")");
     }
 
-    private void OnDestroy()
-    {
-        env.Dispose();
-    }
 }
