@@ -35,10 +35,19 @@ class LevelLoader {
     }
 }
 
+/**
+ * Make A LevelLoader Run
+ * @param bindTo A C# LevelRunner
+ */
 function Init(bindTo: LevelRunner) {
     new LevelLoader(bindTo, _name, _level);
 }
 
+/**
+ * Set A LevelLoader's Content
+ * @param name Level Name
+ * @param Level A Level
+ */
 function SetLevel(name: string, Level: IGameLevel) {
     _name = name;
     _level = Level;

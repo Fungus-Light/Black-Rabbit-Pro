@@ -1892,6 +1892,14 @@ declare module 'csharp' {
         class Coroutine extends UnityEngine.YieldInstruction {
             
         }
+        /** Position, size, anchor and pivot information for a rectangle. */
+        class RectTransform extends UnityEngine.Transform {
+            
+        }
+        /** Represents a Sprite object for use in 2D gameplay. */
+        class Sprite extends UnityEngine.Object {
+            
+        }
         
     }
     namespace System {
@@ -2904,6 +2912,8 @@ declare module 'csharp' {
         
         class LevelRunner extends UnityEngine.MonoBehaviour {
             
+            public PackName: string;
+            
             public LevelModName: string;
             
             public LevelLoaderName: string;
@@ -2935,5 +2945,78 @@ declare module 'csharp' {
         }
         
     
+    namespace Fungus {
+        
+        class SayDialog extends UnityEngine.MonoBehaviour {
+            
+            public get NameText(): string;
+            public set NameText(value: string);
+            
+            public get StoryText(): string;
+            public set StoryText(value: string);
+            
+            public get StoryTextRectTrans(): UnityEngine.RectTransform;
+            
+            public get CharacterImage(): UnityEngine.UI.Image;
+            
+            public get SpeakingCharacter(): Fungus.Character;
+            
+            public static get ActiveSayDialog(): Fungus.SayDialog;
+            public static set ActiveSayDialog(value: Fungus.SayDialog);
+            
+            public get FadeWhenDone(): boolean;
+            public set FadeWhenDone(value: boolean);
+            
+            public constructor();
+            
+            public static GetSayDialog():Fungus.SayDialog;
+            
+            public static StopPortraitTweens():void;
+            
+            public SetActive($state: boolean):void;
+            
+            public SetCharacter($character: Fungus.Character):void;
+            
+            public SetCharacterImage($image: UnityEngine.Sprite):void;
+            
+            public SetCharacterName($name: string, $color: UnityEngine.Color):void;
+            
+            public Say($text: string, $clearPrevious: boolean, $waitForInput: boolean, $fadeWhenDone: boolean, $stopVoiceover: boolean, $waitForVO: boolean, $voiceOverClip: UnityEngine.AudioClip, $onComplete: System.Action):void;
+            
+            public DoSay($text: string, $clearPrevious: boolean, $waitForInput: boolean, $fadeWhenDone: boolean, $stopVoiceover: boolean, $waitForVO: boolean, $voiceOverClip: UnityEngine.AudioClip, $onComplete: System.Action):System.Collections.IEnumerator;
+            
+            public Stop():void;
+            
+            public Clear():void;
+            
+        }
+        
+        class Character extends UnityEngine.MonoBehaviour {
+            
+        }
+        
+    }
+    namespace UnityEngine.UI {
+        
+        class Image extends UnityEngine.UI.MaskableGraphic {
+            
+        }
+        
+        class MaskableGraphic extends UnityEngine.UI.Graphic {
+            
+        }
+        
+        class Graphic extends UnityEngine.EventSystems.UIBehaviour {
+            
+        }
+        
+    }
+    namespace UnityEngine.EventSystems {
+        
+        class UIBehaviour extends UnityEngine.MonoBehaviour {
+            
+        }
+        
+    }
     
 }

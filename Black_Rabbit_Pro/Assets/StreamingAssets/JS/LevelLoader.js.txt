@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SetLevel = exports.Init = void 0;
 const Common_1 = require("Utils/Common");
 let _level = null;
 let _name = "";
@@ -25,10 +26,19 @@ class LevelLoader {
         this.Level.OnDestroy();
     }
 }
+/**
+ * Make A LevelLoader Run
+ * @param bindTo A C# LevelRunner
+ */
 function Init(bindTo) {
     new LevelLoader(bindTo, _name, _level);
 }
 exports.Init = Init;
+/**
+ * Set A LevelLoader's Content
+ * @param name Level Name
+ * @param Level A Level
+ */
 function SetLevel(name, Level) {
     _name = name;
     _level = Level;

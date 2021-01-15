@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.$ = exports.T = exports.Transform = exports.AudioClip = exports.GameTime = exports.Vector2 = exports.Vector3 = exports.Debug = void 0;
 const csharp_1 = require("csharp");
 const puerts_1 = require("puerts");
 /**
@@ -14,17 +15,32 @@ exports.Debug = Debug;
 class Vector3 extends csharp_1.UnityEngine.Vector3 {
 }
 exports.Vector3 = Vector3;
+/**
+ * UnityEngine's Vector2
+ */
 class Vector2 extends csharp_1.UnityEngine.Vector2 {
 }
 exports.Vector2 = Vector2;
 class Transform extends csharp_1.UnityEngine.Transform {
 }
 exports.Transform = Transform;
+/**
+ * UnityEngine's Time Class
+ */
 class GameTime extends csharp_1.UnityEngine.Time {
 }
 exports.GameTime = GameTime;
+class AudioClip extends csharp_1.UnityEngine.AudioClip {
+}
+exports.AudioClip = AudioClip;
+/**
+ * Get An Obeject's Type
+ */
 const T = puerts_1.$typeof;
 exports.T = T;
+/**
+ * Get A Transform By It's Name
+ */
 const $ = csharp_1.GameObjectHelper.GetTransformByName;
 exports.$ = $;
 //# sourceMappingURL=Common.js.map

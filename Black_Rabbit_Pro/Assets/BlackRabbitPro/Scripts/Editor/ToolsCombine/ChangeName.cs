@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class ChangeNameFunc
 {
-    [MenuItem(@"Tools/快速重命名/_FGO")]
+    //[MenuItem(@"Tools/快速重命名/_FGO")]
     public static void AddFGO()
     {
         Transform[] transforms = Selection.transforms;
@@ -23,7 +23,7 @@ public class ChangeNameFunc
         }
     }
 
-    [MenuItem(@"Tools/快速重命名/Clear")]
+    //[MenuItem(@"Tools/快速重命名/Clear")]
     public static void Clear()
     {
         Transform[] transforms = Selection.transforms;

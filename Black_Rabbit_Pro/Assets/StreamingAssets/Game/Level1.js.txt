@@ -1,5 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Create = void 0;
+/*==============Dont Delete This============================*/
+const DialogManager_1 = require("JS/Dialog/DialogManager");
 const Common_1 = require("JS/Utils/Common");
 function Create() { return new Level1(); }
 exports.Create = Create;
@@ -10,11 +13,14 @@ class Level1 {
     }
     OnStart() {
         Common_1.Debug.LogWarning("Enter Level1, this is a demo level");
-        this.TestCube = Common_1.$("Cube");
+        let flow = DialogManager_1.CreateDialog();
+        flow.Say("Hello Black Rabbit");
+        flow.Say("This a flow");
+        flow.Start();
     }
     OnUpdate() {
-        let V = Common_1.Vector3.op_Multiply(this.TestCube.up, this.TestSpeed);
-        this.TestCube.Rotate(V);
+        // let V = Vector3.op_Multiply(this.TestCube.up, this.TestSpeed);
+        // this.TestCube.Rotate(V);
     }
     OnDestroy() {
     }

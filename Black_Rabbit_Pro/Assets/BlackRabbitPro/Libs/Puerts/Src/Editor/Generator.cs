@@ -941,7 +941,7 @@ namespace Puerts.Editor
             };
         }
 
-        [MenuItem("Puerts/Generate Code", false, 1)]
+        [MenuItem("Tools/Puerts/Generate Code", false, 1)]
         public static void GenerateCode()
         {
             var start = DateTime.Now;
@@ -953,7 +953,7 @@ namespace Puerts.Editor
             AssetDatabase.Refresh();
         }
 
-        [MenuItem("Puerts/Generate index.d.ts", false, 1)]
+        [MenuItem("Tools/Puerts/Generate index.d.ts", false, 1)]
         public static void GenerateDTS()
         {
             var start = DateTime.Now;
@@ -965,7 +965,7 @@ namespace Puerts.Editor
             AssetDatabase.Refresh();
         }
 
-        [MenuItem("Puerts/Clear Generated Code", false, 2)]
+        [MenuItem("Tools/Puerts/Clear Generated Code", false, 2)]
         public static void ClearAll()
         {
             var saveTo = Configure.GetCodeOutputDirectory();

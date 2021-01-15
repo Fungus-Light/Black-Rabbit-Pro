@@ -1,0 +1,67 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CreateDialog = exports.DialogManager = void 0;
+const SayDialog_1 = require("Dialog/SayDialog");
+/**
+ * Manage A Dialog FLow
+ */
+class DialogManager {
+    constructor() {
+        this.FlowList = new Array();
+    }
+    /**
+     * Say Something
+     * @param text Content To Say
+     * @param clearPrevious will Close Previous Say
+     * @param waitForInput wait For User Click
+     * @param fadeWhenDone
+     * @param stopVoiceover
+     * @param waitForVO
+     * @param clip
+     */
+    Say(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, clip) {
+        if (clearPrevious == null) {
+            clearPrevious = true;
+        }
+        if (waitForInput == null) {
+            waitForInput = true;
+        }
+        if (fadeWhenDone == null) {
+            fadeWhenDone = true;
+        }
+        if (stopVoiceover == null) {
+            stopVoiceover = true;
+        }
+        if (waitForVO == true) {
+            waitForVO = true;
+        }
+        if (clip == null) {
+            clip = null;
+        }
+        this.FlowList.push(() => {
+            SayDialog_1.$SayDialog().gameObject.SetActive(true);
+            SayDialog_1.$SayDialog().Say(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, clip, () => {
+                this.Gonext();
+            });
+        });
+    }
+    Gonext() {
+        if (this.FlowList.length > 0) {
+            this.FlowList.shift();
+        }
+        if (this.FlowList.length > 0) {
+            this.FlowList[0]();
+        }
+    }
+    Start() {
+        if (this.FlowList.length > 0) {
+            this.FlowList[0]();
+        }
+    }
+}
+exports.DialogManager = DialogManager;
+function CreateDialog() {
+    return new DialogManager;
+}
+exports.CreateDialog = CreateDialog;
+//# sourceMappingURL=DialogManager.js.map
