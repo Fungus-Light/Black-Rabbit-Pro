@@ -1,11 +1,12 @@
 import { SayDialog, $SayDialog } from "Dialog/SayDialog"
-import { $, AudioClip } from "Utils/Common";
+import { $, AudioClip, Debug } from "Utils/Common";
 
 /**
  * Manage A Dialog FLow
  */
 class DialogManager {
     FlowList: Array<any>
+    CB: any
     constructor() {
         this.FlowList = new Array<any>()
     }
@@ -20,29 +21,7 @@ class DialogManager {
      * @param waitForVO 
      * @param clip 
      */
-    Say(text: string, clearPrevious?: boolean, waitForInput?: boolean, fadeWhenDone?: boolean, stopVoiceover?: boolean, waitForVO?: boolean, clip?: AudioClip): void {
-        if (clearPrevious == null) {
-            clearPrevious = true
-        }
-        if (waitForInput == null) {
-            waitForInput = true
-        }
-
-        if (fadeWhenDone == null) {
-            fadeWhenDone = true
-        }
-
-        if (stopVoiceover == null) {
-            stopVoiceover = true
-        }
-
-        if (waitForVO == true) {
-            waitForVO = true
-        }
-        if(clip==null){
-            clip=null
-        }
-
+    SayDetail(text: string, clearPrevious: boolean, waitForInput: boolean, fadeWhenDone: boolean, stopVoiceover: boolean, waitForVO: boolean, clip: AudioClip): void {
         this.FlowList.push(() => {
             $SayDialog().gameObject.SetActive(true)
             $SayDialog().Say(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, clip, () => {
@@ -51,19 +30,44 @@ class DialogManager {
         })
     }
 
+    Say(text: string) {
+        this.FlowList.push(() => {
+            $SayDialog().gameObject.SetActive(true)
+            $SayDialog().Say(text, true, true, true, true, true, null, () => {
+                this.Gonext()
+            })
+        })
+    }
+
+    /**
+     * Set The CallBack When Flow is End
+     * @param cb 
+     */
+    SetCallBack(cb: any) {
+        this.CB = cb;
+        Debug.LogWarning("Call Back Setted")
+    }
+
     private Gonext(): void {
         if (this.FlowList.length > 0) {
-            this.FlowList.shift()
-        }
-        if (this.FlowList.length > 0) {
-            this.FlowList[0]()
+            let step = this.FlowList.shift()
+            step()
+        } else {
+            Debug.LogWarning("Nothing To Talk.")
+            if(this.CB==null){
+                Debug.LogWarning("CB is Nothing")
+            }else{
+                this.CB()
+            }
+            
         }
     }
 
+    /**
+     * Start A FLow
+     */
     Start(): void {
-        if (this.FlowList.length > 0) {
-            this.FlowList[0]()
-        }
+        this.Gonext()
     }
 
 }

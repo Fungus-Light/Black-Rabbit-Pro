@@ -14,8 +14,12 @@ class Level1 {
     OnStart() {
         Common_1.Debug.LogWarning("Enter Level1, this is a demo level");
         let flow = DialogManager_1.CreateDialog();
+        flow.SetCallBack(() => {
+            Common_1.Debug.LogWarning("End Talk!!!");
+        });
         flow.Say("Hello Black Rabbit");
         flow.Say("This a flow");
+        flow.SayDetail("This a Detail say", true, true, true, true, true, null);
         flow.Start();
     }
     OnUpdate() {

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateDialog = exports.DialogManager = void 0;
 const SayDialog_1 = require("Dialog/SayDialog");
+const Common_1 = require("Utils/Common");
 /**
  * Manage A Dialog FLow
  */
@@ -19,25 +20,7 @@ class DialogManager {
      * @param waitForVO
      * @param clip
      */
-    Say(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, clip) {
-        if (clearPrevious == null) {
-            clearPrevious = true;
-        }
-        if (waitForInput == null) {
-            waitForInput = true;
-        }
-        if (fadeWhenDone == null) {
-            fadeWhenDone = true;
-        }
-        if (stopVoiceover == null) {
-            stopVoiceover = true;
-        }
-        if (waitForVO == true) {
-            waitForVO = true;
-        }
-        if (clip == null) {
-            clip = null;
-        }
+    SayDetail(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, clip) {
         this.FlowList.push(() => {
             SayDialog_1.$SayDialog().gameObject.SetActive(true);
             SayDialog_1.$SayDialog().Say(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, clip, () => {
@@ -45,18 +28,42 @@ class DialogManager {
             });
         });
     }
+    Say(text) {
+        this.FlowList.push(() => {
+            SayDialog_1.$SayDialog().gameObject.SetActive(true);
+            SayDialog_1.$SayDialog().Say(text, true, true, true, true, true, null, () => {
+                this.Gonext();
+            });
+        });
+    }
+    /**
+     * Set The CallBack When Flow is End
+     * @param cb
+     */
+    SetCallBack(cb) {
+        this.CB = cb;
+        Common_1.Debug.LogWarning("Call Back Setted");
+    }
     Gonext() {
         if (this.FlowList.length > 0) {
-            this.FlowList.shift();
+            let step = this.FlowList.shift();
+            step();
         }
-        if (this.FlowList.length > 0) {
-            this.FlowList[0]();
+        else {
+            Common_1.Debug.LogWarning("Nothing To Talk.");
+            if (this.CB == null) {
+                Common_1.Debug.LogWarning("CB is Nothing");
+            }
+            else {
+                this.CB();
+            }
         }
     }
+    /**
+     * Start A FLow
+     */
     Start() {
-        if (this.FlowList.length > 0) {
-            this.FlowList[0]();
-        }
+        this.Gonext();
     }
 }
 exports.DialogManager = DialogManager;
