@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Create = void 0;
 /*==============Dont Delete This============================*/
 const DialogManager_1 = require("JS/Dialog/DialogManager");
 const Common_1 = require("JS/Utils/Common");
@@ -17,9 +16,8 @@ class Level1 {
         flow.SetCallBack(() => {
             Common_1.Debug.LogWarning("End Talk!!!");
         });
-        flow.Say("Hello Black Rabbit");
+        flow.Say("Hello world");
         flow.Say("This a flow");
-        flow.SayDetail("This a Detail say", true, true, true, true, true, null);
         flow.Start();
     }
     OnUpdate() {

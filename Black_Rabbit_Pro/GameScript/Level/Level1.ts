@@ -22,9 +22,8 @@ class Level1 implements IGameLevel {
         flow.SetCallBack(() => {
             Debug.LogWarning("End Talk!!!")
         })
-        flow.Say("Hello Black Rabbit")
+        flow.Say("Hello world")
         flow.Say("This a flow")
-        flow.SayDetail("This a Detail say", true, true, true, true, true, null)
 
         flow.Start()
     }

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateDialog = exports.DialogManager = void 0;
 const SayDialog_1 = require("Dialog/SayDialog");
 const Common_1 = require("Utils/Common");
 /**
@@ -10,28 +9,43 @@ class DialogManager {
     constructor() {
         this.FlowList = new Array();
     }
-    /**
-     * Say Something
-     * @param text Content To Say
-     * @param clearPrevious will Close Previous Say
-     * @param waitForInput wait For User Click
-     * @param fadeWhenDone
-     * @param stopVoiceover
-     * @param waitForVO
-     * @param clip
-     */
-    SayDetail(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, clip) {
+    Say(text, dialogName, character, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, clip) {
+        let Dialog = null;
+        if (dialogName != undefined && dialogName != "") {
+            Dialog = SayDialog_1.$SayDialog(dialogName);
+            if (Dialog == null) {
+                Common_1.Debug.LogError("SayDialog " + dialogName + "Can Not Be Found!!!");
+                return;
+            }
+        }
+        if (Dialog == undefined) {
+            Dialog = SayDialog_1.$SayDialog();
+        }
+        if (character != undefined) {
+            Dialog.SetCharacter(character);
+        }
+        if (clearPrevious == undefined) {
+            clearPrevious = true;
+        }
+        if (waitForInput == undefined) {
+            waitForInput = true;
+        }
+        if (fadeWhenDone == undefined) {
+            fadeWhenDone = true;
+        }
+        if (stopVoiceover == undefined) {
+            stopVoiceover = true;
+        }
+        if (waitForVO == undefined) {
+            waitForVO = true;
+        }
+        if (clip == undefined) {
+            clip = null;
+        }
+        //Debug.LogWarning(text + " " + fadeWhenDone + " " + clearPrevious + " " + waitForInput + " " + waitForVO + " " + stopVoiceover)
         this.FlowList.push(() => {
-            SayDialog_1.$SayDialog().gameObject.SetActive(true);
-            SayDialog_1.$SayDialog().Say(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, clip, () => {
-                this.Gonext();
-            });
-        });
-    }
-    Say(text) {
-        this.FlowList.push(() => {
-            SayDialog_1.$SayDialog().gameObject.SetActive(true);
-            SayDialog_1.$SayDialog().Say(text, true, true, true, true, true, null, () => {
+            Dialog.gameObject.SetActive(true);
+            Dialog.Say(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, clip, () => {
                 this.Gonext();
             });
         });

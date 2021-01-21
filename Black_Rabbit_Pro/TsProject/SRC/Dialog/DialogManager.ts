@@ -11,39 +11,70 @@ class DialogManager {
         this.FlowList = new Array<any>()
     }
 
-    /**
-     * Say Something
-     * @param text Content To Say
-     * @param clearPrevious will Close Previous Say 
-     * @param waitForInput wait For User Click
-     * @param fadeWhenDone 
-     * @param stopVoiceover 
-     * @param waitForVO 
-     * @param clip 
-     */
-    SayDetail(text: string, clearPrevious: boolean, waitForInput: boolean, fadeWhenDone: boolean, stopVoiceover: boolean, waitForVO: boolean, clip: AudioClip): void {
+    
+    Say(text: string): void
+    Say(text: string, dialogName: string): void
+    Say(text: string, dialogName: string, character: Character): void
+    Say(text: string, dialogName?: string,
+        character?: Character,
+        clearPrevious?: boolean,
+        waitForInput?: boolean,
+        fadeWhenDone?: boolean,
+        stopVoiceover?: boolean,
+        waitForVO?: boolean,
+        clip?: AudioClip): void {
+
+        let Dialog: SayDialog = null
+
+        if (dialogName != undefined && dialogName != "") {
+            Dialog = $SayDialog(dialogName);
+            if (Dialog == null) {
+                Debug.LogError("SayDialog " + dialogName + "Can Not Be Found!!!")
+                return;
+            }
+        }
+
+        if (Dialog == undefined) {
+            Dialog = $SayDialog()
+        }
+
+        if (character != undefined) {
+            Dialog.SetCharacter(character)
+        }
+
+        if (clearPrevious == undefined) {
+            clearPrevious = true
+        }
+
+        if (waitForInput == undefined) {
+            waitForInput = true
+        }
+
+        if (fadeWhenDone == undefined) {
+            fadeWhenDone = true
+        }
+
+        if (stopVoiceover == undefined) {
+            stopVoiceover = true
+        }
+
+        if (waitForVO == undefined) {
+            waitForVO = true
+        }
+
+        if (clip == undefined) {
+            clip = null
+        }
+
+        //Debug.LogWarning(text + " " + fadeWhenDone + " " + clearPrevious + " " + waitForInput + " " + waitForVO + " " + stopVoiceover)
+
         this.FlowList.push(() => {
-            $SayDialog().gameObject.SetActive(true)
-            $SayDialog().Say(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, clip, () => {
+            Dialog.gameObject.SetActive(true)
+            Dialog.Say(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, clip, () => {
                 this.Gonext()
             })
         })
-    }
 
-    Say(text: string) {
-        this.FlowList.push(() => {
-            $SayDialog().gameObject.SetActive(true)
-            $SayDialog().Say(text, true, true, true, true, true, null, () => {
-                this.Gonext()
-            })
-        })
-    }
-
-    say(text: string): void
-    say(text: string, dialogName: string): void
-    say(text: string, dialogName: string, character: Character): void
-    say(text: string, dialogName?: string, character?: Character, clearPrevious?: boolean, waitForInput?: boolean, fadeWhenDone?: boolean, stopVoiceover?: boolean, waitForVO?: boolean, clip?: AudioClip): void {
-        
     }
 
     /**

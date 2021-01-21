@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.$SayDialog = exports.SayDialog = void 0;
 const csharp_1 = require("csharp");
 /**
  * Class Of Dialog Panel
@@ -8,6 +7,9 @@ const csharp_1 = require("csharp");
 class SayDialog extends csharp_1.Fungus.SayDialog {
 }
 exports.SayDialog = SayDialog;
+class Character extends csharp_1.Fungus.Character {
+}
+exports.Character = Character;
 /**
  * Get Or Create Dialog
  */
