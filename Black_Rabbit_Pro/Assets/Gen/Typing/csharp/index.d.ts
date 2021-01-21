@@ -1575,7 +1575,7 @@ declare module 'csharp' {
             public get isPlaying(): boolean;
             /** Determines whether the Particle System is emitting particles. A Particle System may stop emitting when its emission module has finished, it has been paused or if the system has been stopped using ParticleSystem.Stop|Stop with the ParticleSystemStopBehavior.StopEmitting|StopEmitting flag. Resume emitting by calling ParticleSystem.Play|Play. */
             public get isEmitting(): boolean;
-            /** Determines whether the Particle System is stopped. */
+            /** Determines whether the Particle System is in the stopped state. */
             public get isStopped(): boolean;
             /** Determines whether the Particle System is paused. */
             public get isPaused(): boolean;
@@ -1744,6 +1744,10 @@ declare module 'csharp' {
             public TriggerSubEmitter($subEmitterIndex: number, $particles: System.Collections.Generic.List$1<UnityEngine.ParticleSystem.Particle>):void;
             
             public static ResetPreMappedBufferMemory():void;
+            /** Limits the amount of graphics memory Unity reserves for efficient rendering of Particle Systems. * @param vertexBuffersCount The maximum number of cached vertex buffers.
+             * @param indexBuffersCount The maximum number of cached index buffers.
+             */
+            public static SetMaximumPreMappedBufferCounts($vertexBuffersCount: number, $indexBuffersCount: number):void;
             
         }
         /** Representation of RGBA colors in 32 bit format. */
@@ -2970,6 +2974,8 @@ declare module 'csharp' {
             public constructor();
             
             public static GetSayDialog():Fungus.SayDialog;
+            
+            public static GetSayDialog($name: string):Fungus.SayDialog;
             
             public static StopPortraitTweens():void;
             
