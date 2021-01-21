@@ -953,7 +953,7 @@ namespace Puerts.Editor
             AssetDatabase.Refresh();
         }
 
-        [MenuItem("Tools/Puerts/Generate index.d.ts", false, 1)]
+        [MenuItem("Tools/Puerts/Generate index.d.ts %g", false, 1)]
         public static void GenerateDTS()
         {
             var start = DateTime.Now;

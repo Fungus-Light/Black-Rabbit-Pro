@@ -1,4 +1,4 @@
-import { SayDialog, $SayDialog } from "Dialog/SayDialog"
+import { SayDialog, $SayDialog, Character } from "Dialog/SayDialog"
 import { $, AudioClip, Debug } from "Utils/Common";
 
 /**
@@ -54,12 +54,11 @@ class DialogManager {
             step()
         } else {
             Debug.LogWarning("Nothing To Talk.")
-            if(this.CB==null){
+            if (this.CB == null) {
                 Debug.LogWarning("CB is Nothing")
-            }else{
+            } else {
                 this.CB()
             }
-            
         }
     }
 

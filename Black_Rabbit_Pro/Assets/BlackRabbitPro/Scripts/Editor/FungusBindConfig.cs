@@ -13,7 +13,9 @@ public class FungusBindConfig
         {
             return new List<Type>()
             {
-                typeof(SayDialog)
+                typeof(SayDialog),
+                typeof(Character),
+                
             };
         }
     }

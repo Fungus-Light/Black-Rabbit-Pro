@@ -2999,6 +2999,51 @@ declare module 'csharp' {
         
         class Character extends UnityEngine.MonoBehaviour {
             
+            public static get ActiveCharacters(): System.Collections.Generic.List$1<Fungus.Character>;
+            
+            public get NameText(): string;
+            
+            public get NameColor(): UnityEngine.Color;
+            
+            public get SoundEffect(): UnityEngine.AudioClip;
+            
+            public get Portraits(): System.Collections.Generic.List$1<UnityEngine.Sprite>;
+            
+            public get PortraitsFace(): Fungus.FacingDirection;
+            
+            public get ProfileSprite(): UnityEngine.Sprite;
+            public set ProfileSprite(value: UnityEngine.Sprite);
+            
+            public get State(): Fungus.PortraitState;
+            
+            public get SetSayDialog(): Fungus.SayDialog;
+            
+            public constructor();
+            
+            public GetObjectName():string;
+            
+            public NameStartsWith($matchString: string):boolean;
+            
+            public NameMatch($matchString: string):boolean;
+            
+            public Compare($x: Fungus.Character, $y: Fungus.Character):number;
+            
+            public GetPortrait($portraitString: string):UnityEngine.Sprite;
+            
+            public GetStandardText():string;
+            
+            public SetStandardText($standardText: string):void;
+            
+            public GetDescription():string;
+            
+            public GetStringId():string;
+            
+        }
+        
+        enum FacingDirection { None = 0, Left = 1, Right = 2 }
+        
+        class PortraitState extends System.Object {
+            
         }
         
     }
