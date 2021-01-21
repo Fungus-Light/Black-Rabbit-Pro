@@ -97,7 +97,7 @@ interface IGameLevel {
 }
 
 declare module "JS/Utils/Common"{
-import { UnityEngine, GameObjectHelper } from "csharp";
+import { UnityEngine, GameObjectHelper, CommonJsCall } from "csharp";
 import { $typeof } from "puerts";
 /**
  * Debug Class, Rename Of UnityEngine.Debug
@@ -131,5 +131,6 @@ const T: typeof $typeof;
  * Get A Transform By It's Name
  */
 const $: typeof GameObjectHelper.GetTransformByName;
+const QuitGame: typeof CommonJsCall.QuitGame;
 
 }

@@ -1,7 +1,7 @@
 /*==============Dont Delete This============================*/
 import { CreateDialog } from "JS/Dialog/DialogManager";
 import { IGameLevel } from "JS/Interface/IGameLevel";
-import { Transform, $, Debug, Vector3 } from "JS/Utils/Common"
+import { Transform, $, Debug, Vector3, QuitGame } from "JS/Utils/Common"
 
 function Create() { return new Level1(); }
 export { Create }
@@ -21,6 +21,7 @@ class Level1 implements IGameLevel {
         let flow = CreateDialog()
         flow.SetCallBack(() => {
             Debug.LogWarning("End Talk!!!")
+            QuitGame()
         })
         flow.Say("Hello world")
         flow.Say("This a flow")

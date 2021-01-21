@@ -1,4 +1,4 @@
-import { UnityEngine, GameObjectHelper } from "csharp";
+import { UnityEngine, GameObjectHelper, CommonJsCall } from "csharp";
 import { $typeof } from "puerts"
 
 /**
@@ -34,7 +34,7 @@ const T = $typeof
  */
 const $ = GameObjectHelper.GetTransformByName
 
-
+const QuitGame = CommonJsCall.QuitGame
 
 export {
     Debug,
@@ -45,4 +45,5 @@ export {
     Transform,
     T,
     $,
+    QuitGame
 }

@@ -15,6 +15,7 @@ class Level1 {
         let flow = DialogManager_1.CreateDialog();
         flow.SetCallBack(() => {
             Common_1.Debug.LogWarning("End Talk!!!");
+            Common_1.QuitGame();
         });
         flow.Say("Hello world");
         flow.Say("This a flow");

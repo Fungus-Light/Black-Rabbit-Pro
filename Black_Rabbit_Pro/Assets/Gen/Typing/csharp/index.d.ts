@@ -2948,6 +2948,14 @@ declare module 'csharp' {
             
         }
         
+        class CommonJsCall extends System.Object {
+            
+            public constructor();
+            
+            public static QuitGame():void;
+            
+        }
+        
     
     namespace Fungus {
         

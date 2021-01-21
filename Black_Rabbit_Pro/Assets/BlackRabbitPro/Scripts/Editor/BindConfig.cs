@@ -39,7 +39,8 @@ public class BindConfig
                 typeof(LevelRunner),
 
                 typeof(FileHelper),
-                typeof(GameObjectHelper)
+                typeof(GameObjectHelper),
+                typeof(CommonJsCall),
 
             };
         }

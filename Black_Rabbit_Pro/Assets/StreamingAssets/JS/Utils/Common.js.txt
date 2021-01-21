@@ -42,4 +42,6 @@ exports.T = T;
  */
 const $ = csharp_1.GameObjectHelper.GetTransformByName;
 exports.$ = $;
+const QuitGame = csharp_1.CommonJsCall.QuitGame;
+exports.QuitGame = QuitGame;
 //# sourceMappingURL=Common.js.map
