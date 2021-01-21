@@ -39,6 +39,13 @@ class DialogManager {
         })
     }
 
+    say(text: string): void
+    say(text: string, dialogName: string): void
+    say(text: string, dialogName: string, character: Character): void
+    say(text: string, dialogName?: string, character?: Character, clearPrevious?: boolean, waitForInput?: boolean, fadeWhenDone?: boolean, stopVoiceover?: boolean, waitForVO?: boolean, clip?: AudioClip): void {
+        
+    }
+
     /**
      * Set The CallBack When Flow is End
      * @param cb 
