@@ -13,6 +13,7 @@ class Level1 {
     }
     OnStart() {
         Common_1.Debug.LogWarning("Enter Level1, this is a demo level");
+        //#region Define A Dialog
         let flow = DialogManager_1.CreateDialog();
         flow.SetCallBack(() => {
             Common_1.Debug.LogWarning("End Talk!!!");
@@ -25,7 +26,11 @@ class Level1 {
         flow.WaitForSeconds(3);
         flow.Say("Wait for 3 seconds");
         flow.Say("Talk is End!!!");
-        flow.Start();
+        //#endregion
+        //Start The Logic
+        Common_1.WaitForSeconds(1, () => {
+            flow.Start();
+        });
     }
     OnUpdate() {
     }

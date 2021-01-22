@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PackName: Game
-  LevelModName: Level1
+  LevelModName: DialogModDemo
   LevelLoaderName: LevelLoader
 --- !u!4 &172448302
 Transform:

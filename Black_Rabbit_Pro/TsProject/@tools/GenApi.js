@@ -1,6 +1,21 @@
 const fs = require('fs')
 const path = require("path")
 
+let ReplaceLists = [
+    {
+        find: '\"Interface/IGameLevel\"',
+        replace: '\"JS/Interface/IGameLevel\"'
+    },
+    {
+        find: '\"Dialog/SayDialog\"',
+        replace: '\"JS/Dialog/SayDialog\"'
+    },
+    {
+        find: '\"Utils/Common\"',
+        replace: '\"JS/Utils/Common\"'
+    }
+]
+
 let decRoot = "def"
 let targetFile = "../GameScript/@types/api.d.ts"
 let prefix = "JS/"
@@ -15,6 +30,11 @@ function ModString(content, modname) {
         "}\n";
     let changename = temp.replace("&<name>&", (prefix + modname).replace("\\", "/"));
     let str = changename.replace("&<content>&", content);
+
+    ReplaceLists.forEach((Item) => {
+        str = str.replace(Item.find, Item.replace)
+    })
+
     return str;
 }
 

@@ -35,6 +35,9 @@ const T = $typeof
 const $ = GameObjectHelper.GetTransformByName
 
 const QuitGame = CommonJsCall.QuitGame
+const WaitForFrames = CommonJsCall.WaitForFrames
+const WaitForSeconds = CommonJsCall.WaitForSeconds
+const WaitForSecondsRealtime = CommonJsCall.WaitForSecondsRealtime
 
 export {
     Debug,
@@ -45,5 +48,8 @@ export {
     Transform,
     T,
     $,
-    QuitGame
+    QuitGame,
+    WaitForFrames,
+    WaitForSeconds,
+    WaitForSecondsRealtime
 }

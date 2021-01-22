@@ -1,7 +1,7 @@
 /*==============Dont Delete This============================*/
 import { CreateDialog } from "JS/Dialog/DialogManager";
 import { IGameLevel } from "JS/Interface/IGameLevel";
-import { Transform, $, Debug, Vector3, QuitGame } from "JS/Utils/Common"
+import { Transform, $, Debug, Vector3, QuitGame, WaitForSeconds } from "JS/Utils/Common"
 
 function Create() { return new Level1(); }
 export { Create }
@@ -18,6 +18,7 @@ class Level1 implements IGameLevel {
     OnStart(): void {
         Debug.LogWarning("Enter Level1, this is a demo level");
 
+        //#region Define A Dialog
         let flow = CreateDialog()
         flow.SetCallBack(() => {
             Debug.LogWarning("End Talk!!!")
@@ -34,7 +35,14 @@ class Level1 implements IGameLevel {
         flow.Say("Wait for 3 seconds")
 
         flow.Say("Talk is End!!!")
-        flow.Start()
+
+        //#endregion
+        
+        //Start The Logic
+        WaitForSeconds(1,()=>{
+            flow.Start()
+        })
+
     }
     OnUpdate(): void {
 

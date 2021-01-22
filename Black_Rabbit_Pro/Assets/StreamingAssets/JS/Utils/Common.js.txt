@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QuitGame = exports.$ = exports.T = exports.Transform = exports.AudioClip = exports.GameTime = exports.Vector2 = exports.Vector3 = exports.Debug = void 0;
+exports.WaitForSecondsRealtime = exports.WaitForSeconds = exports.WaitForFrames = exports.QuitGame = exports.$ = exports.T = exports.Transform = exports.AudioClip = exports.GameTime = exports.Vector2 = exports.Vector3 = exports.Debug = void 0;
 const csharp_1 = require("csharp");
 const puerts_1 = require("puerts");
 /**
@@ -45,4 +45,10 @@ const $ = csharp_1.GameObjectHelper.GetTransformByName;
 exports.$ = $;
 const QuitGame = csharp_1.CommonJsCall.QuitGame;
 exports.QuitGame = QuitGame;
+const WaitForFrames = csharp_1.CommonJsCall.WaitForFrames;
+exports.WaitForFrames = WaitForFrames;
+const WaitForSeconds = csharp_1.CommonJsCall.WaitForSeconds;
+exports.WaitForSeconds = WaitForSeconds;
+const WaitForSecondsRealtime = csharp_1.CommonJsCall.WaitForSecondsRealtime;
+exports.WaitForSecondsRealtime = WaitForSecondsRealtime;
 //# sourceMappingURL=Common.js.map

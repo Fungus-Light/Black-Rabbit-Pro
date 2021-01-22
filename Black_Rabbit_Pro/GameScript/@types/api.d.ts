@@ -135,5 +135,8 @@ const T: typeof $typeof;
  */
 const $: typeof GameObjectHelper.GetTransformByName;
 const QuitGame: typeof CommonJsCall.QuitGame;
+const WaitForFrames: typeof CommonJsCall.WaitForFrames;
+const WaitForSeconds: typeof CommonJsCall.WaitForSeconds;
+const WaitForSecondsRealtime: typeof CommonJsCall.WaitForSecondsRealtime;
 
 }
