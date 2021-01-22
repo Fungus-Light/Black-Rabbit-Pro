@@ -85,6 +85,13 @@ class DialogManager {
             });
         });
     }
+    DoAction(action) {
+        this.FlowList.push(() => {
+            csharp_1.CommonJsCall.DoAction(action, () => {
+                this.Gonext();
+            });
+        });
+    }
     /**
      * Set The CallBack When Flow is End
      * @param cb

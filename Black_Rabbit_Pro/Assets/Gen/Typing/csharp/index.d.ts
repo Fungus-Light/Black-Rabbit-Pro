@@ -2964,6 +2964,8 @@ declare module 'csharp' {
             
             public static WaitForSeconds($count: number, $CallBack: System.Action):void;
             
+            public static DoAction($action: System.Action, $callBack: System.Action):void;
+            
         }
         
     

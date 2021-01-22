@@ -24,12 +24,13 @@ function SetLevel(name: string, Level: IGameLevel): void;
 }
 
 declare module "JS/Dialog/DialogManager"{
+import { System } from "csharp";
 import { Character } from "JS/Dialog/SayDialog";
 /**
  * Manage A Dialog FLow
  */
 class DialogManager {
-    FlowList: Array<any>;
+    FlowList: Array<System.Action>;
     CB: any;
     constructor();
     Say(text: string): void;
@@ -38,6 +39,7 @@ class DialogManager {
     WaitForFrames(count: number): void;
     WaitForSeconds(count: number): void;
     WaitForSecondsUnscaled(count: number): void;
+    DoAction(action: System.Action): void;
     /**
      * Set The CallBack When Flow is End
      * @param cb

@@ -73,4 +73,16 @@ public class CommonJsCall : MonoBehaviour
         Instance.StartCoroutine(_WaitForSeconds(count, CallBack));
     }
 
+    static IEnumerator _DoAction(Action action, Action callBack)
+    {
+        action();
+        yield return 0;
+        callBack();
+        yield return 0;
+    }
+    public static void DoAction(Action action, Action callBack)
+    {
+        Instance.StartCoroutine(_DoAction(action, callBack));
+    }
+
 }

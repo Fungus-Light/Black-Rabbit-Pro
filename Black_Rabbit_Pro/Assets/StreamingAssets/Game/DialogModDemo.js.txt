@@ -9,10 +9,11 @@ exports.Create = Create;
 /*===============================================*/
 class Level1 {
     constructor() {
-        this.TestSpeed = 10;
+        this.TestSpeed = 0;
     }
     OnStart() {
         Common_1.Debug.LogWarning("Enter Level1, this is a demo level");
+        this.TestCube = Common_1.$("Cube");
         //#region Define A Dialog
         let flow = DialogManager_1.CreateDialog();
         flow.SetCallBack(() => {
@@ -25,6 +26,18 @@ class Level1 {
         flow.Say("Wait For 360 Frames");
         flow.WaitForSeconds(3);
         flow.Say("Wait for 3 seconds");
+        flow.Say("I will make the cube rotate");
+        flow.DoAction(() => {
+            this.TestSpeed = 2;
+        });
+        flow.Say("Faster!!!");
+        flow.DoAction(() => {
+            this.TestSpeed = 10;
+        });
+        flow.Say("SlowDown!!!");
+        flow.DoAction(() => {
+            this.TestSpeed = 1;
+        });
         flow.Say("Talk is End!!!");
         //#endregion
         //Start The Logic
@@ -33,6 +46,8 @@ class Level1 {
         });
     }
     OnUpdate() {
+        let V = Common_1.Vector3.op_Multiply(this.TestCube.up, this.TestSpeed);
+        this.TestCube.Rotate(V);
     }
     OnDestroy() {
     }

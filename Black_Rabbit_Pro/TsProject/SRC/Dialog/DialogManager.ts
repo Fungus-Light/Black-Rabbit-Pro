@@ -1,4 +1,4 @@
-import { CommonJsCall } from "csharp";
+import { CommonJsCall, System } from "csharp";
 import { SayDialog, $SayDialog, Character } from "Dialog/SayDialog"
 import { $, AudioClip, Debug } from "Utils/Common";
 
@@ -6,7 +6,7 @@ import { $, AudioClip, Debug } from "Utils/Common";
  * Manage A Dialog FLow
  */
 class DialogManager {
-    FlowList: Array<any>
+    FlowList: Array<System.Action>
     CB: any
     constructor() {
         this.FlowList = new Array<any>()
@@ -111,6 +111,14 @@ class DialogManager {
         this.FlowList.push(() => {
             CommonJsCall.WaitForSecondsRealtime(count, () => {
                 this.Gonext();
+            })
+        })
+    }
+
+    DoAction(action: System.Action) {
+        this.FlowList.push(() => {
+            CommonJsCall.DoAction(action, () => {
+                this.Gonext()
             })
         })
     }
