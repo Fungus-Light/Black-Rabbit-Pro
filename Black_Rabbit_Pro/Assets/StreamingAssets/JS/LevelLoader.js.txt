@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SetLevel = exports.Init = void 0;
 const Common_1 = require("Utils/Common");
 let _level = null;
 let _name = "";

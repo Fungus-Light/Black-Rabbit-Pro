@@ -1,14 +1,14 @@
 /*==============Dont Delete This============================*/
-import { CreateDialog } from "JS/Dialog/DialogManager";
+import { CreateDialog, option } from "JS/Dialog/DialogManager";
 import { IGameLevel } from "JS/Interface/IGameLevel";
 import { Transform, $, Debug, Vector3, QuitGame, WaitForSeconds } from "JS/Utils/Common"
 
-function Create() { return new Level1(); }
+function Create() { return new DialogModDemo(); }
 export { Create }
 
-/*===============================================*/
+/*=========================================================*/
 
-class Level1 implements IGameLevel {
+class DialogModDemo implements IGameLevel {
     name: string;
     root: Transform;
 
@@ -22,73 +22,100 @@ class Level1 implements IGameLevel {
         this.TestCube.gameObject.SetActive(true)
 
         //#region Define A Dialog
-        let flow = CreateDialog()
-        flow.SetCallBack(() => {
+        let FlowA = CreateDialog()
+        FlowA.SetCallBack(() => {
             Debug.LogWarning("End Talk!!!")
-            
+
         })
 
-        flow.Say("Hello Black-Rabbit")
-        flow.Say("This flow shows the features of Dialog Mod.")
+        FlowA.Say("Hello Black-Rabbit")
+        FlowA.Say("This flow shows the features of Dialog Mod.")
 
-        flow.WaitForFrames(360)
-        flow.Say("Wait For 360 Frames")
+        FlowA.WaitForFrames(60)
+        FlowA.Say("Wait For 60 Frames")
 
-        flow.WaitForSeconds(3)
-        flow.Say("Wait for 3 seconds")
-        flow.Say("I will make the cube rotate");
+        FlowA.WaitForSeconds(2)
+        FlowA.Say("Wait for 2 seconds")
+        FlowA.Say("I will make the cube rotate");
 
-        flow.DoAction(() => {
+        FlowA.DoAction(() => {
             this.TestSpeed = 2
         })
 
-        flow.Say("Faster!!!");
+        FlowA.Say("Faster!!!");
 
-        flow.DoAction(() => {
+        FlowA.DoAction(() => {
             this.TestSpeed = 10
         })
 
-        flow.Say("SlowDown!!!");
+        FlowA.Say("SlowDown!!!");
 
-        flow.DoAction(() => {
+        FlowA.DoAction(() => {
             this.TestSpeed = 1
         })
 
-        flow.Say("Stop!!!");
+        FlowA.Say("Stop!!!");
 
-        flow.DoAction(() => {
+        FlowA.DoAction(() => {
             this.TestSpeed = 0
         })
 
-        flow.Say("Please Select A Number.");
+        FlowA.Say("Please Select A Number.");
 
-        flow.Option("1", () => {
-            FlowB.Start()
+        FlowA.Options([
+            option("1", () => {
+                FlowB.Start();
+            }),
+            option("2", () => {
+                FlowC.Start()
+            }),
+            option("Select Nothing....", () => {
+                FlowA.Continue();
+            })
+        ], true);
+
+        FlowA.Say("You Select Nothing ....")
+        FlowA.DoAction(()=>{
+            FlowEnd.Start();
         })
-
-        flow.Option("2", () => {
-            FlowC.Start()
-        })
-
-        flow.Option("Select Nothing.....")
-
-
 
         //#endregion
 
         //#region Define B Dialog
         let FlowB = CreateDialog()
         FlowB.Say("You Select 1");
+        FlowB.DoAction(() => {
+            FlowEnd.Start();
+        })
         //#endregion
 
         //#region Define C Dialog
         let FlowC = CreateDialog()
         FlowC.Say("You Select 2");
+        FlowC.DoAction(() => {
+            FlowEnd.Start()
+        })
+        //#endregion
+
+        //#region Define End Dialog
+        let FlowEnd = CreateDialog()
+        FlowEnd.Say("Here is the End Of The Show");
+        FlowEnd.Say("Restart Now???");
+
+        FlowEnd.Options([
+            option("yes",()=>{
+                FlowA.Start()
+            }),
+            option("no",()=>{
+                QuitGame()
+            })
+        ],false)
+
         //#endregion
 
         //Start The Logic
         WaitForSeconds(1, () => {
-            flow.Start()
+            FlowA.Start()
         })
 
     }

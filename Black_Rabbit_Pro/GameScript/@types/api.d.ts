@@ -26,7 +26,9 @@ function SetLevel(name: string, Level: IGameLevel): void;
 declare module "JS/Dialog/DialogManager"{
 import { System } from "csharp";
 import { Character } from "JS/Dialog/SayDialog";
+import { CreateSingleOption, singleOption } from "JS/Dialog/OptionDialog";
 import { AudioClip } from "JS/Utils/Common";
+const option: typeof CreateSingleOption;
 /**
  * Manage A Dialog FLow
  */
@@ -35,9 +37,7 @@ class DialogManager {
     FlowList: Array<System.Action>;
     CB: any;
     constructor();
-    Option(text: string): void;
-    Option(text: string, action: System.Action): void;
-    Option(text: string, action: System.Action, optionDialogName: string, interactable: boolean, hidewhenclick: boolean): void;
+    Options(options: Array<singleOption>, pauseHere: boolean): void;
     Say(text: string): void;
     Say(text: string, dialogName: string): void;
     Say(text: string, dialogName: string, character: Character): void;
@@ -51,6 +51,7 @@ class DialogManager {
      * @param cb
      */
     SetCallBack(cb: any): void;
+    Continue(): void;
     private Gonext;
     /**
      * Start A FLow
@@ -62,10 +63,21 @@ function CreateDialog(): DialogManager;
 }
 
 declare module "JS/Dialog/OptionDialog"{
-import { Fungus } from "csharp";
+import { Fungus, System } from "csharp";
 class OptionDialog extends Fungus.MenuDialog {
 }
 const $OptionDialog: typeof Fungus.MenuDialog.GetMenuDialog;
+class singleOption {
+    text: string;
+    act: System.Action;
+    optionDialogName: string;
+    interactable: boolean;
+    hideWhenClick: boolean;
+    constructor(_text: string, _act: System.Action, _optDN: string, _intAct: boolean, _hideWhenC: boolean);
+}
+function CreateSingleOption(text: string): singleOption;
+function CreateSingleOption(text: string, act: System.Action): singleOption;
+function CreateSingleOption(text: string, act: System.Action, optionDialogName: string): singleOption;
 
 }
 

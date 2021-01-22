@@ -1,8 +1,9 @@
 import { CommonJsCall, System } from "csharp";
 import { SayDialog, $SayDialog, Character } from "Dialog/SayDialog"
-import { $OptionDialog, OptionDialog } from "Dialog/OptionDialog"
+import { $OptionDialog, CreateSingleOption, OptionDialog, singleOption } from "Dialog/OptionDialog"
 import { $, AudioClip, Debug } from "Utils/Common";
 
+const option = CreateSingleOption
 /**
  * Manage A Dialog FLow
  */
@@ -15,49 +16,30 @@ class DialogManager {
         this.index = 0
     }
 
-    Option(text: string): void
-    Option(text: string, action: System.Action): void
-    Option(text: string, action: System.Action, optionDialogName: string, interactable: boolean, hidewhenclick: boolean): void
-    Option(text: string, action?: System.Action, optionDialogName?: string, interactable?: boolean, hidewhenclick?: boolean): void {
-        let OptionDialog: OptionDialog = null;
+    Options(options: Array<singleOption>, pauseHere: boolean): void {
+        this.FlowList.push(() => {
+            options.forEach((item) => {
+                let OptionDialog: OptionDialog = null;
 
-        if (optionDialogName != undefined && optionDialogName != "") {
-            OptionDialog = $OptionDialog(optionDialogName);
-            if (OptionDialog == null) {
-                Debug.LogError("SayDialog " + optionDialogName + "Can Not Be Found!!!")
-                return;
+                if (item.optionDialogName != "") {
+                    OptionDialog = $OptionDialog(item.optionDialogName);
+                    if (OptionDialog == null) {
+                        Debug.LogError("SayDialog " + item.optionDialogName + "Can Not Be Found!!!")
+                        return;
+                    }
+                }
+
+                if (OptionDialog == null) {
+                    OptionDialog = $OptionDialog();
+                }
+
+                OptionDialog.AddOptionTs(item.text, item.interactable, item.hideWhenClick, item.act)
+
+            })
+            if (pauseHere == false) {
+                this.Gonext()
             }
-        }
-
-        if (OptionDialog == null) {
-            OptionDialog = $OptionDialog();
-        }
-
-        if (interactable == undefined) {
-            interactable = true
-        }
-
-        if (hidewhenclick == undefined) {
-            hidewhenclick = false
-        }
-
-        if (action != undefined) {
-
-            this.FlowList.push(() => {
-                OptionDialog.AddOptionTs(text, interactable, hidewhenclick, action)
-                this.Gonext()
-            })
-
-
-        } else {
-
-            this.FlowList.push(() => {
-                OptionDialog.AddOptionTs(text, interactable, hidewhenclick, () => {})
-                this.Gonext()
-            })
-
-        }
-
+        })
     }
 
     Say(text: string): void
@@ -167,6 +149,10 @@ class DialogManager {
         Debug.LogWarning("Call Back Setted")
     }
 
+    Continue(): void {
+        this.Gonext();
+    }
+
     private Gonext(): void {
         if (this.FlowList.length > 0 && this.index < this.FlowList.length) {
             let step = this.FlowList[this.index]
@@ -199,5 +185,6 @@ function CreateDialog() {
 
 export {
     DialogManager,
-    CreateDialog
+    CreateDialog,
+    option
 }

@@ -1,13 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Create = void 0;
 /*==============Dont Delete This============================*/
 const DialogManager_1 = require("JS/Dialog/DialogManager");
 const Common_1 = require("JS/Utils/Common");
-function Create() { return new Level1(); }
+function Create() { return new DialogModDemo(); }
 exports.Create = Create;
-/*===============================================*/
-class Level1 {
+/*=========================================================*/
+class DialogModDemo {
     constructor() {
         this.TestSpeed = 0;
     }
@@ -16,52 +15,79 @@ class Level1 {
         this.TestCube = Common_1.$("Cube");
         this.TestCube.gameObject.SetActive(true);
         //#region Define A Dialog
-        let flow = DialogManager_1.CreateDialog();
-        flow.SetCallBack(() => {
+        let FlowA = DialogManager_1.CreateDialog();
+        FlowA.SetCallBack(() => {
             Common_1.Debug.LogWarning("End Talk!!!");
         });
-        flow.Say("Hello Black-Rabbit");
-        flow.Say("This flow shows the features of Dialog Mod.");
-        flow.WaitForFrames(360);
-        flow.Say("Wait For 360 Frames");
-        flow.WaitForSeconds(3);
-        flow.Say("Wait for 3 seconds");
-        flow.Say("I will make the cube rotate");
-        flow.DoAction(() => {
+        FlowA.Say("Hello Black-Rabbit");
+        FlowA.Say("This flow shows the features of Dialog Mod.");
+        FlowA.WaitForFrames(60);
+        FlowA.Say("Wait For 60 Frames");
+        FlowA.WaitForSeconds(2);
+        FlowA.Say("Wait for 2 seconds");
+        FlowA.Say("I will make the cube rotate");
+        FlowA.DoAction(() => {
             this.TestSpeed = 2;
         });
-        flow.Say("Faster!!!");
-        flow.DoAction(() => {
+        FlowA.Say("Faster!!!");
+        FlowA.DoAction(() => {
             this.TestSpeed = 10;
         });
-        flow.Say("SlowDown!!!");
-        flow.DoAction(() => {
+        FlowA.Say("SlowDown!!!");
+        FlowA.DoAction(() => {
             this.TestSpeed = 1;
         });
-        flow.Say("Stop!!!");
-        flow.DoAction(() => {
+        FlowA.Say("Stop!!!");
+        FlowA.DoAction(() => {
             this.TestSpeed = 0;
         });
-        flow.Say("Please Select A Number.");
-        flow.Option("1", () => {
-            FlowB.Start();
+        FlowA.Say("Please Select A Number.");
+        FlowA.Options([
+            DialogManager_1.option("1", () => {
+                FlowB.Start();
+            }),
+            DialogManager_1.option("2", () => {
+                FlowC.Start();
+            }),
+            DialogManager_1.option("Select Nothing....", () => {
+                FlowA.Continue();
+            })
+        ], true);
+        FlowA.Say("You Select Nothing ....");
+        FlowA.DoAction(() => {
+            FlowEnd.Start();
         });
-        flow.Option("2", () => {
-            FlowC.Start();
-        });
-        flow.Option("Select Nothing.....");
         //#endregion
         //#region Define B Dialog
         let FlowB = DialogManager_1.CreateDialog();
         FlowB.Say("You Select 1");
+        FlowB.DoAction(() => {
+            FlowEnd.Start();
+        });
         //#endregion
         //#region Define C Dialog
         let FlowC = DialogManager_1.CreateDialog();
         FlowC.Say("You Select 2");
+        FlowC.DoAction(() => {
+            FlowEnd.Start();
+        });
+        //#endregion
+        //#region Define End Dialog
+        let FlowEnd = DialogManager_1.CreateDialog();
+        FlowEnd.Say("Here is the End Of The Show");
+        FlowEnd.Say("Restart Now???");
+        FlowEnd.Options([
+            DialogManager_1.option("yes", () => {
+                FlowA.Start();
+            }),
+            DialogManager_1.option("no", () => {
+                Common_1.QuitGame();
+            })
+        ], false);
         //#endregion
         //Start The Logic
         Common_1.WaitForSeconds(1, () => {
-            flow.Start();
+            FlowA.Start();
         });
     }
     OnUpdate() {

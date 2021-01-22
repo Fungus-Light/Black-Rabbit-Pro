@@ -13,6 +13,9 @@ let ReplaceLists = [
     {
         find: '\"Utils/Common\"',
         replace: '\"JS/Utils/Common\"'
+    },{
+        find:'\"Dialog/OptionDialog\"',
+        replace:'\"JS/Dialog/OptionDialog\"'
     }
 ]
 
