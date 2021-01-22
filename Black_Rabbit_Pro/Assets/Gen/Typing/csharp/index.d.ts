@@ -2926,9 +2926,13 @@ declare module 'csharp' {
             
             public LevelLoaderName: string;
             
+            public JsAwake: System.Action;
+            
             public JsStart: System.Action;
             
             public JsUpdate: System.Action;
+            
+            public JsFixedUpdate: System.Action;
             
             public JsOnDestroy: System.Action;
             

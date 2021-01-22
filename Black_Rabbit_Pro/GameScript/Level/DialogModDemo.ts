@@ -9,15 +9,14 @@ export { Create }
 /*=========================================================*/
 
 class DialogModDemo implements IGameLevel {
+    
     name: string;
     root: Transform;
 
     TestCube: Transform;
     TestSpeed: number = 0;
-
+    
     OnStart(): void {
-        Debug.LogWarning("Enter Level1, this is a demo level");
-
         this.TestCube = $("Cube")
         this.TestCube.gameObject.SetActive(true)
 
@@ -30,12 +29,13 @@ class DialogModDemo implements IGameLevel {
 
         FlowA.Say("Hello Black-Rabbit")
         FlowA.Say("This flow shows the features of Dialog Mod.")
-
+        
+        FlowA.Say("Will Wait For 60 Frames")
         FlowA.WaitForFrames(60)
-        FlowA.Say("Wait For 60 Frames")
-
+        
+        FlowA.Say("Will Wait for 2 seconds")
         FlowA.WaitForSeconds(2)
-        FlowA.Say("Wait for 2 seconds")
+
         FlowA.Say("I will make the cube rotate");
 
         FlowA.DoAction(() => {
@@ -120,9 +120,14 @@ class DialogModDemo implements IGameLevel {
 
     }
     OnUpdate(): void {
+        
+    }
+
+    OnFixedUpdate(): void {
         let V = Vector3.op_Multiply(this.TestCube.up, this.TestSpeed);
         this.TestCube.Rotate(V);
     }
+
     OnDestroy(): void {
 
     }

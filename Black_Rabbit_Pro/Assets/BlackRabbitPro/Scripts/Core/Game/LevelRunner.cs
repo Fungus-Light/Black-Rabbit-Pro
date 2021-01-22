@@ -11,8 +11,11 @@ public class LevelRunner : MonoBehaviour
     public string LevelLoaderName = "LevelLoader";
     private JsEnv env;
 
+    //public Action JsAwake;
     public Action JsStart;
     public Action JsUpdate;
+
+    public Action JsFixedUpdate;
     public Action JsOnDestroy;
     void Awake()
     {
@@ -38,7 +41,11 @@ public class LevelRunner : MonoBehaviour
         {
             Init(this);
         }
+
+        //if (JsAwake != null) JsAwake();
+
     }
+
 
     void Start()
     {
@@ -51,9 +58,16 @@ public class LevelRunner : MonoBehaviour
         if (JsUpdate != null) JsUpdate();
     }
 
+    void FixedUpdate()
+    {
+        if (JsFixedUpdate != null) JsFixedUpdate();
+    }
+
     void OnDestroy()
     {
         if (JsOnDestroy != null) JsOnDestroy();
+        //JsAwake = null;
+        JsFixedUpdate = null;
         JsStart = null;
         JsUpdate = null;
         JsOnDestroy = null;

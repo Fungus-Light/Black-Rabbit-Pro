@@ -119,6 +119,7 @@ interface IGameLevel {
      * Call On Per Monobehaviour Update
      */
     OnUpdate(): void;
+    OnFixedUpdate(): void;
     /**
      * Call On Level Destroy
      */
