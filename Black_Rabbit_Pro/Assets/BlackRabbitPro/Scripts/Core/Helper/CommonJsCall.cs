@@ -11,7 +11,7 @@ public class CommonJsCall
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-        UnityEngine.Debug.Log("Quit From Terminal");
+        UnityEngine.Debug.Log("Quit From Game");
 #else
         Application.Quit();
 #endif

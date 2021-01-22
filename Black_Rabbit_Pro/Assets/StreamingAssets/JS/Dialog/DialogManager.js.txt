@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.CreateDialog = exports.DialogManager = void 0;
 const SayDialog_1 = require("Dialog/SayDialog");
 const Common_1 = require("Utils/Common");
 /**
@@ -9,6 +10,18 @@ class DialogManager {
     constructor() {
         this.FlowList = new Array();
     }
+    /**
+     * Say Somthing
+     * @param text Content
+     * @param dialogName The Name Of A SayDialog Obj
+     * @param character Specify A Character
+     * @param clearPrevious
+     * @param waitForInput
+     * @param fadeWhenDone
+     * @param stopVoiceover
+     * @param waitForVO
+     * @param clip
+     */
     Say(text, dialogName, character, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, clip) {
         let Dialog = null;
         if (dialogName != undefined && dialogName != "") {

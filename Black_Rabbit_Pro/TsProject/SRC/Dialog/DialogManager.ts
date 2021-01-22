@@ -10,11 +10,23 @@ class DialogManager {
     constructor() {
         this.FlowList = new Array<any>()
     }
-
     
+
     Say(text: string): void
     Say(text: string, dialogName: string): void
     Say(text: string, dialogName: string, character: Character): void
+    /**
+     * Say Somthing
+     * @param text Content
+     * @param dialogName The Name Of A SayDialog Obj
+     * @param character Specify A Character
+     * @param clearPrevious 
+     * @param waitForInput 
+     * @param fadeWhenDone 
+     * @param stopVoiceover 
+     * @param waitForVO 
+     * @param clip 
+     */
     Say(text: string, dialogName?: string,
         character?: Character,
         clearPrevious?: boolean,

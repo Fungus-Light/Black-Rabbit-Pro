@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Create = void 0;
 /*==============Dont Delete This============================*/
 const DialogManager_1 = require("JS/Dialog/DialogManager");
 const Common_1 = require("JS/Utils/Common");
