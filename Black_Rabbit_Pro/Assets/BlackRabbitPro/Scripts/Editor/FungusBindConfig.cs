@@ -15,7 +15,7 @@ public class FungusBindConfig
             {
                 typeof(SayDialog),
                 typeof(Character),
-                
+                typeof(MenuDialog),
             };
         }
     }

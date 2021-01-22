@@ -2388,6 +2388,10 @@ declare module 'csharp' {
             
         }
         
+        class Random extends System.Object {
+            
+        }
+        
     }
     namespace UnityEngine.Application {
         
@@ -3066,6 +3070,49 @@ declare module 'csharp' {
             
         }
         
+        class MenuDialog extends UnityEngine.MonoBehaviour {
+            
+            public static get ActiveMenuDialog(): Fungus.MenuDialog;
+            public static set ActiveMenuDialog(value: Fungus.MenuDialog);
+            
+            public get CachedButtons(): System.Array$1<UnityEngine.UI.Button>;
+            
+            public get CachedSlider(): UnityEngine.UI.Slider;
+            
+            public get DisplayedOptionsCount(): number;
+            
+            public constructor();
+            
+            public SetActive($state: boolean):void;
+            
+            public static GetMenuDialog():Fungus.MenuDialog;
+            
+            public static GetMenuDialog($_name: string):Fungus.MenuDialog;
+            
+            public Clear():void;
+            
+            public HideSayDialog():void;
+            
+            public AddOption($text: string, $interactable: boolean, $hideOption: boolean, $targetBlock: Fungus.Block):boolean;
+            
+            public AddOptionTs($text: string, $interactable: boolean, $hideOption: boolean, $action: System.Action):boolean;
+            
+            public ShowTimer($duration: number, $targetBlock: Fungus.Block):void;
+            
+            public IsActive():boolean;
+            
+            public Shuffle($r: System.Random):void;
+            
+        }
+        
+        class Block extends Fungus.Node {
+            
+        }
+        
+        class Node extends UnityEngine.MonoBehaviour {
+            
+        }
+        
     }
     namespace UnityEngine.UI {
         
@@ -3078,6 +3125,18 @@ declare module 'csharp' {
         }
         
         class Graphic extends UnityEngine.EventSystems.UIBehaviour {
+            
+        }
+        
+        class Button extends UnityEngine.UI.Selectable {
+            
+        }
+        
+        class Slider extends UnityEngine.UI.Selectable {
+            
+        }
+        
+        class Selectable extends UnityEngine.EventSystems.UIBehaviour {
             
         }
         

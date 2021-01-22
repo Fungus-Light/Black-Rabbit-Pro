@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateDialog = exports.DialogManager = void 0;
 const csharp_1 = require("csharp");
 const SayDialog_1 = require("Dialog/SayDialog");
+const OptionDialog_1 = require("Dialog/OptionDialog");
 const Common_1 = require("Utils/Common");
 /**
  * Manage A Dialog FLow
@@ -10,19 +11,39 @@ const Common_1 = require("Utils/Common");
 class DialogManager {
     constructor() {
         this.FlowList = new Array();
+        this.index = 0;
     }
-    /**
-     * Say Somthing
-     * @param text Content
-     * @param dialogName The Name Of A SayDialog Obj
-     * @param character Specify A Character
-     * @param clearPrevious
-     * @param waitForInput
-     * @param fadeWhenDone
-     * @param stopVoiceover
-     * @param waitForVO
-     * @param clip
-     */
+    Option(text, action, optionDialogName, interactable, hidewhenclick) {
+        let OptionDialog = null;
+        if (optionDialogName != undefined && optionDialogName != "") {
+            OptionDialog = OptionDialog_1.$OptionDialog(optionDialogName);
+            if (OptionDialog == null) {
+                Common_1.Debug.LogError("SayDialog " + optionDialogName + "Can Not Be Found!!!");
+                return;
+            }
+        }
+        if (OptionDialog == null) {
+            OptionDialog = OptionDialog_1.$OptionDialog();
+        }
+        if (interactable == undefined) {
+            interactable = true;
+        }
+        if (hidewhenclick == undefined) {
+            hidewhenclick = false;
+        }
+        if (action != undefined) {
+            this.FlowList.push(() => {
+                OptionDialog.AddOptionTs(text, interactable, hidewhenclick, action);
+                this.Gonext();
+            });
+        }
+        else {
+            this.FlowList.push(() => {
+                OptionDialog.AddOptionTs(text, interactable, hidewhenclick, () => { });
+                this.Gonext();
+            });
+        }
+    }
     Say(text, dialogName, character, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, clip) {
         let Dialog = null;
         if (dialogName != undefined && dialogName != "") {
@@ -101,8 +122,9 @@ class DialogManager {
         Common_1.Debug.LogWarning("Call Back Setted");
     }
     Gonext() {
-        if (this.FlowList.length > 0) {
-            let step = this.FlowList.shift();
+        if (this.FlowList.length > 0 && this.index < this.FlowList.length) {
+            let step = this.FlowList[this.index];
+            this.index++;
             step();
         }
         else {
@@ -119,6 +141,7 @@ class DialogManager {
      * Start A FLow
      */
     Start() {
+        this.index = 0;
         this.Gonext();
     }
 }

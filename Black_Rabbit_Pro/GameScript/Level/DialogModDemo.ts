@@ -18,13 +18,14 @@ class Level1 implements IGameLevel {
     OnStart(): void {
         Debug.LogWarning("Enter Level1, this is a demo level");
 
-        this.TestCube=$("Cube")
+        this.TestCube = $("Cube")
+        this.TestCube.gameObject.SetActive(true)
 
         //#region Define A Dialog
         let flow = CreateDialog()
         flow.SetCallBack(() => {
             Debug.LogWarning("End Talk!!!")
-            QuitGame()
+            
         })
 
         flow.Say("Hello Black-Rabbit")
@@ -53,8 +54,36 @@ class Level1 implements IGameLevel {
             this.TestSpeed = 1
         })
 
-        flow.Say("Talk is End!!!")
+        flow.Say("Stop!!!");
 
+        flow.DoAction(() => {
+            this.TestSpeed = 0
+        })
+
+        flow.Say("Please Select A Number.");
+
+        flow.Option("1", () => {
+            FlowB.Start()
+        })
+
+        flow.Option("2", () => {
+            FlowC.Start()
+        })
+
+        flow.Option("Select Nothing.....")
+
+
+
+        //#endregion
+
+        //#region Define B Dialog
+        let FlowB = CreateDialog()
+        FlowB.Say("You Select 1");
+        //#endregion
+
+        //#region Define C Dialog
+        let FlowC = CreateDialog()
+        FlowC.Say("You Select 2");
         //#endregion
 
         //Start The Logic

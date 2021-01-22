@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 using System.Linq;
+using System;
 
 namespace Fungus
 {
@@ -80,6 +81,19 @@ namespace Fungus
             }
 
             return ActiveMenuDialog;
+        }
+
+        public static MenuDialog GetMenuDialog(string _name)
+        {
+            Transform Dialog = GameObjectHelper.GetTransformByName(_name);
+            if (Dialog.GetComponent<MenuDialog>() != null)
+            {
+                return Dialog.GetComponent<MenuDialog>();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         protected virtual void Awake()
@@ -159,7 +173,7 @@ namespace Fungus
             block.StartExecution();
         }
 
-        
+
 
         /// <summary>
         /// Clear all displayed options in the Menu Dialog.
@@ -169,7 +183,7 @@ namespace Fungus
             StopAllCoroutines();
 
             //if something was shown notify that we are ending
-            if(nextOptionIndex != 0)
+            if (nextOptionIndex != 0)
                 MenuSignals.DoMenuEnd(this);
 
             nextOptionIndex = 0;
@@ -242,6 +256,21 @@ namespace Fungus
             return AddOption(text, interactable, hideOption, action);
         }
 
+        public bool AddOptionTs(string text, bool interactable, bool hideOption, Action action)
+        {
+
+            UnityEngine.Events.UnityAction act = delegate
+                        {
+                            EventSystem.current.SetSelectedGameObject(null);
+                            StopAllCoroutines();
+                            // Stop timeout
+                            Clear();
+                            HideSayDialog();
+                            action();
+                        };
+
+            return AddOption(text, interactable, hideOption, act);
+        }
 
         /// <summary>
         /// Adds the option to the list of displayed options. Calls a Block when selected.
@@ -260,11 +289,11 @@ namespace Fungus
                 return false;
             }
             //if first option notify that a menu has started
-            if(nextOptionIndex == 0)
+            if (nextOptionIndex == 0)
                 MenuSignals.DoMenuStart(this);
 
             var button = cachedButtons[nextOptionIndex];
-            
+
             //move forward for next call
             nextOptionIndex++;
 
@@ -289,7 +318,7 @@ namespace Fungus
             }
 
             button.onClick.AddListener(action);
-            
+
             return true;
         }
 
@@ -326,7 +355,8 @@ namespace Fungus
         /// </summary>
         public virtual int DisplayedOptionsCount
         {
-            get {
+            get
+            {
                 int count = 0;
                 for (int i = 0; i < cachedButtons.Length; i++)
                 {
@@ -340,17 +370,17 @@ namespace Fungus
             }
         }
 
-		/// <summary>
-		/// Shuffle the parent order of the cached buttons, allows for randomising button order, buttons are auto reordered when cleared
-		/// </summary>
-		public void Shuffle(System.Random r)
-		{
-			for (int i = 0; i < CachedButtons.Length; i++)
-			{
-				CachedButtons[i].transform.SetSiblingIndex(r.Next(CachedButtons.Length));
-			}
-		}
+        /// <summary>
+        /// Shuffle the parent order of the cached buttons, allows for randomising button order, buttons are auto reordered when cleared
+        /// </summary>
+        public void Shuffle(System.Random r)
+        {
+            for (int i = 0; i < CachedButtons.Length; i++)
+            {
+                CachedButtons[i].transform.SetSiblingIndex(r.Next(CachedButtons.Length));
+            }
+        }
 
         #endregion
-    }    
+    }
 }

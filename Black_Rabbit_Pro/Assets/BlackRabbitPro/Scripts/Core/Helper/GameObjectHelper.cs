@@ -8,16 +8,7 @@ public class GameObjectHelper
     {
         string realname = "$_" + name;
 
-        GameObject obj = GameObject.Find(realname);
-
-        if (obj != null)
-        {
-            return obj.transform;
-        }
-        else
-        {
-            return null;
-        }
+        return GameObjectPool.Instance.Find(realname);
 
     }
 
