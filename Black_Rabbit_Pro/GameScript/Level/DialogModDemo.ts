@@ -23,14 +23,21 @@ class Level1 implements IGameLevel {
             Debug.LogWarning("End Talk!!!")
             QuitGame()
         })
-        flow.Say("Hello world")
-        flow.Say("This a flow")
 
+        flow.Say("Hello Black-Rabbit")
+        flow.Say("This flow shows the features of Dialog Mod.")
+
+        flow.WaitForFrames(360)
+        flow.Say("Wait For 360 Frames")
+
+        flow.WaitForSeconds(3)
+        flow.Say("Wait for 3 seconds")
+
+        flow.Say("Talk is End!!!")
         flow.Start()
     }
     OnUpdate(): void {
-        // let V = Vector3.op_Multiply(this.TestCube.up, this.TestSpeed);
-        // this.TestCube.Rotate(V);
+
     }
     OnDestroy(): void {
 

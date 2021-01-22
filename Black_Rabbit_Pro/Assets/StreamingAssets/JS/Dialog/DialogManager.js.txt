@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateDialog = exports.DialogManager = void 0;
+const csharp_1 = require("csharp");
 const SayDialog_1 = require("Dialog/SayDialog");
 const Common_1 = require("Utils/Common");
 /**
@@ -59,6 +60,27 @@ class DialogManager {
         this.FlowList.push(() => {
             Dialog.gameObject.SetActive(true);
             Dialog.Say(text, clearPrevious, waitForInput, fadeWhenDone, stopVoiceover, waitForVO, clip, () => {
+                this.Gonext();
+            });
+        });
+    }
+    WaitForFrames(count) {
+        this.FlowList.push(() => {
+            csharp_1.CommonJsCall.WaitForFrames(Math.floor(count), () => {
+                this.Gonext();
+            });
+        });
+    }
+    WaitForSeconds(count) {
+        this.FlowList.push(() => {
+            csharp_1.CommonJsCall.WaitForSeconds(count, () => {
+                this.Gonext();
+            });
+        });
+    }
+    WaitForSecondsUnscaled(count) {
+        this.FlowList.push(() => {
+            csharp_1.CommonJsCall.WaitForSecondsRealtime(count, () => {
                 this.Gonext();
             });
         });

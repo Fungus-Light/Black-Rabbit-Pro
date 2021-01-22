@@ -1,3 +1,4 @@
+import { CommonJsCall } from "csharp";
 import { SayDialog, $SayDialog, Character } from "Dialog/SayDialog"
 import { $, AudioClip, Debug } from "Utils/Common";
 
@@ -10,7 +11,8 @@ class DialogManager {
     constructor() {
         this.FlowList = new Array<any>()
     }
-    
+
+
 
     Say(text: string): void
     Say(text: string, dialogName: string): void
@@ -87,6 +89,30 @@ class DialogManager {
             })
         })
 
+    }
+
+    WaitForFrames(count: number): void {
+        this.FlowList.push(() => {
+            CommonJsCall.WaitForFrames(Math.floor(count), () => {
+                this.Gonext();
+            })
+        })
+    }
+
+    WaitForSeconds(count: number): void {
+        this.FlowList.push(() => {
+            CommonJsCall.WaitForSeconds(count, () => {
+                this.Gonext();
+            })
+        })
+    }
+
+    WaitForSecondsUnscaled(count: number): void {
+        this.FlowList.push(() => {
+            CommonJsCall.WaitForSecondsRealtime(count, () => {
+                this.Gonext();
+            })
+        })
     }
 
     /**

@@ -2948,11 +2948,21 @@ declare module 'csharp' {
             
         }
         
-        class CommonJsCall extends System.Object {
+        class CommonJsCall extends UnityEngine.MonoBehaviour {
+            
+            public DDOL: boolean;
+            
+            public static Instance: CommonJsCall;
             
             public constructor();
             
             public static QuitGame():void;
+            
+            public static WaitForFrames($count: number, $CallBack: System.Action):void;
+            
+            public static WaitForSecondsRealtime($count: number, $CallBack: System.Action):void;
+            
+            public static WaitForSeconds($count: number, $CallBack: System.Action):void;
             
         }
         

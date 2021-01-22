@@ -35,6 +35,9 @@ class DialogManager {
     Say(text: string): void;
     Say(text: string, dialogName: string): void;
     Say(text: string, dialogName: string, character: Character): void;
+    WaitForFrames(count: number): void;
+    WaitForSeconds(count: number): void;
+    WaitForSecondsUnscaled(count: number): void;
     /**
      * Set The CallBack When Flow is End
      * @param cb
