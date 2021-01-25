@@ -32,7 +32,7 @@ public static class TimelineHelper
 
     public static void ReverseTimeline(PlayableDirector PD, System.Action cb)
     {
-        TimelinePlayer.Instance.StartCoroutine(_ReverseTimeline(PD, cb));
+        CommonJsCall.Instance.StartCoroutine(_ReverseTimeline(PD, cb));
     }
 
     public static IEnumerator _ReverseTimeline(PlayableDirector PD, System.Action cb)
