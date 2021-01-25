@@ -1,1 +1,19 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Create = void 0;
+const Common_1 = require("JS/Utils/Common");
+function Create() { return new FeatureScene(); }
+exports.Create = Create;
+/*=========================================================*/
+class FeatureScene {
+    OnStart() {
+        Common_1.Debug.LogWarning("Level FeatureScene Start!!!");
+    }
+    OnUpdate() {
+    }
+    OnFixedUpdate() {
+    }
+    OnDestroy() {
+    }
+}
 //# sourceMappingURL=FeatureScene.js.map
