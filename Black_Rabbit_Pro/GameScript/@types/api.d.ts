@@ -129,14 +129,14 @@ interface IGameLevel {
 }
 
 declare module "JS/Playable/Timeline"{
-import { UnityEngine } from "csharp";
+import { System, UnityEngine } from "csharp";
 import { UAction } from "JS/Utils/Common";
 class PlayableDirector extends UnityEngine.Playables.PlayableDirector {
 }
 function $Timeline(name: string): Timeline | null;
 class Timeline {
     PD: PlayableDirector;
-    isReverse: false;
+    isReverse: boolean;
     CallBacks: Array<UAction>;
     ReCallBacks: Array<UAction>;
     constructor(pd: PlayableDirector);
@@ -144,6 +144,8 @@ class Timeline {
     Pause(): void;
     Reverse(): void;
     Stop(): void;
+    RegStopCallBack(tag: string, cb: System.Action): void;
+    RegReverStopCallBack(tag: string, cb: System.Action): void;
 }
 
 }
@@ -164,6 +166,8 @@ class Vector3 extends UnityEngine.Vector3 {
 class UAction {
     tag: string;
     act: System.Action;
+    constructor();
+    constructor(tag: string, act: System.Action);
 }
 /**
  * UnityEngine's Vector2

@@ -2,12 +2,35 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Create = void 0;
 const Common_1 = require("JS/Utils/Common");
+const Timeline_1 = require("JS/Playable/Timeline");
+const DialogManager_1 = require("JS/Dialog/DialogManager");
 function Create() { return new FeatureScene(); }
 exports.Create = Create;
 /*=========================================================*/
 class FeatureScene {
     OnStart() {
         Common_1.Debug.LogWarning("Level FeatureScene Start!!!");
+        let Introduce = DialogManager_1.CreateDialog();
+        Introduce.Say("We Will Play A Timeline");
+        Introduce.DoAction(() => {
+            StartScene.Play();
+        });
+        let ReverseIntro = DialogManager_1.CreateDialog();
+        ReverseIntro.Say("We Will Reverse A Timeline");
+        ReverseIntro.DoAction(() => {
+            StartScene.Reverse();
+        });
+        let StartScene = Timeline_1.$Timeline("StartTimeline");
+        StartScene.RegStopCallBack("talkB", () => {
+            Common_1.Debug.LogWarning("This is A Call Back");
+            ReverseIntro.Start();
+        });
+        StartScene.RegReverStopCallBack("End", () => {
+            Common_1.Debug.LogWarning("This is A Reverse Call Back");
+        });
+        Common_1.WaitForSeconds(1, () => {
+            Introduce.Start();
+        });
     }
     OnUpdate() {
     }

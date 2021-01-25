@@ -14,6 +14,19 @@ class Vector3 extends UnityEngine.Vector3 { }
 class UAction {
     tag: string
     act: System.Action
+
+    constructor()
+    constructor(tag: string, act: System.Action)
+    constructor(tag?: string, act?: System.Action) {
+        if (tag == undefined) {
+            tag = ""
+        }
+        if (act == undefined) {
+            act = () => { }
+        }
+        this.tag = tag
+        this.act = act
+    }
 }
 
 /**

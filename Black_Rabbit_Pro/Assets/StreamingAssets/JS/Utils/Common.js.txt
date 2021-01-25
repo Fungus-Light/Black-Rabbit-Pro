@@ -16,6 +16,16 @@ class Vector3 extends csharp_1.UnityEngine.Vector3 {
 }
 exports.Vector3 = Vector3;
 class UAction {
+    constructor(tag, act) {
+        if (tag == undefined) {
+            tag = "";
+        }
+        if (act == undefined) {
+            act = () => { };
+        }
+        this.tag = tag;
+        this.act = act;
+    }
 }
 exports.UAction = UAction;
 /**

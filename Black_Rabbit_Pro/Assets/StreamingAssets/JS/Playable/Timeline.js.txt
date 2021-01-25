@@ -19,11 +19,22 @@ function $Timeline(name) {
 exports.$Timeline = $Timeline;
 class Timeline {
     constructor(pd) {
+        this.isReverse = false;
         this.PD = pd;
         this.CallBacks = new Array();
         this.ReCallBacks = new Array();
         this.PD.add_stopped(() => {
-            Common_1.Debug.LogWarning("Timeline End");
+            //Debug.LogWarning("Timeline End")
+            if (this.isReverse) {
+                this.ReCallBacks.forEach(item => {
+                    item.act();
+                });
+            }
+            else {
+                this.CallBacks.forEach(item => {
+                    item.act();
+                });
+            }
         });
     }
     Play() {
@@ -33,9 +44,31 @@ class Timeline {
         this.PD.Pause();
     }
     Reverse() {
+        this.isReverse = true;
+        csharp_1.TimelineHelper.ReverseTimeline(this.PD, () => {
+            this.isReverse = false;
+        });
     }
     Stop() {
         this.PD.Stop();
+    }
+    RegStopCallBack(tag, cb) {
+        this.CallBacks.forEach(element => {
+            if (element.tag == tag) {
+                element.act = cb;
+                return;
+            }
+        });
+        this.CallBacks.push(new Common_1.UAction(tag, cb));
+    }
+    RegReverStopCallBack(tag, cb) {
+        this.ReCallBacks.forEach(element => {
+            if (element.tag == tag) {
+                element.act = cb;
+                return;
+            }
+        });
+        this.ReCallBacks.push(new Common_1.UAction(tag, cb));
     }
 }
 exports.Timeline = Timeline;

@@ -15,15 +15,26 @@ function $Timeline(name: string): Timeline | null {
 
 class Timeline {
     PD: PlayableDirector
-    isReverse: false
+    isReverse: boolean
     CallBacks: Array<UAction>
     ReCallBacks: Array<UAction>
     constructor(pd: PlayableDirector) {
+        this.isReverse = false
         this.PD = pd
         this.CallBacks = new Array<UAction>()
         this.ReCallBacks = new Array<UAction>()
         this.PD.add_stopped(() => {
-            Debug.LogWarning("Timeline End")
+            //Debug.LogWarning("Timeline End")
+            if (this.isReverse) {
+                this.ReCallBacks.forEach(item => {
+                    item.act()
+                })
+            } else {
+                this.CallBacks.forEach(item => {
+                    item.act()
+                })
+            }
+
         })
     }
     Play(): void {
@@ -33,10 +44,31 @@ class Timeline {
         this.PD.Pause()
     }
     Reverse(): void {
-
+        this.isReverse = true
+        TimelineHelper.ReverseTimeline(this.PD, () => {
+            this.isReverse = false
+        })
     }
     Stop(): void {
         this.PD.Stop();
+    }
+    RegStopCallBack(tag: string, cb: System.Action) {
+        this.CallBacks.forEach(element => {
+            if (element.tag == tag) {
+                element.act = cb
+                return;
+            }
+        });
+        this.CallBacks.push(new UAction(tag, cb))
+    }
+    RegReverStopCallBack(tag: string, cb: System.Action) {
+        this.ReCallBacks.forEach(element => {
+            if (element.tag == tag) {
+                element.act = cb
+                return;
+            }
+        })
+        this.ReCallBacks.push(new UAction(tag, cb))
     }
 }
 

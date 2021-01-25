@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.SceneManagement;
 using UnityEditor.SceneManagement;
+using UnityEngine.Playables;
 
 public class toolsCombine : EditorWindow
 {
@@ -23,11 +24,11 @@ public class toolsCombine : EditorWindow
 
     List<FuncItem> items = new List<FuncItem>();
 
-    [MenuItem("Tools/¿ª·¢¹¤¾ßºÏ¼¯ #&t")]
+    [MenuItem("Tools/å¼€å‘å·¥å…·åˆé›† #&t")]
     public static void ShowWindows()
     {
         toolsCombine wnd = GetWindow<toolsCombine>();
-        wnd.titleContent = new GUIContent("¹¤¾ßºÏ¼¯");
+        wnd.titleContent = new GUIContent("å¼€å‘å·¥å…·åˆé›†");
     }
 
     Length Percent(float v)
@@ -51,10 +52,10 @@ public class toolsCombine : EditorWindow
 
         Action<VisualElement, int> bindItem = (e, i) => (e.ElementAt(0) as Label).text = items[i].key;
 
-        items.Add(new FuncItem("ËµÃ÷", "index"));
-        items.Add(new FuncItem("¿ìËÙÖØÃüÃû×ÓÎïÌå", "quickrename"));
+        items.Add(new FuncItem("è¯´æ˜", "index"));
+        items.Add(new FuncItem("å¿«é€Ÿé‡å‘½åå­ç‰©ä½“", "quickrename"));
 
-        items.Add(new FuncItem("¹Ø¿¨µ÷ÊÔ", "leveldebug"));
+        //items.Add(new FuncItem("å…³å¡è°ƒè¯•", "leveldebug"));
         //root.Add(debugBTN);
 
         //tool bar
@@ -70,7 +71,22 @@ public class toolsCombine : EditorWindow
             }
         };
 
-        
+
+        toolbar.Add(new ToolbarButton(() =>
+        {
+            foreach (PlayableDirector pd in Resources.FindObjectsOfTypeAll<PlayableDirector>())
+            {
+                pd.playOnAwake = false;
+                // if (pd.transform.GetComponent<TimelinePlayer>() == null)
+                // {
+                //     pd.gameObject.AddComponent<TimelinePlayer>();
+                // }
+            }
+        })
+        {
+            text = "åˆå§‹åŒ–æ‰€æœ‰Timeline"
+        });
+
 
         root.Add(toolbar);
 
@@ -161,8 +177,8 @@ public class toolsCombine : EditorWindow
 
         };
 
-        page_Index.Add(new Label("ÕâÊÇ½«¸÷ÖÖ¹¤¾ßÕûºÏµÄ´°¿Ú"));
-        page_Index.Add(new Label("¿ì½İ¼ü£ºshift + alt + t"));
+        page_Index.Add(new Label("ä¸€äº›æœ‰ç”¨å·¥å…·åˆé›†"));
+        page_Index.Add(new Label("å¿«æ·é”® shift + alt + t"));
 
         rightBox.Add(page_Index);
 
@@ -179,24 +195,24 @@ public class toolsCombine : EditorWindow
             visible = false
         };
 
-        page_QuickRename.Add(new Label("ÇëÑ¡ÖĞÒªÅúÁ¿¸ü¸ÄÎïÌåµÄ¸¸½Úµã"));
-        page_QuickRename.Add(new Label("Ò»´ÎÇëÖ»Ñ¡ÔñÒ»¸ö"));
-        page_QuickRename.Add(new Label("ÈôÑ¡Ôñ¶à¸ö½«Ö»²Ù×÷µÚÒ»¸ö"));
+        page_QuickRename.Add(new Label("å…ˆé€‰ä¸­çˆ¶ç‰©ä½“"));
+        page_QuickRename.Add(new Label("ç„¶åè®¾ç½®å‚æ•°"));
+        page_QuickRename.Add(new Label("ä¸€æ¬¡è¯·åªé€‰æ‹©ä¸€ä¸ªç‰©ä½“"));
         page_QuickRename.Add(new Label("------------------------"));
         Page_QuickName param = new Page_QuickName();
 
-        var page_QuickRename_basename = new TextField("ÊäÈëÃû×ÖÄ£°å")
+        var page_QuickRename_basename = new TextField("åå­—æ¨¡æ¿")
         {
             value = param.baseName,
             viewDataKey = "page_QuickRename_basename"
         };
 
-        var page_QuickRename_isFGO = new Toggle("ÊÇ·ñ¼ÓFGOºó×º")
+        var page_QuickRename_isFGO = new Toggle("æ˜¯å¦æ³¨å…¥å¯¹è±¡åˆ—è¡¨")
         {
             viewDataKey = "page_QuickRename_isFGO"
         };
 
-        var page_QuickRename_isFromOne = new Toggle("ÊÇ·ñ´Ó1¿ªÊ¼")
+        var page_QuickRename_isFromOne = new Toggle("æ˜¯å¦ä»1å¼€å§‹")
         {
             viewDataKey = "page_QuickRename_isFromOne"
         };
@@ -209,7 +225,7 @@ public class toolsCombine : EditorWindow
             param.ReNameIt(Selection.transforms);
         })
         {
-            text = "È·¶¨",
+            text = "é‡å‘½å",
             style =
             {
                 width=200
@@ -234,25 +250,25 @@ public class toolsCombine : EditorWindow
 
     class Page_QuickName
     {
-        public string baseName = "Ãû×ÖÄ£°å";
+        public string baseName = "åå­—æ¨¡æ¿";
         public bool isFGO = false;
         public bool isFromOne = false;
 
         public void ReNameIt(Transform[] trans)
         {
 
-            Debug.Log("ÃüÃûÄ£°å£º" + baseName);
+            Debug.Log("ä½¿ç”¨æ¨¡æ¿" + baseName);
             if (isFGO)
             {
-                Debug.Log("½«»áÌí¼Ó_FGOºó×º");
+                Debug.Log("å°†ä¼šæ³¨å…¥æ¸¸æˆå¯¹è±¡åˆ—è¡¨");
             }
             if (isFromOne)
             {
-                Debug.Log("½«»á´Ó1¿ªÊ¼");
+                Debug.Log("å°†ä¼šä»1å¼€å§‹");
             }
 
             Transform _parent = trans[0];
-            Debug.Log("¸¸½ÚµãÎª£º" + _parent.name);
+            Debug.Log("çˆ¶ç‰©ä½“åç§°ä¸º: " + _parent.name);
             for (int k = 0; k < _parent.childCount; k++)
             {
                 string oldname = _parent.GetChild(k).name;
@@ -268,11 +284,11 @@ public class toolsCombine : EditorWindow
 
                 if (isFGO)
                 {
-                    _n += "_FGO";
+                    _n = "$_" + _n;
                 }
 
                 _parent.GetChild(k).gameObject.name = _n;
-                Debug.Log(oldname + " ±»ÖØÃüÃûÎª " + _n);
+                Debug.Log(oldname + " è¢«é‡å‘½åä¸º " + _n);
             }
 
             UnityEditor.Experimental.SceneManagement.PrefabStage prefabStage = UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
@@ -295,7 +311,7 @@ public class toolsCombine : EditorWindow
         {
             KEY_CURRENT_PREFABS = key;
         }
-       
+
     }
 
     class Page_LevelDugger
@@ -304,7 +320,7 @@ public class toolsCombine : EditorWindow
         {
             if (EditorApplication.isPlaying == false)
             {
-                Debug.Log("·ÇÔËĞĞÊ±ÎŞ·¨×¢Èëjs´úÂë");
+                Debug.Log("work only in Play mode");
                 return;
             }
             if (RunEnv.GlobalJsEnv != null)
@@ -314,7 +330,7 @@ public class toolsCombine : EditorWindow
             }
             else
             {
-                Debug.LogError("Î´ÄÜÕÒµ½js»·¾³");
+                Debug.LogError("æ— æ³•ä½¿ç”¨");
             }
 
 
@@ -332,9 +348,9 @@ public class toolsCombine : EditorWindow
                 visible = false
             };
 
-            IntegerField text_levelNum = new IntegerField("¹Ø¿¨level");
+            IntegerField text_levelNum = new IntegerField("ï¿½Ø¿ï¿½level");
             text_levelNum.viewDataKey = "page_LevelDebugger_level_num";
-            IntegerField text_partNum = new IntegerField("¹Ø¿¨part");
+            IntegerField text_partNum = new IntegerField("ï¿½Ø¿ï¿½part");
             text_partNum.viewDataKey = "page_LevelDebugger_part_num";
             Button btn_Jump = new Button(() =>
             {
@@ -343,7 +359,7 @@ public class toolsCombine : EditorWindow
                 Excute("GoLevel(" + levelnum + ", " + partnum + ")");
             })
             {
-                text = "Ìø×ª",
+                text = "ï¿½ï¿½×ª",
                 style = {
                 width=300
             },
@@ -364,7 +380,7 @@ public class toolsCombine : EditorWindow
                     width=300
                 }
             };
-            btn_return.text = "·µ»ØÑ¡¹Ø";
+            btn_return.text = "ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½";
 
             Button btn_next = new Button(() =>
             {
@@ -376,7 +392,7 @@ public class toolsCombine : EditorWindow
                     width=300
                 }
             };
-            btn_next.text = "½øÈëÏÂÒ»part";
+            btn_next.text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»part";
 
             page_LevelDebugger.Add(btn_return);
             page_LevelDebugger.Add(btn_next);

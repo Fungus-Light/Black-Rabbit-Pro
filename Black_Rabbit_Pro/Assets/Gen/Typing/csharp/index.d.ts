@@ -2041,6 +2041,15 @@ declare module 'csharp' {
             
         }
         
+        interface Double {
+            
+            ApproxEquals($b: number):boolean;
+            
+            ApproxEquals($b: number):boolean;
+            
+        }
+        
+        
         class Type extends System.Reflection.MemberInfo {
             
             public static FilterAttribute: System.Reflection.MemberFilter;
@@ -2985,11 +2994,17 @@ declare module 'csharp' {
             
         }
         
-        class TimelineHelper extends UnityEngine.MonoBehaviour {
-            
-            public constructor();
+        class TimelineHelper extends System.Object {
             
             public static GetTimeline($name: string):UnityEngine.Playables.PlayableDirector;
+            
+            public static ApproxEquals($a: number, $b: number):boolean;
+            
+            public static ApproxEquals($a: number, $b: number):boolean;
+            
+            public static ReverseTimeline($PD: UnityEngine.Playables.PlayableDirector, $cb: System.Action):void;
+            
+            public static _ReverseTimeline($PD: UnityEngine.Playables.PlayableDirector, $cb: System.Action):System.Collections.IEnumerator;
             
         }
         
