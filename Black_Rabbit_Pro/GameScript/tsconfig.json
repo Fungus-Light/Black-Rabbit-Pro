@@ -12,6 +12,10 @@
       "@types"
     ],
     "outDir": "output",
-    "baseUrl": "Level"
-  }
+    "baseUrl": "Level",
+    
+  },
+  "exclude": [
+    "@Template"
+  ]
 }

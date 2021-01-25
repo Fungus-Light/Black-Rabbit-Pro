@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Puerts;
 using System;
+using UnityEngine.Playables;
 
 [Configure]
 public class BindConfig
@@ -41,7 +42,8 @@ public class BindConfig
                 typeof(FileHelper),
                 typeof(GameObjectHelper),
                 typeof(CommonJsCall),
-
+                typeof(TimelineHelper),
+                typeof(PlayableDirector)
             };
         }
     }

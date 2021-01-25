@@ -1,4 +1,4 @@
-import { UnityEngine, GameObjectHelper, CommonJsCall } from "csharp";
+import { UnityEngine, GameObjectHelper, CommonJsCall, System } from "csharp";
 import { $typeof } from "puerts"
 
 /**
@@ -10,6 +10,11 @@ class Debug extends UnityEngine.Debug { }
  * UnityEngine's Vector3
  */
 class Vector3 extends UnityEngine.Vector3 { }
+
+class UAction {
+    tag: string
+    act: System.Action
+}
 
 /**
  * UnityEngine's Vector2
@@ -46,6 +51,7 @@ export {
     GameTime,
     AudioClip,
     Transform,
+    UAction,
     T,
     $,
     QuitGame,

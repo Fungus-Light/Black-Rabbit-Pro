@@ -4,6 +4,7 @@
   "description": "ts project",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "postbuild": "node ./@Tools/copyJsFile.js output ../Assets/StreamingAssets/Game/"
+    "postbuild": "node ./@Tools/copyJsFile.js output ../Assets/StreamingAssets/Game/",
+    "Create:Level":"node ./@Tools/CreateLevel.js"
   }
 }

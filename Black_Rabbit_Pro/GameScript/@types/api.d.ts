@@ -128,8 +128,28 @@ interface IGameLevel {
 
 }
 
+declare module "JS/Playable/Timeline"{
+import { UnityEngine } from "csharp";
+import { UAction } from "JS/Utils/Common";
+class PlayableDirector extends UnityEngine.Playables.PlayableDirector {
+}
+function $Timeline(name: string): Timeline | null;
+class Timeline {
+    PD: PlayableDirector;
+    isReverse: false;
+    CallBacks: Array<UAction>;
+    ReCallBacks: Array<UAction>;
+    constructor(pd: PlayableDirector);
+    Play(): void;
+    Pause(): void;
+    Reverse(): void;
+    Stop(): void;
+}
+
+}
+
 declare module "JS/Utils/Common"{
-import { UnityEngine, GameObjectHelper, CommonJsCall } from "csharp";
+import { UnityEngine, GameObjectHelper, CommonJsCall, System } from "csharp";
 import { $typeof } from "puerts";
 /**
  * Debug Class, Rename Of UnityEngine.Debug
@@ -140,6 +160,10 @@ class Debug extends UnityEngine.Debug {
  * UnityEngine's Vector3
  */
 class Vector3 extends UnityEngine.Vector3 {
+}
+class UAction {
+    tag: string;
+    act: System.Action;
 }
 /**
  * UnityEngine's Vector2
