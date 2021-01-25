@@ -43,7 +43,8 @@ public class BindConfig
                 typeof(GameObjectHelper),
                 typeof(CommonJsCall),
                 typeof(TimelineHelper),
-                typeof(PlayableDirector)
+                typeof(PlayableDirector),
+                typeof(CharacterManager)
             };
         }
     }

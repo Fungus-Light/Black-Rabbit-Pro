@@ -15,29 +15,10 @@ class FeatureScene implements IGameLevel {
     OnStart(): void {
         Debug.LogWarning("Level FeatureScene Start!!!")
 
-        let Introduce = CreateDialog()
-        Introduce.Say("We Will Play A Timeline")
-        Introduce.DoAction(() => {
-            StartScene.Play()
-        })
-
-        let ReverseIntro = CreateDialog()
-        ReverseIntro.Say("We Will Reverse A Timeline")
-        ReverseIntro.DoAction(() => {
-            StartScene.Reverse()
-        })
-
-        let StartScene = $Timeline("StartTimeline");
-        StartScene.RegStopCallBack("talkB", () => {
-            Debug.LogWarning("This is A Call Back")
-            ReverseIntro.Start()
-        });
-        StartScene.RegReverStopCallBack("End",()=>{
-            Debug.LogWarning("This is A Reverse Call Back")
-        })
+        
 
         WaitForSeconds(1, () => {
-            Introduce.Start()
+            
         })
 
     }

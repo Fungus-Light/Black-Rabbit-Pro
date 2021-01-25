@@ -3008,6 +3008,24 @@ declare module 'csharp' {
             
         }
         
+        class CharacterManager extends UnityEngine.MonoBehaviour {
+            
+            public CharacterController: ICharacterController;
+            
+            public constructor();
+            
+            public static GetCharacterManager($n: string):CharacterManager;
+            
+            public EnableCharacterMovement():void;
+            
+            public DisableCharacterMovement():void;
+            
+        }
+        
+        interface ICharacterController {
+            
+        }
+        
     
     namespace UnityEngine.Playables {
         /** Instantiates a PlayableAsset and controls playback of Playable objects. */
