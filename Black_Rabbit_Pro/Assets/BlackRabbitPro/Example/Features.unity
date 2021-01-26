@@ -610,8 +610,9 @@ GameObject:
   - component: {fileID: 2143246731}
   - component: {fileID: 2143246730}
   - component: {fileID: 2143246729}
+  - component: {fileID: 2143246732}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: FreeLockCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -682,3 +683,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2143246732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143246728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c1253e95ff4b74ba34b4663da16ac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivity: 5
+  target: {fileID: 0}
+  dstFromTarget: 3
+  pitchMinMax: {x: -40, y: 85}
+  rotationSmoothTime: 0.12
