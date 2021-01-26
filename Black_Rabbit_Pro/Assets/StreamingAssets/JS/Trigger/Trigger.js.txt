@@ -1,0 +1,71 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Trigger = exports.$Trigger = exports.Outline = exports.$Outline = void 0;
+const csharp_1 = require("csharp");
+const Common_1 = require("Utils/Common");
+const $Outline = csharp_1.Black_Rabbit.SimpleOutline.GetOutLineObj;
+exports.$Outline = $Outline;
+class Outline extends csharp_1.Black_Rabbit.SimpleOutline {
+}
+exports.Outline = Outline;
+function $Trigger(name, type, showName, showMessage, outlineOBJName, messagePos) {
+    let trigger = csharp_1.TriggerHelper.GetTrigger(name);
+    let outlineObj = null;
+    if (showName == undefined) {
+        showName = "default trigger";
+    }
+    if (showMessage == undefined) {
+        showMessage = "default message";
+    }
+    if (outlineOBJName != undefined) {
+        outlineObj = $Outline(outlineOBJName);
+    }
+    else {
+        outlineObj = null;
+    }
+    if (messagePos == undefined) {
+        messagePos = Common_1.$(name).Find("Pos");
+        if (messagePos == null) {
+            Common_1.Debug.LogError("Must Have A Child Called 'Pos' ");
+            return;
+        }
+    }
+    if (trigger != null) {
+        return new Trigger(trigger, showName, showMessage, outlineObj, type, messagePos);
+    }
+    else {
+        Common_1.Debug.LogError("Can not find Trigger " + name);
+    }
+}
+exports.$Trigger = $Trigger;
+class Trigger {
+    constructor(trigger, name, message, outLineObj, type, messagePos) {
+        this.EnterActionList = new Array();
+        this.LeaveActionList = new Array();
+        this.UTrigger = trigger;
+        this.UTrigger.Name = name;
+        this.UTrigger.Message = message;
+        this.UTrigger.isShow = false;
+        this.UTrigger.outlineOBJ = outLineObj;
+        this.UTrigger.GameType = type;
+        this.UTrigger.MessagePos = messagePos;
+        this.UTrigger.EnterAct = () => {
+            this.EnterActionList.forEach(item => {
+                item.act();
+            });
+        };
+        this.UTrigger.LeaveAct = () => {
+            this.LeaveActionList.forEach(item => {
+                item.act();
+            });
+        };
+    }
+    MakeUseful() {
+        this.UTrigger.MakeUseful();
+    }
+    MakeUseless() {
+        this.UTrigger.MakeUseless();
+    }
+}
+exports.Trigger = Trigger;
+//# sourceMappingURL=Trigger.js.map

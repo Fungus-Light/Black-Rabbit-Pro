@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Black_Rabbit;
 
-public enum GameType{
+public enum GameType
+{
     FPS,
     TPS,
     AVG
@@ -11,25 +12,34 @@ public enum GameType{
 
 public interface ITrigger
 {
-    string Name{
-        get;set;
+    Action EnterAct { get; set; }
+
+    Action LeaveAct { get; set; }
+
+    string Name
+    {
+        get; set;
     }
 
-    string Message{
-        get;set;
+    string Message
+    {
+        get; set;
     }
-    bool isShow{
-        get;set;
+    bool isShow
+    {
+        get; set;
     }
-    GameType GameType{
-        get;set;
+    GameType GameType
+    {
+        get; set;
     }
 
-    SimpleOutline outlineOBJ{
-        get;set;
+    SimpleOutline outlineOBJ
+    {
+        get; set;
     }
 
-    Transform MessagePos{get;set;}
+    Transform MessagePos { get; set; }
     void MakeUseful();
     void MakeUseless();
 }

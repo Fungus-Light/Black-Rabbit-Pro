@@ -23,6 +23,12 @@ function SetLevel(name: string, Level: IGameLevel): void;
 
 }
 
+declare module "JS/CharacterManager/CharacterManager"{
+import { CharacterManager } from "csharp";
+const $CharacterManager: typeof CharacterManager.GetCharacterManager;
+
+}
+
 declare module "JS/Dialog/DialogManager"{
 import { System } from "csharp";
 import { Character } from "JS/Dialog/SayDialog";
@@ -146,6 +152,26 @@ class Timeline {
     Stop(): void;
     RegStopCallBack(tag: string, cb: System.Action): void;
     RegReverStopCallBack(tag: string, cb: System.Action): void;
+}
+
+}
+
+declare module "JS/Trigger/Trigger"{
+import { Black_Rabbit, GameType, ITrigger } from "csharp";
+import { Transform, UAction } from "JS/Utils/Common";
+const $Outline: typeof Black_Rabbit.SimpleOutline.GetOutLineObj;
+class Outline extends Black_Rabbit.SimpleOutline {
+}
+function $Trigger(name: string, type: GameType): Trigger | void;
+function $Trigger(name: string, type: GameType, showName: string, showMessage: string): Trigger | void;
+function $Trigger(name: string, type: GameType, showName: string, showMessage: string, outlineOBJName: string, messagePos: Transform): Trigger | void;
+class Trigger {
+    UTrigger: ITrigger;
+    EnterActionList: Array<UAction>;
+    LeaveActionList: Array<UAction>;
+    constructor(trigger: ITrigger, name: string, message: string, outLineObj: Black_Rabbit.SimpleOutline, type: GameType, messagePos: Transform);
+    MakeUseful(): void;
+    MakeUseless(): void;
 }
 
 }

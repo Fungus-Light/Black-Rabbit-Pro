@@ -3026,6 +3026,40 @@ declare module 'csharp' {
             
         }
         
+        interface ITrigger {
+            
+            EnterAct: System.Action;
+            
+            LeaveAct: System.Action;
+            
+            Name: string;
+            
+            Message: string;
+            
+            isShow: boolean;
+            
+            GameType: GameType;
+            
+            outlineOBJ: Black_Rabbit.SimpleOutline;
+            
+            MessagePos: UnityEngine.Transform;
+            
+            MakeUseful():void;
+            
+            MakeUseless():void;
+            
+        }
+        
+        enum GameType { FPS = 0, TPS = 1, AVG = 2 }
+        
+        class TriggerHelper extends System.Object {
+            
+            public constructor();
+            
+            public static GetTrigger($name: string):ITrigger;
+            
+        }
+        
     
     namespace UnityEngine.Playables {
         /** Instantiates a PlayableAsset and controls playback of Playable objects. */
@@ -3129,6 +3163,35 @@ declare module 'csharp' {
         }
         /** Defines what time source is used to update a Director graph. */
         enum DirectorUpdateMode { DSPClock = 0, GameTime = 1, UnscaledGameTime = 2, Manual = 3 }
+        
+    }
+    namespace Black_Rabbit {
+        
+        class SimpleOutline extends UnityEngine.MonoBehaviour {
+            
+            public get OutlineMode(): Black_Rabbit.SimpleOutline.Mode;
+            public set OutlineMode(value: Black_Rabbit.SimpleOutline.Mode);
+            
+            public get OutlineColor(): UnityEngine.Color;
+            public set OutlineColor(value: UnityEngine.Color);
+            
+            public get OutlineWidth(): number;
+            public set OutlineWidth(value: number);
+            
+            public constructor();
+            
+            public static GetOutLineObj($name: string):Black_Rabbit.SimpleOutline;
+            
+            public ShowOutLine():void;
+            
+            public HideOutLine():void;
+            
+        }
+        
+    }
+    namespace Black_Rabbit.SimpleOutline {
+        
+        enum Mode { OutlineAll = 0, OutlineVisible = 1, OutlineHidden = 2, OutlineAndSilhouette = 3, SilhouetteOnly = 4 }
         
     }
     namespace Fungus {

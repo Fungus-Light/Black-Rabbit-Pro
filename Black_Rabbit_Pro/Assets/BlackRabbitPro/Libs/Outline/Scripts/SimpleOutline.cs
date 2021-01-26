@@ -16,6 +16,14 @@ namespace Black_Rabbit
     [DisallowMultipleComponent]
     public class SimpleOutline : MonoBehaviour
     {
+        public static SimpleOutline GetOutLineObj(string name){
+            Transform trans =GameObjectHelper.GetTransformByName(name);
+            if(trans!=null){
+                return trans.GetComponent<SimpleOutline>();
+            }else{
+                return null;
+            }
+        }
         private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
 
         public enum Mode

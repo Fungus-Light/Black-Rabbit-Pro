@@ -4,6 +4,7 @@ using UnityEngine;
 using Puerts;
 using System;
 using UnityEngine.Playables;
+using Black_Rabbit;
 
 [Configure]
 public class BindConfig
@@ -44,7 +45,11 @@ public class BindConfig
                 typeof(CommonJsCall),
                 typeof(TimelineHelper),
                 typeof(PlayableDirector),
-                typeof(CharacterManager)
+                typeof(CharacterManager),
+                typeof(ITrigger),
+                typeof(TriggerHelper),
+                typeof(SimpleOutline),
+                typeof(GameType)
             };
         }
     }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Black_Rabbit;
@@ -7,18 +7,9 @@ using Black_Rabbit;
 [RequireComponent(typeof(AudioSource))]
 public class Trigger_Basic : MonoBehaviour, ITrigger
 {
-    private GameType gameType;
-    public GameType GameType
-    {
-        get
-        {
-            return gameType;
-        }
-        set
-        {
-            gameType = value;
-        }
-    }
+    public Action EnterAct{get;set;}
+    public Action LeaveAct{get;set;}
+    public GameType GameType { get; set; }
     public bool isShow { get; set; }
     public string Name { get; set; }
     public string Message { get; set; }
@@ -39,12 +30,12 @@ public class Trigger_Basic : MonoBehaviour, ITrigger
     // Start is called before the first frame update
     void Start()
     {
-
+        isShow=false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 }

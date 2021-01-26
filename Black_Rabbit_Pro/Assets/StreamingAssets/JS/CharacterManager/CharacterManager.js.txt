@@ -1,0 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.$CharacterManager = exports.CharacterManager = void 0;
+const csharp_1 = require("csharp");
+Object.defineProperty(exports, "CharacterManager", { enumerable: true, get: function () { return csharp_1.CharacterManager; } });
+const $CharacterManager = csharp_1.CharacterManager.GetCharacterManager;
+exports.$CharacterManager = $CharacterManager;
+//# sourceMappingURL=CharacterManager.js.map
