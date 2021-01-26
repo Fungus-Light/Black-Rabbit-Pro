@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IMessageBar
 {
     void HideMessage();
-    void ShowMessage(string _name,string _message,Transform _pos);
+    void ShowMessage(string _name, string _message, Transform _pos);
 }
