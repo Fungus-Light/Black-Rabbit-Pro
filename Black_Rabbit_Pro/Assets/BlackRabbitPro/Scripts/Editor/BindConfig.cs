@@ -4,6 +4,7 @@ using UnityEngine;
 using Puerts;
 using System;
 using UnityEngine.Playables;
+using Cinemachine;
 using Black_Rabbit;
 
 [Configure]
@@ -49,7 +50,9 @@ public class BindConfig
                 typeof(ITrigger),
                 typeof(TriggerHelper),
                 typeof(SimpleOutline),
-                typeof(GameType)
+                typeof(GameType),
+
+                typeof(CinemachineBrain),
             };
         }
     }
