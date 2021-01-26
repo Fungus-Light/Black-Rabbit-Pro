@@ -60,16 +60,16 @@ namespace Black_Rabbit
                     if (item != null)
                     {
                         
-                        if (item.isShow && item.GameType == GameType.FPS)
-                        {
-                            //item.GetComponent<Outline>().ShowOutLine();
-                            ui.ShowMessage(item.Name, item.Message, item.MessagePos.transform);
-                            if (item.outlineOBJ != null)
-                            {
-                                item.outlineOBJ.ShowOutLine();
-                            }
+                        // if (item.isShow && item.GameType == GameType.FPS)
+                        // {
+                        //     //item.GetComponent<Outline>().ShowOutLine();
+                        //     ui.ShowMessage(item.Name, item.Message, item.MessagePos.transform);
+                        //     if (item.outlineOBJ != null)
+                        //     {
+                        //         item.outlineOBJ.ShowOutLine();
+                        //     }
 
-                        }
+                        // }
 
 
                         CLearPrev();
@@ -102,10 +102,10 @@ namespace Black_Rabbit
         {
             if (prevTrigger != null)
             {
-                if (prevTrigger.outlineOBJ!=null)
-                {
-                    prevTrigger.outlineOBJ.HideOutLine();
-                }
+                // if (prevTrigger.outlineOBJ!=null)
+                // {
+                //     prevTrigger.outlineOBJ.HideOutLine();
+                // }
                 prevTrigger.MakeUseless();
                 //prevTrigger.GetComponent<Outline>().HideOutLine();
                 prevTrigger = null;

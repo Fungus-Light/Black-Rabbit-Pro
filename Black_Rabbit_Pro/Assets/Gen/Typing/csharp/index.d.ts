@@ -3028,21 +3028,13 @@ declare module 'csharp' {
         
         interface ITrigger {
             
-            EnterAct: System.Action;
+            EnterAct: System.Collections.Generic.Dictionary$2<string, System.Action>;
             
-            LeaveAct: System.Action;
+            LeaveAct: System.Collections.Generic.Dictionary$2<string, System.Action>;
             
-            Name: string;
-            
-            Message: string;
-            
-            isShow: boolean;
+            isUseful: boolean;
             
             GameType: GameType;
-            
-            outlineOBJ: Black_Rabbit.SimpleOutline;
-            
-            MessagePos: UnityEngine.Transform;
             
             MakeUseful():void;
             

@@ -2,13 +2,23 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Create = void 0;
 const Common_1 = require("JS/Utils/Common");
+const Trigger_1 = require("JS/Trigger/Trigger");
+const csharp_1 = require("csharp");
 function Create() { return new FeatureScene(); }
 exports.Create = Create;
 /*=========================================================*/
 class FeatureScene {
     OnStart() {
         Common_1.Debug.LogWarning("Level FeatureScene Start!!!");
+        let BasicTrigger = Trigger_1.$Trigger("BasicTrigger", csharp_1.GameType.FPS);
+        BasicTrigger.RegEnterAct("Player", () => {
+            Common_1.Debug.LogWarning("Player Enter");
+        });
+        BasicTrigger.RegLeaveAct("Player", () => {
+            Common_1.Debug.LogWarning("Player Leave");
+        });
         Common_1.WaitForSeconds(1, () => {
+            BasicTrigger.MakeUseful();
         });
     }
     OnUpdate() {

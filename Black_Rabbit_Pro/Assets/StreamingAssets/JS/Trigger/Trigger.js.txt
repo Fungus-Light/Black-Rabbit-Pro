@@ -8,30 +8,10 @@ exports.$Outline = $Outline;
 class Outline extends csharp_1.Black_Rabbit.SimpleOutline {
 }
 exports.Outline = Outline;
-function $Trigger(name, type, showName, showMessage, outlineOBJName, messagePos) {
+function $Trigger(name, type) {
     let trigger = csharp_1.TriggerHelper.GetTrigger(name);
-    let outlineObj = null;
-    if (showName == undefined) {
-        showName = "default trigger";
-    }
-    if (showMessage == undefined) {
-        showMessage = "default message";
-    }
-    if (outlineOBJName != undefined) {
-        outlineObj = $Outline(outlineOBJName);
-    }
-    else {
-        outlineObj = null;
-    }
-    if (messagePos == undefined) {
-        messagePos = Common_1.$(name).Find("Pos");
-        if (messagePos == null) {
-            Common_1.Debug.LogError("Must Have A Child Called 'Pos' ");
-            return;
-        }
-    }
     if (trigger != null) {
-        return new Trigger(trigger, showName, showMessage, outlineObj, type, messagePos);
+        return new Trigger(trigger, type);
     }
     else {
         Common_1.Debug.LogError("Can not find Trigger " + name);
@@ -39,32 +19,32 @@ function $Trigger(name, type, showName, showMessage, outlineOBJName, messagePos)
 }
 exports.$Trigger = $Trigger;
 class Trigger {
-    constructor(trigger, name, message, outLineObj, type, messagePos) {
-        this.EnterActionList = new Array();
-        this.LeaveActionList = new Array();
+    constructor(trigger, type) {
         this.UTrigger = trigger;
-        this.UTrigger.Name = name;
-        this.UTrigger.Message = message;
-        this.UTrigger.isShow = false;
-        this.UTrigger.outlineOBJ = outLineObj;
+        this.UTrigger.isUseful = true;
         this.UTrigger.GameType = type;
-        this.UTrigger.MessagePos = messagePos;
-        this.UTrigger.EnterAct = () => {
-            this.EnterActionList.forEach(item => {
-                item.act();
-            });
-        };
-        this.UTrigger.LeaveAct = () => {
-            this.LeaveActionList.forEach(item => {
-                item.act();
-            });
-        };
     }
     MakeUseful() {
         this.UTrigger.MakeUseful();
     }
     MakeUseless() {
         this.UTrigger.MakeUseless();
+    }
+    RegEnterAct(tag, cb) {
+        if (this.UTrigger.EnterAct.ContainsKey(tag)) {
+            this.UTrigger.EnterAct.set_Item(tag, cb);
+        }
+        else {
+            this.UTrigger.EnterAct.Add(tag, cb);
+        }
+    }
+    RegLeaveAct(tag, cb) {
+        if (this.UTrigger.LeaveAct.ContainsKey(tag)) {
+            this.UTrigger.LeaveAct.set_Item(tag, cb);
+        }
+        else {
+            this.UTrigger.LeaveAct.Add(tag, cb);
+        }
     }
 }
 exports.Trigger = Trigger;

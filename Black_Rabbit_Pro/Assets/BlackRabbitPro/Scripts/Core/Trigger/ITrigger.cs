@@ -12,20 +12,10 @@ public enum GameType
 
 public interface ITrigger
 {
-    Action EnterAct { get; set; }
+    Dictionary<string,Action> EnterAct { get; set; }
+    Dictionary<string,Action> LeaveAct { get; set; }
 
-    Action LeaveAct { get; set; }
-
-    string Name
-    {
-        get; set;
-    }
-
-    string Message
-    {
-        get; set;
-    }
-    bool isShow
+    bool isUseful
     {
         get; set;
     }
@@ -33,13 +23,6 @@ public interface ITrigger
     {
         get; set;
     }
-
-    SimpleOutline outlineOBJ
-    {
-        get; set;
-    }
-
-    Transform MessagePos { get; set; }
     void MakeUseful();
     void MakeUseless();
 }

@@ -157,21 +157,18 @@ class Timeline {
 }
 
 declare module "JS/Trigger/Trigger"{
-import { Black_Rabbit, GameType, ITrigger } from "csharp";
-import { Transform, UAction } from "JS/Utils/Common";
+import { Black_Rabbit, GameType, ITrigger, System } from "csharp";
 const $Outline: typeof Black_Rabbit.SimpleOutline.GetOutLineObj;
 class Outline extends Black_Rabbit.SimpleOutline {
 }
-function $Trigger(name: string, type: GameType): Trigger | void;
-function $Trigger(name: string, type: GameType, showName: string, showMessage: string): Trigger | void;
-function $Trigger(name: string, type: GameType, showName: string, showMessage: string, outlineOBJName: string, messagePos: Transform): Trigger | void;
+function $Trigger(name: string, type: GameType): Trigger;
 class Trigger {
     UTrigger: ITrigger;
-    EnterActionList: Array<UAction>;
-    LeaveActionList: Array<UAction>;
-    constructor(trigger: ITrigger, name: string, message: string, outLineObj: Black_Rabbit.SimpleOutline, type: GameType, messagePos: Transform);
+    constructor(trigger: ITrigger, type: GameType);
     MakeUseful(): void;
     MakeUseless(): void;
+    RegEnterAct(tag: string, cb: System.Action): void;
+    RegLeaveAct(tag: string, cb: System.Action): void;
 }
 
 }

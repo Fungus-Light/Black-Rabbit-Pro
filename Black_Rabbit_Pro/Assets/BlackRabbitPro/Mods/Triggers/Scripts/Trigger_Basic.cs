@@ -4,38 +4,58 @@ using UnityEngine;
 using Black_Rabbit;
 
 [RequireComponent(typeof(Collider))]
-[RequireComponent(typeof(AudioSource))]
 public class Trigger_Basic : MonoBehaviour, ITrigger
 {
-    public Action EnterAct{get;set;}
-    public Action LeaveAct{get;set;}
+    public Dictionary<string, Action> EnterAct { get; set; } = new Dictionary<string, Action>();
+    public Dictionary<string, Action> LeaveAct { get; set; } = new Dictionary<string, Action>();
     public GameType GameType { get; set; }
-    public bool isShow { get; set; }
-    public string Name { get; set; }
-    public string Message { get; set; }
+    public bool isUseful { get; set; }
 
-    public Transform MessagePos { get; set; }
-    public SimpleOutline outlineOBJ
-    {
-        get; set;
-    }
     public void MakeUseful()
     {
-        isShow = true;
+        isUseful = true;
     }
     public void MakeUseless()
     {
-        isShow = false;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        isShow=false;
+        isUseful = false;
     }
 
-    // Update is called once per frame
+    void Awake()
+    {
+        this.GetComponent<Collider>().isTrigger = true;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (isUseful)
+        {
+            foreach (string key in EnterAct.Keys)
+            {
+                if (key == other.tag)
+                {
+                    EnterAct[key]();
+                }
+            }
+        }
+
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (isUseful)
+        {
+            foreach (string key in LeaveAct.Keys)
+            {
+                if (key == other.tag)
+                {
+                    LeaveAct[key]();
+                }
+            }
+        }
+    }
+
     void Update()
     {
-        
+
     }
 }
