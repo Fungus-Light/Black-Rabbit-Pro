@@ -60,7 +60,7 @@ namespace Black_Rabbit
                     if (item != null)
                     {
                         
-                        if (item.isShow && item.gameType == GameType.FPS)
+                        if (item.isShow && item.GameType == GameType.FPS)
                         {
                             //item.GetComponent<Outline>().ShowOutLine();
                             ui.ShowMessage(item.Name, item.Message, item.MessagePos.transform);
@@ -74,7 +74,7 @@ namespace Black_Rabbit
 
                         CLearPrev();
                         prevTrigger = item;
-                        if (item.gameType == GameType.FPS)
+                        if (item.GameType == GameType.FPS)
                         {
                             item.MakeUseful();
                         }

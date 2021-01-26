@@ -21,7 +21,7 @@ public interface ITrigger
     bool isShow{
         get;set;
     }
-    GameType gameType{
+    GameType GameType{
         get;set;
     }
 
