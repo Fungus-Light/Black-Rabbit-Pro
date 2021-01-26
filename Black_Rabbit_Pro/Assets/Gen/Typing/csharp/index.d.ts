@@ -1907,6 +1907,30 @@ declare module 'csharp' {
         class PropertyName extends System.ValueType {
             
         }
+        /** Class that can be used to generate text for rendering. */
+        class TextGenerator extends System.Object {
+            
+        }
+        /** Base class for texture handling. Contains functionality that is common to both Texture2D and RenderTexture classes. */
+        class Texture extends UnityEngine.Object {
+            
+        }
+        /** Script interface for. */
+        class Font extends UnityEngine.Object {
+            
+        }
+        /** Where the anchor of the text is placed. */
+        enum TextAnchor { UpperLeft = 0, UpperCenter = 1, UpperRight = 2, MiddleLeft = 3, MiddleCenter = 4, MiddleRight = 5, LowerLeft = 6, LowerCenter = 7, LowerRight = 8 }
+        /** Wrapping modes for text that reaches the horizontal boundary. */
+        enum HorizontalWrapMode { Wrap = 0, Overflow = 1 }
+        /** Wrapping modes for text that reaches the vertical boundary. */
+        enum VerticalWrapMode { Truncate = 0, Overflow = 1 }
+        /** Font Style applied to GUI Texts, Text Meshes or GUIStyles. */
+        enum FontStyle { Normal = 0, Bold = 1, Italic = 2, BoldAndItalic = 3 }
+        /** A struct that stores the settings for TextGeneration. */
+        class TextGenerationSettings extends System.ValueType {
+            
+        }
         /** Position, size, anchor and pivot information for a rectangle. */
         class RectTransform extends UnityEngine.Transform {
             
@@ -2429,6 +2453,32 @@ declare module 'csharp' {
         /** Zero argument delegate used by UnityEvents. */
         type UnityAction = () => void;
         var UnityAction: {new (func: () => void): UnityAction;}
+        
+        class UnityEvent$1<T0> extends UnityEngine.Events.UnityEventBase {
+            
+        }
+        /** Abstract base class for UnityEvents. */
+        class UnityEventBase extends System.Object {
+            
+        }
+        
+        class UnityEvent$2<T0,T1> extends UnityEngine.Events.UnityEventBase {
+            
+        }
+        /** A zero argument persistent callback that can be saved with the Scene. */
+        class UnityEvent extends UnityEngine.Events.UnityEventBase {
+            
+            public constructor();
+            /** Add a non persistent listener to the UnityEvent. * @param call Callback function.
+             */
+            public AddListener($call: UnityEngine.Events.UnityAction):void;
+            /** Remove a non persistent listener from the UnityEvent. * @param call Callback function.
+             */
+            public RemoveListener($call: UnityEngine.Events.UnityAction):void;
+            
+            public Invoke():void;
+            
+        }
         
     }
     namespace System.Collections.Generic {
@@ -3052,6 +3102,18 @@ declare module 'csharp' {
             
         }
         
+        class UIHelper extends System.Object {
+            
+            public constructor();
+            
+            public static GetCanvas($name: string):UnityEngine.Canvas;
+            
+            public static GetButton($name: string):UnityEngine.UI.Button;
+            
+            public static GetText($name: string):UnityEngine.UI.Text;
+            
+        }
+        
     
     namespace UnityEngine.Playables {
         /** Instantiates a PlayableAsset and controls playback of Playable objects. */
@@ -3184,6 +3246,234 @@ declare module 'csharp' {
     namespace Black_Rabbit.SimpleOutline {
         
         enum Mode { OutlineAll = 0, OutlineVisible = 1, OutlineHidden = 2, OutlineAndSilhouette = 3, SilhouetteOnly = 4 }
+        
+    }
+    namespace Cinemachine {
+        
+        class CinemachineBrain extends UnityEngine.MonoBehaviour {
+            
+            public m_ShowDebugText: boolean;
+            
+            public m_ShowCameraFrustum: boolean;
+            
+            public m_IgnoreTimeScale: boolean;
+            
+            public m_WorldUpOverride: UnityEngine.Transform;
+            
+            public m_UpdateMethod: Cinemachine.CinemachineBrain.UpdateMethod;
+            
+            public m_BlendUpdateMethod: Cinemachine.CinemachineBrain.BrainUpdateMethod;
+            
+            public m_DefaultBlend: Cinemachine.CinemachineBlendDefinition;
+            
+            public m_CustomBlends: Cinemachine.CinemachineBlenderSettings;
+            
+            public m_CameraCutEvent: Cinemachine.CinemachineBrain.BrainEvent;
+            
+            public m_CameraActivatedEvent: Cinemachine.CinemachineBrain.VcamActivatedEvent;
+            
+            public get OutputCamera(): UnityEngine.Camera;
+            
+            public static get SoloCamera(): Cinemachine.ICinemachineCamera;
+            public static set SoloCamera(value: Cinemachine.ICinemachineCamera);
+            
+            public get DefaultWorldUp(): UnityEngine.Vector3;
+            
+            public get ActiveVirtualCamera(): Cinemachine.ICinemachineCamera;
+            
+            public get IsBlending(): boolean;
+            
+            public get ActiveBlend(): Cinemachine.CinemachineBlend;
+            
+            public get CurrentCameraState(): Cinemachine.CameraState;
+            
+            public constructor();
+            
+            public static GetSoloGUIColor():UnityEngine.Color;
+            
+            public ManualUpdate():void;
+            
+            public SetCameraOverride($overrideId: number, $camA: Cinemachine.ICinemachineCamera, $camB: Cinemachine.ICinemachineCamera, $weightB: number, $deltaTime: number):number;
+            
+            public ReleaseCameraOverride($overrideId: number):void;
+            
+            public ComputeCurrentBlend($outputBlend: $Ref<Cinemachine.CinemachineBlend>, $numTopLayersToExclude: number):void;
+            
+            public IsLive($vcam: Cinemachine.ICinemachineCamera, $dominantChildOnly?: boolean):boolean;
+            
+        }
+        
+        class CinemachineBlendDefinition extends System.ValueType {
+            
+        }
+        
+        class CinemachineBlenderSettings extends UnityEngine.ScriptableObject {
+            
+        }
+        
+        interface ICinemachineCamera {
+            
+        }
+        
+        class CinemachineBlend extends System.Object {
+            
+        }
+        
+        class CameraState extends System.ValueType {
+            
+        }
+        
+    }
+    namespace Cinemachine.CinemachineBrain {
+        
+        enum UpdateMethod { FixedUpdate = 0, LateUpdate = 1, SmartUpdate = 2, ManualUpdate = 3 }
+        
+        enum BrainUpdateMethod { FixedUpdate = 0, LateUpdate = 1 }
+        
+        class BrainEvent extends UnityEngine.Events.UnityEvent$1<Cinemachine.CinemachineBrain> {
+            
+        }
+        
+        class VcamActivatedEvent extends UnityEngine.Events.UnityEvent$2<Cinemachine.ICinemachineCamera, Cinemachine.ICinemachineCamera> {
+            
+        }
+        
+    }
+    namespace UnityEngine.UI {
+        
+        class Button extends UnityEngine.UI.Selectable {
+            
+            public get onClick(): UnityEngine.UI.Button.ButtonClickedEvent;
+            public set onClick(value: UnityEngine.UI.Button.ButtonClickedEvent);
+            
+            public OnPointerClick($eventData: UnityEngine.EventSystems.PointerEventData):void;
+            
+            public OnSubmit($eventData: UnityEngine.EventSystems.BaseEventData):void;
+            
+        }
+        
+        class Selectable extends UnityEngine.EventSystems.UIBehaviour {
+            
+        }
+        
+        class Text extends UnityEngine.UI.MaskableGraphic {
+            
+            public get cachedTextGenerator(): UnityEngine.TextGenerator;
+            
+            public get cachedTextGeneratorForLayout(): UnityEngine.TextGenerator;
+            
+            public get mainTexture(): UnityEngine.Texture;
+            
+            public get font(): UnityEngine.Font;
+            public set font(value: UnityEngine.Font);
+            
+            public get text(): string;
+            public set text(value: string);
+            
+            public get supportRichText(): boolean;
+            public set supportRichText(value: boolean);
+            
+            public get resizeTextForBestFit(): boolean;
+            public set resizeTextForBestFit(value: boolean);
+            
+            public get resizeTextMinSize(): number;
+            public set resizeTextMinSize(value: number);
+            
+            public get resizeTextMaxSize(): number;
+            public set resizeTextMaxSize(value: number);
+            
+            public get alignment(): UnityEngine.TextAnchor;
+            public set alignment(value: UnityEngine.TextAnchor);
+            
+            public get alignByGeometry(): boolean;
+            public set alignByGeometry(value: boolean);
+            
+            public get fontSize(): number;
+            public set fontSize(value: number);
+            
+            public get horizontalOverflow(): UnityEngine.HorizontalWrapMode;
+            public set horizontalOverflow(value: UnityEngine.HorizontalWrapMode);
+            
+            public get verticalOverflow(): UnityEngine.VerticalWrapMode;
+            public set verticalOverflow(value: UnityEngine.VerticalWrapMode);
+            
+            public get lineSpacing(): number;
+            public set lineSpacing(value: number);
+            
+            public get fontStyle(): UnityEngine.FontStyle;
+            public set fontStyle(value: UnityEngine.FontStyle);
+            
+            public get pixelsPerUnit(): number;
+            
+            public get minWidth(): number;
+            
+            public get preferredWidth(): number;
+            
+            public get flexibleWidth(): number;
+            
+            public get minHeight(): number;
+            
+            public get preferredHeight(): number;
+            
+            public get flexibleHeight(): number;
+            
+            public get layoutPriority(): number;
+            
+            public FontTextureChanged():void;
+            
+            public GetGenerationSettings($extents: UnityEngine.Vector2):UnityEngine.TextGenerationSettings;
+            
+            public static GetTextAnchorPivot($anchor: UnityEngine.TextAnchor):UnityEngine.Vector2;
+            
+            public CalculateLayoutInputHorizontal():void;
+            
+            public CalculateLayoutInputVertical():void;
+            
+            public OnRebuildRequested():void;
+            
+        }
+        
+        class MaskableGraphic extends UnityEngine.UI.Graphic {
+            
+        }
+        
+        class Graphic extends UnityEngine.EventSystems.UIBehaviour {
+            
+        }
+        
+        class Image extends UnityEngine.UI.MaskableGraphic {
+            
+        }
+        
+        class Slider extends UnityEngine.UI.Selectable {
+            
+        }
+        
+    }
+    namespace UnityEngine.EventSystems {
+        
+        class UIBehaviour extends UnityEngine.MonoBehaviour {
+            
+        }
+        
+        class PointerEventData extends UnityEngine.EventSystems.BaseEventData {
+            
+        }
+        
+        class BaseEventData extends UnityEngine.EventSystems.AbstractEventData {
+            
+        }
+        
+        class AbstractEventData extends System.Object {
+            
+        }
+        
+    }
+    namespace UnityEngine.UI.Button {
+        
+        class ButtonClickedEvent extends UnityEngine.Events.UnityEvent {
+            
+        }
         
     }
     namespace Fungus {
@@ -3323,40 +3613,6 @@ declare module 'csharp' {
         }
         
         class Node extends UnityEngine.MonoBehaviour {
-            
-        }
-        
-    }
-    namespace UnityEngine.UI {
-        
-        class Image extends UnityEngine.UI.MaskableGraphic {
-            
-        }
-        
-        class MaskableGraphic extends UnityEngine.UI.Graphic {
-            
-        }
-        
-        class Graphic extends UnityEngine.EventSystems.UIBehaviour {
-            
-        }
-        
-        class Button extends UnityEngine.UI.Selectable {
-            
-        }
-        
-        class Slider extends UnityEngine.UI.Selectable {
-            
-        }
-        
-        class Selectable extends UnityEngine.EventSystems.UIBehaviour {
-            
-        }
-        
-    }
-    namespace UnityEngine.EventSystems {
-        
-        class UIBehaviour extends UnityEngine.MonoBehaviour {
             
         }
         

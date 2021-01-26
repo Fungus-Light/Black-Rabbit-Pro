@@ -6,6 +6,9 @@ using System;
 using UnityEngine.Playables;
 using Cinemachine;
 using Black_Rabbit;
+using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 [Configure]
 public class BindConfig
@@ -53,6 +56,13 @@ public class BindConfig
                 typeof(GameType),
 
                 typeof(CinemachineBrain),
+
+                typeof(UIHelper),
+                typeof(Button),
+                typeof(UnityEvent),
+                typeof(Text),
+                typeof(Canvas),
+
             };
         }
     }
