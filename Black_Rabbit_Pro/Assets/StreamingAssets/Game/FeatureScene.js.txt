@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Create = void 0;
 const Common_1 = require("JS/Utils/Common");
 const Trigger_1 = require("JS/Trigger/Trigger");
 const csharp_1 = require("csharp");
+const UI_1 = require("JS/UI/UI");
 function Create() { return new FeatureScene(); }
 exports.Create = Create;
 /*=========================================================*/
@@ -16,6 +16,17 @@ class FeatureScene {
         });
         BasicTrigger.RegLeaveAct("Player", () => {
             Common_1.Debug.LogWarning("Player Leave");
+        });
+        let BTN1 = UI_1.$Button("BTN1");
+        let BTN2 = UI_1.$Button("BTN2");
+        let testText = UI_1.$Text("testText");
+        BTN1.RegClickCallBack("click", () => {
+            Common_1.Debug.Log("click1");
+            testText.text = "Click BTN1";
+        });
+        BTN2.RegClickCallBack("click", () => {
+            Common_1.Debug.Log("click2");
+            testText.text = "Click BTN2";
         });
         Common_1.WaitForSeconds(1, () => {
             BasicTrigger.MakeUseful();

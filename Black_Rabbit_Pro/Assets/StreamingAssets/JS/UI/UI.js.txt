@@ -1,0 +1,28 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const csharp_1 = require("csharp");
+const Common_1 = require("Utils/Common");
+class Button {
+    constructor(btn) {
+        this.btn = btn;
+    }
+    RegClickCallBack(tag, act) {
+        this.btn.onClick.AddListener(act);
+    }
+}
+exports.Button = Button;
+class Text extends csharp_1.UnityEngine.UI.Text {
+}
+exports.Text = Text;
+function $Button(name) {
+    let btn = csharp_1.UIHelper.GetButton(name);
+    if (btn == null) {
+        Common_1.Debug.LogError("Buttom " + name + " Can Not Be Found!!!");
+        return;
+    }
+    return new Button(btn);
+}
+exports.$Button = $Button;
+const $Text = csharp_1.UIHelper.GetText;
+exports.$Text = $Text;
+//# sourceMappingURL=UI.js.map

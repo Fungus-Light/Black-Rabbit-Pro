@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Trigger = exports.$Trigger = exports.Outline = exports.$Outline = void 0;
 const csharp_1 = require("csharp");
 const Common_1 = require("Utils/Common");
 const $Outline = csharp_1.Black_Rabbit.SimpleOutline.GetOutLineObj;

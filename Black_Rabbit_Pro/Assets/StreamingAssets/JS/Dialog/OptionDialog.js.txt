@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateSingleOption = exports.singleOption = exports.$OptionDialog = exports.OptionDialog = void 0;
 const csharp_1 = require("csharp");
 class OptionDialog extends csharp_1.Fungus.MenuDialog {
 }

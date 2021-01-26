@@ -173,6 +173,20 @@ class Trigger {
 
 }
 
+declare module "JS/UI/UI"{
+import { System, UIHelper, UnityEngine } from "csharp";
+class Button {
+    btn: UnityEngine.UI.Button;
+    constructor(btn: UnityEngine.UI.Button);
+    RegClickCallBack(tag: string, act: System.Action): void;
+}
+class Text extends UnityEngine.UI.Text {
+}
+function $Button(name: string): Button;
+const $Text: typeof UIHelper.GetText;
+
+}
+
 declare module "JS/Utils/Common"{
 import { UnityEngine, GameObjectHelper, CommonJsCall, System } from "csharp";
 import { $typeof } from "puerts";
