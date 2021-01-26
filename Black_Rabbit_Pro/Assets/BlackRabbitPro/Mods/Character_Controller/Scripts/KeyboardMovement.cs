@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Black_Rabbit
 {
 
-    [AddComponentMenu("Black-Rabbit/CharacterController/3D")]
+    [AddComponentMenu("Black-Rabbit/CharacterController/KeyBoard")]
     //自动添加必要的组件
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(CapsuleCollider))]
-    public class CharacterMovement : MonoBehaviour, ICharacterController
+    public class KeyboardMovement : MonoBehaviour, ICharacterController
     {
         //决定是否使用角色本身的前方作为前进方向，默认是摄影机的方向作为前方
         public bool useCharacterForward = false;
@@ -48,6 +49,8 @@ namespace Black_Rabbit
             {
                 input.x = Input.GetAxis("Horizontal");
                 input.y = Input.GetAxis("Vertical");
+
+                
 
                 // set speed to both vertical and horizontal inputs
                 if (useCharacterForward)

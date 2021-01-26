@@ -4,6 +4,7 @@ using UnityEngine;
 using Puerts;
 using System;
 using UnityEngine.Playables;
+using UnityEngine.InputSystem;
 using Black_Rabbit;
 
 [Configure]
@@ -40,6 +41,9 @@ public class BindConfig
                 typeof(JsBehaviour),
                 typeof(LevelRunner),
 
+                typeof(Gamepad),
+                typeof(Keyboard),
+                typeof(Mouse),
                 typeof(FileHelper),
                 typeof(GameObjectHelper),
                 typeof(CommonJsCall),
