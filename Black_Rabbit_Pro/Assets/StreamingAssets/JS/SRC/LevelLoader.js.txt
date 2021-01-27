@@ -1,0 +1,55 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SetLevel = exports.Init = void 0;
+const Common_1 = require("Utils/Common");
+let _level = null;
+let _name = "";
+class LevelLoader {
+    constructor(bindTo, name, Level) {
+        this.bindTo = bindTo;
+        Level.name = name;
+        Level.root = bindTo.transform;
+        this.Level = Level;
+        this.bindTo.JsStart = () => this.OnStart();
+        this.bindTo.JsUpdate = () => this.OnUpdate();
+        this.bindTo.JsOnDestroy = () => this.OnDestroy();
+        //this.bindTo.JsAwake = () => this.Init();
+        this.bindTo.JsFixedUpdate = () => this.OnFixedUpdate();
+    }
+    // public Init() {
+    //     //this.Level.Init();
+    // }
+    OnStart() {
+        Common_1.Debug.LogWarning("Start Load Level " + this.Level.name);
+        this.Level.OnStart();
+    }
+    OnFixedUpdate() {
+        this.Level.OnFixedUpdate();
+    }
+    OnUpdate() {
+        this.Level.OnUpdate();
+    }
+    OnDestroy() {
+        Common_1.Debug.LogWarning('Destroy...' + this.Level.name);
+        this.Level.OnDestroy();
+    }
+}
+/**
+ * Make A LevelLoader Run
+ * @param bindTo A C# LevelRunner
+ */
+function Init(bindTo) {
+    new LevelLoader(bindTo, _name, _level);
+}
+exports.Init = Init;
+/**
+ * Set A LevelLoader's Content
+ * @param name Level Name
+ * @param Level A Level
+ */
+function SetLevel(name, Level) {
+    _name = name;
+    _level = Level;
+}
+exports.SetLevel = SetLevel;
+//# sourceMappingURL=LevelLoader.js.map

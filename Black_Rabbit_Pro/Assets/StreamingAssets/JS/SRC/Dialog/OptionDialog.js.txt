@@ -1,0 +1,36 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CreateSingleOption = exports.singleOption = exports.$OptionDialog = exports.OptionDialog = void 0;
+const csharp_1 = require("csharp");
+class OptionDialog extends csharp_1.Fungus.MenuDialog {
+}
+exports.OptionDialog = OptionDialog;
+const $OptionDialog = OptionDialog.GetMenuDialog;
+exports.$OptionDialog = $OptionDialog;
+class singleOption {
+    constructor(_text, _act, _optDN, _intAct, _hideWhenC) {
+        this.text = _text;
+        this.act = _act;
+        this.optionDialogName = _optDN;
+        this.interactable = _intAct;
+        this.hideWhenClick = _hideWhenC;
+    }
+}
+exports.singleOption = singleOption;
+function CreateSingleOption(text, act, optionDialogName, interActable, hideWhenClick) {
+    if (act == undefined) {
+        act = () => { };
+    }
+    if (optionDialogName == undefined) {
+        optionDialogName = "";
+    }
+    if (interActable == undefined) {
+        interActable = true;
+    }
+    if (hideWhenClick == undefined) {
+        hideWhenClick = false;
+    }
+    return new singleOption(text, act, optionDialogName, interActable, hideWhenClick);
+}
+exports.CreateSingleOption = CreateSingleOption;
+//# sourceMappingURL=OptionDialog.js.map

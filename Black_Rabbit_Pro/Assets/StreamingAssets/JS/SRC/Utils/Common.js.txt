@@ -1,0 +1,67 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WaitForSecondsRealtime = exports.WaitForSeconds = exports.WaitForFrames = exports.QuitGame = exports.$ = exports.T = exports.UAction = exports.Transform = exports.AudioClip = exports.GameTime = exports.Vector2 = exports.Vector3 = exports.Debug = void 0;
+const csharp_1 = require("csharp");
+const puerts_1 = require("puerts");
+/**
+ * Debug Class, Rename Of UnityEngine.Debug
+ */
+class Debug extends csharp_1.UnityEngine.Debug {
+}
+exports.Debug = Debug;
+/**
+ * UnityEngine's Vector3
+ */
+class Vector3 extends csharp_1.UnityEngine.Vector3 {
+}
+exports.Vector3 = Vector3;
+class UAction {
+    constructor(tag, act) {
+        if (tag == undefined) {
+            tag = "";
+        }
+        if (act == undefined) {
+            act = () => { };
+        }
+        this.tag = tag;
+        this.act = act;
+    }
+}
+exports.UAction = UAction;
+/**
+ * UnityEngine's Vector2
+ */
+class Vector2 extends csharp_1.UnityEngine.Vector2 {
+}
+exports.Vector2 = Vector2;
+class Transform extends csharp_1.UnityEngine.Transform {
+}
+exports.Transform = Transform;
+/**
+ * UnityEngine's Time Class
+ */
+class GameTime extends csharp_1.UnityEngine.Time {
+}
+exports.GameTime = GameTime;
+class AudioClip extends csharp_1.UnityEngine.AudioClip {
+}
+exports.AudioClip = AudioClip;
+/**
+ * Get An Obeject's Type
+ */
+const T = puerts_1.$typeof;
+exports.T = T;
+/**
+ * Get A Transform By It's Name
+ */
+const $ = csharp_1.GameObjectHelper.GetTransformByName;
+exports.$ = $;
+const QuitGame = csharp_1.CommonJsCall.QuitGame;
+exports.QuitGame = QuitGame;
+const WaitForFrames = csharp_1.CommonJsCall.WaitForFrames;
+exports.WaitForFrames = WaitForFrames;
+const WaitForSeconds = csharp_1.CommonJsCall.WaitForSeconds;
+exports.WaitForSeconds = WaitForSeconds;
+const WaitForSecondsRealtime = csharp_1.CommonJsCall.WaitForSecondsRealtime;
+exports.WaitForSecondsRealtime = WaitForSecondsRealtime;
+//# sourceMappingURL=Common.js.map

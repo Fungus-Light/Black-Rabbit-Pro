@@ -1,0 +1,19 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.$SayDialog = exports.Character = exports.SayDialog = void 0;
+const csharp_1 = require("csharp");
+/**
+ * Class Of Dialog Panel
+ */
+class SayDialog extends csharp_1.Fungus.SayDialog {
+}
+exports.SayDialog = SayDialog;
+class Character extends csharp_1.Fungus.Character {
+}
+exports.Character = Character;
+/**
+ * Get Or Create Dialog
+ */
+const $SayDialog = SayDialog.GetSayDialog;
+exports.$SayDialog = $SayDialog;
+//# sourceMappingURL=SayDialog.js.map
