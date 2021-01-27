@@ -275,6 +275,16 @@ const WaitForSecondsRealtime: typeof CommonJsCall.WaitForSecondsRealtime;
 
 }
 
+declare module "JS/Utils/MathMod"{
+const ABS: (x: number) => number;
+const MIN: (...values: number[]) => number;
+const MAX: (...values: number[]) => number;
+const RANDOM: {
+    GetRndInteger: (min: number, max: number) => number;
+};
+
+}
+
 declare module "JS/SRC/CharacterManager/CharacterManager"{
 import { CharacterManager } from "csharp";
 const $CharacterManager: typeof CharacterManager.GetCharacterManager;

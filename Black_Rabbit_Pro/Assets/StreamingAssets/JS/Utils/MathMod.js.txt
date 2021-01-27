@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RANDOM = exports.MAX = exports.MIN = exports.ABS = void 0;
+const ABS = Math.abs;
+exports.ABS = ABS;
+const MIN = Math.min;
+exports.MIN = MIN;
+const MAX = Math.max;
+exports.MAX = MAX;
+const RANDOM = {
+    GetRndInteger: function (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+};
+exports.RANDOM = RANDOM;
+//# sourceMappingURL=MathMod.js.map

@@ -6,6 +6,7 @@ import { CreateDialog } from "JS/Dialog/DialogManager";
 import { $Trigger } from "JS/Trigger/Trigger";
 import { GameType } from "csharp";
 import { $Button, $InputField, $Text } from "JS/UI/UI";
+import { RANDOM } from "JS/Utils/MathMod";
 
 function Create() { return new FeatureScene(); }
 export { Create }
@@ -32,7 +33,7 @@ class FeatureScene implements IGameLevel {
         let testText = $Text("testText")
 
         let testInput = $InputField("input")
-
+        testInput.SetValue(RANDOM.GetRndInteger(1, 100).toString())
         testInput.RegValueChange("ChangeDebug", v => {
             Debug.Log(v)
         })

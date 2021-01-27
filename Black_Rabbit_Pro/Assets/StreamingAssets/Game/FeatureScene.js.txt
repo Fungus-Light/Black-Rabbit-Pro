@@ -5,6 +5,7 @@ const Common_1 = require("JS/Utils/Common");
 const Trigger_1 = require("JS/Trigger/Trigger");
 const csharp_1 = require("csharp");
 const UI_1 = require("JS/UI/UI");
+const MathMod_1 = require("JS/Utils/MathMod");
 function Create() { return new FeatureScene(); }
 exports.Create = Create;
 /*=========================================================*/
@@ -22,6 +23,7 @@ class FeatureScene {
         let BTN2 = UI_1.$Button("BTN2");
         let testText = UI_1.$Text("testText");
         let testInput = UI_1.$InputField("input");
+        testInput.SetValue(MathMod_1.RANDOM.GetRndInteger(1, 100).toString());
         testInput.RegValueChange("ChangeDebug", v => {
             Common_1.Debug.Log(v);
         });
