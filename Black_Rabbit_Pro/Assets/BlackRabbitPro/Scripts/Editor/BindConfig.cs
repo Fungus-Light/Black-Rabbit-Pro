@@ -50,7 +50,9 @@ public class BindConfig
                 typeof(CommonJsCall),
                 typeof(TimelineHelper),
                 typeof(PlayableDirector),
+
                 typeof(CharacterManager),
+
                 typeof(ITrigger),
                 typeof(IActionTrigger),
                 typeof(TriggerHelper),
@@ -58,6 +60,8 @@ public class BindConfig
                 typeof(GameType),
 
                 typeof(CinemachineBrain),
+                typeof(ICameraDetector),
+                typeof(CameraManager),
 
                 typeof(UIHelper),
                 typeof(Button),

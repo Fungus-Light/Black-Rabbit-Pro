@@ -22,4 +22,7 @@ public interface IActionTrigger
     }
     void MakeUseful();
     void MakeUseless();
+
+    void MakeInterActable();
+    void MakeDisInterActable();
 }

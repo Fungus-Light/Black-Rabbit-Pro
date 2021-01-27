@@ -23,6 +23,16 @@ public class Trigger_Action : MonoBehaviour, IActionTrigger
         isUseful = false;
     }
 
+    public void MakeInterActable()
+    {
+        interActable = true;
+    }
+
+    public void MakeDisInterActable()
+    {
+        interActable = false;
+    }
+
     void Awake()
     {
         this.GetComponent<Collider>().isTrigger = true;
@@ -44,19 +54,23 @@ public class Trigger_Action : MonoBehaviour, IActionTrigger
     {
         if (isUseful)
         {
-            if (other.tag == PlayerTag)
+            if (other.tag == PlayerTag && this.GameType == GameType.TPS)
             {
                 Debug.LogError("Player Enter");
-                interActable = true;
+                MakeInterActable();
             }
 
-            foreach (string key in EnterAct.Keys)
+            if (this.GameType == GameType.TPS)
             {
-                if (key == other.tag)
+                foreach (string key in EnterAct.Keys)
                 {
-                    EnterAct[key]();
+                    if (key == other.tag)
+                    {
+                        EnterAct[key]();
+                    }
                 }
             }
+
         }
         else
         {
@@ -69,18 +83,22 @@ public class Trigger_Action : MonoBehaviour, IActionTrigger
     {
         if (isUseful)
         {
-            if (other.tag == PlayerTag)
+            if (other.tag == PlayerTag && this.GameType == GameType.TPS)
             {
-                interActable = false;
+                MakeDisInterActable();
             }
 
-            foreach (string key in LeaveAct.Keys)
+            if (this.GameType == GameType.TPS)
             {
-                if (key == other.tag)
+                foreach (string key in LeaveAct.Keys)
                 {
-                    LeaveAct[key]();
+                    if (key == other.tag)
+                    {
+                        LeaveAct[key]();
+                    }
                 }
             }
+
         }
         else
         {

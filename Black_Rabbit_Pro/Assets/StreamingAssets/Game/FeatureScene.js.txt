@@ -7,14 +7,17 @@ const Trigger_1 = require("JS/Trigger/Trigger");
 const csharp_1 = require("csharp");
 const UI_1 = require("JS/UI/UI");
 const MathMod_1 = require("JS/Utils/MathMod");
+const CameraManager_1 = require("JS/CameraManager/CameraManager");
 function Create() { return new FeatureScene(); }
 exports.Create = Create;
 /*=========================================================*/
 class FeatureScene {
     OnStart() {
+        Common_1.Debug.LogWarning("Level FeatureScene Start!!!");
+        //#region Hello World flow
         let SimpleFlow = DialogManager_1.CreateDialog();
         SimpleFlow.Say("Hello World");
-        Common_1.Debug.LogWarning("Level FeatureScene Start!!!");
+        //#endregion
         let BasicTrigger = Trigger_1.$Trigger("BasicTrigger", csharp_1.GameType.FPS);
         BasicTrigger.RegEnterAct("Player", () => {
             Common_1.Debug.LogWarning("Player Enter");
@@ -26,7 +29,16 @@ class FeatureScene {
         BasicActionTrigger.RegInterAct("talk", () => {
             SimpleFlow.Start();
         });
-        BasicActionTrigger.MakeUseful();
+        let OutLine_FPSTrigger = Trigger_1.$Outline("FPSTrigger");
+        let FPSTrigger = Trigger_1.$ActionTrigger("FPSTrigger", csharp_1.GameType.FPS, "Player", Common_1.KeyCode.E);
+        FPSTrigger.RegEnterAct("ray Enter", () => {
+            Common_1.Debug.LogWarning("Ray Enter");
+            OutLine_FPSTrigger.ShowOutLine();
+        });
+        FPSTrigger.RegLeaveAct("ray leave", () => {
+            Common_1.Debug.LogWarning("Ray Leave");
+            OutLine_FPSTrigger.HideOutLine();
+        });
         let BTN1 = UI_1.$Button("BTN1");
         let BTN2 = UI_1.$Button("BTN2");
         let testText = UI_1.$Text("testText");
@@ -43,8 +55,13 @@ class FeatureScene {
             //Debug.Log("click2")
             testText.text = "You Input " + testInput.GetValue();
         });
+        let CameraDetector = CameraManager_1.$CameraDetector("CameraDetector");
+        CameraDetector.detectRange = 10;
         Common_1.WaitForSeconds(1, () => {
             BasicTrigger.MakeUseful();
+            BasicActionTrigger.MakeUseful();
+            FPSTrigger.MakeUseful();
+            CameraDetector.StartDetecting();
         });
     }
     OnUpdate() {

@@ -4,25 +4,21 @@ using UnityEngine;
 
 namespace Black_Rabbit
 {
-    public class MyCameraDetector : MonoBehaviour
+    public class FPSCameraDetector : MonoBehaviour, ICameraDetector
     {
-        public float detectRange = 50f;                                     // Distance in Unity units over which the player can fire
+        public float detectRange { get; set; }                                   // Distance in Unity units over which the player can fire
         private Camera Cam;                                              // Holds a reference to the first person camera                                           // Float to store the time the player will be allowed to fire again, after firing
-        public IMessageBar ui;
 
         public bool isDebug = false;
 
-        public bool ISDetecting = true;
+        public bool ISDetecting { get; set; }
 
-        private ITrigger prevTrigger;
+        private IActionTrigger prevTrigger;
 
         void Start()
         {
-            //init camera
-            //初始化摄影机
-            Cam = GetComponentInParent<Camera>();
-            ui = MessageUI.Instance;
-            ui.HideMessage();
+            ISDetecting = false;
+            Cam = GetComponent<Camera>();
         }
 
         public void StartDetecting()
@@ -44,13 +40,12 @@ namespace Black_Rabbit
                 // 声明射线
                 RaycastHit hit;
 
-
                 // 检查是否碰到任何物体
                 if (Physics.Raycast(rayOrigin, Cam.transform.forward, out hit, detectRange))
                 {
 
                     // Get a reference to a health script attached to the collider we hit
-                    ITrigger item = hit.collider.GetComponent<Trigger_Basic>();
+                    IActionTrigger item = hit.collider.GetComponent<IActionTrigger>();
 
                     if (isDebug)
                     {
@@ -59,42 +54,31 @@ namespace Black_Rabbit
 
                     if (item != null)
                     {
-                        
-                        // if (item.isShow && item.GameType == GameType.FPS)
-                        // {
-                        //     //item.GetComponent<Outline>().ShowOutLine();
-                        //     ui.ShowMessage(item.Name, item.Message, item.MessagePos.transform);
-                        //     if (item.outlineOBJ != null)
-                        //     {
-                        //         item.outlineOBJ.ShowOutLine();
-                        //     }
-
-                        // }
-
-
-                        CLearPrev();
-                        prevTrigger = item;
-                        if (item.GameType == GameType.FPS)
+                        if (item != prevTrigger)
                         {
-                            item.MakeUseful();
+                            CLearPrev();
+                            prevTrigger = item;
+                            if (item.GameType == GameType.FPS)
+                            {
+                                item.MakeInterActable();
+                                foreach (string key in item.EnterAct.Keys)
+                                {
+                                    item.EnterAct[key]();
+                                }
+                            }
                         }
-
 
                     }
                     else
                     {
-                        ui.HideMessage();
-
                         CLearPrev();
                     }
                 }
                 else
                 {
-                    ui.HideMessage();
+                    CLearPrev();
                 }
             }
-            // 在屏幕中间创建一个Vecter3
-
 
         }
 
@@ -102,12 +86,16 @@ namespace Black_Rabbit
         {
             if (prevTrigger != null)
             {
-                // if (prevTrigger.outlineOBJ!=null)
-                // {
-                //     prevTrigger.outlineOBJ.HideOutLine();
-                // }
-                prevTrigger.MakeUseless();
-                //prevTrigger.GetComponent<Outline>().HideOutLine();
+                if (prevTrigger.GameType == GameType.FPS)
+                {
+                    foreach (string key in prevTrigger.LeaveAct.Keys)
+                    {
+                        prevTrigger.LeaveAct[key]();
+                    }
+                    prevTrigger.MakeDisInterActable();
+                    prevTrigger.MakeUseless();
+                }
+
                 prevTrigger = null;
 
             }

@@ -31,6 +31,12 @@ declare module "JS/@tools/GenApi"{
 
 }
 
+declare module "JS/CameraManager/CameraManager"{
+import { CameraManager } from "csharp";
+const $CameraDetector: typeof CameraManager.GetCameraDetector;
+
+}
+
 declare module "JS/CharacterManager/CharacterManager"{
 import { CharacterManager } from "csharp";
 const $CharacterManager: typeof CharacterManager.GetCharacterManager;

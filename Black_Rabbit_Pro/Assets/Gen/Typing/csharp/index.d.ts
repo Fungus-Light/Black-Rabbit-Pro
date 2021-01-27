@@ -3272,6 +3272,10 @@ declare module 'csharp' {
             
             MakeUseless():void;
             
+            MakeInterActable():void;
+            
+            MakeDisInterActable():void;
+            
         }
         
         class TriggerHelper extends System.Object {
@@ -3281,6 +3285,26 @@ declare module 'csharp' {
             public static GetTrigger($name: string):ITrigger;
             
             public static GetActionTrigger($name: string):IActionTrigger;
+            
+        }
+        
+        interface ICameraDetector {
+            
+            detectRange: number;
+            
+            ISDetecting: boolean;
+            
+            StartDetecting():void;
+            
+            StopDetecting():void;
+            
+        }
+        
+        class CameraManager extends UnityEngine.MonoBehaviour {
+            
+            public constructor();
+            
+            public static GetCameraDetector($name: string):ICameraDetector;
             
         }
         

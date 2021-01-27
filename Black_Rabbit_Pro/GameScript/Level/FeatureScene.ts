@@ -3,10 +3,11 @@ import { IGameLevel } from "JS/Interface/IGameLevel";
 import { Debug, Input, KeyCode, Transform, WaitForSeconds } from "JS/Utils/Common"
 import { $Timeline } from "JS/Playable/Timeline"
 import { CreateDialog } from "JS/Dialog/DialogManager";
-import { $ActionTrigger, $Trigger } from "JS/Trigger/Trigger";
+import { $ActionTrigger, $Outline, $Trigger } from "JS/Trigger/Trigger";
 import { GameType } from "csharp";
 import { $Button, $InputField, $Text } from "JS/UI/UI";
 import { RANDOM } from "JS/Utils/MathMod";
+import { $CameraDetector } from "JS/CameraManager/CameraManager";
 
 function Create() { return new FeatureScene(); }
 export { Create }
@@ -17,10 +18,12 @@ class FeatureScene implements IGameLevel {
     name: string;
     root: Transform;
     OnStart(): void {
-        let SimpleFlow = CreateDialog()
-        SimpleFlow.Say("Hello World")
 
         Debug.LogWarning("Level FeatureScene Start!!!")
+        //#region Hello World flow
+        let SimpleFlow = CreateDialog()
+        SimpleFlow.Say("Hello World")
+        //#endregion
 
         let BasicTrigger = $Trigger("BasicTrigger", GameType.FPS)
         BasicTrigger.RegEnterAct("Player", () => {
@@ -35,7 +38,17 @@ class FeatureScene implements IGameLevel {
         BasicActionTrigger.RegInterAct("talk", () => {
             SimpleFlow.Start()
         })
-        BasicActionTrigger.MakeUseful()
+
+        let OutLine_FPSTrigger = $Outline("FPSTrigger")
+        let FPSTrigger = $ActionTrigger("FPSTrigger", GameType.FPS, "Player", KeyCode.E)
+        FPSTrigger.RegEnterAct("ray Enter", () => {
+            Debug.LogWarning("Ray Enter")
+            OutLine_FPSTrigger.ShowOutLine()
+        })
+        FPSTrigger.RegLeaveAct("ray leave", () => {
+            Debug.LogWarning("Ray Leave")
+            OutLine_FPSTrigger.HideOutLine()
+        })
 
         let BTN1 = $Button("BTN1")
         let BTN2 = $Button("BTN2")
@@ -57,8 +70,15 @@ class FeatureScene implements IGameLevel {
             testText.text = "You Input " + testInput.GetValue()
         })
 
+        let CameraDetector = $CameraDetector("CameraDetector")
+        CameraDetector.detectRange = 10;
+
+
         WaitForSeconds(1, () => {
             BasicTrigger.MakeUseful()
+            BasicActionTrigger.MakeUseful()
+            FPSTrigger.MakeUseful();
+            CameraDetector.StartDetecting();
         })
 
     }
