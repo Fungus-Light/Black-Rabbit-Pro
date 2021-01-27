@@ -1,20 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Common_1 = require("Utils/Common");
+exports.Create = void 0;
 function Create() { return new Level1(); }
 exports.Create = Create;
 /*===============================================*/
 class Level1 {
-    constructor() {
-        this.TestSpeed = 10;
-    }
     OnStart() {
-        Common_1.Debug.LogWarning("Enter Level1, this is a demo level");
-        this.TestCube = Common_1.$("Cube");
     }
     OnUpdate() {
-        let V = Common_1.Vector3.op_Multiply(this.TestCube.up, this.TestSpeed);
-        this.TestCube.Rotate(V);
     }
     OnDestroy() {
     }

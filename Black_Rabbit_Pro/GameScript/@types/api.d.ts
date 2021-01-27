@@ -182,6 +182,14 @@ class Button {
 }
 class Text extends UnityEngine.UI.Text {
 }
+class InputField {
+    field: UnityEngine.UI.InputField;
+    constructor(field: UnityEngine.UI.InputField);
+    SetValue(text: string): void;
+    GetValue(): string;
+    RegValueChange(tag: string, act: (v: string) => void): void;
+}
+function $InputField(name: string): InputField;
 function $Button(name: string): Button;
 const $Text: typeof UIHelper.GetText;
 

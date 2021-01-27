@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Create = void 0;
 const Common_1 = require("JS/Utils/Common");
 const Trigger_1 = require("JS/Trigger/Trigger");
 const csharp_1 = require("csharp");
@@ -20,13 +21,17 @@ class FeatureScene {
         let BTN1 = UI_1.$Button("BTN1");
         let BTN2 = UI_1.$Button("BTN2");
         let testText = UI_1.$Text("testText");
+        let testInput = UI_1.$InputField("input");
+        testInput.RegValueChange("ChangeDebug", v => {
+            Common_1.Debug.Log(v);
+        });
         BTN1.RegClickCallBack("click", () => {
-            Common_1.Debug.Log("click1");
+            //Debug.Log("click1")
             testText.text = "Click BTN1";
         });
         BTN2.RegClickCallBack("click", () => {
-            Common_1.Debug.Log("click2");
-            testText.text = "Click BTN2";
+            //Debug.Log("click2")
+            testText.text = "You Input " + testInput.GetValue();
         });
         Common_1.WaitForSeconds(1, () => {
             BasicTrigger.MakeUseful();

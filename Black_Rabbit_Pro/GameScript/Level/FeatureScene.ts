@@ -5,7 +5,7 @@ import { $Timeline } from "JS/Playable/Timeline"
 import { CreateDialog } from "JS/Dialog/DialogManager";
 import { $Trigger } from "JS/Trigger/Trigger";
 import { GameType } from "csharp";
-import { $Button, $Text } from "JS/UI/UI";
+import { $Button, $InputField, $Text } from "JS/UI/UI";
 
 function Create() { return new FeatureScene(); }
 export { Create }
@@ -30,13 +30,21 @@ class FeatureScene implements IGameLevel {
         let BTN1 = $Button("BTN1")
         let BTN2 = $Button("BTN2")
         let testText = $Text("testText")
+
+        let testInput = $InputField("input")
+
+        testInput.RegValueChange("ChangeDebug", v => {
+            Debug.Log(v)
+        })
+
         BTN1.RegClickCallBack("click", () => {
             //Debug.Log("click1")
-            testText.text="Click BTN1"
+            testText.text = "Click BTN1"
         })
-        BTN2.RegClickCallBack("click",()=>{
+        BTN2.RegClickCallBack("click", () => {
             //Debug.Log("click2")
-            testText.text="Click BTN2"
+
+            testText.text = "You Input " + testInput.GetValue()
         })
 
         WaitForSeconds(1, () => {

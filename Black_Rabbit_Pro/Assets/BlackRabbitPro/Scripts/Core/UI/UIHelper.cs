@@ -31,7 +31,8 @@ public class UIHelper
         }
     }
 
-    public static Text GetText(string name){
+    public static Text GetText(string name)
+    {
         Transform trans = GameObjectHelper.GetTransformByName(name);
         if (trans != null)
         {
@@ -43,6 +44,17 @@ public class UIHelper
         }
     }
 
-    
+    public static InputField GetInputField(string name)
+    {
+        Transform trans = GameObjectHelper.GetTransformByName(name);
+        if (trans != null)
+        {
+            return trans.GetComponent<InputField>();
+        }
+        else
+        {
+            return null;
+        }
+    }
 
 }

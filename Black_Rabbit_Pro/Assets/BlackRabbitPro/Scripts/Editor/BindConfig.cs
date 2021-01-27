@@ -59,7 +59,10 @@ public class BindConfig
 
                 typeof(UIHelper),
                 typeof(Button),
+                typeof(InputField),
+                
                 typeof(UnityEvent),
+                typeof(UnityEvent<string>),
                 typeof(Text),
                 typeof(Canvas),
 

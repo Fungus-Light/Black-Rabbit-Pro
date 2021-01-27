@@ -1907,6 +1907,16 @@ declare module 'csharp' {
         class PropertyName extends System.ValueType {
             
         }
+        /** Interface for on-screen keyboards. Only native iPhone, Android, and Windows Store Apps are supported. */
+        class TouchScreenKeyboard extends System.Object {
+            
+        }
+        /** Enumeration of the different types of supported touchscreen keyboards. */
+        enum TouchScreenKeyboardType { Default = 0, ASCIICapable = 1, NumbersAndPunctuation = 2, URL = 3, NumberPad = 4, PhonePad = 5, NamePhonePad = 6, EmailAddress = 7, NintendoNetworkAccount = 8, Social = 9, Search = 10, DecimalPad = 11 }
+        /** A UnityGUI event. */
+        class Event extends System.Object {
+            
+        }
         /** Class that can be used to generate text for rendering. */
         class TextGenerator extends System.Object {
             
@@ -2456,6 +2466,12 @@ declare module 'csharp' {
         
         class UnityEvent$1<T0> extends UnityEngine.Events.UnityEventBase {
             
+            public AddListener($call: UnityEngine.Events.UnityAction$1<T0>):void;
+            
+            public RemoveListener($call: UnityEngine.Events.UnityAction$1<T0>):void;
+            
+            public Invoke($arg0: T0):void;
+            
         }
         /** Abstract base class for UnityEvents. */
         class UnityEventBase extends System.Object {
@@ -2479,6 +2495,8 @@ declare module 'csharp' {
             public Invoke():void;
             
         }
+        
+        type UnityAction$1<T0> = (arg0: T0) => void;
         
     }
     namespace System.Collections.Generic {
@@ -3112,6 +3130,8 @@ declare module 'csharp' {
             
             public static GetText($name: string):UnityEngine.UI.Text;
             
+            public static GetInputField($name: string):UnityEngine.UI.InputField;
+            
         }
         
     
@@ -3441,6 +3461,145 @@ declare module 'csharp' {
             
         }
         
+        class InputField extends UnityEngine.UI.Selectable {
+            
+            public get shouldHideMobileInput(): boolean;
+            public set shouldHideMobileInput(value: boolean);
+            
+            public get text(): string;
+            public set text(value: string);
+            
+            public get isFocused(): boolean;
+            
+            public get caretBlinkRate(): number;
+            public set caretBlinkRate(value: number);
+            
+            public get caretWidth(): number;
+            public set caretWidth(value: number);
+            
+            public get textComponent(): UnityEngine.UI.Text;
+            public set textComponent(value: UnityEngine.UI.Text);
+            
+            public get placeholder(): UnityEngine.UI.Graphic;
+            public set placeholder(value: UnityEngine.UI.Graphic);
+            
+            public get caretColor(): UnityEngine.Color;
+            public set caretColor(value: UnityEngine.Color);
+            
+            public get customCaretColor(): boolean;
+            public set customCaretColor(value: boolean);
+            
+            public get selectionColor(): UnityEngine.Color;
+            public set selectionColor(value: UnityEngine.Color);
+            
+            public get onEndEdit(): UnityEngine.UI.InputField.SubmitEvent;
+            public set onEndEdit(value: UnityEngine.UI.InputField.SubmitEvent);
+            
+            public get onValueChanged(): UnityEngine.UI.InputField.OnChangeEvent;
+            public set onValueChanged(value: UnityEngine.UI.InputField.OnChangeEvent);
+            
+            public get onValidateInput(): UnityEngine.UI.InputField.OnValidateInput;
+            public set onValidateInput(value: UnityEngine.UI.InputField.OnValidateInput);
+            
+            public get characterLimit(): number;
+            public set characterLimit(value: number);
+            
+            public get contentType(): UnityEngine.UI.InputField.ContentType;
+            public set contentType(value: UnityEngine.UI.InputField.ContentType);
+            
+            public get lineType(): UnityEngine.UI.InputField.LineType;
+            public set lineType(value: UnityEngine.UI.InputField.LineType);
+            
+            public get inputType(): UnityEngine.UI.InputField.InputType;
+            public set inputType(value: UnityEngine.UI.InputField.InputType);
+            
+            public get touchScreenKeyboard(): UnityEngine.TouchScreenKeyboard;
+            
+            public get keyboardType(): UnityEngine.TouchScreenKeyboardType;
+            public set keyboardType(value: UnityEngine.TouchScreenKeyboardType);
+            
+            public get characterValidation(): UnityEngine.UI.InputField.CharacterValidation;
+            public set characterValidation(value: UnityEngine.UI.InputField.CharacterValidation);
+            
+            public get readOnly(): boolean;
+            public set readOnly(value: boolean);
+            
+            public get multiLine(): boolean;
+            
+            public get asteriskChar(): number;
+            public set asteriskChar(value: number);
+            
+            public get wasCanceled(): boolean;
+            
+            public get caretPosition(): number;
+            public set caretPosition(value: number);
+            
+            public get selectionAnchorPosition(): number;
+            public set selectionAnchorPosition(value: number);
+            
+            public get selectionFocusPosition(): number;
+            public set selectionFocusPosition(value: number);
+            
+            public get minWidth(): number;
+            
+            public get preferredWidth(): number;
+            
+            public get flexibleWidth(): number;
+            
+            public get minHeight(): number;
+            
+            public get preferredHeight(): number;
+            
+            public get flexibleHeight(): number;
+            
+            public get layoutPriority(): number;
+            
+            public SetTextWithoutNotify($input: string):void;
+            
+            public MoveTextEnd($shift: boolean):void;
+            
+            public MoveTextStart($shift: boolean):void;
+            
+            public OnBeginDrag($eventData: UnityEngine.EventSystems.PointerEventData):void;
+            
+            public OnDrag($eventData: UnityEngine.EventSystems.PointerEventData):void;
+            
+            public OnEndDrag($eventData: UnityEngine.EventSystems.PointerEventData):void;
+            
+            public OnPointerDown($eventData: UnityEngine.EventSystems.PointerEventData):void;
+            
+            public ProcessEvent($e: UnityEngine.Event):void;
+            
+            public OnUpdateSelected($eventData: UnityEngine.EventSystems.BaseEventData):void;
+            
+            public ForceLabelUpdate():void;
+            
+            public Rebuild($update: UnityEngine.UI.CanvasUpdate):void;
+            
+            public LayoutComplete():void;
+            
+            public GraphicUpdateComplete():void;
+            
+            public ActivateInputField():void;
+            
+            public OnSelect($eventData: UnityEngine.EventSystems.BaseEventData):void;
+            
+            public OnPointerClick($eventData: UnityEngine.EventSystems.PointerEventData):void;
+            
+            public DeactivateInputField():void;
+            
+            public OnDeselect($eventData: UnityEngine.EventSystems.BaseEventData):void;
+            
+            public OnSubmit($eventData: UnityEngine.EventSystems.BaseEventData):void;
+            
+            public CalculateLayoutInputHorizontal():void;
+            
+            public CalculateLayoutInputVertical():void;
+            
+        }
+        
+        enum CanvasUpdate { Prelayout = 0, Layout = 1, PostLayout = 2, PreRender = 3, LatePreRender = 4, MaxUpdateValue = 5 }
+        
         class Image extends UnityEngine.UI.MaskableGraphic {
             
         }
@@ -3474,6 +3633,28 @@ declare module 'csharp' {
         class ButtonClickedEvent extends UnityEngine.Events.UnityEvent {
             
         }
+        
+    }
+    namespace UnityEngine.UI.InputField {
+        
+        class SubmitEvent extends UnityEngine.Events.UnityEvent$1<string> {
+            
+        }
+        
+        class OnChangeEvent extends UnityEngine.Events.UnityEvent$1<string> {
+            
+        }
+        
+        type OnValidateInput = (text: string, charIndex: number, addedChar: number) => number;
+        var OnValidateInput: {new (func: (text: string, charIndex: number, addedChar: number) => number): OnValidateInput;}
+        
+        enum ContentType { Standard = 0, Autocorrected = 1, IntegerNumber = 2, DecimalNumber = 3, Alphanumeric = 4, Name = 5, EmailAddress = 6, Password = 7, Pin = 8, Custom = 9 }
+        
+        enum LineType { SingleLine = 0, MultiLineSubmit = 1, MultiLineNewline = 2 }
+        
+        enum InputType { Standard = 0, AutoCorrect = 1, Password = 2 }
+        
+        enum CharacterValidation { None = 0, Integer = 1, Decimal = 2, Alphanumeric = 3, Name = 4, EmailAddress = 5 }
         
     }
     namespace Fungus {
