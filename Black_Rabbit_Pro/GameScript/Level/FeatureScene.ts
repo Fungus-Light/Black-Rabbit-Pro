@@ -1,6 +1,6 @@
 /*================Dont Delete This=========================*/
 import { IGameLevel } from "JS/Interface/IGameLevel";
-import { Debug, Transform, WaitForSeconds } from "JS/Utils/Common"
+import { Debug, Input, KeyCode, Transform, WaitForSeconds } from "JS/Utils/Common"
 import { $Timeline } from "JS/Playable/Timeline"
 import { CreateDialog } from "JS/Dialog/DialogManager";
 import { $Trigger } from "JS/Trigger/Trigger";
@@ -54,7 +54,9 @@ class FeatureScene implements IGameLevel {
 
     }
     OnUpdate(): void {
-
+        if(Input.GetKeyUp(KeyCode.E)){
+            Debug.LogWarning("Get E")
+        }
     }
     OnFixedUpdate(): void {
 

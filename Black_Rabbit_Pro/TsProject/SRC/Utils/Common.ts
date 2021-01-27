@@ -59,7 +59,8 @@ const WaitForSecondsRealtime = CommonJsCall.WaitForSecondsRealtime
 
 /*========================= */
 
-
+class Input extends UnityEngine.Input { }
+const KeyCode = UnityEngine.KeyCode
 
 export {
     Debug,
@@ -69,6 +70,8 @@ export {
     AudioClip,
     Transform,
     UAction,
+    Input,
+    KeyCode,
     T,
     $,
     QuitGame,

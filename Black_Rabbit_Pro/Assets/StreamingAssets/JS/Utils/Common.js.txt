@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WaitForSecondsRealtime = exports.WaitForSeconds = exports.WaitForFrames = exports.QuitGame = exports.$ = exports.T = exports.UAction = exports.Transform = exports.AudioClip = exports.GameTime = exports.Vector2 = exports.Vector3 = exports.Debug = void 0;
+exports.WaitForSecondsRealtime = exports.WaitForSeconds = exports.WaitForFrames = exports.QuitGame = exports.$ = exports.T = exports.KeyCode = exports.Input = exports.UAction = exports.Transform = exports.AudioClip = exports.GameTime = exports.Vector2 = exports.Vector3 = exports.Debug = void 0;
 const csharp_1 = require("csharp");
 const puerts_1 = require("puerts");
 /**
@@ -64,4 +64,10 @@ const WaitForSeconds = csharp_1.CommonJsCall.WaitForSeconds;
 exports.WaitForSeconds = WaitForSeconds;
 const WaitForSecondsRealtime = csharp_1.CommonJsCall.WaitForSecondsRealtime;
 exports.WaitForSecondsRealtime = WaitForSecondsRealtime;
+/*========================= */
+class Input extends csharp_1.UnityEngine.Input {
+}
+exports.Input = Input;
+const KeyCode = csharp_1.UnityEngine.KeyCode;
+exports.KeyCode = KeyCode;
 //# sourceMappingURL=Common.js.map

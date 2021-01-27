@@ -272,6 +272,9 @@ const QuitGame: typeof CommonJsCall.QuitGame;
 const WaitForFrames: typeof CommonJsCall.WaitForFrames;
 const WaitForSeconds: typeof CommonJsCall.WaitForSeconds;
 const WaitForSecondsRealtime: typeof CommonJsCall.WaitForSecondsRealtime;
+class Input extends UnityEngine.Input {
+}
+const KeyCode: typeof UnityEngine.KeyCode;
 
 }
 

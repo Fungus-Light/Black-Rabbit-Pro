@@ -40,6 +40,9 @@ class FeatureScene {
         });
     }
     OnUpdate() {
+        if (Common_1.Input.GetKeyUp(Common_1.KeyCode.E)) {
+            Common_1.Debug.LogWarning("Get E");
+        }
     }
     OnFixedUpdate() {
     }

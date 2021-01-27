@@ -41,6 +41,7 @@ public class BindConfig
                 typeof(Behaviour),
                 typeof(MonoBehaviour),
                 typeof(System.IO.Path),
+
                 typeof(JsBehaviour),
                 typeof(LevelRunner),
 
@@ -65,6 +66,8 @@ public class BindConfig
                 typeof(UnityEvent<string>),
                 typeof(Text),
                 typeof(Canvas),
+                typeof(Input),
+                typeof(KeyCode),
 
             };
         }
