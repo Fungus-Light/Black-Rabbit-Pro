@@ -3,7 +3,7 @@ import { IGameLevel } from "JS/Interface/IGameLevel";
 import { Debug, Input, KeyCode, Transform, WaitForSeconds } from "JS/Utils/Common"
 import { $Timeline } from "JS/Playable/Timeline"
 import { CreateDialog } from "JS/Dialog/DialogManager";
-import { $Trigger } from "JS/Trigger/Trigger";
+import { $ActionTrigger, $Trigger } from "JS/Trigger/Trigger";
 import { GameType } from "csharp";
 import { $Button, $InputField, $Text } from "JS/UI/UI";
 import { RANDOM } from "JS/Utils/MathMod";
@@ -17,6 +17,9 @@ class FeatureScene implements IGameLevel {
     name: string;
     root: Transform;
     OnStart(): void {
+        let SimpleFlow = CreateDialog()
+        SimpleFlow.Say("Hello World")
+
         Debug.LogWarning("Level FeatureScene Start!!!")
 
         let BasicTrigger = $Trigger("BasicTrigger", GameType.FPS)
@@ -27,6 +30,12 @@ class FeatureScene implements IGameLevel {
         BasicTrigger.RegLeaveAct("Player", () => {
             Debug.LogWarning("Player Leave")
         });
+
+        let BasicActionTrigger = $ActionTrigger("BasicActionTrigger", GameType.TPS, "Player", KeyCode.E)
+        BasicActionTrigger.RegInterAct("talk", () => {
+            SimpleFlow.Start()
+        })
+        BasicActionTrigger.MakeUseful()
 
         let BTN1 = $Button("BTN1")
         let BTN2 = $Button("BTN2")
@@ -54,9 +63,7 @@ class FeatureScene implements IGameLevel {
 
     }
     OnUpdate(): void {
-        if(Input.GetKeyUp(KeyCode.E)){
-            Debug.LogWarning("Get E")
-        }
+
     }
     OnFixedUpdate(): void {
 

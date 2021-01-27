@@ -189,11 +189,16 @@ function SetLevel(name: string, Level: IGameLevel): void;
 }
 
 declare module "JS/Trigger/Trigger"{
-import { Black_Rabbit, GameType, ITrigger, System } from "csharp";
+import { Black_Rabbit, GameType, IActionTrigger, ITrigger, System, UnityEngine } from "csharp";
+import { UAction } from "JS/Utils/Common";
 const $Outline: typeof Black_Rabbit.SimpleOutline.GetOutLineObj;
 class Outline extends Black_Rabbit.SimpleOutline {
 }
+function $Trigger(name: string): Trigger;
 function $Trigger(name: string, type: GameType): Trigger;
+function $ActionTrigger(name: string): ActionTrigger;
+function $ActionTrigger(name: string, type: GameType): ActionTrigger;
+function $ActionTrigger(name: string, type: GameType, playerTag: string, keyCode: UnityEngine.KeyCode): ActionTrigger;
 class Trigger {
     UTrigger: ITrigger;
     constructor(trigger: ITrigger, type: GameType);
@@ -201,6 +206,16 @@ class Trigger {
     MakeUseless(): void;
     RegEnterAct(tag: string, cb: System.Action): void;
     RegLeaveAct(tag: string, cb: System.Action): void;
+}
+class ActionTrigger {
+    ATrigger: IActionTrigger;
+    ActionList: Array<UAction>;
+    constructor(trigger: IActionTrigger, type: GameType, playerTag: string, keyCode: UnityEngine.KeyCode);
+    MakeUseful(): void;
+    MakeUseless(): void;
+    RegEnterAct(tag: string, cb: System.Action): void;
+    RegLeaveAct(tag: string, cb: System.Action): void;
+    RegInterAct(tag: string, cb: System.Action): void;
 }
 
 }

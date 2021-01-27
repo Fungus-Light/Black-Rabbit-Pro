@@ -52,6 +52,7 @@ public class BindConfig
                 typeof(PlayableDirector),
                 typeof(CharacterManager),
                 typeof(ITrigger),
+                typeof(IActionTrigger),
                 typeof(TriggerHelper),
                 typeof(SimpleOutline),
                 typeof(GameType),

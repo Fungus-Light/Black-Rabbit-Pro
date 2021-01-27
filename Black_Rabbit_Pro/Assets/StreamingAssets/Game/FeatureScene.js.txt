@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Create = void 0;
 const Common_1 = require("JS/Utils/Common");
+const DialogManager_1 = require("JS/Dialog/DialogManager");
 const Trigger_1 = require("JS/Trigger/Trigger");
 const csharp_1 = require("csharp");
 const UI_1 = require("JS/UI/UI");
@@ -11,6 +12,8 @@ exports.Create = Create;
 /*=========================================================*/
 class FeatureScene {
     OnStart() {
+        let SimpleFlow = DialogManager_1.CreateDialog();
+        SimpleFlow.Say("Hello World");
         Common_1.Debug.LogWarning("Level FeatureScene Start!!!");
         let BasicTrigger = Trigger_1.$Trigger("BasicTrigger", csharp_1.GameType.FPS);
         BasicTrigger.RegEnterAct("Player", () => {
@@ -19,6 +22,11 @@ class FeatureScene {
         BasicTrigger.RegLeaveAct("Player", () => {
             Common_1.Debug.LogWarning("Player Leave");
         });
+        let BasicActionTrigger = Trigger_1.$ActionTrigger("BasicActionTrigger", csharp_1.GameType.TPS, "Player", Common_1.KeyCode.E);
+        BasicActionTrigger.RegInterAct("talk", () => {
+            SimpleFlow.Start();
+        });
+        BasicActionTrigger.MakeUseful();
         let BTN1 = UI_1.$Button("BTN1");
         let BTN2 = UI_1.$Button("BTN2");
         let testText = UI_1.$Text("testText");
@@ -40,9 +48,6 @@ class FeatureScene {
         });
     }
     OnUpdate() {
-        if (Common_1.Input.GetKeyUp(Common_1.KeyCode.E)) {
-            Common_1.Debug.LogWarning("Get E");
-        }
     }
     OnFixedUpdate() {
     }

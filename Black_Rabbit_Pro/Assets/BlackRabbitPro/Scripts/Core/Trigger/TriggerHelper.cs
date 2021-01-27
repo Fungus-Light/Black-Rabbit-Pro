@@ -16,4 +16,17 @@ public class TriggerHelper
             return null;
         }
     }
+
+    public static IActionTrigger GetActionTrigger(string name)
+    {
+        Transform trans = GameObjectHelper.GetTransformByName(name);
+        if (trans != null)
+        {
+            return trans.GetComponent<IActionTrigger>();
+        }
+        else
+        {
+            return null;
+        }
+    }
 }

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Trigger = exports.$Trigger = exports.Outline = exports.$Outline = void 0;
+exports.ActionTrigger = exports.$ActionTrigger = exports.Trigger = exports.$Trigger = exports.Outline = exports.$Outline = void 0;
 const csharp_1 = require("csharp");
 const Common_1 = require("Utils/Common");
 const $Outline = csharp_1.Black_Rabbit.SimpleOutline.GetOutLineObj;
@@ -9,6 +9,9 @@ class Outline extends csharp_1.Black_Rabbit.SimpleOutline {
 }
 exports.Outline = Outline;
 function $Trigger(name, type) {
+    if (type == undefined) {
+        type = csharp_1.GameType.TPS;
+    }
     let trigger = csharp_1.TriggerHelper.GetTrigger(name);
     if (trigger != null) {
         return new Trigger(trigger, type);
@@ -18,6 +21,25 @@ function $Trigger(name, type) {
     }
 }
 exports.$Trigger = $Trigger;
+function $ActionTrigger(name, type, playerTag, keyCode) {
+    if (type == undefined) {
+        type = csharp_1.GameType.TPS;
+    }
+    if (playerTag == undefined) {
+        playerTag = "Player";
+    }
+    if (keyCode == undefined) {
+        keyCode = Common_1.KeyCode.E;
+    }
+    let trigger = csharp_1.TriggerHelper.GetActionTrigger(name);
+    if (trigger != null) {
+        return new ActionTrigger(trigger, type, playerTag, keyCode);
+    }
+    else {
+        Common_1.Debug.LogError("Can not find ActionTrigger " + name);
+    }
+}
+exports.$ActionTrigger = $ActionTrigger;
 class Trigger {
     constructor(trigger, type) {
         this.UTrigger = trigger;
@@ -48,4 +70,52 @@ class Trigger {
     }
 }
 exports.Trigger = Trigger;
+class ActionTrigger {
+    constructor(trigger, type, playerTag, keyCode) {
+        this.ActionList = new Array();
+        this.ATrigger = trigger;
+        this.ATrigger.GameType = type;
+        this.ATrigger.PlayerTag = playerTag;
+        this.ATrigger.code = keyCode;
+        this.ATrigger.interActable = false;
+        this.ATrigger.isUseful = false;
+        this.ATrigger.interAction = () => {
+            this.ActionList.forEach(item => {
+                item.act();
+            });
+        };
+    }
+    MakeUseful() {
+        this.ATrigger.MakeUseful();
+    }
+    MakeUseless() {
+        this.ATrigger.MakeUseless();
+    }
+    RegEnterAct(tag, cb) {
+        if (this.ATrigger.EnterAct.ContainsKey(tag)) {
+            this.ATrigger.EnterAct.set_Item(tag, cb);
+        }
+        else {
+            this.ATrigger.EnterAct.Add(tag, cb);
+        }
+    }
+    RegLeaveAct(tag, cb) {
+        if (this.ATrigger.LeaveAct.ContainsKey(tag)) {
+            this.ATrigger.LeaveAct.set_Item(tag, cb);
+        }
+        else {
+            this.ATrigger.LeaveAct.Add(tag, cb);
+        }
+    }
+    RegInterAct(tag, cb) {
+        this.ActionList.forEach(item => {
+            if (item.tag == tag) {
+                item.act = cb;
+                return;
+            }
+        });
+        this.ActionList.push(new Common_1.UAction(tag, cb));
+    }
+}
+exports.ActionTrigger = ActionTrigger;
 //# sourceMappingURL=Trigger.js.map
