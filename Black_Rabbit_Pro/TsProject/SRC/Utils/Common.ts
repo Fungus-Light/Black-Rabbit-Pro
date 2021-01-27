@@ -2,15 +2,21 @@ import { UnityEngine, GameObjectHelper, CommonJsCall, System } from "csharp";
 import { $typeof } from "puerts"
 
 /**
- * Debug Class, Rename Of UnityEngine.Debug 
+ * Debug Class, Rename Of UnityEngine.Debug
+ * 调试类，对UnityEngine.Debug 的导出
  */
 class Debug extends UnityEngine.Debug { }
 
 /**
  * UnityEngine's Vector3
+ * Unity的 Vector3
  */
 class Vector3 extends UnityEngine.Vector3 { }
 
+/**
+ * Include A Tag And A Unity Action
+ * 包含一个标签和一个Action
+ */
 class UAction {
     tag: string
     act: System.Action
@@ -31,6 +37,7 @@ class UAction {
 
 /**
  * UnityEngine's Vector2
+ * Unity的 Vector2
  */
 class Vector2 extends UnityEngine.Vector2 { }
 
@@ -44,15 +51,26 @@ class AudioClip extends UnityEngine.AudioClip { }
 
 /**
  * Get An Obeject's Type
+ * 获得一个对象的类型
  */
 const T = $typeof
 
 /**
  * Get A Transform By It's Name
+ * 通过名字获得一个物体的Transform组件
  */
 const $ = GameObjectHelper.GetTransformByName
 
+/**
+ * QUit The Game
+ * 退出游戏
+ */
 const QuitGame = CommonJsCall.QuitGame
+
+/**
+ * Wait For Some Frames
+ * 等待若干帧
+ */
 const WaitForFrames = CommonJsCall.WaitForFrames
 const WaitForSeconds = CommonJsCall.WaitForSeconds
 const WaitForSecondsRealtime = CommonJsCall.WaitForSecondsRealtime

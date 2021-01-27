@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.option = exports.CreateDialog = exports.DialogManager = void 0;
 const csharp_1 = require("csharp");
 const SayDialog_1 = require("Dialog/SayDialog");
 const OptionDialog_1 = require("Dialog/OptionDialog");

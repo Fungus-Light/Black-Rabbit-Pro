@@ -81,6 +81,22 @@ class Trigger {
         }
     }
 
+    RemoveEnterAct(tag: string) {
+        if (this.UTrigger.EnterAct.ContainsKey(tag)) {
+            this.UTrigger.EnterAct.Remove(tag);
+        }
+    }
+
+    RemoveLeaveAct(tag: string) {
+        if (this.UTrigger.LeaveAct.ContainsKey(tag)) {
+            this.UTrigger.LeaveAct.Remove(tag)
+        }
+    }
+
+    CleanAllAct() {
+        this.UTrigger.EnterAct.Clear();
+        this.UTrigger.LeaveAct.Clear();
+    }
 }
 
 class ActionTrigger {
@@ -133,6 +149,25 @@ class ActionTrigger {
         })
         this.ActionList.push(new UAction(tag, cb))
     }
+
+    RemoveEnterAct(tag: string) {
+        if (this.ATrigger.EnterAct.ContainsKey(tag)) {
+            this.ATrigger.EnterAct.Remove(tag);
+        }
+    }
+
+    RemoveLeaveAct(tag: string) {
+        if (this.ATrigger.LeaveAct.ContainsKey(tag)) {
+            this.ATrigger.LeaveAct.Remove(tag)
+        }
+    }
+
+    CleanAllAct() {
+        this.ATrigger.EnterAct.Clear();
+        this.ATrigger.LeaveAct.Clear();
+        this.ActionList = new Array<UAction>();
+    }
+
 }
 
 export {

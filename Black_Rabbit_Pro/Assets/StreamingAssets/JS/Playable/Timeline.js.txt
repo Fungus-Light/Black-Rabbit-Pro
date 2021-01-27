@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Timeline = exports.$Timeline = exports.PlayableDirector = void 0;
 const csharp_1 = require("csharp");
 const Common_1 = require("Utils/Common");
 class PlayableDirector extends csharp_1.UnityEngine.Playables.PlayableDirector {
@@ -69,6 +68,24 @@ class Timeline {
             }
         });
         this.ReCallBacks.push(new Common_1.UAction(tag, cb));
+    }
+    ReMoveStopCallBack(tag) {
+        for (let i = 0; i < this.CallBacks.length; i++) {
+            if (this.CallBacks[i].tag == tag) {
+                this.CallBacks.splice(i, 1);
+            }
+        }
+    }
+    ReMoveReverseStopCallBack(tag) {
+        for (let i = 0; i < this.ReCallBacks.length; i++) {
+            if (this.ReCallBacks[i].tag == tag) {
+                this.ReCallBacks.splice(i, 1);
+            }
+        }
+    }
+    CleanAllCallBack() {
+        this.CallBacks = new Array();
+        this.ReCallBacks = new Array();
     }
 }
 exports.Timeline = Timeline;

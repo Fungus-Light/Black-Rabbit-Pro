@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ActionTrigger = exports.$ActionTrigger = exports.Trigger = exports.$Trigger = exports.Outline = exports.$Outline = void 0;
 const csharp_1 = require("csharp");
 const Common_1 = require("Utils/Common");
 const $Outline = csharp_1.Black_Rabbit.SimpleOutline.GetOutLineObj;
@@ -68,6 +67,20 @@ class Trigger {
             this.UTrigger.LeaveAct.Add(tag, cb);
         }
     }
+    RemoveEnterAct(tag) {
+        if (this.UTrigger.EnterAct.ContainsKey(tag)) {
+            this.UTrigger.EnterAct.Remove(tag);
+        }
+    }
+    RemoveLeaveAct(tag) {
+        if (this.UTrigger.LeaveAct.ContainsKey(tag)) {
+            this.UTrigger.LeaveAct.Remove(tag);
+        }
+    }
+    CleanAllAct() {
+        this.UTrigger.EnterAct.Clear();
+        this.UTrigger.LeaveAct.Clear();
+    }
 }
 exports.Trigger = Trigger;
 class ActionTrigger {
@@ -115,6 +128,21 @@ class ActionTrigger {
             }
         });
         this.ActionList.push(new Common_1.UAction(tag, cb));
+    }
+    RemoveEnterAct(tag) {
+        if (this.ATrigger.EnterAct.ContainsKey(tag)) {
+            this.ATrigger.EnterAct.Remove(tag);
+        }
+    }
+    RemoveLeaveAct(tag) {
+        if (this.ATrigger.LeaveAct.ContainsKey(tag)) {
+            this.ATrigger.LeaveAct.Remove(tag);
+        }
+    }
+    CleanAllAct() {
+        this.ATrigger.EnterAct.Clear();
+        this.ATrigger.LeaveAct.Clear();
+        this.ActionList = new Array();
     }
 }
 exports.ActionTrigger = ActionTrigger;

@@ -1,20 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WaitForSecondsRealtime = exports.WaitForSeconds = exports.WaitForFrames = exports.QuitGame = exports.$ = exports.T = exports.KeyCode = exports.Input = exports.UAction = exports.Transform = exports.AudioClip = exports.GameTime = exports.Vector2 = exports.Vector3 = exports.Debug = void 0;
 const csharp_1 = require("csharp");
 const puerts_1 = require("puerts");
 /**
  * Debug Class, Rename Of UnityEngine.Debug
+ * 调试类，对UnityEngine.Debug 的导出
  */
 class Debug extends csharp_1.UnityEngine.Debug {
 }
 exports.Debug = Debug;
 /**
  * UnityEngine's Vector3
+ * Unity的 Vector3
  */
 class Vector3 extends csharp_1.UnityEngine.Vector3 {
 }
 exports.Vector3 = Vector3;
+/**
+ * Include A Tag And A Unity Action
+ * 包含一个标签和一个Action
+ */
 class UAction {
     constructor(tag, act) {
         if (tag == undefined) {
@@ -30,6 +35,7 @@ class UAction {
 exports.UAction = UAction;
 /**
  * UnityEngine's Vector2
+ * Unity的 Vector2
  */
 class Vector2 extends csharp_1.UnityEngine.Vector2 {
 }
@@ -48,16 +54,26 @@ class AudioClip extends csharp_1.UnityEngine.AudioClip {
 exports.AudioClip = AudioClip;
 /**
  * Get An Obeject's Type
+ * 获得一个对象的类型
  */
 const T = puerts_1.$typeof;
 exports.T = T;
 /**
  * Get A Transform By It's Name
+ * 通过名字获得一个物体的Transform组件
  */
 const $ = csharp_1.GameObjectHelper.GetTransformByName;
 exports.$ = $;
+/**
+ * QUit The Game
+ * 退出游戏
+ */
 const QuitGame = csharp_1.CommonJsCall.QuitGame;
 exports.QuitGame = QuitGame;
+/**
+ * Wait For Some Frames
+ * 等待若干帧
+ */
 const WaitForFrames = csharp_1.CommonJsCall.WaitForFrames;
 exports.WaitForFrames = WaitForFrames;
 const WaitForSeconds = csharp_1.CommonJsCall.WaitForSeconds;

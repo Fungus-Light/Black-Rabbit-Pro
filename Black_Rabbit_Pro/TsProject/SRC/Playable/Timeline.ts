@@ -70,6 +70,24 @@ class Timeline {
         })
         this.ReCallBacks.push(new UAction(tag, cb))
     }
+    ReMoveStopCallBack(tag: string) {
+        for (let i = 0; i < this.CallBacks.length; i++) {
+            if (this.CallBacks[i].tag == tag) {
+                this.CallBacks.splice(i, 1)
+            }
+        }
+    }
+    ReMoveReverseStopCallBack(tag: string) {
+        for (let i = 0; i < this.ReCallBacks.length; i++) {
+            if (this.ReCallBacks[i].tag == tag) {
+                this.ReCallBacks.splice(i, 1)
+            }
+        }
+    }
+    CleanAllCallBack() {
+        this.CallBacks = new Array<UAction>()
+        this.ReCallBacks = new Array<UAction>()
+    }
 }
 
 export {

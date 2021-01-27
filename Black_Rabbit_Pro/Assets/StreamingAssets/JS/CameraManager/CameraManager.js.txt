@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.$CameraDetector = void 0;
 const csharp_1 = require("csharp");
 const $CameraDetector = csharp_1.CameraManager.GetCameraDetector;
 exports.$CameraDetector = $CameraDetector;

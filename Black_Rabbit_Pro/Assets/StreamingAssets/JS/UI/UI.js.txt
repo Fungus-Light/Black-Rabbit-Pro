@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Text = exports.$Text = exports.Button = exports.$Button = exports.InputField = exports.$InputField = void 0;
 const csharp_1 = require("csharp");
 const Common_1 = require("Utils/Common");
 class Button {

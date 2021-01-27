@@ -49,6 +49,9 @@ class FeatureScene implements IGameLevel {
             Debug.LogWarning("Ray Leave")
             OutLine_FPSTrigger.HideOutLine()
         })
+        FPSTrigger.RegInterAct("Say Hello", () => {
+            SimpleFlow.Start()
+        })
 
         let BTN1 = $Button("BTN1")
         let BTN2 = $Button("BTN2")
