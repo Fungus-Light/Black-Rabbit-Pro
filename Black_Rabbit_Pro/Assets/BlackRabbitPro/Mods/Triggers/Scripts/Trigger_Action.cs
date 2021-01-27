@@ -56,7 +56,6 @@ public class Trigger_Action : MonoBehaviour, IActionTrigger
         {
             if (other.tag == PlayerTag && this.GameType == GameType.TPS)
             {
-                Debug.LogError("Player Enter");
                 MakeInterActable();
             }
 
