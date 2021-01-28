@@ -1,0 +1,75 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Timeline = exports.$Timeline = exports.PlayableDirector = void 0;
+const csharp_1 = require("csharp");
+const Common_1 = require("Utils/Common");
+class PlayableDirector extends csharp_1.UnityEngine.Playables.PlayableDirector {
+}
+exports.PlayableDirector = PlayableDirector;
+function $Timeline(name) {
+    let pd = csharp_1.TimelineHelper.GetTimeline(name);
+    if (pd != null) {
+        return new Timeline(pd);
+    }
+    else {
+        Common_1.Debug.LogWarning("GameObject " + name + " Does Not Exist A PlayableDirector Component!!!");
+        return null;
+    }
+}
+exports.$Timeline = $Timeline;
+class Timeline {
+    constructor(pd) {
+        this.isReverse = false;
+        this.PD = pd;
+        this.CallBacks = new Array();
+        this.ReCallBacks = new Array();
+        this.PD.add_stopped(() => {
+            //Debug.LogWarning("Timeline End")
+            if (this.isReverse) {
+                this.ReCallBacks.forEach(item => {
+                    item.act();
+                });
+            }
+            else {
+                this.CallBacks.forEach(item => {
+                    item.act();
+                });
+            }
+        });
+    }
+    Play() {
+        this.PD.Play();
+    }
+    Pause() {
+        this.PD.Pause();
+    }
+    Reverse() {
+        this.isReverse = true;
+        csharp_1.TimelineHelper.ReverseTimeline(this.PD, () => {
+            this.isReverse = false;
+        });
+    }
+    Stop() {
+        this.PD.Stop();
+    }
+    RegStopCallBack(tag, cb) {
+        this.CallBacks.forEach(element => {
+            if (element.tag == tag) {
+                element.act = cb;
+                return;
+            }
+        });
+        this.CallBacks.push(new Common_1.UAction(tag, cb));
+    }
+    RegReverStopCallBack(tag, cb) {
+        this.ReCallBacks.forEach(element => {
+            if (element.tag == tag) {
+                element.act = cb;
+                return;
+            }
+        });
+        this.ReCallBacks.push(new Common_1.UAction(tag, cb));
+    }
+}
+exports.Timeline = Timeline;
+//# sourceMappingURL=Timeline.js.map

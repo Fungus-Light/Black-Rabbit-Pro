@@ -1,1 +1,1 @@
-{"version":3,"file":"IGameLevel.js","sourceRoot":"","sources":["../../SRC/Interface/IGameLevel.ts"],"names":[],"mappings":""}
+{"version":3,"file":"IGameLevel.js","sourceRoot":"","sources":["../../JS/Interface/IGameLevel.ts"],"names":[],"mappings":""}

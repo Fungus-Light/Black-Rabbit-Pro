@@ -1,0 +1,1 @@
+{"version":3,"file":"CharacterManager.js","sourceRoot":"","sources":["../../../SRC/CharacterManager/CharacterManager.ts"],"names":[],"mappings":";;;AAAA,mCAAyC;AAKrC,iGALK,yBAAgB,OAKL;AAHpB,MAAM,iBAAiB,GAAG,yBAAgB,CAAC,mBAAmB,CAAA;AAI1D,8CAAiB"}
