@@ -70,8 +70,7 @@ namespace Fungus.EditorUtils
             EditorGUILayout.PropertyField(saveSelectionProp);
             EditorGUILayout.PropertyField(localizationIdProp);
             EditorGUILayout.PropertyField(showLineNumbersProp);
-            EditorGUILayout.PropertyField(luaEnvironmentProp);
-            EditorGUILayout.PropertyField(luaBindingNameProp);
+            
 
             // Show list of commands to hide in Add Command menu
             //ReorderableListGUI.Title(new GUIContent(hideCommandsProp.displayName, hideCommandsProp.tooltip));

@@ -36,13 +36,13 @@ namespace Fungus.EditorUtils
             SpawnPrefab("FungusLogo");
         }
 
-        [MenuItem("Tools/Fungus/Utilities/Export Fungus Package")]
+        //[MenuItem("Tools/Fungus/Utilities/Export Fungus Package")]
         static void ExportFungusPackageFull()
         {
             ExportFungusPackage( new string[] {"Assets/Fungus", "Assets/FungusExamples" });
         }
 
-        [MenuItem("Tools/Fungus/Utilities/Export Fungus Package - Lite")]
+        //[MenuItem("Tools/Fungus/Utilities/Export Fungus Package - Lite")]
         static void ExportFungusPackageLite()
         {
             ExportFungusPackage(new string[] { "Assets/Fungus" });
