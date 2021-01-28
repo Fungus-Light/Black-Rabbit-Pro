@@ -3322,6 +3322,20 @@ declare module 'csharp' {
             
         }
         
+        enum LeanTweenType { notUsed = 0, linear = 1, easeOutQuad = 2, easeInQuad = 3, easeInOutQuad = 4, easeInCubic = 5, easeOutCubic = 6, easeInOutCubic = 7, easeInQuart = 8, easeOutQuart = 9, easeInOutQuart = 10, easeInQuint = 11, easeOutQuint = 12, easeInOutQuint = 13, easeInSine = 14, easeOutSine = 15, easeInOutSine = 16, easeInExpo = 17, easeOutExpo = 18, easeInOutExpo = 19, easeInCirc = 20, easeOutCirc = 21, easeInOutCirc = 22, easeInBounce = 23, easeOutBounce = 24, easeInOutBounce = 25, easeInBack = 26, easeOutBack = 27, easeInOutBack = 28, easeInElastic = 29, easeOutElastic = 30, easeInOutElastic = 31, easeSpring = 32, easeShake = 33, punch = 34, once = 35, clamp = 36, pingPong = 37, animationCurve = 38 }
+        
+        class DialogHelper extends UnityEngine.MonoBehaviour {
+            
+            public constructor();
+            
+            public static GetCharacter($name: string):Fungus.Character;
+            
+            public static GetStage($name: string):Fungus.Stage;
+            
+            public static GetStage():Fungus.Stage;
+            
+        }
+        
     
     namespace UnityEngine.Playables {
         /** Instantiates a PlayableAsset and controls playback of Playable objects. */
@@ -3984,6 +3998,116 @@ declare module 'csharp' {
         class Node extends UnityEngine.MonoBehaviour {
             
         }
+        
+        class Stage extends Fungus.PortraitController {
+            
+            public static get ActiveStages(): System.Collections.Generic.List$1<Fungus.Stage>;
+            
+            public get PortraitCanvas(): UnityEngine.Canvas;
+            
+            public get DimPortraits(): boolean;
+            public set DimPortraits(value: boolean);
+            
+            public get DimColor(): UnityEngine.Color;
+            public set DimColor(value: UnityEngine.Color);
+            
+            public get FadeDuration(): number;
+            public set FadeDuration(value: number);
+            
+            public get MoveDuration(): number;
+            public set MoveDuration(value: number);
+            
+            public get FadeEaseType(): LeanTweenType;
+            
+            public get ShiftOffset(): UnityEngine.Vector2;
+            
+            public get DefaultPosition(): UnityEngine.UI.Image;
+            
+            public get Positions(): System.Collections.Generic.List$1<UnityEngine.RectTransform>;
+            
+            public get CharactersOnStage(): System.Collections.Generic.List$1<Fungus.Character>;
+            
+            public constructor();
+            
+            public static GetActiveStage():Fungus.Stage;
+            
+            public GetPosition($positionString: string):UnityEngine.RectTransform;
+            
+        }
+        
+        class PortraitController extends UnityEngine.MonoBehaviour {
+            
+            public constructor();
+            
+            public static SetRectTransform($target: UnityEngine.RectTransform, $from: UnityEngine.RectTransform):void;
+            
+            public RunPortraitCommand($options: Fungus.PortraitOptions, $onComplete: System.Action):void;
+            
+            public MoveToFront($options: Fungus.PortraitOptions):void;
+            
+            public Show($options: Fungus.PortraitOptions):void;
+            
+            public Hide($options: Fungus.PortraitOptions):void;
+            
+            public SetDimmed($character: Fungus.Character, $dimmedState: boolean):void;
+            
+            public Show($character: Fungus.Character, $position: string):void;
+            
+            public Show($character: Fungus.Character, $portrait: string, $fromPosition: string, $toPosition: string):void;
+            
+            public ShowPortrait($character: Fungus.Character, $portrait: string):void;
+            
+            public Hide($character: Fungus.Character):void;
+            
+            public Hide($character: Fungus.Character, $toPosition: string):void;
+            
+            public MoveToFront($character: Fungus.Character):void;
+            
+        }
+        
+        class PortraitOptions extends System.Object {
+            
+            public character: Fungus.Character;
+            
+            public replacedCharacter: Fungus.Character;
+            
+            public portrait: UnityEngine.Sprite;
+            
+            public display: Fungus.DisplayType;
+            
+            public offset: Fungus.PositionOffset;
+            
+            public fromPosition: UnityEngine.RectTransform;
+            
+            public toPosition: UnityEngine.RectTransform;
+            
+            public facing: Fungus.FacingDirection;
+            
+            public useDefaultSettings: boolean;
+            
+            public fadeDuration: number;
+            
+            public moveDuration: number;
+            
+            public shiftOffset: UnityEngine.Vector2;
+            
+            public move: boolean;
+            
+            public shiftIntoPlace: boolean;
+            
+            public waitUntilFinished: boolean;
+            
+            public onComplete: System.Action;
+            
+            public constructor($useDefaultSettings?: boolean);
+            
+            public constructor();
+            
+        }
+        
+        enum DisplayType { None = 0, Show = 1, Hide = 2, Replace = 3, MoveToFront = 4 }
+        
+        enum PositionOffset { None = 0, OffsetLeft = 1, OffsetRight = 2 }
         
     }
     

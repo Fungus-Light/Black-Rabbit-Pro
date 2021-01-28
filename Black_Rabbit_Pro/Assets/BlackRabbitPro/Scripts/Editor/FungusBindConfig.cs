@@ -16,6 +16,12 @@ public class FungusBindConfig
                 typeof(SayDialog),
                 typeof(Character),
                 typeof(MenuDialog),
+                typeof(Stage),
+                typeof(DialogHelper),
+                typeof(PortraitOptions),
+                typeof(PortraitController),
+                typeof(FacingDirection),
+                
             };
         }
     }
