@@ -1,1 +1,1 @@
-{"version":3,"file":"GameEntrance.js","sourceRoot":"","sources":["../JS/GameEntrance.ts"],"names":[],"mappings":";AAAA;;GAEG;;AAEH,yCAAoC;AAEpC,cAAK,CAAC,GAAG,CAAC,wBAAwB,CAAC,CAAC"}
+{"version":3,"file":"GameEntrance.js","sourceRoot":"","sources":["../SRC/GameEntrance.ts"],"names":[],"mappings":";AAAA;;GAEG;;AAEH,yCAAoC;AAEpC,cAAK,CAAC,GAAG,CAAC,wBAAwB,CAAC,CAAC"}
