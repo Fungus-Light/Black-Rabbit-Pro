@@ -77,6 +77,11 @@ exports.QuitGame = QuitGame;
  */
 const WaitForFrames = csharp_1.CommonJsCall.WaitForFrames;
 exports.WaitForFrames = WaitForFrames;
+/**
+ * Wait For Seconds And Do Action , Affected By Time.timescale
+ *
+ * 等待若干秒后执行 ,受到 timescale影响
+ */
 const WaitForSeconds = csharp_1.CommonJsCall.WaitForSeconds;
 exports.WaitForSeconds = WaitForSeconds;
 const WaitForSecondsRealtime = csharp_1.CommonJsCall.WaitForSecondsRealtime;

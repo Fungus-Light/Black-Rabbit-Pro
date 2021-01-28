@@ -4,6 +4,10 @@ exports.SetLevel = exports.Init = void 0;
 const Common_1 = require("Utils/Common");
 let _level = null;
 let _name = "";
+/**
+ * Level Loader Load IGameLevel and Run it
+ * LevelLoader 加载 IGameLevel 并且运行关卡
+ */
 class LevelLoader {
     constructor(bindTo, name, Level) {
         this.bindTo = bindTo;
