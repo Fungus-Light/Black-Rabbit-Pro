@@ -1,5 +1,5 @@
 import { System, UIHelper, UnityEngine } from "csharp"
-import { Debug, UAction } from "Utils/Common";
+import { Debug } from "Utils/Common";
 
 class Button {
     btn: UnityEngine.UI.Button

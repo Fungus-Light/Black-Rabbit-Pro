@@ -25,7 +25,7 @@ function SetLevel(name: string, Level: IGameLevel): void;
 }
 
 declare module "JS/CameraManager/CameraManager"{
-import { CameraManager } from "csharp";
+import { CameraManager, ICameraDetector } from "csharp";
 const $CameraDetector: typeof CameraManager.GetCameraDetector;
 
 }
