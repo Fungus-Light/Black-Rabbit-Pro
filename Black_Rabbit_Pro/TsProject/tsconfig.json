@@ -15,5 +15,16 @@
     "baseUrl": "JS",
     "declaration": true,
     "declarationDir": "./def"
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "./"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "out": "../DOCs",
+    "hideGenerator": true,
+    "readme":"./README.md"
   }
 }
