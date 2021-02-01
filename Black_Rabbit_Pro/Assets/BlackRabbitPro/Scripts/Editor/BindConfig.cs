@@ -42,7 +42,6 @@ public class BindConfig
                 typeof(System.IO.Path),
 
                 typeof(LevelRunner),
-
                 typeof(FileHelper),
                 typeof(GameObjectHelper),
                 typeof(CommonJsCall),
