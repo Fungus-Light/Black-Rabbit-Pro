@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RANDOM = exports.MAX = exports.MIN = exports.ABS = void 0;
 /**
  * Abselute
  * 绝对值

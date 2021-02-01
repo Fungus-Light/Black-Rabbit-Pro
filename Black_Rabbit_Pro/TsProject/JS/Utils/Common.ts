@@ -61,6 +61,11 @@ const T = $typeof
  */
 const $ = GameObjectHelper.GetTransformByName
 
+function SetActive(trans: Transform, state: boolean) {
+    if (trans != null) {
+        trans.gameObject.SetActive(state);
+    }
+}
 /**
  * QUit The Game
  * 退出游戏
@@ -97,6 +102,7 @@ export {
     KeyCode,
     T,
     $,
+    SetActive,
     QuitGame,
     WaitForFrames,
     WaitForSeconds,

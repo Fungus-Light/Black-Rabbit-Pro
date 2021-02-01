@@ -1,1 +1,1 @@
-{"version":3,"file":"CameraManager.js","sourceRoot":"","sources":["../../JS/CameraManager/CameraManager.ts"],"names":[],"mappings":";;;AAAA,mCAAuD;AAEvD,MAAM,eAAe,GAAG,sBAAa,CAAC,iBAAiB,CAAA;AAGnD,0CAAe"}
+{"version":3,"file":"CameraManager.js","sourceRoot":"","sources":["../../JS/CameraManager/CameraManager.ts"],"names":[],"mappings":";;AAAA,mCAAuD;AAEvD,MAAM,eAAe,GAAG,sBAAa,CAAC,iBAAiB,CAAA;AAGnD,0CAAe"}

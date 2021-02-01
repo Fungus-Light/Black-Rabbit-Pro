@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Timeline = exports.$Timeline = exports.PlayableDirector = void 0;
 const csharp_1 = require("csharp");
 const Common_1 = require("Utils/Common");
 class PlayableDirector extends csharp_1.UnityEngine.Playables.PlayableDirector {

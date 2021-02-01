@@ -2,7 +2,6 @@ import { CommonJsCall, System } from "csharp";
 import { SayDialog, $SayDialog, Character } from "Dialog/SayDialog"
 import { $OptionDialog, CreateSingleOption, OptionDialog, singleOption } from "Dialog/OptionDialog"
 import { $, AudioClip, Debug } from "Utils/Common";
-import { Stage,PortraitOptions } from "./Portrait";
 
 const option = CreateSingleOption
 /**
@@ -41,19 +40,6 @@ class DialogManager {
                 this.Gonext()
             }
         })
-    }
-
-    Portrait(character: Character, stage: Stage,): void {
-
-        let portraitOption=new PortraitOptions(false)
-        portraitOption.character=character
-        //portraitOption.facing
-
-        // this.FlowList.push(() => {
-        //     stage.RunPortraitCommand(,()=>{
-        //         this.Gonext();
-        //     })
-        // })
     }
 
     Say(text: string): void

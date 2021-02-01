@@ -30,12 +30,6 @@ const $CameraDetector: typeof CameraManager.GetCameraDetector;
 
 }
 
-declare module "JS/CharacterManager/CharacterManager"{
-import { CharacterManager } from "csharp";
-const $CharacterManager: typeof CharacterManager.GetCharacterManager;
-
-}
-
 declare module "JS/Dialog/DialogManager"{
 import { System } from "csharp";
 import { Character } from "JS/Dialog/SayDialog";
@@ -94,8 +88,18 @@ function CreateSingleOption(text: string, act: System.Action, optionDialogName: 
 
 }
 
+declare module "JS/Dialog/Portrait"{
+import { Fungus, DialogHelper } from "csharp";
+class Stage extends Fungus.Stage {
+}
+class PortraitOptions extends Fungus.PortraitOptions {
+}
+const $Stage: typeof DialogHelper.GetStage;
+
+}
+
 declare module "JS/Dialog/SayDialog"{
-import { Fungus } from "csharp";
+import { DialogHelper, Fungus } from "csharp";
 /**
  * Class Of Dialog Panel
  */
@@ -107,6 +111,7 @@ class Character extends Fungus.Character {
  * Get Or Create Dialog
  */
 const $SayDialog: typeof Fungus.SayDialog.GetSayDialog;
+const $Character: typeof DialogHelper.GetCharacter;
 
 }
 
@@ -276,6 +281,7 @@ const T: typeof $typeof;
  * 通过名字获得一个物体的Transform组件
  */
 const $: typeof GameObjectHelper.GetTransformByName;
+function SetActive(trans: Transform, state: boolean): void;
 /**
  * QUit The Game
  * 退出游戏
