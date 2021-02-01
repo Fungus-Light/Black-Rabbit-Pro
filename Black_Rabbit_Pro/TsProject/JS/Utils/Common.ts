@@ -47,8 +47,6 @@ class Transform extends UnityEngine.Transform { }
  */
 class GameTime extends UnityEngine.Time { }
 
-class AudioClip extends UnityEngine.AudioClip { }
-
 /**
  * Get An Obeject's Type
  * 获得一个对象的类型
@@ -95,7 +93,6 @@ export {
     Vector3,
     Vector2,
     GameTime,
-    AudioClip,
     Transform,
     UAction,
     Input,
