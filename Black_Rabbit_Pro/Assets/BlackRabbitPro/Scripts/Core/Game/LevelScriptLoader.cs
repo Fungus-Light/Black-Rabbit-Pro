@@ -15,7 +15,6 @@ public class LevelScriptLoader : Puerts.ILoader
     {
         if (filepath.StartsWith("puerts/")) return true;
 #if UNITY_EDITOR
-        //Debug.Log(Path.Combine(Application.streamingAssetsPath, filepath + ".txt").Replace("\\", "/"));
         return File.Exists(Path.Combine(Application.streamingAssetsPath, filepath + ".txt").Replace("\\", "/"));
 #else
 	    return File.Exists(Path.Combine(Application.dataPath,"StreamingAssets", filepath + ".txt").Replace("\\", "/"));

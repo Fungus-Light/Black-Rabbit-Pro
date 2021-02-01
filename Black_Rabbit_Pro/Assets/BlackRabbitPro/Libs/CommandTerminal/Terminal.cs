@@ -15,7 +15,6 @@ namespace CommandTerminal
     public class Terminal : MonoBehaviour
     {
         [Header("Window")]
-        public bool DontDestroy = true;
 
         [Range(0, 1)]
         [SerializeField]
@@ -161,10 +160,6 @@ namespace CommandTerminal
 
         void Start()
         {
-            if (DontDestroy)
-            {
-                DontDestroyOnLoad(this.gameObject);
-            }
 
             if (ConsoleFont == null)
             {

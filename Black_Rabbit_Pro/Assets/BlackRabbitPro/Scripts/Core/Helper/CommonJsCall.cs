@@ -8,7 +8,6 @@ using UnityEditor;
 #endif
 public class CommonJsCall : MonoBehaviour
 {
-    public bool DDOL = true;
     public static CommonJsCall Instance;
 
     void Awake()
@@ -16,11 +15,6 @@ public class CommonJsCall : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-        }
-
-        if (DDOL)
-        {
-            DontDestroyOnLoad(this.gameObject);
         }
 
     }

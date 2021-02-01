@@ -2,12 +2,14 @@
 using UnityEngine;
 using Puerts;
 
+[RequireComponent(typeof(GameObjectPool))]
 public class LevelRunner : MonoBehaviour
 {
     delegate void LoaderInit(LevelRunner levelRunner);
 
     public string PackName = "";
     public string LevelModName = "";
+    public string CorePackName = "JS";
     public string LevelLoaderName = "LevelLoader";
     private JsEnv env;
 
@@ -32,7 +34,7 @@ public class LevelRunner : MonoBehaviour
 
         env.Eval(
             @"let level=require('" + ModName + "').Create(); " +
-            "let loader=require('JS/" + LevelLoaderName + "');" +
+            "let loader=require('" + CorePackName + "/" + LevelLoaderName + "');" +
             "loader.SetLevel('" + LevelModName + "',level)"
             );
 
