@@ -18,7 +18,7 @@ public class LevelScriptLoader : Puerts.ILoader
         //Debug.Log(Path.Combine(Application.streamingAssetsPath, filepath + ".txt").Replace("\\", "/"));
         return File.Exists(Path.Combine(Application.streamingAssetsPath, filepath + ".txt").Replace("\\", "/"));
 #else
-			return true;
+	    return File.Exists(Path.Combine(Application.dataPath,"StreamingAssets", filepath + ".txt").Replace("\\", "/"));
 #endif
     }
     public string GetScriptDebugPath(string filepath)
@@ -38,8 +38,9 @@ public class LevelScriptLoader : Puerts.ILoader
             var asset = Resources.Load<TextAsset>(filepath);
             return asset.text;
         }
-        //Debug.Log(Path.Combine(Application.streamingAssetsPath + "/JS", filepath).Replace("\\", "/"));
-        return File.ReadAllText(Path.Combine(Application.streamingAssetsPath, filepath + ".txt").Replace("\\", "/"));
+        Debug.Log(Path.Combine(Application.dataPath,"StreamingAssets", filepath + ".txt").Replace("\\", "/"));
+        return File.ReadAllText(Path.Combine(Application.dataPath,"StreamingAssets", filepath + ".txt").Replace("\\", "/"));
+
     }
 
     public void Close() { }
