@@ -323,11 +323,11 @@ public class toolsCombine : EditorWindow
                 Debug.Log("work only in Play mode");
                 return;
             }
-            if (RunEnv.GlobalJsEnv != null)
-            {
-                RunEnv.GlobalJsEnv.Eval(code);
+            // if (RunEnv.GlobalJsEnv != null)
+            // {
+            //     RunEnv.GlobalJsEnv.Eval(code);
 
-            }
+            // }
             else
             {
                 Debug.LogError("无法使用");
