@@ -19,8 +19,9 @@ public class GameObjectPool : MonoBehaviour
 
         foreach (GameObject go in Resources.FindObjectsOfTypeAll<GameObject>())
         {
-            if (go.name.StartsWith("$_"))
+            if (go.name.StartsWith("$_") && go.scene.name != null)
             {
+                //Debug.LogWarning(go.scene.name);
                 if (NameDic.ContainsKey(go.name))
                 {
                     Debug.LogError("Exist Two Or More " + go.name);
