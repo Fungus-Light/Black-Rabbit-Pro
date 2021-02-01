@@ -4,7 +4,6 @@ using UnityEngine;
 using Puerts;
 using System;
 using UnityEngine.Playables;
-using Cinemachine;
 using Black_Rabbit;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -58,7 +57,6 @@ public class BindConfig
                 typeof(SimpleOutline),
                 typeof(GameType),
 
-                typeof(CinemachineBrain),
                 typeof(ICameraDetector),
                 typeof(CameraManager),
 

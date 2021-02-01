@@ -2601,24 +2601,6 @@ declare module 'csharp' {
         /** Zero argument delegate used by UnityEvents. */
         type UnityAction = () => void;
         var UnityAction: {new (func: () => void): UnityAction;}
-        
-        class UnityEvent$1<T0> extends UnityEngine.Events.UnityEventBase {
-            
-            public AddListener($call: UnityEngine.Events.UnityAction$1<T0>):void;
-            
-            public RemoveListener($call: UnityEngine.Events.UnityAction$1<T0>):void;
-            
-            public Invoke($arg0: T0):void;
-            
-        }
-        /** Abstract base class for UnityEvents. */
-        class UnityEventBase extends System.Object {
-            
-        }
-        
-        class UnityEvent$2<T0,T1> extends UnityEngine.Events.UnityEventBase {
-            
-        }
         /** A zero argument persistent callback that can be saved with the Scene. */
         class UnityEvent extends UnityEngine.Events.UnityEventBase {
             
@@ -2631,6 +2613,20 @@ declare module 'csharp' {
             public RemoveListener($call: UnityEngine.Events.UnityAction):void;
             
             public Invoke():void;
+            
+        }
+        /** Abstract base class for UnityEvents. */
+        class UnityEventBase extends System.Object {
+            
+        }
+        
+        class UnityEvent$1<T0> extends UnityEngine.Events.UnityEventBase {
+            
+            public AddListener($call: UnityEngine.Events.UnityAction$1<T0>):void;
+            
+            public RemoveListener($call: UnityEngine.Events.UnityAction$1<T0>):void;
+            
+            public Invoke($arg0: T0):void;
             
         }
         
@@ -3130,25 +3126,13 @@ declare module 'csharp' {
     }
     
         
-        class JsBehaviour extends UnityEngine.MonoBehaviour {
-            
-            public ModuleName: string;
-            
-            public JsStart: System.Action;
-            
-            public JsUpdate: System.Action;
-            
-            public JsOnDestroy: System.Action;
-            
-            public constructor();
-            
-        }
-        
         class LevelRunner extends UnityEngine.MonoBehaviour {
             
             public PackName: string;
             
             public LevelModName: string;
+            
+            public CorePackName: string;
             
             public LevelLoaderName: string;
             
@@ -3181,8 +3165,6 @@ declare module 'csharp' {
         }
         
         class CommonJsCall extends UnityEngine.MonoBehaviour {
-            
-            public DDOL: boolean;
             
             public static Instance: CommonJsCall;
             
@@ -3468,97 +3450,6 @@ declare module 'csharp' {
     namespace Black_Rabbit.SimpleOutline {
         
         enum Mode { OutlineAll = 0, OutlineVisible = 1, OutlineHidden = 2, OutlineAndSilhouette = 3, SilhouetteOnly = 4 }
-        
-    }
-    namespace Cinemachine {
-        
-        class CinemachineBrain extends UnityEngine.MonoBehaviour {
-            
-            public m_ShowDebugText: boolean;
-            
-            public m_ShowCameraFrustum: boolean;
-            
-            public m_IgnoreTimeScale: boolean;
-            
-            public m_WorldUpOverride: UnityEngine.Transform;
-            
-            public m_UpdateMethod: Cinemachine.CinemachineBrain.UpdateMethod;
-            
-            public m_BlendUpdateMethod: Cinemachine.CinemachineBrain.BrainUpdateMethod;
-            
-            public m_DefaultBlend: Cinemachine.CinemachineBlendDefinition;
-            
-            public m_CustomBlends: Cinemachine.CinemachineBlenderSettings;
-            
-            public m_CameraCutEvent: Cinemachine.CinemachineBrain.BrainEvent;
-            
-            public m_CameraActivatedEvent: Cinemachine.CinemachineBrain.VcamActivatedEvent;
-            
-            public get OutputCamera(): UnityEngine.Camera;
-            
-            public static get SoloCamera(): Cinemachine.ICinemachineCamera;
-            public static set SoloCamera(value: Cinemachine.ICinemachineCamera);
-            
-            public get DefaultWorldUp(): UnityEngine.Vector3;
-            
-            public get ActiveVirtualCamera(): Cinemachine.ICinemachineCamera;
-            
-            public get IsBlending(): boolean;
-            
-            public get ActiveBlend(): Cinemachine.CinemachineBlend;
-            
-            public get CurrentCameraState(): Cinemachine.CameraState;
-            
-            public constructor();
-            
-            public static GetSoloGUIColor():UnityEngine.Color;
-            
-            public ManualUpdate():void;
-            
-            public SetCameraOverride($overrideId: number, $camA: Cinemachine.ICinemachineCamera, $camB: Cinemachine.ICinemachineCamera, $weightB: number, $deltaTime: number):number;
-            
-            public ReleaseCameraOverride($overrideId: number):void;
-            
-            public ComputeCurrentBlend($outputBlend: $Ref<Cinemachine.CinemachineBlend>, $numTopLayersToExclude: number):void;
-            
-            public IsLive($vcam: Cinemachine.ICinemachineCamera, $dominantChildOnly?: boolean):boolean;
-            
-        }
-        
-        class CinemachineBlendDefinition extends System.ValueType {
-            
-        }
-        
-        class CinemachineBlenderSettings extends UnityEngine.ScriptableObject {
-            
-        }
-        
-        interface ICinemachineCamera {
-            
-        }
-        
-        class CinemachineBlend extends System.Object {
-            
-        }
-        
-        class CameraState extends System.ValueType {
-            
-        }
-        
-    }
-    namespace Cinemachine.CinemachineBrain {
-        
-        enum UpdateMethod { FixedUpdate = 0, LateUpdate = 1, SmartUpdate = 2, ManualUpdate = 3 }
-        
-        enum BrainUpdateMethod { FixedUpdate = 0, LateUpdate = 1 }
-        
-        class BrainEvent extends UnityEngine.Events.UnityEvent$1<Cinemachine.CinemachineBrain> {
-            
-        }
-        
-        class VcamActivatedEvent extends UnityEngine.Events.UnityEvent$2<Cinemachine.ICinemachineCamera, Cinemachine.ICinemachineCamera> {
-            
-        }
         
     }
     namespace UnityEngine.UI {
