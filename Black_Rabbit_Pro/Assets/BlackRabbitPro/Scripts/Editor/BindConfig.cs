@@ -70,6 +70,9 @@ public class BindConfig
                 typeof(Input),
                 typeof(KeyCode),
 
+                typeof(SoundLib),
+                typeof(TagSound),
+                typeof(SoundConfig)
             };
         }
     }
