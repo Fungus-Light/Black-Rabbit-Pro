@@ -1,0 +1,17 @@
+{
+  "name": "logicmaker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "blockly": "^4.20201217.0"
+  },
+  "devDependencies": {
+    "electron": "^11.2.3"
+  }
+}
