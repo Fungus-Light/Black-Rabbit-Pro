@@ -2,19 +2,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Logic-Maker</title>
 </head>
 
 <body style="background: white;">
-    <h1>Hello World!</h1>
-    <p>
-        We are using node
-        <script>document.write(process.versions.node)</script>,
-        Chrome
-        <script>document.write(process.versions.chrome)</script>,
-        and Electron
-        <script>document.write(process.versions.electron)</script>.
-    </p>
+
+    <xml id="toolbox" style="display: none">
+        <block type="controls_if"></block>
+        <block type="controls_repeat_ext"></block>
+        <block type="logic_compare"></block>
+        <block type="math_number"></block>
+        <block type="math_arithmetic"></block>
+        <block type="text"></block>
+        <block type="text_print"></block>
+    </xml>
+    <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+    <script src="./SRC/js/index.js"></script>
 </body>
 
 </html>

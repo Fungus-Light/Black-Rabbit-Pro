@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "blockly": "^4.20201217.0"
+    "blockly": "^4.20201217.0",
+    "monaco-editor": "^0.22.3"
   },
   "devDependencies": {
     "electron": "^11.2.3"
