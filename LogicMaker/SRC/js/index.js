@@ -1,3 +1,6 @@
+
+
+
 const Blockly = require("blockly")
 
 let workspace = Blockly.inject('blocklyDiv',
