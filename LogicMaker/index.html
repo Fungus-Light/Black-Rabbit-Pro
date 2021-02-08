@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="CodeMirror/theme/dracula.css">
     <script src="CodeMirror/lib/codemirror.js"></script>
     <script src="CodeMirror/mode/javascript/javascript.js"></script>
-
+    
 </head>
 
 <style>
@@ -19,14 +19,14 @@
         margin: 0;
     }
 
-    @font-face {
-        font-family: code;
-        src: url(./CodeMirror/monospace.ttf);
+    .CodeMirror {
+        font-family: monospace;
+        height: 100%;
     }
 
-    .CodeMirror {
-        font-family: code;
-        height: 100%;
+    .DialogInput{
+        height: 30px;
+        line-height: 30px;
     }
 </style>
 
@@ -40,7 +40,6 @@
                 <x-menu>
                     <x-menuitem>
                         <x-label>Load Project</x-label>
-                        <x-shortcut value="Control+N"></x-shortcut>
                     </x-menuitem>
 
                     <hr>
@@ -98,14 +97,19 @@
             </category>
             <category name="对话系统">
                 <block type='dialog_block'></block>
+                <block type="dialog_variable"></block>
+                <block type="say"></block>
             </category>
             <category name="数据类型">
                 <block type="text"></block>
+
             </category>
+            <category name="Variables" custom="VARIABLE"></category>
+            <category name="Functions" custom="PROCEDURE"></category>
         </xml>
         <div style="height: 100%; width: 10vw;float: left;background-color: rgba(231, 228, 223, 0.753);">
             <ul>
-                
+
                 <x-menuitem>
                     <x-label>file1</x-label>
                 </x-menuitem>
@@ -126,6 +130,7 @@
     </div>
 
     <script src="./SRC/js/index.js"></script>
+    <script src="SRC/js/custom-dialog.js"></script>
     <script src="SRC/js/Define.js"></script>
 </body>
 

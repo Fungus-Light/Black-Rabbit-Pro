@@ -17,7 +17,8 @@ let workspace = Blockly.inject(blocklyDiv,
             scrollbars: true,
             drag: true,
             wheel: false
-        }
+        },
+        media:'./media/'
     });
 let onresize = function (e) {
     // Compute the absolute coordinates and dimensions of blocklyArea.

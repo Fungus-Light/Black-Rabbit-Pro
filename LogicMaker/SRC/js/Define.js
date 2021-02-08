@@ -113,7 +113,7 @@ Blockly.JavaScript['dialog_block'] = function (block) {
     // TODO: Assemble JavaScript into code variable.
     var code = statements_name.replaceAll("block.");
     // TODO: Change ORDER_NONE to the correct strength.
-    return "$blockname$=CreateDialog();\n";
+    return "$blockname$=CreateDialog();\n"+code;
 };
 
 //-------------------------------
@@ -136,5 +136,30 @@ Blockly.JavaScript['dialog_variable'] = function (block) {
     var value_block = Blockly.JavaScript.valueToCode(block, 'Block', Blockly.JavaScript.ORDER_ATOMIC);
     // TODO: Assemble JavaScript into code variable.
     var code = '...;\n';
+    return code;
+};
+
+//---------------------------------
+Blockly.Blocks['say'] = {
+    init: function () {
+        this.appendValueInput("text")
+            .setCheck("String")
+            .appendField("Say Text");
+        this.appendValueInput("tag")
+            .setCheck("String")
+            .appendField("Dialog Tag");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(165);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.JavaScript['say'] = function (block) {
+    var value_text = Blockly.JavaScript.valueToCode(block, 'text', Blockly.JavaScript.ORDER_ATOMIC);
+    var value_tag = Blockly.JavaScript.valueToCode(block, 'tag', Blockly.JavaScript.ORDER_ATOMIC);
+    // TODO: Assemble JavaScript into code variable.
+    var code = '$blockname$.Say('+value_text+','+value_tag+');\n';
     return code;
 };
