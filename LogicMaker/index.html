@@ -130,23 +130,35 @@
 
     <div style="width: 100%;height: calc( 100vh - 40px ) ;">
         <xml id="toolbox" style="display: none">
-            <category name="控制">
+            <category name="基本控制">
                 <block type="controls_if"></block>
                 <block type="controls_whileUntil"></block>
                 <block type="controls_for">
+                    <block type="logic_compare"></block>
+                    <block type="logic_operation"></block>
+                    <block type="logic_boolean"></block>
             </category>
-            <category name="逻辑">
-                <block type="logic_compare"></block>
-                <block type="logic_operation"></block>
-                <block type="logic_boolean"></block>
+            <category name="架构">
+                <block type='level'></block>
+            </category>
+            <category name="常用工具">
+                <block type='log'></block>
+                <block type='warning'></block>
+            </category>
+            <category name="对话系统">
+                <block type='dialog_block'></block>
+            </category>
+            <category name="数据类型">
+                <block type="text"></block>
             </category>
         </xml>
-        <div id="blocklyArea" style="height: 100%; width: 65vw;float: left;"></div>
+        <div id="blocklyArea" style="height: 100%; width: 60vw;float: left;"></div>
         <div id="blocklyDiv" style="position: absolute;"></div>
-        <div id="container" style="height: 100%; width: calc( 100% - 65vw ) ;float: left;"></div>
+        <div id="container" style="height: 100%; width: calc( 100% - 60vw ) ;float: left;"></div>
     </div>
 
     <script src="./SRC/js/index.js"></script>
+    <script src="SRC/js/Define.js"></script>
 </body>
 
 </html>

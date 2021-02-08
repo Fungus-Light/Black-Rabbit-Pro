@@ -11,6 +11,7 @@
   "dependencies": {
     "blockly": "^4.20201217.0",
     "highlight.js": "^10.5.0",
+    "js-beautify": "^1.13.5",
     "xel": "^0.0.230"
   },
   "devDependencies": {

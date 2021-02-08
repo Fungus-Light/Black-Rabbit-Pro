@@ -1,4 +1,5 @@
 const Blockly = require("blockly")
+const beautyfy = require('js-beautify').js
 
 let myCodeMirror = CodeMirror(document.getElementById("container"), {
     value: "//drag block and gen code",
@@ -36,10 +37,13 @@ let onresize = function (e) {
     Blockly.svgResize(workspace);
 };
 
-workspace.addChangeListener(()=>{
-    let code =Blockly.JavaScript.workspaceToCode(workspace);
-    console.log(code)
-    myCodeMirror.setValue(code)
+workspace.addChangeListener(() => {
+    let code = Blockly.JavaScript.workspaceToCode(workspace);
+
+    myCodeMirror.setValue(beautyfy(code, {
+        indent_size: 4,
+        space_in_empty_paren: true
+    }))
 })
 
 window.addEventListener('resize', onresize, false);
