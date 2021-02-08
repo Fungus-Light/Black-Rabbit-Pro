@@ -3,23 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <title>Logic-Maker</title>
+    <link rel="stylesheet" href="node_modules/xel/themes/material.css">
+    <script src="node_modules/xel/xel.min.js"></script>
+    <link rel="stylesheet" href="CodeMirror/lib/codemirror.css">
+    <link rel="stylesheet" href="CodeMirror/theme/dracula.css">
+    <script src="CodeMirror/lib/codemirror.js"></script>
+    <script src="CodeMirror/mode/javascript/javascript.js"></script>
+
 </head>
 
-<body style="background: white;">
+<style>
+    * {
+        padding: 0;
+        border: 0;
+        margin: 0;
+    }
 
-    <xml id="toolbox" style="display: none">
-        <block type="controls_if"></block>
-        <block type="controls_repeat_ext"></block>
-        <block type="logic_compare"></block>
-        <block type="math_number"></block>
-        <block type="math_arithmetic"></block>
-        <block type="text"></block>
-        <block type="text_print"></block>
-    </xml>
-    <div id="blocklyDiv" style="height: 480px; width: 50vw;"></div>
-    <div id="container"></div>
+    @font-face {
+        font-family: code;
+        src: url(./CodeMirror/monospace.ttf);
+    }
 
-    
+    .CodeMirror {
+        font-family: code;
+        height: 100%;
+    }
+</style>
+
+<body style="background: white;height: 100vh;">
+
+    <div style="width: 100%;height: 40px;">
+        <x-menubar>
+            <x-menuitem>
+                <x-label>File</x-label>
+
+                <x-menu>
+                    <x-menuitem>
+                        <x-label>New</x-label>
+                        <x-shortcut value="Control+N"></x-shortcut>
+                    </x-menuitem>
+
+                    <x-menuitem>
+                        <x-label>Open…</x-label>
+                        <x-shortcut value="Control+O"></x-shortcut>
+                    </x-menuitem>
+
+                    <hr>
+
+                    <x-menuitem>
+                        <x-label>Save</x-label>
+                        <x-shortcut value="Control+S"></x-shortcut>
+                    </x-menuitem>
+
+                    <x-menuitem>
+                        <x-label>Save as…</x-label>
+                        <x-shortcut value="Control+Shift+S"></x-shortcut>
+                    </x-menuitem>
+                </x-menu>
+            </x-menuitem>
+
+            <x-menuitem>
+                <x-label>Edit</x-label>
+
+                <x-menu>
+                    <x-menuitem>
+                        <x-icon name="undo"></x-icon>
+                        <x-label>Undo</x-label>
+                        <x-shortcut value="Control+Z"></x-shortcut>
+                    </x-menuitem>
+
+                    <x-menuitem disabled>
+                        <x-icon name="redo"></x-icon>
+                        <x-label>Redo</x-label>
+                        <x-shortcut value="Control+Shift+Z"></x-shortcut>
+                    </x-menuitem>
+
+                    <hr>
+
+                    <x-menuitem>
+                        <x-icon name="content-cut"></x-icon>
+                        <x-label>Cut</x-label>
+                        <x-shortcut value="Control+X"></x-shortcut>
+                    </x-menuitem>
+
+                    <x-menuitem>
+                        <x-icon name="content-copy"></x-icon>
+                        <x-label>Copy</x-label>
+                        <x-shortcut value="Control+C"></x-shortcut>
+                    </x-menuitem>
+
+                    <x-menuitem>
+                        <x-icon name="content-paste"></x-icon>
+                        <x-label>Paste</x-label>
+                        <x-shortcut value="Control+V"></x-shortcut>
+                    </x-menuitem>
+                </x-menu>
+            </x-menuitem>
+
+            <x-menuitem>
+                <x-label>Gen</x-label>
+
+                <x-menu>
+                    <x-menuitem>
+                        <x-label>Gen Code</x-label>
+                    </x-menuitem>
+
+                    <x-menuitem>
+                        <x-label>Show spelling suggestions</x-label>
+                    </x-menuitem>
+                </x-menu>
+            </x-menuitem>
+
+            <x-menuitem>
+                <x-label>Help</x-label>
+
+                <x-menu>
+                    <x-menuitem>
+                        <x-icon name="help"></x-icon>
+                        <x-label>Documentation</x-label>
+                    </x-menuitem>
+                </x-menu>
+            </x-menuitem>
+        </x-menubar>
+
+    </div>
+
+    <div style="width: 100%;height: calc( 100vh - 40px ) ;">
+        <xml id="toolbox" style="display: none">
+            <category name="控制">
+                <block type="controls_if"></block>
+                <block type="controls_whileUntil"></block>
+                <block type="controls_for">
+            </category>
+            <category name="逻辑">
+                <block type="logic_compare"></block>
+                <block type="logic_operation"></block>
+                <block type="logic_boolean"></block>
+            </category>
+        </xml>
+        <div id="blocklyArea" style="height: 100%; width: 65vw;float: left;"></div>
+        <div id="blocklyDiv" style="position: absolute;"></div>
+        <div id="container" style="height: 100%; width: calc( 100% - 65vw ) ;float: left;"></div>
+    </div>
+
     <script src="./SRC/js/index.js"></script>
 </body>
 

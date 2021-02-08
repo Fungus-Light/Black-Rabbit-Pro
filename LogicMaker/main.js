@@ -6,7 +6,9 @@ function createWindow() {
         height: 720,
         webPreferences: {
             nodeIntegration: true
-        }
+        },
+        autoHideMenuBar:true,
+        useContentSize:true
     })
 
     win.loadFile('index.html')
