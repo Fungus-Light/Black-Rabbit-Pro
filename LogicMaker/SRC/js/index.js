@@ -37,6 +37,7 @@ let onresize = function (e) {
     Blockly.svgResize(workspace);
 };
 
+
 workspace.addChangeListener(() => {
     let code = Blockly.JavaScript.workspaceToCode(workspace);
 
