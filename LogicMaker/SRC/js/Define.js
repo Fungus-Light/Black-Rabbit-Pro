@@ -98,9 +98,9 @@ Blockly.JavaScript['warning'] = function (block) {
 //------------------------------------
 Blockly.Blocks['dialog_block'] = {
     init: function () {
-        this.appendStatementInput("NAME")
+        this.appendStatementInput("command")
             .setCheck(null)
-            .appendField("Block Define");
+            .appendField(new Blockly.FieldLabelSerializable("Dialog Flow List"), "Flow");
         this.setOutput(true, null);
         this.setColour(330);
         this.setTooltip("");
@@ -109,11 +109,11 @@ Blockly.Blocks['dialog_block'] = {
 };
 
 Blockly.JavaScript['dialog_block'] = function (block) {
-    var statements_name = Blockly.JavaScript.statementToCode(block, 'NAME');
+    var statements_command = Blockly.JavaScript.statementToCode(block, 'command');
     // TODO: Assemble JavaScript into code variable.
-    var code = statements_name.replaceAll("block.");
+    var code = '...';
     // TODO: Change ORDER_NONE to the correct strength.
-    return "$blockname$=CreateDialog();\n"+code;
+    return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 //-------------------------------
@@ -122,7 +122,7 @@ Blockly.Blocks['dialog_variable'] = {
         this.appendValueInput("Block")
             .setCheck(null)
             .appendField("Dialog Variable")
-            .appendField(new Blockly.FieldVariable("item"), "var");
+            .appendField(new Blockly.FieldVariable("variable"), "let");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(230);
@@ -160,6 +160,6 @@ Blockly.JavaScript['say'] = function (block) {
     var value_text = Blockly.JavaScript.valueToCode(block, 'text', Blockly.JavaScript.ORDER_ATOMIC);
     var value_tag = Blockly.JavaScript.valueToCode(block, 'tag', Blockly.JavaScript.ORDER_ATOMIC);
     // TODO: Assemble JavaScript into code variable.
-    var code = '$blockname$.Say('+value_text+','+value_tag+');\n';
+    var code = '$blockname$.Say(' + value_text + ',' + value_tag + ');\n';
     return code;
 };
