@@ -39,63 +39,15 @@
 
                 <x-menu>
                     <x-menuitem>
-                        <x-label>New</x-label>
+                        <x-label>Load Project</x-label>
                         <x-shortcut value="Control+N"></x-shortcut>
                     </x-menuitem>
 
-                    <x-menuitem>
-                        <x-label>Open…</x-label>
-                        <x-shortcut value="Control+O"></x-shortcut>
-                    </x-menuitem>
-
                     <hr>
 
                     <x-menuitem>
-                        <x-label>Save</x-label>
+                        <x-label>Save Project</x-label>
                         <x-shortcut value="Control+S"></x-shortcut>
-                    </x-menuitem>
-
-                    <x-menuitem>
-                        <x-label>Save as…</x-label>
-                        <x-shortcut value="Control+Shift+S"></x-shortcut>
-                    </x-menuitem>
-                </x-menu>
-            </x-menuitem>
-
-            <x-menuitem>
-                <x-label>Edit</x-label>
-
-                <x-menu>
-                    <x-menuitem>
-                        <x-icon name="undo"></x-icon>
-                        <x-label>Undo</x-label>
-                        <x-shortcut value="Control+Z"></x-shortcut>
-                    </x-menuitem>
-
-                    <x-menuitem disabled>
-                        <x-icon name="redo"></x-icon>
-                        <x-label>Redo</x-label>
-                        <x-shortcut value="Control+Shift+Z"></x-shortcut>
-                    </x-menuitem>
-
-                    <hr>
-
-                    <x-menuitem>
-                        <x-icon name="content-cut"></x-icon>
-                        <x-label>Cut</x-label>
-                        <x-shortcut value="Control+X"></x-shortcut>
-                    </x-menuitem>
-
-                    <x-menuitem>
-                        <x-icon name="content-copy"></x-icon>
-                        <x-label>Copy</x-label>
-                        <x-shortcut value="Control+C"></x-shortcut>
-                    </x-menuitem>
-
-                    <x-menuitem>
-                        <x-icon name="content-paste"></x-icon>
-                        <x-label>Paste</x-label>
-                        <x-shortcut value="Control+V"></x-shortcut>
                     </x-menuitem>
                 </x-menu>
             </x-menuitem>
@@ -105,11 +57,10 @@
 
                 <x-menu>
                     <x-menuitem>
-                        <x-label>Gen Code</x-label>
+                        <x-label>Export TsProject</x-label>
                     </x-menuitem>
-
                     <x-menuitem>
-                        <x-label>Show spelling suggestions</x-label>
+                        <x-label>Gen To Unity</x-label>
                     </x-menuitem>
                 </x-menu>
             </x-menuitem>
@@ -152,7 +103,22 @@
                 <block type="text"></block>
             </category>
         </xml>
-        <div id="blocklyArea" style="height: 100%; width: 60vw;float: left;"></div>
+        <div style="height: 100%; width: 10vw;float: left;background-color: rgba(231, 228, 223, 0.753);">
+            <ul>
+                <x-menuitem>
+                    <x-label>file1</x-label>
+                </x-menuitem>
+                <x-menuitem>
+                    <x-label>file1</x-label>
+                </x-menuitem>
+
+                <x-menuitem>
+                    <x-label>file1</x-label>
+                </x-menuitem>
+
+            </ul>
+        </div>
+        <div id="blocklyArea" style="height: 100%; width: 50vw;float: left;"></div>
         <div id="blocklyDiv" style="position: absolute;"></div>
         <div id="container" style="height: 100%; width: calc( 100% - 60vw ) ;float: left;"></div>
     </div>
