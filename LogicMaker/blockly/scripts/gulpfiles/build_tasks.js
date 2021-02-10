@@ -381,35 +381,6 @@ goog.require('Blockly.requires')
 };
 
 /**
- * This task builds Blockly's lang files.
- *     msg/*.js
- */
-function buildLangfiles(done) {
-  // Run js_to_json.py
-  const jsToJsonCmd = `python ./scripts/i18n/js_to_json.py \
---input_file ${path.join('msg', 'messages.js')} \
---output_dir ${path.join('msg', 'json')} \
---quiet`;
-  execSync(jsToJsonCmd, { stdio: 'inherit' });
-
-  // Run create_messages.py
-  let json_files = fs.readdirSync(path.join('msg', 'json'));
-  json_files = json_files.filter(file => file.endsWith('json') &&
-    !(new RegExp(/(keys|synonyms|qqq|constants)\.json$/).test(file)));
-  json_files = json_files.map(file => path.join('msg', 'json', file));
-  const createMessagesCmd = `python ./scripts/i18n/create_messages.py \
-  --source_lang_file ${path.join('msg', 'json', 'en.json')} \
-  --source_synonym_file ${path.join('msg', 'json', 'synonyms.json')} \
-  --source_constants_file ${path.join('msg', 'json', 'constants.json')} \
-  --key_file ${path.join('msg', 'json', 'keys.json')} \
-  --output_dir ${path.join('msg', 'js')} \
-  --quiet ${json_files.join(' ')}`;
-    execSync(createMessagesCmd, { stdio: 'inherit' });
-
-  done();
-};
-
-/**
  * This task builds Blockly core, blocks and generators together and uses
  * closure compiler's ADVANCED_COMPILATION mode.
  */
@@ -479,14 +450,12 @@ const buildCore = gulp.parallel(
 const build = gulp.parallel(
   buildCore,
   buildGenerators,
-  buildLangfiles
 );
 
 module.exports = {
   build: build,
   core: buildCore,
   blocks: buildBlocks,
-  langfiles: buildLangfiles,
   uncompressed: buildUncompressed,
   compressed: buildCompressed,
   generators: buildGenerators,

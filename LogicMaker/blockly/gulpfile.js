@@ -22,7 +22,6 @@ module.exports = {
   build: buildTasks.build,
   buildCore: buildTasks.core,
   buildBlocks: buildTasks.blocks,
-  buildLangfiles: buildTasks.langfiles,
   buildUncompressed: buildTasks.uncompressed,
   buildCompressed: buildTasks.compressed,
   buildGenerators: buildTasks.generators,
