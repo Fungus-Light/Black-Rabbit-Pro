@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "blockly": "^4.20201217.0",
     "js-beautify": "^1.13.5"
   },
   "devDependencies": {

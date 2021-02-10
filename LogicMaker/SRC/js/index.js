@@ -1,4 +1,3 @@
-const Blockly = require("blockly")
 const beautyfy = require('js-beautify').js
 
 let myCodeMirror = CodeMirror(document.getElementById("container"), {
