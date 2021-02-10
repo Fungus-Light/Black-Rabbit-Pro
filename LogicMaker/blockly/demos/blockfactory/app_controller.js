@@ -689,7 +689,7 @@ AppController.prototype.init = function() {
        toolbox: toolbox,
        comments: false,
        disable: false,
-       media: '../../media/'});
+       media: '../../../media/'});
 
   // Add tab handlers for switching between Block Factory and Block Exporter.
   this.addTabHandlers(this.tabMap);

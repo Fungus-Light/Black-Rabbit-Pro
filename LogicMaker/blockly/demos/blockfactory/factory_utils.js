@@ -871,7 +871,7 @@ FactoryUtils.injectCode = function(code, id) {
   pre.textContent = code;
   // Remove the 'prettyprinted' class, so that Prettify will recalculate.
   pre.className = pre.className.replace('prettyprinted', '');
-  PR.prettyPrint();
+//  PR.prettyPrint();
 };
 
 /**
