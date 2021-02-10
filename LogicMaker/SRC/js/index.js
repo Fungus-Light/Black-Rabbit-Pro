@@ -17,7 +17,7 @@ let workspace = Blockly.inject(blocklyDiv,
             drag: true,
             wheel: false
         },
-        media:'./media/'
+        media: './media/'
     });
 let onresize = function (e) {
     // Compute the absolute coordinates and dimensions of blocklyArea.
@@ -37,15 +37,27 @@ let onresize = function (e) {
     Blockly.svgResize(workspace);
 };
 
+const alert = function (message) {
 
-workspace.addChangeListener(() => {
-    let code = Blockly.JavaScript.workspaceToCode(workspace);
+    Swal.fire('Oops...', message, 'error')
 
-    myCodeMirror.setValue(beautyfy(code, {
-        indent_size: 4,
-        space_in_empty_paren: true
-    }))
-})
+};
+
+function GenJS() {
+    try {
+        let code = Blockly.JavaScript.workspaceToCode(workspace);
+
+        myCodeMirror.setValue(beautyfy(code, {
+            indent_size: 4,
+            space_in_empty_paren: true
+        }))
+    } catch (err) {
+        if (err) {
+            alert(err.toString())
+        }
+    }
+
+}
 
 window.addEventListener('resize', onresize, false);
 onresize();

@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Logic-Maker</title>
-    <link rel="stylesheet" href="./xel/material.css">
-    <script src="./xel/xel.min.js"></script>
-    <link rel="stylesheet" href="CodeMirror/lib/codemirror.css">
-    <link rel="stylesheet" href="CodeMirror/theme/dracula.css">
-    <script src="CodeMirror/lib/codemirror.js"></script>
-    <script src="CodeMirror/mode/javascript/javascript.js"></script>
+    <link rel="stylesheet" href="Lib/xel/material.css">
+    <script src="Lib/xel/xel.min.js"></script>
 
-    <script src="./blockly/blockly_compressed.js"></script>
+    <link rel="stylesheet" href="Lib/CodeMirror/lib/codemirror.css">
+    <link rel="stylesheet" href="Lib/CodeMirror/theme/dracula.css">
+    <script src="Lib/CodeMirror/lib/codemirror.js"></script>
+    <script src="Lib/CodeMirror/mode/javascript/javascript.js"></script>
+    <script src="Lib/SweetAlert/sweetalert2.all.js"></script>
+    <!--Include Blockly-->
+    <script src="blockly/blockly_compressed.js"></script>
     <script src="blockly/blocks_compressed.js"></script>
     <script src="blockly/javascript_compressed.js"></script>
     <script src="blockly/msg/js/en.js"></script>
-    
+
 </head>
 
 <style>
@@ -24,12 +26,17 @@
         margin: 0;
     }
 
+    @font-face {
+        font-family: firacode;
+        src: url(./Lib/CodeMirror/FiraCode-Regular.ttf);
+    }
+
     .CodeMirror {
-        font-family: monospace;
+        font-family: firacode;
         height: 100%;
     }
 
-    .DialogInput{
+    .DialogInput {
         height: 30px;
         line-height: 30px;
     }
@@ -102,7 +109,6 @@
             </category>
             <category name="对话系统">
                 <block type='dialog_block'></block>
-                <block type="dialog_variable"></block>
                 <block type="say"></block>
             </category>
             <category name="数据类型">
@@ -115,16 +121,12 @@
         <div style="height: 100%; width: 10vw;float: left;background-color: rgba(231, 228, 223, 0.753);">
             <ul>
 
-                <x-menuitem>
-                    <x-label>file1</x-label>
+                <x-menuitem onclick="GenJS()">
+                    <x-label>生成JS</x-label>
                 </x-menuitem>
 
-                <x-menuitem>
-                    <x-label>file1</x-label>
-                </x-menuitem>
-
-                <x-menuitem>
-                    <x-label>file1</x-label>
+                <x-menuitem onclick="">
+                    <x-label>生成Lua</x-label>
                 </x-menuitem>
 
             </ul>
@@ -136,7 +138,7 @@
 
     <script src="./SRC/js/index.js"></script>
     <script src="SRC/js/custom-dialog.js"></script>
-    <script src="SRC/js/Define.js"></script>
+    <script src="SRC/js/custom_blocks.js"></script>
 </body>
 
 </html>

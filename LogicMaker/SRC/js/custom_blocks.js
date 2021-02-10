@@ -97,16 +97,15 @@ Blockly.JavaScript['warning'] = function (block) {
 
 //------------------------------------
 Blockly.Blocks['dialog_block'] = {
-    init: function () {
-        this.appendStatementInput("command")
-            .setCheck(null)
-            .appendField(new Blockly.FieldLabelSerializable("Dialog Flow List"), "Flow");
-        this.setOutput(true, null);
-        this.setColour(330);
-        this.setTooltip("");
-        this.setHelpUrl("");
+    init: function() {
+      this.appendStatementInput("command")
+          .setCheck(null)
+          .appendField("Block Define");
+      this.setColour(330);
+   this.setTooltip("");
+   this.setHelpUrl("");
     }
-};
+  };
 
 Blockly.JavaScript['dialog_block'] = function (block) {
     var statements_command = Blockly.JavaScript.statementToCode(block, 'command');
@@ -114,29 +113,6 @@ Blockly.JavaScript['dialog_block'] = function (block) {
     var code = '...';
     // TODO: Change ORDER_NONE to the correct strength.
     return [code, Blockly.JavaScript.ORDER_NONE];
-};
-
-//-------------------------------
-Blockly.Blocks['dialog_variable'] = {
-    init: function () {
-        this.appendValueInput("Block")
-            .setCheck(null)
-            .appendField("Dialog Variable")
-            .appendField(new Blockly.FieldVariable("variable"), "let");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(230);
-        this.setTooltip("");
-        this.setHelpUrl("");
-    }
-};
-
-Blockly.JavaScript['dialog_variable'] = function (block) {
-    var variable_var = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE);
-    var value_block = Blockly.JavaScript.valueToCode(block, 'Block', Blockly.JavaScript.ORDER_ATOMIC);
-    // TODO: Assemble JavaScript into code variable.
-    var code = '...;\n';
-    return code;
 };
 
 //---------------------------------
