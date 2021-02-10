@@ -1,3 +1,45 @@
+class StrictConnectionChecker extends Blockly.ConnectionChecker {
+    /**
+     * Constructor for the connection checker.
+     */
+    constructor() {
+        super();
+    }
+
+    /**
+     * Type check arrays must either intersect or both be null.
+     * @override
+     */
+    doTypeChecks(a, b) {
+        const checkArrayOne = a.getCheck();
+        const checkArrayTwo = b.getCheck();
+
+        if (!checkArrayOne || !checkArrayTwo) {
+            // Null arrays can only connect to other null arrays.
+            return checkArrayOne == checkArrayTwo;
+        }
+
+        // Find any intersection in the check lists.
+        for (let i = 0; i < checkArrayOne.length; i++) {
+            if (checkArrayTwo.indexOf(checkArrayOne[i]) != -1) {
+                return true;
+            }
+        }
+        // No intersection.
+        return false;
+    }
+}
+
+const registrationType = Blockly.registry.Type.CONNECTION_CHECKER;
+
+const TYPES = [
+    "command"
+]
+TYPES.forEach(typename => {
+    Blockly.registry.register(
+        registrationType, typename, StrictConnectionChecker);
+});
+
 Blockly.Blocks['level'] = {
     init: function () {
         this.appendValueInput("LevelName")
@@ -97,35 +139,43 @@ Blockly.JavaScript['warning'] = function (block) {
 
 //------------------------------------
 Blockly.Blocks['dialog_block'] = {
-    init: function() {
-      this.appendStatementInput("command")
-          .setCheck(null)
-          .appendField("Block Define");
-      this.setColour(330);
-   this.setTooltip("");
-   this.setHelpUrl("");
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Block Name")
+            .appendField(new Blockly.FieldTextInput("block"), "NAME");
+        this.appendStatementInput("command")
+            .setCheck("command")
+            .appendField("Block Commond");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, "dialogblock");
+        this.setColour(330);
+        this.setTooltip("this is a definition of a dialog block");
+        this.setHelpUrl("");
     }
-  };
+};
 
 Blockly.JavaScript['dialog_block'] = function (block) {
-    var statements_command = Blockly.JavaScript.statementToCode(block, 'command');
-    // TODO: Assemble JavaScript into code variable.
-    var code = '...';
-    // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.JavaScript.ORDER_NONE];
+    let value_name = block.getFieldValue('NAME');
+    let statements_command = Blockly.JavaScript.statementToCode(block, 'command');
+    value_name = value_name.replaceAll("\'", "")
+    value_name = value_name.replaceAll("\"", "")
+    value_name = value_name.replaceAll(" ", "")
+    let code = 'let ' + value_name + ' = CreateDialog();\n';
+    statements_command = statements_command.replaceAll("$blockname$", value_name)
+    return code + statements_command;
 };
 
 //---------------------------------
 Blockly.Blocks['say'] = {
     init: function () {
-        this.appendValueInput("text")
-            .setCheck("String")
-            .appendField("Say Text");
-        this.appendValueInput("tag")
-            .setCheck("String")
-            .appendField("Dialog Tag");
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
+        this.appendDummyInput()
+            .appendField("Say")
+            .appendField("Text")
+            .appendField(new Blockly.FieldTextInput("Hello World"), "text")
+            .appendField("Tag")
+            .appendField(new Blockly.FieldTextInput("GOD"), "tag");
+        this.setPreviousStatement(true, "command");
+        this.setNextStatement(true, "command");
         this.setColour(165);
         this.setTooltip("");
         this.setHelpUrl("");
@@ -133,9 +183,9 @@ Blockly.Blocks['say'] = {
 };
 
 Blockly.JavaScript['say'] = function (block) {
-    var value_text = Blockly.JavaScript.valueToCode(block, 'text', Blockly.JavaScript.ORDER_ATOMIC);
-    var value_tag = Blockly.JavaScript.valueToCode(block, 'tag', Blockly.JavaScript.ORDER_ATOMIC);
+    var value_text = block.getFieldValue('text');
+    var value_tag = block.getFieldValue('tag');
     // TODO: Assemble JavaScript into code variable.
-    var code = '$blockname$.Say(' + value_text + ',' + value_tag + ');\n';
+    var code = '$blockname$.Say(\'' + value_text + '\',\'' + value_tag + '\');\n';
     return code;
 };

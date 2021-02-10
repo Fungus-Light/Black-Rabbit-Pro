@@ -64,21 +64,7 @@
             </x-menuitem>
 
             <x-menuitem>
-                <x-label>Gen</x-label>
-
-                <x-menu>
-                    <x-menuitem>
-                        <x-label>Export TsProject</x-label>
-                    </x-menuitem>
-                    <x-menuitem>
-                        <x-label>Gen To Unity</x-label>
-                    </x-menuitem>
-                </x-menu>
-            </x-menuitem>
-
-            <x-menuitem>
                 <x-label>Help</x-label>
-
                 <x-menu>
                     <x-menuitem>
                         <x-icon name="help"></x-icon>
@@ -125,15 +111,25 @@
                     <x-label>生成JS</x-label>
                 </x-menuitem>
 
-                <x-menuitem onclick="">
+                <!-- <x-menuitem onclick="">
                     <x-label>生成Lua</x-label>
+                </x-menuitem> -->
+
+                <x-menuitem onclick="ClearErr()">
+                    <x-label>清除错误信息</x-label>
                 </x-menuitem>
 
             </ul>
         </div>
         <div id="blocklyArea" style="height: 100%; width: 50vw;float: left;"></div>
         <div id="blocklyDiv" style="position: absolute;"></div>
-        <div id="container" style="height: 100%; width: calc( 100% - 60vw ) ;float: left;"></div>
+        <div style="height: 100%; width: calc( 100% - 60vw ) ;float: left;">
+            <div id="container" style="width: 100%;height: calc( 100% - 100px );"></div>
+            <p id="err-list" style="width: 100%;height: 100px;background-color: black;color: brown;">
+
+            </p>
+        </div>
+        
     </div>
 
     <script src="./SRC/js/index.js"></script>

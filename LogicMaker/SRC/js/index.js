@@ -40,7 +40,6 @@ let onresize = function (e) {
 const alert = function (message) {
 
     Swal.fire('Oops...', message, 'error')
-
 };
 
 function GenJS() {
@@ -58,6 +57,20 @@ function GenJS() {
     }
 
 }
+
+function ClearErr(){
+    document.getElementById("err-list").innerText = ""
+}
+
+workspace.addChangeListener(() => {
+    try {
+        let code = Blockly.JavaScript.workspaceToCode(workspace);
+    } catch (err) {
+        if (err) {
+            document.getElementById("err-list").innerText = err.toString()
+        }
+    }
+});
 
 window.addEventListener('resize', onresize, false);
 onresize();
