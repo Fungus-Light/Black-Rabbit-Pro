@@ -38,7 +38,7 @@ WorkspaceFactoryController = function(toolboxName, toolboxDiv, previewDiv) {
        length: 3,
        colour: '#ccc',
        snap: true},
-       media: '../../../media/',
+       media: '../media/',
        toolbox: this.toolbox
      });
 
@@ -49,7 +49,7 @@ WorkspaceFactoryController = function(toolboxName, toolboxDiv, previewDiv) {
        length: 3,
        colour: '#ccc',
        snap: true},
-     media: '../../../media/',
+     media: '../media/',
      toolbox: '<xml xmlns="https://developers.google.com/blockly/xml"></xml>',
      zoom:
        {controls: true,
