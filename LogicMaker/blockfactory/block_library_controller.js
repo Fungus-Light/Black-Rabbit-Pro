@@ -15,6 +15,7 @@
  * Depends on BlockFactory functions defined in factory.js.
  *
  * @author quachtina96 (Tina Quach)
+ * @author Fungus-Light
  */
 'use strict';
 

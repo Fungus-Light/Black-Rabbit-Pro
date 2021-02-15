@@ -379,7 +379,7 @@ WorkspaceFactoryView.prototype.setBaseOptions = function() {
   document.getElementById('option_css_checkbox').checked = true;
   document.getElementById('option_maxBlocks_number').value = 100;
   document.getElementById('option_media_text').value =
-      'https://blockly-demo.appspot.com/static/media/';
+      '../media/';
   document.getElementById('option_rtl_checkbox').checked = false;
   document.getElementById('option_sounds_checkbox').checked = true;
   document.getElementById('option_oneBasedIndex_checkbox').checked = true;

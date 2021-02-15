@@ -30,7 +30,9 @@ WorkspaceFactoryGenerator = function(model) {
   hiddenBlocks.id = hiddenBlocksId;
   hiddenBlocks.style.display = 'none';
   document.body.appendChild(hiddenBlocks);
-  this.hiddenWorkspace = Blockly.inject(hiddenBlocksId);
+  this.hiddenWorkspace = Blockly.inject(hiddenBlocksId,{
+    media: '../media/',
+  });
 };
 
 /**

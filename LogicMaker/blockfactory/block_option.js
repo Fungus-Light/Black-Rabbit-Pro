@@ -14,17 +14,17 @@
  */
 'use strict';
 
- /**
- * BlockOption Class
- * A block option includes checkbox, label, and div element that shows a preview
- * of the block.
- * @param {!Element} blockSelector Scrollable div that will contain the
- *    block options for the selector.
- * @param {string} blockType Type of block for which to create an option.
- * @param {!Element} previewBlockXml XML element containing the preview block.
- * @constructor
- */
-var BlockOption = function(blockSelector, blockType, previewBlockXml) {
+/**
+* BlockOption Class
+* A block option includes checkbox, label, and div element that shows a preview
+* of the block.
+* @param {!Element} blockSelector Scrollable div that will contain the
+*    block options for the selector.
+* @param {string} blockType Type of block for which to create an option.
+* @param {!Element} previewBlockXml XML element containing the preview block.
+* @constructor
+*/
+var BlockOption = function (blockSelector, blockType, previewBlockXml) {
   // The div to contain the block option.
   this.blockSelector = blockSelector;
   // The type of block represented by the option.
@@ -51,7 +51,7 @@ var BlockOption = function(blockSelector, blockType, previewBlockXml) {
  * @return {!Element} Root node of the selector dom which consists of a
  * checkbox, a label, and a fixed size preview workspace per block.
  */
-BlockOption.prototype.createDom = function() {
+BlockOption.prototype.createDom = function () {
   // Create the div for the block option.
   var blockOptContainer = document.createElement('div');
   blockOptContainer.id = this.blockType;
@@ -98,12 +98,15 @@ BlockOption.prototype.createDom = function() {
 /**
  * Injects a workspace containing the block into the block option's preview div.
  */
-BlockOption.prototype.showPreviewBlock = function() {
+BlockOption.prototype.showPreviewBlock = function () {
   // Get ID of preview workspace.
   var blockOptPreviewID = this.dom.id + '_workspace';
 
   // Inject preview block.
-  var demoWorkspace = Blockly.inject(blockOptPreviewID, {readOnly:true});
+  var demoWorkspace = Blockly.inject(blockOptPreviewID, {
+    readOnly: true,
+    media: '../media/',
+  });
   Blockly.Xml.domToWorkspace(this.previewBlockXml, demoWorkspace);
   this.previewWorkspace = demoWorkspace;
 
@@ -114,7 +117,7 @@ BlockOption.prototype.showPreviewBlock = function() {
 /**
  * Centers the preview block in the workspace.
  */
-BlockOption.prototype.centerBlock = function() {
+BlockOption.prototype.centerBlock = function () {
   // Get metrics.
   var block = this.previewWorkspace.getTopBlocks()[0];
   var blockMetrics = block.getHeightWidth();
@@ -122,10 +125,10 @@ BlockOption.prototype.centerBlock = function() {
   var workspaceMetrics = this.previewWorkspace.getMetrics();
 
   // Calculate new coordinates.
-  var x = workspaceMetrics.viewWidth/2 - blockMetrics['width']/2 -
-      blockCoordinates.x;
-  var y = workspaceMetrics.viewHeight/2 - blockMetrics['height']/2 -
-      blockCoordinates.y;
+  var x = workspaceMetrics.viewWidth / 2 - blockMetrics['width'] / 2 -
+    blockCoordinates.x;
+  var y = workspaceMetrics.viewHeight / 2 - blockMetrics['height'] / 2 -
+    blockCoordinates.y;
 
   // Move block.
   block.moveBy(x, y);
@@ -136,7 +139,7 @@ BlockOption.prototype.centerBlock = function() {
  * @param {!boolean} selected True if selecting option, false if deselecting
  *    option.
  */
-BlockOption.prototype.setSelected = function(selected) {
+BlockOption.prototype.setSelected = function (selected) {
   this.selected = selected;
   if (this.checkbox) {
     this.checkbox.checked = selected;
@@ -148,6 +151,6 @@ BlockOption.prototype.setSelected = function(selected) {
  * @return {!boolean} True if selecting option, false if deselecting
  *    option.
  */
-BlockOption.prototype.isSelected = function() {
+BlockOption.prototype.isSelected = function () {
   return this.selected;
 };

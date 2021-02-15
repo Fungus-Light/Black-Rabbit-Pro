@@ -1,3 +1,11 @@
+const fs = require('fs')
+const path = require('path')
+
+const fileroot = path.join(__dirname, "BlocksLibs");
+if (!fs.existsSync(fileroot)) {
+  fs.mkdirSync(fileroot);
+}
+
 /**
  * @license
  * Copyright 2016 Google LLC
@@ -9,6 +17,7 @@
  * Depends on Block Library for its namespace.
  *
  * @author quachtina96 (Tina Quach)
+ * @author Fungus-Light
  */
 
 'use strict';
@@ -42,22 +51,38 @@ function BlockLibraryStorage(blockLibraryName, opt_blocks) {
 /**
  * Reads the named block library from local storage and saves it in this.blocks.
  */
-BlockLibraryStorage.prototype.loadFromLocalStorage = function() {
-  var object = localStorage[this.name];
+BlockLibraryStorage.prototype.loadFromLocalStorage = function () {
+  let object = ""
+  let targetfile = path.join(fileroot, this.name + ".json");
+
+  if (fs.existsSync(targetfile)) {
+    object = fs.readFileSync(targetfile, {
+      encoding: "utf-8"
+    })
+  }
+
+
+  if (object == "") {
+    object = null
+  }
   this.blocks = object ? JSON.parse(object) : null;
 };
 
 /**
- * Writes the current block library (this.blocks) to local storage.
+ * Writes the current block library (this.blocks) to local json file.
  */
-BlockLibraryStorage.prototype.saveToLocalStorage = function() {
-  localStorage[this.name] = JSON.stringify(this.blocks);
+BlockLibraryStorage.prototype.saveToLocalStorage = function () {
+  //localStorage[this.name] = JSON.stringify(this.blocks);
+  let targetfile = path.join(fileroot, this.name + ".json");
+  fs.writeFileSync(targetfile, JSON.stringify(this.blocks), {
+    encoding: "utf-8"
+  })
 };
 
 /**
  * Clears the current block library.
  */
-BlockLibraryStorage.prototype.clear = function() {
+BlockLibraryStorage.prototype.clear = function () {
   this.blocks = Object.create(null);
   // The line above is equivalent of {} except that this object is TRULY
   // empty. It doesn't have built-in attributes/functions such as length or
@@ -69,7 +94,7 @@ BlockLibraryStorage.prototype.clear = function() {
  * @param {string} blockType Type of block.
  * @param {Element} blockXML The block's XML pulled from workspace.
  */
-BlockLibraryStorage.prototype.addBlock = function(blockType, blockXML) {
+BlockLibraryStorage.prototype.addBlock = function (blockType, blockXML) {
   var prettyXml = Blockly.Xml.domToPrettyText(blockXML);
   this.blocks[blockType] = prettyXml;
 };
@@ -78,7 +103,7 @@ BlockLibraryStorage.prototype.addBlock = function(blockType, blockXML) {
  * Removes block from current block library (this.blocks).
  * @param {string} blockType Type of block.
  */
-BlockLibraryStorage.prototype.removeBlock = function(blockType) {
+BlockLibraryStorage.prototype.removeBlock = function (blockType) {
   delete this.blocks[blockType];
 };
 
@@ -88,7 +113,7 @@ BlockLibraryStorage.prototype.removeBlock = function(blockType) {
  * @param {string} blockType Type of block.
  * @return {Element} The XML that represents the block type or null.
  */
-BlockLibraryStorage.prototype.getBlockXml = function(blockType) {
+BlockLibraryStorage.prototype.getBlockXml = function (blockType) {
   var xml = this.blocks[blockType] || null;
   if (xml) {
     var xml = Blockly.Xml.textToDom(xml);
@@ -103,7 +128,7 @@ BlockLibraryStorage.prototype.getBlockXml = function(blockType) {
  * @param {!Array.<string>} blockTypes Types of blocks.
  * @return {!Object} Map of block type to corresponding XML.
  */
-BlockLibraryStorage.prototype.getBlockXmlMap = function(blockTypes) {
+BlockLibraryStorage.prototype.getBlockXmlMap = function (blockTypes) {
   var blockXmlMap = Object.create(null);
   for (var i = 0; i < blockTypes.length; i++) {
     var blockType = blockTypes[i];
@@ -117,7 +142,7 @@ BlockLibraryStorage.prototype.getBlockXmlMap = function(blockTypes) {
  * Returns array of all block types stored in current block library.
  * @return {!Array.<string>} Array of block types stored in library.
  */
-BlockLibraryStorage.prototype.getBlockTypes = function() {
+BlockLibraryStorage.prototype.getBlockTypes = function () {
   return Object.keys(this.blocks);
 };
 
@@ -125,7 +150,7 @@ BlockLibraryStorage.prototype.getBlockTypes = function() {
  * Checks to see if block library is empty.
  * @return {boolean} True if empty, false otherwise.
  */
-BlockLibraryStorage.prototype.isEmpty = function() {
+BlockLibraryStorage.prototype.isEmpty = function () {
   for (var blockType in this.blocks) {
     return false;
   }
@@ -136,7 +161,7 @@ BlockLibraryStorage.prototype.isEmpty = function() {
  * Returns array of all block types stored in current block library.
  * @return {!Array.<string>} Map of block type to corresponding XML text.
  */
-BlockLibraryStorage.prototype.getBlockXmlTextMap = function() {
+BlockLibraryStorage.prototype.getBlockXmlTextMap = function () {
   return this.blocks;
 };
 
@@ -146,6 +171,6 @@ BlockLibraryStorage.prototype.getBlockXmlTextMap = function() {
  * @param {string} blockType Type of block.
  * @return {boolean} Whether or not blockType is stored in block library.
  */
-BlockLibraryStorage.prototype.has = function(blockType) {
+BlockLibraryStorage.prototype.has = function (blockType) {
   return !!this.blocks[blockType];
 };

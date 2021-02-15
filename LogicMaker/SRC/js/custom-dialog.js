@@ -1,17 +1,3 @@
-/**
- * @license
- * Copyright 2016 Google LLC
- * SPDX-License-Identifier: Apache-2.0
- */
-
-/**
- * An example implementation of how one might replace Blockly's browser
- * dialogs. This is just an example, and applications are not encouraged to use
- * it verbatim.
- *
- * @namespace
- */
-CustomDialog = {};
 
 /** Override Blockly.alert() with custom implementation. */
 Blockly.alert = function (message, callback) {
