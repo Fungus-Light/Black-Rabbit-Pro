@@ -83,12 +83,14 @@ const WaitForFrames = CommonJsCall.WaitForFrames
 const WaitForSeconds = CommonJsCall.WaitForSeconds
 const WaitForSecondsRealtime = CommonJsCall.WaitForSecondsRealtime
 
-function PlayMusic(tag:string,cb:System.Action){
+class AudioClip extends UnityEngine.AudioClip { }
+
+function PlayMusic(tag: string, cb: System.Action) {
 
 }
 
-function PlaySound(tag:string,cb:System.Action){
-    
+function PlaySound(tag: string, cb: System.Action) {
+
 }
 
 /*========================= */
@@ -104,6 +106,7 @@ export {
     Transform,
     UAction,
     Input,
+    AudioClip,
     KeyCode,
     T,
     $,

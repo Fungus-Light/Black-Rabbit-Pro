@@ -49,9 +49,6 @@ exports.Transform = Transform;
 class GameTime extends csharp_1.UnityEngine.Time {
 }
 exports.GameTime = GameTime;
-class AudioClip extends csharp_1.UnityEngine.AudioClip {
-}
-exports.AudioClip = AudioClip;
 /**
  * Get An Obeject's Type
  * 获得一个对象的类型
@@ -91,6 +88,13 @@ const WaitForSeconds = csharp_1.CommonJsCall.WaitForSeconds;
 exports.WaitForSeconds = WaitForSeconds;
 const WaitForSecondsRealtime = csharp_1.CommonJsCall.WaitForSecondsRealtime;
 exports.WaitForSecondsRealtime = WaitForSecondsRealtime;
+class AudioClip extends csharp_1.UnityEngine.AudioClip {
+}
+exports.AudioClip = AudioClip;
+function PlayMusic(tag, cb) {
+}
+function PlaySound(tag, cb) {
+}
 /*========================= */
 class Input extends csharp_1.UnityEngine.Input {
 }

@@ -269,8 +269,6 @@ class Transform extends UnityEngine.Transform {
  */
 class GameTime extends UnityEngine.Time {
 }
-class AudioClip extends UnityEngine.AudioClip {
-}
 /**
  * Get An Obeject's Type
  * 获得一个对象的类型
@@ -299,9 +297,19 @@ const WaitForFrames: typeof CommonJsCall.WaitForFrames;
  */
 const WaitForSeconds: typeof CommonJsCall.WaitForSeconds;
 const WaitForSecondsRealtime: typeof CommonJsCall.WaitForSecondsRealtime;
+class AudioClip extends UnityEngine.AudioClip {
+}
 class Input extends UnityEngine.Input {
 }
 const KeyCode: typeof UnityEngine.KeyCode;
+
+}
+
+declare module "JS/Utils/Components"{
+import { UnityEngine } from "csharp";
+class AudioSource extends UnityEngine.AudioSource {
+}
+function $AudioSource(name: string): AudioSource;
 
 }
 

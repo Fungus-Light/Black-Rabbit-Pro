@@ -24,11 +24,11 @@ public class toolsCombine : EditorWindow
 
     List<FuncItem> items = new List<FuncItem>();
 
-    [MenuItem("Tools/开发工具合集 #&t")]
+    [MenuItem("Tools/Dev Tools Combine #&t")]
     public static void ShowWindows()
     {
         toolsCombine wnd = GetWindow<toolsCombine>();
-        wnd.titleContent = new GUIContent("开发工具合集");
+        wnd.titleContent = new GUIContent("Dev Tools");
     }
 
     Length Percent(float v)
@@ -52,13 +52,8 @@ public class toolsCombine : EditorWindow
 
         Action<VisualElement, int> bindItem = (e, i) => (e.ElementAt(0) as Label).text = items[i].key;
 
-        items.Add(new FuncItem("说明", "index"));
-        items.Add(new FuncItem("快速重命名子物体", "quickrename"));
-
-        //items.Add(new FuncItem("关卡调试", "leveldebug"));
-        //root.Add(debugBTN);
-
-        //tool bar
+        items.Add(new FuncItem("README", "index"));
+        items.Add(new FuncItem("Quick Rename", "quickrename"));
 
         var toolbar = new Toolbar()
         {
@@ -77,14 +72,10 @@ public class toolsCombine : EditorWindow
             foreach (PlayableDirector pd in Resources.FindObjectsOfTypeAll<PlayableDirector>())
             {
                 pd.playOnAwake = false;
-                // if (pd.transform.GetComponent<TimelinePlayer>() == null)
-                // {
-                //     pd.gameObject.AddComponent<TimelinePlayer>();
-                // }
             }
         })
         {
-            text = "初始化所有Timeline"
+            text = "Init all Timeline"
         });
 
 
@@ -177,8 +168,8 @@ public class toolsCombine : EditorWindow
 
         };
 
-        page_Index.Add(new Label("一些有用工具合集"));
-        page_Index.Add(new Label("快捷键 shift + alt + t"));
+        page_Index.Add(new Label("Some Useful Tools"));
+        page_Index.Add(new Label("Short Cut shift + alt + t"));
 
         rightBox.Add(page_Index);
 
@@ -195,24 +186,24 @@ public class toolsCombine : EditorWindow
             visible = false
         };
 
-        page_QuickRename.Add(new Label("先选中父物体"));
-        page_QuickRename.Add(new Label("然后设置参数"));
-        page_QuickRename.Add(new Label("一次请只选择一个物体"));
+        page_QuickRename.Add(new Label("Select Parent Obj,"));
+        page_QuickRename.Add(new Label("Then Select The Options,"));
+        page_QuickRename.Add(new Label("Select One Obj At Once"));
         page_QuickRename.Add(new Label("------------------------"));
         Page_QuickName param = new Page_QuickName();
 
-        var page_QuickRename_basename = new TextField("名字模板")
+        var page_QuickRename_basename = new TextField("Name Template")
         {
             value = param.baseName,
             viewDataKey = "page_QuickRename_basename"
         };
 
-        var page_QuickRename_isFGO = new Toggle("是否注入对象列表")
+        var page_QuickRename_isFGO = new Toggle("Is Injected")
         {
             viewDataKey = "page_QuickRename_isFGO"
         };
 
-        var page_QuickRename_isFromOne = new Toggle("是否从1开始")
+        var page_QuickRename_isFromOne = new Toggle("Start From One")
         {
             viewDataKey = "page_QuickRename_isFromOne"
         };
@@ -225,7 +216,7 @@ public class toolsCombine : EditorWindow
             param.ReNameIt(Selection.transforms);
         })
         {
-            text = "重命名",
+            text = "Rename It",
             style =
             {
                 width=200
@@ -239,36 +230,29 @@ public class toolsCombine : EditorWindow
 
         rightBox.Add(page_QuickRename);
 
-
-        //Lua Injector
-
-        Page_LevelDugger page_LevelDugger = new Page_LevelDugger();
-        page_LevelDugger.CreateUI("leveldebug", rightBox);
-
-
     }
 
     class Page_QuickName
     {
-        public string baseName = "名字模板";
+        public string baseName = "Name Template";
         public bool isFGO = false;
         public bool isFromOne = false;
 
         public void ReNameIt(Transform[] trans)
         {
 
-            Debug.Log("使用模板" + baseName);
+            Debug.Log("Use Template " + baseName);
             if (isFGO)
             {
-                Debug.Log("将会注入游戏对象列表");
+                Debug.Log("Will Inject To Game Object Pools.");
             }
             if (isFromOne)
             {
-                Debug.Log("将会从1开始");
+                Debug.Log("Will Start From 1");
             }
 
             Transform _parent = trans[0];
-            Debug.Log("父物体名称为: " + _parent.name);
+            Debug.Log("Parent Obj is : " + _parent.name);
             for (int k = 0; k < _parent.childCount; k++)
             {
                 string oldname = _parent.GetChild(k).name;
@@ -288,7 +272,7 @@ public class toolsCombine : EditorWindow
                 }
 
                 _parent.GetChild(k).gameObject.name = _n;
-                Debug.Log(oldname + " 被重命名为 " + _n);
+                Debug.Log(oldname + " will be renamed to " + _n);
             }
 
             UnityEditor.Experimental.SceneManagement.PrefabStage prefabStage = UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
@@ -302,104 +286,4 @@ public class toolsCombine : EditorWindow
 
 
     }
-
-    class QuickTool_SwitchPrefabs
-    {
-        public string KEY_CURRENT_PREFABS = "key_current_prefab";
-
-        public QuickTool_SwitchPrefabs(string key)
-        {
-            KEY_CURRENT_PREFABS = key;
-        }
-
-    }
-
-    class Page_LevelDugger
-    {
-        public void Excute(string code)
-        {
-            if (EditorApplication.isPlaying == false)
-            {
-                Debug.Log("work only in Play mode");
-                return;
-            }
-            // if (RunEnv.GlobalJsEnv != null)
-            // {
-            //     RunEnv.GlobalJsEnv.Eval(code);
-
-            // }
-            else
-            {
-                Debug.LogError("无法使用");
-            }
-
-
-        }
-
-        public void CreateUI(string n, VisualElement parent)
-        {
-            var page_LevelDebugger = new VisualElement()
-            {
-                name = n,
-                style =
-            {
-                width=400
-            },
-                visible = false
-            };
-
-            IntegerField text_levelNum = new IntegerField("�ؿ�level");
-            text_levelNum.viewDataKey = "page_LevelDebugger_level_num";
-            IntegerField text_partNum = new IntegerField("�ؿ�part");
-            text_partNum.viewDataKey = "page_LevelDebugger_part_num";
-            Button btn_Jump = new Button(() =>
-            {
-                int levelnum = text_levelNum.value;
-                int partnum = text_partNum.value;
-                Excute("GoLevel(" + levelnum + ", " + partnum + ")");
-            })
-            {
-                text = "��ת",
-                style = {
-                width=300
-            },
-            };
-
-            page_LevelDebugger.Add(text_levelNum);
-            page_LevelDebugger.Add(text_partNum);
-            page_LevelDebugger.Add(btn_Jump);
-            page_LevelDebugger.Add(new Label(" "));
-
-            Button btn_return = new Button(() =>
-            {
-                Excute("GoScene(UiDef.Levels)");
-            })
-            {
-                style =
-                {
-                    width=300
-                }
-            };
-            btn_return.text = "����ѡ��";
-
-            Button btn_next = new Button(() =>
-            {
-                Excute("GoNextLevelPart()");
-            })
-            {
-                style =
-                {
-                    width=300
-                }
-            };
-            btn_next.text = "������һpart";
-
-            page_LevelDebugger.Add(btn_return);
-            page_LevelDebugger.Add(btn_next);
-
-            parent.Add(page_LevelDebugger);
-        }
-    }
-
-
 }

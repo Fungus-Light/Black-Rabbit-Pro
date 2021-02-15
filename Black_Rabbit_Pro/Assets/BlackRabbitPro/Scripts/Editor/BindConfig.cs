@@ -70,6 +70,7 @@ public class BindConfig
                 typeof(Input),
                 typeof(KeyCode),
 
+                typeof(AudioClip),
                 typeof(SoundLib),
                 typeof(TagSound),
                 typeof(SoundConfig)

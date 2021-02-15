@@ -1411,6 +1411,48 @@ declare module 'csharp' {
         }
         /** A container for audio data. */
         class AudioClip extends UnityEngine.Object {
+            /** The length of the audio clip in seconds. (Read Only) */
+            public get length(): number;
+            /** The length of the audio clip in samples. (Read Only) */
+            public get samples(): number;
+            /** The number of channels in the audio clip. (Read Only) */
+            public get channels(): number;
+            /** The sample frequency of the clip in Hertz. (Read Only) */
+            public get frequency(): number;
+            /** The load type of the clip (read-only). */
+            public get loadType(): UnityEngine.AudioClipLoadType;
+            /** Preloads audio data of the clip when the clip asset is loaded. When this flag is off, scripts have to call AudioClip.LoadAudioData() to load the data before the clip can be played. Properties like length, channels and format are available before the audio data has been loaded. */
+            public get preloadAudioData(): boolean;
+            /** Returns true if this audio clip is ambisonic (read-only). */
+            public get ambisonic(): boolean;
+            /** Corresponding to the "Load In Background" flag in the inspector, when this flag is set, the loading will happen delayed without blocking the main thread. */
+            public get loadInBackground(): boolean;
+            /** Returns the current load state of the audio data associated with an AudioClip. */
+            public get loadState(): UnityEngine.AudioDataLoadState;
+            
+            public LoadAudioData():boolean;
+            
+            public UnloadAudioData():boolean;
+            /** Fills an array with sample data from the clip. */
+            public GetData($data: System.Array$1<number>, $offsetSamples: number):boolean;
+            /** Set sample data in a clip. */
+            public SetData($data: System.Array$1<number>, $offsetSamples: number):boolean;
+            /** Creates a user AudioClip with a name and with the given length in samples, channels and frequency.
+             * @param name Name of clip.
+             * @param lengthSamples Number of sample frames.
+             * @param channels Number of channels per frame.
+             * @param frequency Sample frequency of clip.
+             * @param _3D Audio clip is played back in 3D.
+             * @param stream True if clip is streamed, that is if the pcmreadercallback generates data on the fly.
+             * @param pcmreadercallback This callback is invoked to generate a block of sample data. Non-streamed clips call this only once at creation time while streamed clips call this continuously.
+             * @param pcmsetpositioncallback This callback is invoked whenever the clip loops or changes playback position.
+             * @returns A reference to the created AudioClip. 
+             */
+            public static Create($name: string, $lengthSamples: number, $channels: number, $frequency: number, $stream: boolean):UnityEngine.AudioClip;
+            
+            public static Create($name: string, $lengthSamples: number, $channels: number, $frequency: number, $stream: boolean, $pcmreadercallback: UnityEngine.AudioClip.PCMReaderCallback):UnityEngine.AudioClip;
+            
+            public static Create($name: string, $lengthSamples: number, $channels: number, $frequency: number, $stream: boolean, $pcmreadercallback: UnityEngine.AudioClip.PCMReaderCallback, $pcmsetpositioncallback: UnityEngine.AudioClip.PCMSetPositionCallback):UnityEngine.AudioClip;
             
         }
         /** Describes when an AudioSource or AudioListener is updated. */
@@ -2079,6 +2121,10 @@ declare module 'csharp' {
         class Gyroscope extends System.Object {
             
         }
+        /** Determines how the audio clip is loaded in. */
+        enum AudioClipLoadType { DecompressOnLoad = 0, CompressedInMemory = 1, Streaming = 2 }
+        /** Value describing the current load state of the audio data associated with an AudioClip. */
+        enum AudioDataLoadState { Unloaded = 0, Loading = 1, Loaded = 2, Failed = 3 }
         /** Position, size, anchor and pivot information for a rectangle. */
         class RectTransform extends UnityEngine.Transform {
             
@@ -3798,6 +3844,15 @@ declare module 'csharp' {
         enum InputType { Standard = 0, AutoCorrect = 1, Password = 2 }
         
         enum CharacterValidation { None = 0, Integer = 1, Decimal = 2, Alphanumeric = 3, Name = 4, EmailAddress = 5 }
+        
+    }
+    namespace UnityEngine.AudioClip {
+        
+        type PCMReaderCallback = (data: System.Array$1<number>) => void;
+        var PCMReaderCallback: {new (func: (data: System.Array$1<number>) => void): PCMReaderCallback;}
+        
+        type PCMSetPositionCallback = (position: number) => void;
+        var PCMSetPositionCallback: {new (func: (position: number) => void): PCMSetPositionCallback;}
         
     }
     namespace Fungus {
