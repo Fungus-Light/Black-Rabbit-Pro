@@ -1,9 +1,0 @@
-"use strict";
-/**
- * This is where the game begin
- * 游戏入口脚本
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-const Common_1 = require("Utils/Common");
-Common_1.Debug.Log("Now Using Black-Rabbit");
-//# sourceMappingURL=GameEntrance.js.map

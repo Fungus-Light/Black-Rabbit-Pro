@@ -1,4 +1,4 @@
-import { UnityEngine, GameObjectHelper, CommonJsCall, System } from "csharp";
+import { UnityEngine, GameObjectHelper, CommonJsCall, System, SoundLib } from "csharp";
 import { $typeof } from "puerts"
 
 /**
@@ -85,12 +85,14 @@ const WaitForSecondsRealtime = CommonJsCall.WaitForSecondsRealtime
 
 class AudioClip extends UnityEngine.AudioClip { }
 
-function PlayMusic(tag: string, cb: System.Action) {
+const $SoundLib = SoundLib.GetSoundLib
 
+function PlayMusic(tag: string, cb: System.Action) {
+    let clip = SoundLib.GetSoundLib().GetMusic(tag)
 }
 
 function PlaySound(tag: string, cb: System.Action) {
-
+    let clip = SoundLib.GetSoundLib().GetSound(tag);
 }
 
 /*========================= */
@@ -114,5 +116,9 @@ export {
     QuitGame,
     WaitForFrames,
     WaitForSeconds,
-    WaitForSecondsRealtime
+    WaitForSecondsRealtime,
+
+    PlayMusic,
+    PlaySound,
+    $SoundLib
 }
