@@ -232,7 +232,7 @@ const $Text: typeof UIHelper.GetText;
 }
 
 declare module "JS/Utils/Common"{
-import { UnityEngine, GameObjectHelper, CommonJsCall, System } from "csharp";
+import { UnityEngine, GameObjectHelper, CommonJsCall, System, SoundLib } from "csharp";
 import { $typeof } from "puerts";
 /**
  * Debug Class, Rename Of UnityEngine.Debug
@@ -299,6 +299,9 @@ const WaitForSeconds: typeof CommonJsCall.WaitForSeconds;
 const WaitForSecondsRealtime: typeof CommonJsCall.WaitForSecondsRealtime;
 class AudioClip extends UnityEngine.AudioClip {
 }
+const $SoundLib: typeof SoundLib.GetSoundLib;
+function PlayMusic(tag: string, cb: System.Action): void;
+function PlaySound(tag: string, cb: System.Action): void;
 class Input extends UnityEngine.Input {
 }
 const KeyCode: typeof UnityEngine.KeyCode;
