@@ -42,42 +42,41 @@ TYPES.forEach(typename => {
 
 Blockly.Blocks['level'] = {
     init: function () {
-        this.appendValueInput("LevelName")
+        this.appendDummyInput()
+            .appendField("Level Name: ")
+            .appendField(new Blockly.FieldTextInput("ExampleLevel"), "levelname");
+        this.appendStatementInput("start")
             .setCheck(null)
-            .appendField(new Blockly.FieldLabelSerializable("Level Name"), "NAME");
-        this.appendStatementInput("Start")
+            .appendField("Start: ");
+        this.appendStatementInput("update")
             .setCheck(null)
-            .appendField("start");
-        this.appendStatementInput("Update")
+            .appendField("Update: ");
+        this.appendStatementInput("fixedupdate")
             .setCheck(null)
-            .appendField("update");
-        this.appendStatementInput("FixedUpdate")
+            .appendField("FiexedUpdate: ");
+        this.appendStatementInput("destroy")
             .setCheck(null)
-            .appendField("fiexupdate");
-        this.appendStatementInput("Destroy")
-            .setCheck(null)
-            .appendField("destroy");
-        this.setInputsInline(false);
-        this.setColour(230);
-        this.setTooltip("");
+            .appendField("Destroy: ");
+        this.setColour(180);
+        this.setTooltip("The basic struct of a level.");
         this.setHelpUrl("");
     }
 };
 
 Blockly.JavaScript['level'] = function (block) {
-    var value_levelname = Blockly.JavaScript.valueToCode(block, 'LevelName', Blockly.JavaScript.ORDER_ATOMIC);
+    let text_levelname = block.getFieldValue('levelname');
 
-    value_levelname = value_levelname.replaceAll(" ", "")
-    value_levelname = value_levelname.replaceAll("\"", "")
-    value_levelname = value_levelname.replaceAll("\'", "")
+    text_levelname = text_levelname.replaceAll(" ", "")
+    text_levelname = text_levelname.replaceAll("\"", "")
+    text_levelname = text_levelname.replaceAll("\'", "")
 
-    var statements_start = Blockly.JavaScript.statementToCode(block, 'Start');
-    var statements_update = Blockly.JavaScript.statementToCode(block, 'Update');
-    var statements_fixedupdate = Blockly.JavaScript.statementToCode(block, 'FixedUpdate');
-    var statements_destroy = Blockly.JavaScript.statementToCode(block, 'Destroy');
+    let statements_start = Blockly.JavaScript.statementToCode(block, 'start');
+    let statements_update = Blockly.JavaScript.statementToCode(block, 'update');
+    let statements_fixedupdate = Blockly.JavaScript.statementToCode(block, 'fixedupdate');
+    let statements_destroy = Blockly.JavaScript.statementToCode(block, 'destroy');
     // TODO: Assemble JavaScript into code variable.
-    var code =
-        '\nclass ' + value_levelname + ' implements IGameLevel {\n' +
+    let code =
+        '\nclass ' + text_levelname + ' implements IGameLevel {\n' +
         '\tname: string;\n' +
         '\troot: Transform;\n' +
         '\tOnStart(): void {\n' +
@@ -96,44 +95,47 @@ Blockly.JavaScript['level'] = function (block) {
 
     return code;
 };
+
+
 //-------------------------------------
 Blockly.Blocks['log'] = {
     init: function () {
-        this.appendValueInput("message")
-            .setCheck(null)
-            .appendField("Log");
+        this.appendDummyInput()
+            .appendField("Log:")
+            .appendField(new Blockly.FieldTextInput("Hello Black Rabbit!!!"), "message");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(230);
-        this.setTooltip("");
+        this.setColour(195);
+        this.setTooltip("Log a message in console");
         this.setHelpUrl("");
     }
 };
 
 Blockly.JavaScript['log'] = function (block) {
-    var value_message = Blockly.JavaScript.valueToCode(block, 'message', Blockly.JavaScript.ORDER_ATOMIC);
+    let text_message = block.getFieldValue('message');
     // TODO: Assemble JavaScript into code variable.
-    var code = 'Debug.Log( ' + value_message + ' )\n';
+    let code = 'Debug.Log(\"' + text_message + '\" )\n';
     return code;
 };
 
+
 Blockly.Blocks['warning'] = {
     init: function () {
-        this.appendValueInput("message")
-            .setCheck(null)
-            .appendField("Warning");
+        this.appendDummyInput()
+            .appendField("Warning:")
+            .appendField(new Blockly.FieldTextInput("Something need to be noticed!!!"), "message");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(230);
-        this.setTooltip("");
+        this.setColour(60);
+        this.setTooltip("Log Warning message in console.");
         this.setHelpUrl("");
     }
 };
 
 Blockly.JavaScript['warning'] = function (block) {
-    var value_message = Blockly.JavaScript.valueToCode(block, 'message', Blockly.JavaScript.ORDER_ATOMIC);
-    // TODO: Assemble JavaScript into code variable.
-    var code = 'Debug.LogWarning( ' + value_message + ' )\n';
+    let text_message = block.getFieldValue('message');
+
+    let code = 'Debug.LogWarning( \"' + text_message + '\" )\n';
     return code;
 };
 
