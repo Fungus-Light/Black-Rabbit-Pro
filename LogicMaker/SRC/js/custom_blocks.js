@@ -157,6 +157,33 @@ Blockly.JavaScript['error'] = function (block) {
     return code;
 };
 
+Blockly.Blocks['wait_for_seconds'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Wait: ")
+            .appendField(new Blockly.FieldNumber(0, 0), "time")
+            .appendField("s");
+        this.appendStatementInput("actions")
+            .setCheck(null)
+            .appendField("Then: ");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.JavaScript['wait_for_seconds'] = function (block) {
+    let number_time = block.getFieldValue('time');
+    let statements_actions = Blockly.JavaScript.statementToCode(block, 'actions');
+    // TODO: Assemble JavaScript into code variable.
+    let code = 'WaitForSeconds(' + number_time + ', () => {\n' +
+        statements_actions +
+        '})\n';
+    return code;
+};
+
 //------------------------------------
 Blockly.Blocks['dialog_block'] = {
     init: function () {
