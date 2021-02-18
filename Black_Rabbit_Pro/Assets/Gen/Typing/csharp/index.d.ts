@@ -2125,6 +2125,14 @@ declare module 'csharp' {
         enum AudioClipLoadType { DecompressOnLoad = 0, CompressedInMemory = 1, Streaming = 2 }
         /** Value describing the current load state of the audio data associated with an AudioClip. */
         enum AudioDataLoadState { Unloaded = 0, Loading = 1, Loaded = 2, Failed = 3 }
+        /** Renders a Sprite for 2D graphics. */
+        class SpriteRenderer extends UnityEngine.Renderer {
+            
+        }
+        /** General functionality for all renderers. */
+        class Renderer extends UnityEngine.Component {
+            
+        }
         /** Position, size, anchor and pivot information for a rectangle. */
         class RectTransform extends UnityEngine.Transform {
             
@@ -3397,6 +3405,18 @@ declare module 'csharp' {
             public constructor();
             
             public constructor($t: string, $c: UnityEngine.AudioClip);
+            
+        }
+        
+        class Tweens extends UnityEngine.MonoBehaviour {
+            
+            public constructor();
+            
+            public static FadeSprite($renderer: UnityEngine.SpriteRenderer, $start: number, $end: number, $time: number, $callback: System.Action):void;
+            
+            public static MoveFrom($trans: UnityEngine.Transform, $from: UnityEngine.Vector3, $time: number, $callback: System.Action):void;
+            
+            public static MoveTo($trans: UnityEngine.Transform, $to: UnityEngine.Vector3, $time: number, $callback: System.Action):void;
             
         }
         

@@ -5,30 +5,58 @@ using DG.Tweening;
 
 public class Tweens : MonoBehaviour
 {
-    public static void FadeSprite(SpriteRenderer renderer, float start, float end, float time, Action callback)
+    public static void FadeSprite(string name, float start, float end, float time, Action callback)
     {
-        renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, start);
-        renderer.DOFade(end, time).OnComplete(() =>
+        Transform trans = GameObjectHelper.GetTransformByName(name);
+        SpriteRenderer renderer = trans.GetComponent<SpriteRenderer>();
+        if (renderer != null)
         {
-            callback();
-        });
+            renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, start);
+            renderer.DOFade(end, time).OnComplete(() =>
+            {
+                callback();
+            });
+        }
+        else
+        {
+            Debug.LogError("No SpriteRender in " + name);
+        }
+
     }
 
-    public static void MoveFrom(Transform trans, Vector3 from, float time, Action callback)
+    public static void MoveFrom(string name, Vector3 from, float time, Action callback)
     {
-        Vector3 to = trans.position;
-        trans.position = from;
-        trans.DOMove(to, time).OnComplete(() =>
+        Transform trans = GameObjectHelper.GetTransformByName(name);
+        if (trans != null)
         {
-            callback();
-        });
+            Vector3 to = trans.position;
+            trans.position = from;
+            trans.DOMove(to, time).OnComplete(() =>
+            {
+                callback();
+            });
+        }
+        else
+        {
+            Debug.LogError("Can not find " + name);
+        }
+
     }
 
-    public static void MoveTo(Transform trans, Vector3 to, float time, Action callback)
+    public static void MoveTo(string name, Vector3 to, float time, Action callback)
     {
-        trans.DOMove(to, time).OnComplete(() =>
+        Transform trans = GameObjectHelper.GetTransformByName(name);
+        if (trans != null)
         {
-            callback();
-        });
+            trans.DOMove(to, time).OnComplete(() =>
+            {
+                callback();
+            });
+        }
+        else
+        {
+            Debug.LogError("Can not find " + name);
+        }
+
     }
 }

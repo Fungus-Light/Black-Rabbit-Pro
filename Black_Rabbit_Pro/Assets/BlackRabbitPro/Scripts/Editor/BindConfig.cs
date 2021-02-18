@@ -62,7 +62,7 @@ public class BindConfig
                 typeof(UIHelper),
                 typeof(Button),
                 typeof(InputField),
-                
+
                 typeof(UnityEvent),
                 typeof(UnityEvent<string>),
                 typeof(Text),
@@ -73,7 +73,9 @@ public class BindConfig
                 typeof(AudioClip),
                 typeof(SoundLib),
                 typeof(TagSound),
-                typeof(SoundConfig)
+                typeof(SoundConfig),
+
+                typeof(Tweens),
             };
         }
     }
