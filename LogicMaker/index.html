@@ -78,7 +78,7 @@
 
     <div style="width: 100%;height: calc( 100vh - 40px ) ;">
         <xml id="toolbox" style="display: none">
-            <category name="基本控制">
+            <category name="Basic Control">
                 <block type="controls_if"></block>
                 <block type="controls_whileUntil"></block>
                 <block type="controls_for">
@@ -86,18 +86,22 @@
                     <block type="logic_operation"></block>
                     <block type="logic_boolean"></block>
             </category>
-            <category name="架构">
+            <category name="Level Construct">
                 <block type='level'></block>
             </category>
-            <category name="常用工具">
+            <category name="Common Api">
                 <block type='log'></block>
                 <block type='warning'></block>
+                <block type='error'></block>
             </category>
-            <category name="对话系统">
+            <category name="Dialog System">
                 <block type='dialog_block'></block>
+                <block type="block_start"></block>
                 <block type="say"></block>
+                <block type="options"></block>
+                <block type="option"></block>
             </category>
-            <category name="数据类型">
+            <category name="Data Types">
                 <block type="text"></block>
 
             </category>
@@ -108,7 +112,7 @@
             <ul>
 
                 <x-menuitem onclick="GenJS()">
-                    <x-label>生成JS</x-label>
+                    <x-label>Gen JS</x-label>
                 </x-menuitem>
 
                 <!-- <x-menuitem onclick="">
@@ -116,7 +120,7 @@
                 </x-menuitem> -->
 
                 <x-menuitem onclick="ClearErr()">
-                    <x-label>清除错误信息</x-label>
+                    <x-label>Clear Error</x-label>
                 </x-menuitem>
 
             </ul>

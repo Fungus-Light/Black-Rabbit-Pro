@@ -96,7 +96,6 @@ Blockly.JavaScript['level'] = function (block) {
     return code;
 };
 
-
 //-------------------------------------
 Blockly.Blocks['log'] = {
     init: function () {
@@ -118,7 +117,6 @@ Blockly.JavaScript['log'] = function (block) {
     return code;
 };
 
-
 Blockly.Blocks['warning'] = {
     init: function () {
         this.appendDummyInput()
@@ -136,6 +134,26 @@ Blockly.JavaScript['warning'] = function (block) {
     let text_message = block.getFieldValue('message');
 
     let code = 'Debug.LogWarning( \"' + text_message + '\" )\n';
+    return code;
+};
+
+Blockly.Blocks['error'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Error: ")
+            .appendField(new Blockly.FieldTextInput("Something wrong happened"), "NAME");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(0);
+        this.setTooltip("Log an error message in console.");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.JavaScript['error'] = function (block) {
+    let text_name = block.getFieldValue('NAME');
+    // TODO: Assemble JavaScript into code variable.
+    let code = 'Debug.LogError( \"' + text_name + '\" )\n';
     return code;
 };
 
@@ -189,5 +207,77 @@ Blockly.JavaScript['say'] = function (block) {
     var value_tag = block.getFieldValue('tag');
     // TODO: Assemble JavaScript into code variable.
     var code = '$blockname$.Say(\'' + value_text + '\',\'' + value_tag + '\');\n';
+    return code;
+};
+
+Blockly.Blocks['options'] = {
+    init: function () {
+        this.appendStatementInput("NAME")
+            .setCheck(null)
+            .appendField("Options:");
+        this.appendDummyInput()
+            .appendField("Pause Here")
+            .appendField(new Blockly.FieldCheckbox("TRUE"), "NAME");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(60);
+        this.setTooltip("Options to do");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.JavaScript['options'] = function (block) {
+    var statements_name = Blockly.JavaScript.statementToCode(block, 'NAME');
+    var checkbox_name = block.getFieldValue('NAME') == 'TRUE';
+    // TODO: Assemble JavaScript into code variable.
+    var code = '$blockname$.Options([\n' +
+        statements_name +
+        '],' + checkbox_name.toString() + ');\n';
+    return code;
+};
+
+Blockly.Blocks['option'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Option Text:")
+            .appendField(new Blockly.FieldTextInput("default"), "text");
+        this.appendStatementInput("NAME")
+            .setCheck(null)
+            .appendField("Action:");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(135);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.JavaScript['option'] = function (block) {
+    let text_text = block.getFieldValue('text');
+    let statements_name = Blockly.JavaScript.statementToCode(block, 'NAME');
+    // TODO: Assemble JavaScript into code variable.
+    let code = 'option(\"' + text_text + '\",()=>{\n' +
+        statements_name +
+        '}),\n';
+    return code;
+};
+
+Blockly.Blocks['block_start'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("Start Block Name: ")
+            .appendField(new Blockly.FieldTextInput("block"), "blockname");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(300);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.JavaScript['block_start'] = function (block) {
+    let text_blockname = block.getFieldValue('blockname');
+    // TODO: Assemble JavaScript into code variable.
+    let code = text_blockname + '.Start();\n';
     return code;
 };
