@@ -50,14 +50,14 @@
                 <x-label>File</x-label>
 
                 <x-menu>
-                    <x-menuitem>
-                        <x-label>Load Project</x-label>
+                    <x-menuitem onclick="OpenFile()">
+                        <x-label>Open File</x-label>
                     </x-menuitem>
 
                     <hr>
 
                     <x-menuitem>
-                        <x-label>Save Project</x-label>
+                        <x-label>Save File</x-label>
                         <x-shortcut value="Control+S"></x-shortcut>
                     </x-menuitem>
                 </x-menu>
@@ -78,7 +78,7 @@
 
     <div style="width: 100%;height: calc( 100vh - 40px ) ;">
         <xml id="toolbox" style="display: none">
-            <category name="Basic Control">
+            <category name="Basic Control" colour="%{BKY_LOGIC_HUE}">
                 <block type="controls_if"></block>
                 <block type="controls_whileUntil"></block>
                 <block type="controls_for">
@@ -86,28 +86,28 @@
                     <block type="logic_operation"></block>
                     <block type="logic_boolean"></block>
             </category>
-            <category name="Level Construct">
+            <category name="Level Construct" colour="%{BKY_LOOPS_HUE}">
                 <block type='level'></block>
             </category>
-            <category name="Common Api">
+            <category name="Common Api" colour="%{BKY_MATH_HUE}">
+                <block type='comment'></block>
                 <block type='log'></block>
                 <block type='warning'></block>
                 <block type='error'></block>
                 <block type="wait_for_seconds"></block>
             </category>
-            <category name="Dialog System">
+            <category name="Dialog System" colour="%{BKY_LISTS_HUE}">
                 <block type='dialog_block'></block>
                 <block type="block_start"></block>
                 <block type="say"></block>
                 <block type="options"></block>
                 <block type="option"></block>
             </category>
-            <category name="Data Types">
+            <category name="Data Types" colour="%{BKY_LISTS_HUE}">
                 <block type="text"></block>
-
             </category>
-            <category name="Variables" custom="VARIABLE"></category>
-            <category name="Functions" custom="PROCEDURE"></category>
+            <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}"></category>
+            <category name="Functions" custom="PROCEDURE" colour="%{BKY_PROCEDURES_HUE}"></category>
         </xml>
         <div style="height: 100%; width: 10vw;float: left;background-color: rgba(231, 228, 223, 0.753);">
             <ul>
@@ -115,10 +115,6 @@
                 <x-menuitem onclick="GenJS()">
                     <x-label>Gen JS</x-label>
                 </x-menuitem>
-
-                <!-- <x-menuitem onclick="">
-                    <x-label>生成Lua</x-label>
-                </x-menuitem> -->
 
                 <x-menuitem onclick="ClearErr()">
                     <x-label>Clear Error</x-label>
@@ -134,12 +130,13 @@
 
             </p>
         </div>
-        
+
     </div>
 
     <script src="./SRC/js/index.js"></script>
     <script src="SRC/js/custom-dialog.js"></script>
     <script src="SRC/js/custom_blocks.js"></script>
+    <script src="SRC/js/file.js"></script>
 </body>
 
 </html>

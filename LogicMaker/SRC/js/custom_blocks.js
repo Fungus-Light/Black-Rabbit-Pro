@@ -184,6 +184,26 @@ Blockly.JavaScript['wait_for_seconds'] = function (block) {
     return code;
 };
 
+Blockly.Blocks['comment'] = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField("comment: ")
+            .appendField(new Blockly.FieldTextInput("Note Something..."), "comment");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(210);
+        this.setTooltip("");
+        this.setHelpUrl("");
+    }
+};
+
+Blockly.JavaScript['comment'] = function (block) {
+    var text_comment = block.getFieldValue('comment');
+    // TODO: Assemble JavaScript into code variable.
+    var code = '//' + text_comment + '\n';
+    return code;
+};
+
 //------------------------------------
 Blockly.Blocks['dialog_block'] = {
     init: function () {

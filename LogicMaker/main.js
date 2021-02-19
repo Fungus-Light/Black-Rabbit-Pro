@@ -6,21 +6,23 @@ function createWindow() {
         width: 1280,
         height: 720,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            contextIsolation: false
         },
-        autoHideMenuBar:true,
-        useContentSize:true
+        autoHideMenuBar: true,
+        useContentSize: true,
     })
 
     const BlockMaker = new BrowserWindow({
         width: 1280,
         height: 720,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            contextIsolation: false
         },
-        autoHideMenuBar:true,
-        useContentSize:true,
-        show:true
+        autoHideMenuBar: true,
+        useContentSize: true,
+        show: true
     })
 
     win.loadFile('index.html')
