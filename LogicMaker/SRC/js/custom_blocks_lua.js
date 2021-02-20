@@ -50,7 +50,7 @@ Blockly.Lua['setsoundpath'] = function (block) {
         CS.LuaCall.PlaySound("${text_path}/Sound/" .. Global.Lang, name, false, cb, 1, AUDIO_CV)
     end
     `;
-    console.log(code)
+    
     return code;
 };
 

@@ -19,6 +19,17 @@ window.onload = () => {
     DefaultInit()
 }
 
+function NewFile(){
+    CurrentFile = "Untitled.brp"
+    isNew=true
+    isDirty=true
+    Refresh()
+    workspaceJS.clear()
+    workspaceLUA.clear()
+    JSCodeMirror.setValue("//drag block and gen code")
+    LUACodeMirror.setValue("-- drag block and gen code")
+}
+
 function OpenFile() {
 
     let paths = dialog.showOpenDialogSync(null, {
@@ -85,7 +96,12 @@ function SaveFile() {
                     lua: xmlLUA_text
                 }
 
-                fs.writeFileSync(_path, JSON.stringify(DATA), {
+                let DATA_STR = JSbeautyfy(JSON.stringify(DATA), {
+                    indent_size: 4,
+                    space_in_empty_paren: true
+                })
+
+                fs.writeFileSync(_path, DATA_STR, {
                     encoding: "utf-8"
                 })
 
@@ -112,7 +128,12 @@ function SaveFile() {
                 lua: xmlLUA_text
             }
 
-            fs.writeFileSync(CurrentFile, JSON.stringify(DATA), {
+            let DATA_STR = JSbeautyfy(JSON.stringify(DATA), {
+                indent_size: 4,
+                space_in_empty_paren: true
+            })
+
+            fs.writeFileSync(CurrentFile, DATA_STR, {
                 encoding: "utf-8"
             })
 
@@ -140,3 +161,9 @@ function DefaultInit() {
     let xmlJS = Blockly.Xml.textToDom(defaultJSXML);
     Blockly.Xml.domToWorkspace(xmlJS, workspaceJS);
 }
+
+window.addEventListener('keydown',(ev)=>{
+    if((ev.key=='s'||ev.key=='S')&&ev.ctrlKey){
+        SaveFile()
+    }
+})
