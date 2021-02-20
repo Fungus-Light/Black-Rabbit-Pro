@@ -42,12 +42,17 @@ function OpenFile() {
         CurrentFile = realPath
         Refresh()
         try {
-            let xml = Blockly.Xml.textToDom(str);
-            Blockly.Xml.domToWorkspace(xml, workspace);
+            let xmlJS = Blockly.Xml.textToDom(JSON.parse(str).js);
+            workspaceJS.clear()
+            Blockly.Xml.domToWorkspace(xmlJS, workspaceJS);
+
+            let xmlLUA = Blockly.Xml.textToDom(JSON.parse(str).lua);
+            workspaceLUA.clear()
+            Blockly.Xml.domToWorkspace(xmlLUA, workspaceLUA);
+
         } catch (err) {
             if (err) {
                 Alert("Open Failed!!!", err.toString())
-                document.getElementById("err-list").innerText = err.toString()
             }
         }
 
@@ -69,10 +74,18 @@ function SaveFile() {
 
         if (_path != undefined) {
             try {
-                let xml = Blockly.Xml.workspaceToDom(workspace);
-                let xml_text = Blockly.Xml.domToPrettyText(xml);
+                let xmlJS = Blockly.Xml.workspaceToDom(workspaceJS);
+                let xmlJS_text = Blockly.Xml.domToPrettyText(xmlJS);
 
-                fs.writeFileSync(_path, xml_text, {
+                let xmlLUA = Blockly.Xml.workspaceToDom(workspaceLUA);
+                let xmlLUA_text = Blockly.Xml.domToPrettyText(xmlLUA);
+
+                let DATA = {
+                    js: xmlJS_text,
+                    lua: xmlLUA_text
+                }
+
+                fs.writeFileSync(_path, JSON.stringify(DATA), {
                     encoding: "utf-8"
                 })
 
@@ -84,15 +97,22 @@ function SaveFile() {
 
             } catch (err) {
                 Alert("Save Failed!!!", err.toString())
-                document.getElementById("err-list").innerText = err.toString()
             }
         }
     } else {
         try {
-            let xml = Blockly.Xml.workspaceToDom(workspace);
-            let xml_text = Blockly.Xml.domToPrettyText(xml);
+            let xmlJS = Blockly.Xml.workspaceToDom(workspaceJS);
+            let xmlJS_text = Blockly.Xml.domToPrettyText(xmlJS);
 
-            fs.writeFileSync(CurrentFile, xml_text, {
+            let xmlLUA = Blockly.Xml.workspaceToDom(workspaceLUA);
+            let xmlLUA_text = Blockly.Xml.domToPrettyText(xmlLUA);
+
+            let DATA = {
+                js: xmlJS_text,
+                lua: xmlLUA_text
+            }
+
+            fs.writeFileSync(CurrentFile, JSON.stringify(DATA), {
                 encoding: "utf-8"
             })
 
@@ -102,13 +122,12 @@ function SaveFile() {
 
         } catch (err) {
             Alert("Save Failed!!!", err.toString())
-            document.getElementById("err-list").innerText = err.toString()
         }
     }
 }
 
 function DefaultInit() {
-    let defaultXML = '<xml xmlns="https://developers.google.com/blockly/xml">' +
+    let defaultJSXML = '<xml xmlns="https://developers.google.com/blockly/xml">' +
         '<block type="level" id="M].@5YbF**`v@}UvC/^F" x="57" y="60">' +
         '<field name="levelname">ExampleLevel</field>' +
         '<statement name="start">' +
@@ -118,6 +137,6 @@ function DefaultInit() {
         '</statement>' +
         '</block>' +
         '</xml>'
-    let xml = Blockly.Xml.textToDom(defaultXML);
-    Blockly.Xml.domToWorkspace(xml, workspace);
+    let xmlJS = Blockly.Xml.textToDom(defaultJSXML);
+    Blockly.Xml.domToWorkspace(xmlJS, workspaceJS);
 }
