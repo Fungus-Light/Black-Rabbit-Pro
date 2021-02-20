@@ -493,12 +493,6 @@ AppController.prototype.assignBlockFactoryClickHandlers = function() {
         self.exportBlockLibraryToFile();
       });
 
-  document.getElementById('helpButton').addEventListener('click',
-      function() {
-        open('https://developers.google.com/blockly/custom-blocks/block-factory',
-             'BlockFactoryHelp');
-      });
-
   document.getElementById('files').addEventListener('change',
       function() {
         // Warn user.

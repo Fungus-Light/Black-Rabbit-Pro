@@ -6,6 +6,8 @@ let myCodeMirror = CodeMirror(document.getElementById("container"), {
     theme: "dracula"
 });
 
+var isDirty = false
+
 let blocklyArea = document.getElementById('blocklyArea');
 let blocklyDiv = document.getElementById('blocklyDiv');
 let workspace = Blockly.inject(blocklyDiv,
@@ -58,11 +60,12 @@ function GenJS() {
 
 }
 
-function ClearErr(){
+function ClearErr() {
     document.getElementById("err-list").innerText = ""
 }
 
 workspace.addChangeListener(() => {
+    isDirty = true
     try {
         let code = Blockly.JavaScript.workspaceToCode(workspace);
     } catch (err) {
