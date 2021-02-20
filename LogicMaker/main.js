@@ -2,19 +2,19 @@ const { app, BrowserWindow } = require('electron')
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
 function createWindow() {
-    const win = new BrowserWindow({
+    let win = new BrowserWindow({
         width: 1280,
         height: 720,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
-            enableRemoteModule:true
+            enableRemoteModule: true
         },
         autoHideMenuBar: true,
         useContentSize: true,
     })
 
-    const BlockMaker = new BrowserWindow({
+    let BlockMaker = new BrowserWindow({
         width: 1280,
         height: 720,
         webPreferences: {
@@ -23,10 +23,16 @@ function createWindow() {
         },
         autoHideMenuBar: true,
         useContentSize: true,
-        show: true
+        show: true,
+        parent:win
     })
 
     win.loadFile('index.html')
+    win.on("close", () => {
+        BlockMaker.close()
+        app.quit()
+    })
+
     BlockMaker.loadFile('./blockfactory/index.html')
 }
 
