@@ -91,22 +91,35 @@
         <!-- <category name="Level Construct" colour="%{BKY_LOOPS_HUE}">
             <block type='level'></block>
         </category> -->
-        <!-- <category name="Common Api" colour="%{BKY_MATH_HUE}">
-            <block type='comment'></block>
+        <category name="Common Api" colour="%{BKY_MATH_HUE}">
+            <!-- <block type='comment'></block> -->
             <block type='log'></block>
             <block type='warning'></block>
             <block type='error'></block>
             <block type="wait_for_seconds"></block>
-        </category> -->
-        <!-- <category name="Dialog System" colour="%{BKY_LISTS_HUE}">
-            <block type='dialog_block'></block>
-            <block type="block_start"></block>
-            <block type="say"></block>
-            <block type="options"></block>
-            <block type="option"></block>
-        </category> -->
-        <category name="Data Types" colour="%{BKY_LISTS_HUE}">
-            <block type="text"></block>
+            <block type="setsoundpath"></block>
+            <block type="playbgm"></block>
+            <block type="playcv"></block>
+            <block type="playcv_cb"></block>
+            <block type='playtimeline'></block>
+            <block type='playtimeline_cb'></block>
+            <block type="showtitle"></block>
+        </category>
+        <category name="Lists" colour="%{BKY_LISTS_HUE}" _mstmutation="1">
+            <block type="lists_create_empty"></block>
+            <block type="lists_create_with"></block>
+            <block type="lists_repeat">
+                <value name="NUM">
+                    <block type="math_number">
+                        <field name="NUM">5</field>
+                    </block>
+                </value>
+            </block>
+            <block type="lists_length"></block>
+            <block type="lists_isEmpty"></block>
+            <block type="lists_indexOf"></block>
+            <block type="lists_getIndex"></block>
+            <block type="lists_setIndex"></block>
         </category>
         <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}"></category>
         <category name="Functions" custom="PROCEDURE" colour="%{BKY_PROCEDURES_HUE}"></category>
@@ -131,9 +144,9 @@
                 </x-menu>
             </x-menuitem>
 
-            <x-menuitem onclick="SwitchState()">
+            <!-- <x-menuitem onclick="SwitchState()">
                 <x-label>JS/Lua</x-label>
-            </x-menuitem>
+            </x-menuitem> -->
 
             <x-menuitem>
                 <x-label>Help</x-label>
@@ -148,7 +161,7 @@
 
     </div>
     <div>
-        <div id="JSAPP" style="display: block;">
+        <div id="JSAPP" style="display: none;">
 
             <div style="width: 100%;height: calc( 100vh - 40px ) ;">
                 <div style="height: 100%; width: 10vw;float: left;background-color: rgba(231, 228, 223, 0.753);">
@@ -174,7 +187,7 @@
             </div>
         </div>
 
-        <div id="LUAAPP" style="display: none;">
+        <div id="LUAAPP" style="display: block;">
             <div style="width: 100%;height: calc( 100vh - 40px ) ;">
                 <div style="height: 100%; width: 10vw;float: left;background-color: rgba(231, 228, 223, 0.753);">
                     <ul>
@@ -205,6 +218,9 @@
     <script src="./SRC/js/index.js"></script>
     <script src="SRC/js/custom-dialog.js"></script>
     <script src="SRC/js/custom_blocks.js"></script>
+
+    <script src="SRC/js/custom_blocks_js.js"></script>
+    <script src="SRC/js/custom_blocks_lua.js"></script>
     <script src="SRC/js/file.js"></script>
 </body>
 

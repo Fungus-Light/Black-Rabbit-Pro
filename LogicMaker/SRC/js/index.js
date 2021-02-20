@@ -1,12 +1,13 @@
 const JSbeautyfy = require('js-beautify').js
+const LUAbeatutify = require('lua-fmt')
+
+var isJS = false
 
 let JSCodeMirror = CodeMirror(document.getElementById("containerJS"), {
     value: "//drag block and gen code",
     mode: "text/typescript",
     theme: "dracula"
 });
-
-var isJS = true
 
 let LUACodeMirror = CodeMirror(document.getElementById("containerLUA"), {
     value: "-- drag block and gen code",
@@ -129,7 +130,7 @@ let onresizeLUA = function (e) {
 function GenLUA() {
     try {
         let code = Blockly.Lua.workspaceToCode(workspaceLUA);
-
+        code = LUAbeatutify.formatText(code)
         LUACodeMirror.setValue(code)
     } catch (err) {
         if (err) {

@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "js-beautify": "^1.13.5",
+    "lua-fmt": "^2.6.0",
     "sweetalert2": "^10.14.0"
   },
   "devDependencies": {
