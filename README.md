@@ -9,7 +9,7 @@ Unity版本： 2019.4 或以上
 
 安装node.js后需要设置  cnpm  
 
-> 你可以使用我们定制的 [cnpm](https://github.com/cnpm/cnpm) (gzip 压缩支持) 命令行工具代替默认的 `npm`:
+> 可以使用 [cnpm](https://github.com/cnpm/cnpm) (gzip 压缩支持) 命令行工具代替默认的 `npm`:
 >
 > ```
 > $ npm install -g cnpm --registry=https://registry.npm.taobao.org
@@ -17,7 +17,7 @@ Unity版本： 2019.4 或以上
 
 还需要安装**typescript**
 
-```
+```shell
 cnpm install -g typescript
 ```
 
