@@ -85,7 +85,7 @@ class Scene1 implements IGameLevel {
 
 在TsProject文件夹里面运行命令  **npm run build**,就会重新生成框架代码，并且生成定义文件和参考文档
 
-参考文档默认被git忽略，生成后位置和Unity项目平级
+参考文档默认被git忽略，生成后位置和Unity项目平级，
 
 最重要的是以**$**开头的一系列函数
 
