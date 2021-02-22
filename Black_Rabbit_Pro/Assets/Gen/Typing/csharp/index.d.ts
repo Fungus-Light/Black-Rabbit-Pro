@@ -3699,6 +3699,20 @@ declare module 'csharp' {
     }
     
         
+        class BRPSceneManager extends System.Object {
+            
+            public constructor();
+            
+            public static GetSceneLoader($name: string):IScenesLoader;
+            
+        }
+        
+        interface IScenesLoader {
+            
+            LoadScene($name: string):void;
+            
+        }
+        
         class LevelRunner extends UnityEngine.MonoBehaviour {
             
             public PackName: string;
@@ -3736,6 +3750,18 @@ declare module 'csharp' {
             public constructor();
             
             public static GetTransformByName($name: string):UnityEngine.Transform;
+            
+        }
+        
+        class GameObjectPool extends UnityEngine.MonoBehaviour {
+            
+            public static Instance: GameObjectPool;
+            
+            public gameObjectPool: System.Collections.Generic.List$1<UnityEngine.Transform>;
+            
+            public constructor();
+            
+            public Find($n: string):UnityEngine.Transform;
             
         }
         

@@ -47,10 +47,13 @@ public class BindConfig
                 typeof(UnityEngine.TextAsset),
                 typeof(UnityEngine.SceneManagement.SceneManager),
                 typeof(UnityEngine.SceneManagement.LoadSceneMode),
+                typeof(BRPSceneManager),
+                typeof(IScenesLoader),
 
                 typeof(LevelRunner),
                 typeof(FileHelper),
                 typeof(GameObjectHelper),
+                typeof(GameObjectPool),
                 typeof(CommonJsCall),
                 typeof(TimelineHelper),
                 typeof(PlayableDirector),

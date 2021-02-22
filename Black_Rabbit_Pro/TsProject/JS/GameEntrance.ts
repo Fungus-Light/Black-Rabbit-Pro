@@ -2,10 +2,11 @@
  * This is where the game begin
  * 游戏入口脚本
  */
-import { Debug, Transform, WaitForSeconds } from "Utils/Common"
+import { Debug, Transform, WaitForSeconds, T } from "Utils/Common"
 import { FadeUIGroup } from "Tween/Tween"
 import { IGameLevel } from "Interface/IGameLevel";
-import { UnityEngine, FileHelper, System } from "csharp";
+import { UnityEngine, FileHelper, System, IScenesLoader, GameObjectPool } from "csharp";
+import { $SceneLoader } from "SceneLoader/SceneLoader";
 
 function Create() { return new GameEntrance(); }
 export { Create }
@@ -63,6 +64,11 @@ class GameEntrance implements IGameLevel {
         let GameEnv = Resources.Load("Core/GameEnv") as UnityEngine.GameObject
         InitGameObjct(GameEnv)
 
+        let SL = Resources.Load("SceneLoader") as UnityEngine.GameObject
+        let Loader = InitGameObjct(SL) as UnityEngine.GameObject
+        Loader.name = "$_SceneLoader"
+        GameObjectPool.Instance.gameObjectPool.Add(Loader.transform);
+
         WaitForSeconds(1, () => {
 
             FadeUIGroup("LogoUI", 0, 1, 1, () => {
@@ -91,7 +97,7 @@ class GameEntrance implements IGameLevel {
                         }
                     }
                     if (EntranceScenePath != null) {
-                        SceneManager.LoadScene(EntranceScenePath, UnityEngine.SceneManagement.LoadSceneMode.Single);
+                        $SceneLoader().LoadScene(EntranceScenePath);
                     } else {
                         Debug.LogError("Can Not Find Entrance Scene Path");
                     }
