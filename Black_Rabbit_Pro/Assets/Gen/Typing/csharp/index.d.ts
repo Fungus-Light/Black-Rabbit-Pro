@@ -1938,6 +1938,190 @@ declare module 'csharp' {
         class Coroutine extends UnityEngine.YieldInstruction {
             
         }
+        /** The Resources class allows you to find and access Objects including assets. */
+        class Resources extends System.Object {
+            
+            public constructor();
+            /** Returns a list of all objects of Type type. */
+            public static FindObjectsOfTypeAll($type: System.Type):System.Array$1<UnityEngine.Object>;
+            /** Loads an asset stored at path in a Resources folder.
+             * @param path Path to the target resource to load. When using an empty string (i.e., ""), the function loads the entire contents of the Resources folder.
+             * @param systemTypeInstance Type filter for objects returned.
+             * @returns The requested asset returned as an Object. 
+             */
+            public static Load($path: string):UnityEngine.Object;
+            /** Loads an asset stored at path in a Resources folder.
+             * @param path Path to the target resource to load. When using an empty string (i.e., ""), the function loads the entire contents of the Resources folder.
+             * @param systemTypeInstance Type filter for objects returned.
+             * @returns The requested asset returned as an Object. 
+             */
+            public static Load($path: string, $systemTypeInstance: System.Type):UnityEngine.Object;
+            /** Asynchronously loads an asset stored at path in a Resources folder. * @param path Pathname of the target folder. When using the empty string (i.e., ""), the function will load the entire contents of the Resources folder.
+             */
+            public static LoadAsync($path: string):UnityEngine.ResourceRequest;
+            /** Asynchronously loads an asset stored at path in a Resources folder. * @param path Pathname of the target folder. When using the empty string (i.e., ""), the function will load the entire contents of the Resources folder.
+             * @param systemTypeInstance Type filter for objects returned.
+             */
+            public static LoadAsync($path: string, $type: System.Type):UnityEngine.ResourceRequest;
+            /** Loads all assets in a folder or file at path in a Resources folder. * @param path Pathname of the target folder. When using the empty string (i.e., ""), the function will load the entire contents of the Resources folder.
+             * @param systemTypeInstance Type filter for objects returned.
+             */
+            public static LoadAll($path: string, $systemTypeInstance: System.Type):System.Array$1<UnityEngine.Object>;
+            /** Loads all assets in a folder or file at path in a Resources folder. * @param path Pathname of the target folder. When using the empty string (i.e., ""), the function will load the entire contents of the Resources folder.
+             */
+            public static LoadAll($path: string):System.Array$1<UnityEngine.Object>;
+            
+            public static GetBuiltinResource($type: System.Type, $path: string):UnityEngine.Object;
+            /** Unloads assetToUnload from memory. */
+            public static UnloadAsset($assetToUnload: UnityEngine.Object):void;
+            
+            public static UnloadUnusedAssets():UnityEngine.AsyncOperation;
+            
+        }
+        /** Asynchronous load request from the Resources bundle. */
+        class ResourceRequest extends UnityEngine.AsyncOperation {
+            
+        }
+        /** AssetBundles let you stream additional assets via the UnityWebRequest class and instantiate them at runtime. AssetBundles are created via BuildPipeline.BuildAssetBundle. */
+        class AssetBundle extends UnityEngine.Object {
+            /** Return true if the AssetBundle is a streamed Scene AssetBundle. */
+            public get isStreamedSceneAssetBundle(): boolean;
+            /** Unloads all currently loaded Asset Bundles. * @param unloadAllObjects Determines whether the current instances of objects loaded from Asset Bundles will also be unloaded.
+             */
+            public static UnloadAllAssetBundles($unloadAllObjects: boolean):void;
+            
+            public static GetAllLoadedAssetBundles():System.Collections.Generic.IEnumerable$1<UnityEngine.AssetBundle>;
+            
+            public static LoadFromFileAsync($path: string):UnityEngine.AssetBundleCreateRequest;
+            
+            public static LoadFromFileAsync($path: string, $crc: number):UnityEngine.AssetBundleCreateRequest;
+            /** Asynchronously loads an AssetBundle from a file on disk.
+             * @param path Path of the file on disk.
+             * @param crc An optional CRC-32 checksum of the uncompressed content. If this is non-zero, then the content will be compared against the checksum before loading it, and give an error if it does not match.
+             * @param offset An optional byte offset. This value specifies where to start reading the AssetBundle from.
+             * @returns Asynchronous create request for an AssetBundle. Use AssetBundleCreateRequest.assetBundle property to get an AssetBundle once it is loaded. 
+             */
+            public static LoadFromFileAsync($path: string, $crc: number, $offset: bigint):UnityEngine.AssetBundleCreateRequest;
+            
+            public static LoadFromFile($path: string):UnityEngine.AssetBundle;
+            
+            public static LoadFromFile($path: string, $crc: number):UnityEngine.AssetBundle;
+            /** Synchronously loads an AssetBundle from a file on disk.
+             * @param path Path of the file on disk.
+             * @param crc An optional CRC-32 checksum of the uncompressed content. If this is non-zero, then the content will be compared against the checksum before loading it, and give an error if it does not match.
+             * @param offset An optional byte offset. This value specifies where to start reading the AssetBundle from.
+             * @returns Loaded AssetBundle object or null if failed. 
+             */
+            public static LoadFromFile($path: string, $crc: number, $offset: bigint):UnityEngine.AssetBundle;
+            
+            public static LoadFromMemoryAsync($binary: System.Array$1<number>):UnityEngine.AssetBundleCreateRequest;
+            /** Asynchronously create an AssetBundle from a memory region.
+             * @param binary Array of bytes with the AssetBundle data.
+             * @param crc An optional CRC-32 checksum of the uncompressed content. If this is non-zero, then the content will be compared against the checksum before loading it, and give an error if it does not match.
+             * @returns Asynchronous create request for an AssetBundle. Use AssetBundleCreateRequest.assetBundle property to get an AssetBundle once it is loaded. 
+             */
+            public static LoadFromMemoryAsync($binary: System.Array$1<number>, $crc: number):UnityEngine.AssetBundleCreateRequest;
+            
+            public static LoadFromMemory($binary: System.Array$1<number>):UnityEngine.AssetBundle;
+            /** Synchronously create an AssetBundle from a memory region.
+             * @param binary Array of bytes with the AssetBundle data.
+             * @param crc An optional CRC-32 checksum of the uncompressed content. If this is non-zero, then the content will be compared against the checksum before loading it, and give an error if it does not match.
+             * @returns Loaded AssetBundle object or null if failed. 
+             */
+            public static LoadFromMemory($binary: System.Array$1<number>, $crc: number):UnityEngine.AssetBundle;
+            /** Asynchronously loads an AssetBundle from a managed Stream.
+             * @param stream The managed Stream object. Unity calls Read(), Seek() and the Length property on this object to load the AssetBundle data.
+             * @param crc An optional CRC-32 checksum of the uncompressed content.
+             * @param managedReadBufferSize You can use this to override the size of the read buffer Unity uses while loading data. The default size is 32KB.
+             * @returns Asynchronous create request for an AssetBundle. Use AssetBundleCreateRequest.assetBundle property to get an AssetBundle once it is loaded. 
+             */
+            public static LoadFromStreamAsync($stream: System.IO.Stream, $crc: number, $managedReadBufferSize: number):UnityEngine.AssetBundleCreateRequest;
+            
+            public static LoadFromStreamAsync($stream: System.IO.Stream, $crc: number):UnityEngine.AssetBundleCreateRequest;
+            
+            public static LoadFromStreamAsync($stream: System.IO.Stream):UnityEngine.AssetBundleCreateRequest;
+            /** Synchronously loads an AssetBundle from a managed Stream.
+             * @param stream The managed Stream object. Unity calls Read(), Seek() and the Length property on this object to load the AssetBundle data.
+             * @param crc An optional CRC-32 checksum of the uncompressed content.
+             * @param managedReadBufferSize You can use this to override the size of the read buffer Unity uses while loading data. The default size is 32KB.
+             * @returns The loaded AssetBundle object or null when the object fails to load. 
+             */
+            public static LoadFromStream($stream: System.IO.Stream, $crc: number, $managedReadBufferSize: number):UnityEngine.AssetBundle;
+            
+            public static LoadFromStream($stream: System.IO.Stream, $crc: number):UnityEngine.AssetBundle;
+            
+            public static LoadFromStream($stream: System.IO.Stream):UnityEngine.AssetBundle;
+            
+            public static SetAssetBundleDecryptKey($password: string):void;
+            /** Check if an AssetBundle contains a specific object. */
+            public Contains($name: string):boolean;
+            /** Loads asset with name of type T from the bundle. */
+            public LoadAsset($name: string):UnityEngine.Object;
+            /** Loads asset with name of a given type from the bundle. */
+            public LoadAsset($name: string, $type: System.Type):UnityEngine.Object;
+            /** Asynchronously loads asset with name of a given T from the bundle. */
+            public LoadAssetAsync($name: string):UnityEngine.AssetBundleRequest;
+            /** Asynchronously loads asset with name of a given type from the bundle. */
+            public LoadAssetAsync($name: string, $type: System.Type):UnityEngine.AssetBundleRequest;
+            /** Loads asset and sub assets with name of type T from the bundle. */
+            public LoadAssetWithSubAssets($name: string):System.Array$1<UnityEngine.Object>;
+            /** Loads asset and sub assets with name of a given type from the bundle. */
+            public LoadAssetWithSubAssets($name: string, $type: System.Type):System.Array$1<UnityEngine.Object>;
+            /** Loads asset with sub assets with name of type T from the bundle asynchronously. */
+            public LoadAssetWithSubAssetsAsync($name: string):UnityEngine.AssetBundleRequest;
+            /** Loads asset with sub assets with name of a given type from the bundle asynchronously. */
+            public LoadAssetWithSubAssetsAsync($name: string, $type: System.Type):UnityEngine.AssetBundleRequest;
+            
+            public LoadAllAssets():System.Array$1<UnityEngine.Object>;
+            /** Loads all assets contained in the asset bundle that inherit from type. */
+            public LoadAllAssets($type: System.Type):System.Array$1<UnityEngine.Object>;
+            
+            public LoadAllAssetsAsync():UnityEngine.AssetBundleRequest;
+            /** Loads all assets contained in the asset bundle that inherit from type asynchronously. */
+            public LoadAllAssetsAsync($type: System.Type):UnityEngine.AssetBundleRequest;
+            /** Unloads assets in the bundle. */
+            public Unload($unloadAllLoadedObjects: boolean):void;
+            
+            public GetAllAssetNames():System.Array$1<string>;
+            
+            public GetAllScenePaths():System.Array$1<string>;
+            /** Asynchronously recompress a downloaded/stored AssetBundle from one BuildCompression to another. * @param inputPath Path to the AssetBundle to recompress.
+             * @param outputPath Path to the recompressed AssetBundle to be generated. Can be the same as inputPath.
+             * @param method The compression method, level and blocksize to use during recompression. Only some BuildCompression types are supported (see note).
+             * @param expectedCRC CRC of the AssetBundle to test against. Testing this requires additional file reading and computation. Pass in 0 to skip this check. Unity does not compute a CRC when the source and destination BuildCompression are the same, so no CRC verification takes place (see note).
+             * @param priority The priority at which the recompression operation should run. This sets thread priority during the operation and does not effect the order in which operations are performed. Recompression operations run on a background worker thread.
+             */
+            public static RecompressAssetBundleAsync($inputPath: string, $outputPath: string, $method: UnityEngine.BuildCompression, $expectedCRC?: number, $priority?: UnityEngine.ThreadPriority):UnityEngine.AssetBundleRecompressOperation;
+            
+        }
+        /** Asynchronous create request for an AssetBundle. */
+        class AssetBundleCreateRequest extends UnityEngine.AsyncOperation {
+            
+        }
+        /** Asynchronous load request from an AssetBundle. */
+        class AssetBundleRequest extends UnityEngine.AsyncOperation {
+            
+        }
+        /** Asynchronous AssetBundle recompression from one compression method and level to another. */
+        class AssetBundleRecompressOperation extends UnityEngine.AsyncOperation {
+            
+        }
+        /** Contains information about compression methods, compression levels and block sizes that are supported by Asset Bundle compression at build time and recompression at runtime. */
+        class BuildCompression extends System.ValueType {
+            
+        }
+        /** Text file assets. */
+        class TextAsset extends UnityEngine.Object {
+            /** The text contents of the .txt file as a string. (Read Only) */
+            public get text(): string;
+            /** The raw bytes of the text asset. (Read Only) */
+            public get bytes(): System.Array$1<number>;
+            
+            public constructor();
+            
+            public constructor($text: string);
+            
+        }
         /** A class you can derive from if you want to create objects that don't need to be attached to game objects. */
         class ScriptableObject extends UnityEngine.Object {
             
@@ -2125,14 +2309,6 @@ declare module 'csharp' {
         enum AudioClipLoadType { DecompressOnLoad = 0, CompressedInMemory = 1, Streaming = 2 }
         /** Value describing the current load state of the audio data associated with an AudioClip. */
         enum AudioDataLoadState { Unloaded = 0, Loading = 1, Loaded = 2, Failed = 3 }
-        /** Renders a Sprite for 2D graphics. */
-        class SpriteRenderer extends UnityEngine.Renderer {
-            
-        }
-        /** General functionality for all renderers. */
-        class Renderer extends UnityEngine.Component {
-            
-        }
         /** Position, size, anchor and pivot information for a rectangle. */
         class RectTransform extends UnityEngine.Transform {
             
@@ -2606,6 +2782,138 @@ declare module 'csharp' {
         
         class Array extends System.Object {
             
+            public get LongLength(): bigint;
+            
+            public get IsFixedSize(): boolean;
+            
+            public get IsReadOnly(): boolean;
+            
+            public get IsSynchronized(): boolean;
+            
+            public get SyncRoot(): any;
+            
+            public get Length(): number;
+            
+            public get Rank(): number;
+            
+            public static CreateInstance($elementType: System.Type, ...lengths: bigint[]):System.Array;
+            
+            public CopyTo($array: System.Array, $index: number):void;
+            
+            public Clone():any;
+            
+            public static BinarySearch($array: System.Array, $value: any):number;
+            
+            public static Copy($sourceArray: System.Array, $destinationArray: System.Array, $length: bigint):void;
+            
+            public static Copy($sourceArray: System.Array, $sourceIndex: bigint, $destinationArray: System.Array, $destinationIndex: bigint, $length: bigint):void;
+            
+            public CopyTo($array: System.Array, $index: bigint):void;
+            
+            public GetLongLength($dimension: number):bigint;
+            
+            public GetValue($index: bigint):any;
+            
+            public GetValue($index1: bigint, $index2: bigint):any;
+            
+            public GetValue($index1: bigint, $index2: bigint, $index3: bigint):any;
+            
+            public GetValue(...indices: bigint[]):any;
+            
+            public static BinarySearch($array: System.Array, $index: number, $length: number, $value: any):number;
+            
+            public static BinarySearch($array: System.Array, $value: any, $comparer: System.Collections.IComparer):number;
+            
+            public static BinarySearch($array: System.Array, $index: number, $length: number, $value: any, $comparer: System.Collections.IComparer):number;
+            
+            public static IndexOf($array: System.Array, $value: any):number;
+            
+            public static IndexOf($array: System.Array, $value: any, $startIndex: number):number;
+            
+            public static IndexOf($array: System.Array, $value: any, $startIndex: number, $count: number):number;
+            
+            public static LastIndexOf($array: System.Array, $value: any):number;
+            
+            public static LastIndexOf($array: System.Array, $value: any, $startIndex: number):number;
+            
+            public static LastIndexOf($array: System.Array, $value: any, $startIndex: number, $count: number):number;
+            
+            public static Reverse($array: System.Array):void;
+            
+            public static Reverse($array: System.Array, $index: number, $length: number):void;
+            
+            public SetValue($value: any, $index: bigint):void;
+            
+            public SetValue($value: any, $index1: bigint, $index2: bigint):void;
+            
+            public SetValue($value: any, $index1: bigint, $index2: bigint, $index3: bigint):void;
+            
+            public SetValue($value: any, ...indices: bigint[]):void;
+            
+            public static Sort($array: System.Array):void;
+            
+            public static Sort($array: System.Array, $index: number, $length: number):void;
+            
+            public static Sort($array: System.Array, $comparer: System.Collections.IComparer):void;
+            
+            public static Sort($array: System.Array, $index: number, $length: number, $comparer: System.Collections.IComparer):void;
+            
+            public static Sort($keys: System.Array, $items: System.Array):void;
+            
+            public static Sort($keys: System.Array, $items: System.Array, $comparer: System.Collections.IComparer):void;
+            
+            public static Sort($keys: System.Array, $items: System.Array, $index: number, $length: number):void;
+            
+            public static Sort($keys: System.Array, $items: System.Array, $index: number, $length: number, $comparer: System.Collections.IComparer):void;
+            
+            public GetEnumerator():System.Collections.IEnumerator;
+            
+            public GetLength($dimension: number):number;
+            
+            public GetLowerBound($dimension: number):number;
+            
+            public GetValue(...indices: number[]):any;
+            
+            public SetValue($value: any, ...indices: number[]):void;
+            
+            public GetUpperBound($dimension: number):number;
+            
+            public GetValue($index: number):any;
+            
+            public GetValue($index1: number, $index2: number):any;
+            
+            public GetValue($index1: number, $index2: number, $index3: number):any;
+            
+            public SetValue($value: any, $index: number):void;
+            
+            public SetValue($value: any, $index1: number, $index2: number):void;
+            
+            public SetValue($value: any, $index1: number, $index2: number, $index3: number):void;
+            
+            public static CreateInstance($elementType: System.Type, $length: number):System.Array;
+            
+            public static CreateInstance($elementType: System.Type, $length1: number, $length2: number):System.Array;
+            
+            public static CreateInstance($elementType: System.Type, $length1: number, $length2: number, $length3: number):System.Array;
+            
+            public static CreateInstance($elementType: System.Type, ...lengths: number[]):System.Array;
+            
+            public static CreateInstance($elementType: System.Type, $lengths: System.Array$1<number>, $lowerBounds: System.Array$1<number>):System.Array;
+            
+            public static Clear($array: System.Array, $index: number, $length: number):void;
+            
+            public static Copy($sourceArray: System.Array, $destinationArray: System.Array, $length: number):void;
+            
+            public static Copy($sourceArray: System.Array, $sourceIndex: number, $destinationArray: System.Array, $destinationIndex: number, $length: number):void;
+            
+            public static ConstrainedCopy($sourceArray: System.Array, $sourceIndex: number, $destinationArray: System.Array, $destinationIndex: number, $length: number):void;
+            
+            public Initialize():void;
+            
+        }
+        
+        class Int64 extends System.ValueType {
+            
         }
         
         class Char extends System.ValueType {
@@ -2634,6 +2942,14 @@ declare module 'csharp' {
             
         }
         
+        class Byte extends System.ValueType {
+            
+        }
+        
+        class MarshalByRefObject extends System.Object {
+            
+        }
+        
         class Random extends System.Object {
             
         }
@@ -2655,6 +2971,10 @@ declare module 'csharp' {
         /** Zero argument delegate used by UnityEvents. */
         type UnityAction = () => void;
         var UnityAction: {new (func: () => void): UnityAction;}
+        
+        type UnityAction$2<T0,T1> = (arg0: T0, arg1: T1) => void;
+        
+        type UnityAction$1<T0> = (arg0: T0) => void;
         /** A zero argument persistent callback that can be saved with the Scene. */
         class UnityEvent extends UnityEngine.Events.UnityEventBase {
             
@@ -2683,8 +3003,6 @@ declare module 'csharp' {
             public Invoke($arg0: T0):void;
             
         }
-        
-        type UnityAction$1<T0> = (arg0: T0) => void;
         
     }
     namespace System.Collections.Generic {
@@ -2907,6 +3225,10 @@ declare module 'csharp' {
             
         }
         
+        interface IComparer {
+            
+        }
+        
     }
     namespace UnityEngine.Audio {
         /** Object representing a group in the mixer. */
@@ -2991,6 +3313,199 @@ declare module 'csharp' {
         class Scene extends System.ValueType {
             
         }
+        /** Scene management at run-time. */
+        class SceneManager extends System.Object {
+            /** The total number of currently loaded Scenes. */
+            public static get sceneCount(): number;
+            /** Number of Scenes in Build Settings. */
+            public static get sceneCountInBuildSettings(): number;
+            
+            public constructor();
+            
+            public static GetActiveScene():UnityEngine.SceneManagement.Scene;
+            /** Set the Scene to be active.
+             * @param scene The Scene to be set.
+             * @returns Returns false if the Scene is not loaded yet. 
+             */
+            public static SetActiveScene($scene: UnityEngine.SceneManagement.Scene):boolean;
+            /** Searches all Scenes loaded for a Scene that has the given asset path.
+             * @param scenePath Path of the Scene. Should be relative to the project folder. Like: "AssetsMyScenesMyScene.unity".
+             * @returns A reference to the Scene, if valid. If not, an invalid Scene is returned. 
+             */
+            public static GetSceneByPath($scenePath: string):UnityEngine.SceneManagement.Scene;
+            /** Searches through the Scenes loaded for a Scene with the given name.
+             * @param name Name of Scene to find.
+             * @returns A reference to the Scene, if valid. If not, an invalid Scene is returned. 
+             */
+            public static GetSceneByName($name: string):UnityEngine.SceneManagement.Scene;
+            /** Get a Scene struct from a build index.
+             * @param buildIndex Build index as shown in the Build Settings window.
+             * @returns A reference to the Scene, if valid. If not, an invalid Scene is returned. 
+             */
+            public static GetSceneByBuildIndex($buildIndex: number):UnityEngine.SceneManagement.Scene;
+            /** Get the Scene at index in the SceneManager's list of loaded Scenes.
+             * @param index Index of the Scene to get. Index must be greater than or equal to 0 and less than SceneManager.sceneCount.
+             * @returns A reference to the Scene at the index specified. 
+             */
+            public static GetSceneAt($index: number):UnityEngine.SceneManagement.Scene;
+            /** Create an empty new Scene at runtime with the given name.
+             * @param sceneName The name of the new Scene. It cannot be empty or null, or same as the name of the existing Scenes.
+             * @param parameters Various parameters used to create the Scene.
+             * @returns A reference to the new Scene that was created, or an invalid Scene if creation failed. 
+             */
+            public static CreateScene($sceneName: string, $parameters: UnityEngine.SceneManagement.CreateSceneParameters):UnityEngine.SceneManagement.Scene;
+            /** This will merge the source Scene into the destinationScene. * @param sourceScene The Scene that will be merged into the destination Scene.
+             * @param destinationScene Existing Scene to merge the source Scene into.
+             */
+            public static MergeScenes($sourceScene: UnityEngine.SceneManagement.Scene, $destinationScene: UnityEngine.SceneManagement.Scene):void;
+            /** Move a GameObject from its current Scene to a new Scene. * @param go GameObject to move.
+             * @param scene Scene to move into.
+             */
+            public static MoveGameObjectToScene($go: UnityEngine.GameObject, $scene: UnityEngine.SceneManagement.Scene):void;
+            
+            public static add_sceneLoaded($value: UnityEngine.Events.UnityAction$2<UnityEngine.SceneManagement.Scene, UnityEngine.SceneManagement.LoadSceneMode>):void;
+            
+            public static remove_sceneLoaded($value: UnityEngine.Events.UnityAction$2<UnityEngine.SceneManagement.Scene, UnityEngine.SceneManagement.LoadSceneMode>):void;
+            
+            public static add_sceneUnloaded($value: UnityEngine.Events.UnityAction$1<UnityEngine.SceneManagement.Scene>):void;
+            
+            public static remove_sceneUnloaded($value: UnityEngine.Events.UnityAction$1<UnityEngine.SceneManagement.Scene>):void;
+            
+            public static add_activeSceneChanged($value: UnityEngine.Events.UnityAction$2<UnityEngine.SceneManagement.Scene, UnityEngine.SceneManagement.Scene>):void;
+            
+            public static remove_activeSceneChanged($value: UnityEngine.Events.UnityAction$2<UnityEngine.SceneManagement.Scene, UnityEngine.SceneManagement.Scene>):void;
+            /** Create an empty new Scene at runtime with the given name.
+             * @param sceneName The name of the new Scene. It cannot be empty or null, or same as the name of the existing Scenes.
+             * @param parameters Various parameters used to create the Scene.
+             * @returns A reference to the new Scene that was created, or an invalid Scene if creation failed. 
+             */
+            public static CreateScene($sceneName: string):UnityEngine.SceneManagement.Scene;
+            /** Loads the Scene by its name or index in Build Settings. * @param sceneName Name or path of the Scene to load.
+             * @param sceneBuildIndex Index of the Scene in the Build Settings to load.
+             * @param mode Allows you to specify whether or not to load the Scene additively. See SceneManagement.LoadSceneMode for more information about the options.
+             */
+            public static LoadScene($sceneName: string, $mode: UnityEngine.SceneManagement.LoadSceneMode):void;
+            
+            public static LoadScene($sceneName: string):void;
+            /** Loads the Scene by its name or index in Build Settings.
+             * @param sceneName Name or path of the Scene to load.
+             * @param sceneBuildIndex Index of the Scene in the Build Settings to load.
+             * @param parameters Various parameters used to load the Scene.
+             * @returns A handle to the Scene being loaded. 
+             */
+            public static LoadScene($sceneName: string, $parameters: UnityEngine.SceneManagement.LoadSceneParameters):UnityEngine.SceneManagement.Scene;
+            /** Loads the Scene by its name or index in Build Settings. * @param sceneName Name or path of the Scene to load.
+             * @param sceneBuildIndex Index of the Scene in the Build Settings to load.
+             * @param mode Allows you to specify whether or not to load the Scene additively. See SceneManagement.LoadSceneMode for more information about the options.
+             */
+            public static LoadScene($sceneBuildIndex: number, $mode: UnityEngine.SceneManagement.LoadSceneMode):void;
+            
+            public static LoadScene($sceneBuildIndex: number):void;
+            /** Loads the Scene by its name or index in Build Settings.
+             * @param sceneName Name or path of the Scene to load.
+             * @param sceneBuildIndex Index of the Scene in the Build Settings to load.
+             * @param parameters Various parameters used to load the Scene.
+             * @returns A handle to the Scene being loaded. 
+             */
+            public static LoadScene($sceneBuildIndex: number, $parameters: UnityEngine.SceneManagement.LoadSceneParameters):UnityEngine.SceneManagement.Scene;
+            /** Loads the Scene asynchronously in the background.
+             * @param sceneName Name or path of the Scene to load.
+             * @param sceneBuildIndex Index of the Scene in the Build Settings to load.
+             * @param mode If LoadSceneMode.Single then all current Scenes will be unloaded before loading.
+             * @param parameters Struct that collects the various parameters into a single place except for the name and index.
+             * @returns Use the AsyncOperation to determine if the operation has completed. 
+             */
+            public static LoadSceneAsync($sceneBuildIndex: number, $mode: UnityEngine.SceneManagement.LoadSceneMode):UnityEngine.AsyncOperation;
+            
+            public static LoadSceneAsync($sceneBuildIndex: number):UnityEngine.AsyncOperation;
+            /** Loads the Scene asynchronously in the background.
+             * @param sceneName Name or path of the Scene to load.
+             * @param sceneBuildIndex Index of the Scene in the Build Settings to load.
+             * @param mode If LoadSceneMode.Single then all current Scenes will be unloaded before loading.
+             * @param parameters Struct that collects the various parameters into a single place except for the name and index.
+             * @returns Use the AsyncOperation to determine if the operation has completed. 
+             */
+            public static LoadSceneAsync($sceneBuildIndex: number, $parameters: UnityEngine.SceneManagement.LoadSceneParameters):UnityEngine.AsyncOperation;
+            /** Loads the Scene asynchronously in the background.
+             * @param sceneName Name or path of the Scene to load.
+             * @param sceneBuildIndex Index of the Scene in the Build Settings to load.
+             * @param mode If LoadSceneMode.Single then all current Scenes will be unloaded before loading.
+             * @param parameters Struct that collects the various parameters into a single place except for the name and index.
+             * @returns Use the AsyncOperation to determine if the operation has completed. 
+             */
+            public static LoadSceneAsync($sceneName: string, $mode: UnityEngine.SceneManagement.LoadSceneMode):UnityEngine.AsyncOperation;
+            
+            public static LoadSceneAsync($sceneName: string):UnityEngine.AsyncOperation;
+            /** Loads the Scene asynchronously in the background.
+             * @param sceneName Name or path of the Scene to load.
+             * @param sceneBuildIndex Index of the Scene in the Build Settings to load.
+             * @param mode If LoadSceneMode.Single then all current Scenes will be unloaded before loading.
+             * @param parameters Struct that collects the various parameters into a single place except for the name and index.
+             * @returns Use the AsyncOperation to determine if the operation has completed. 
+             */
+            public static LoadSceneAsync($sceneName: string, $parameters: UnityEngine.SceneManagement.LoadSceneParameters):UnityEngine.AsyncOperation;
+            /** Destroys all GameObjects associated with the given Scene and removes the Scene from the SceneManager.
+             * @param sceneBuildIndex Index of the Scene in BuildSettings.
+             * @param sceneName Name or path of the Scene to unload.
+             * @param scene Scene to unload.
+             * @param options Scene unloading options.
+             * @returns Use the AsyncOperation to determine if the operation has completed. 
+             */
+            public static UnloadSceneAsync($sceneBuildIndex: number):UnityEngine.AsyncOperation;
+            /** Destroys all GameObjects associated with the given Scene and removes the Scene from the SceneManager.
+             * @param sceneBuildIndex Index of the Scene in BuildSettings.
+             * @param sceneName Name or path of the Scene to unload.
+             * @param scene Scene to unload.
+             * @param options Scene unloading options.
+             * @returns Use the AsyncOperation to determine if the operation has completed. 
+             */
+            public static UnloadSceneAsync($sceneName: string):UnityEngine.AsyncOperation;
+            /** Destroys all GameObjects associated with the given Scene and removes the Scene from the SceneManager.
+             * @param sceneBuildIndex Index of the Scene in BuildSettings.
+             * @param sceneName Name or path of the Scene to unload.
+             * @param scene Scene to unload.
+             * @param options Scene unloading options.
+             * @returns Use the AsyncOperation to determine if the operation has completed. 
+             */
+            public static UnloadSceneAsync($scene: UnityEngine.SceneManagement.Scene):UnityEngine.AsyncOperation;
+            /** Destroys all GameObjects associated with the given Scene and removes the Scene from the SceneManager.
+             * @param sceneBuildIndex Index of the Scene in BuildSettings.
+             * @param sceneName Name or path of the Scene to unload.
+             * @param scene Scene to unload.
+             * @param options Scene unloading options.
+             * @returns Use the AsyncOperation to determine if the operation has completed. 
+             */
+            public static UnloadSceneAsync($sceneBuildIndex: number, $options: UnityEngine.SceneManagement.UnloadSceneOptions):UnityEngine.AsyncOperation;
+            /** Destroys all GameObjects associated with the given Scene and removes the Scene from the SceneManager.
+             * @param sceneBuildIndex Index of the Scene in BuildSettings.
+             * @param sceneName Name or path of the Scene to unload.
+             * @param scene Scene to unload.
+             * @param options Scene unloading options.
+             * @returns Use the AsyncOperation to determine if the operation has completed. 
+             */
+            public static UnloadSceneAsync($sceneName: string, $options: UnityEngine.SceneManagement.UnloadSceneOptions):UnityEngine.AsyncOperation;
+            /** Destroys all GameObjects associated with the given Scene and removes the Scene from the SceneManager.
+             * @param sceneBuildIndex Index of the Scene in BuildSettings.
+             * @param sceneName Name or path of the Scene to unload.
+             * @param scene Scene to unload.
+             * @param options Scene unloading options.
+             * @returns Use the AsyncOperation to determine if the operation has completed. 
+             */
+            public static UnloadSceneAsync($scene: UnityEngine.SceneManagement.Scene, $options: UnityEngine.SceneManagement.UnloadSceneOptions):UnityEngine.AsyncOperation;
+            
+        }
+        /** This struct collects all the CreateScene parameters in to a single place. */
+        class CreateSceneParameters extends System.ValueType {
+            
+        }
+        /** Used when loading a Scene in a player. */
+        enum LoadSceneMode { Single = 0, Additive = 1 }
+        /** This struct collects all the LoadScene parameters in to a single place. */
+        class LoadSceneParameters extends System.ValueType {
+            
+        }
+        /** Scene unloading options passed to SceneManager.UnloadScene. */
+        enum UnloadSceneOptions { None = 0, UnloadAllEmbeddedSceneObjects = 1 }
         
     }
     namespace System.Runtime.InteropServices {
@@ -3177,6 +3692,10 @@ declare module 'csharp' {
             
         }
         
+        class Stream extends System.MarshalByRefObject {
+            
+        }
+        
     }
     
         
@@ -3207,6 +3726,8 @@ declare module 'csharp' {
             public constructor();
             
             public static ReadTextFile($path: string):string;
+            
+            public static ReadStreamTextFile($filepath: string):string;
             
         }
         
@@ -3412,11 +3933,13 @@ declare module 'csharp' {
             
             public constructor();
             
-            public static FadeSprite($renderer: UnityEngine.SpriteRenderer, $start: number, $end: number, $time: number, $callback: System.Action):void;
+            public static FadeSprite($name: string, $start: number, $end: number, $time: number, $callback: System.Action):void;
             
-            public static MoveFrom($trans: UnityEngine.Transform, $from: UnityEngine.Vector3, $time: number, $callback: System.Action):void;
+            public static FadeUIGroup($name: string, $start: number, $end: number, $time: number, $callback: System.Action):void;
             
-            public static MoveTo($trans: UnityEngine.Transform, $to: UnityEngine.Vector3, $time: number, $callback: System.Action):void;
+            public static MoveFrom($name: string, $from: UnityEngine.Vector3, $time: number, $callback: System.Action):void;
+            
+            public static MoveTo($name: string, $to: UnityEngine.Vector3, $time: number, $callback: System.Action):void;
             
         }
         

@@ -1,6 +1,14 @@
-import {Tweens} from "csharp"
-import {$} from "Utils/Common"
+import { Tweens } from "csharp"
 
-export{
+const FadeSprite = Tweens.FadeSprite
+const FadeUIGroup = Tweens.FadeUIGroup
+const MoveTo = Tweens.MoveTo
+const MoveFrom = Tweens.MoveFrom
 
+
+export {
+    FadeSprite,
+    FadeUIGroup,
+    MoveFrom,
+    MoveTo
 }

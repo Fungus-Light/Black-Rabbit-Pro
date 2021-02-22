@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class Tweens : MonoBehaviour
 {
@@ -22,6 +23,23 @@ public class Tweens : MonoBehaviour
             Debug.LogError("No SpriteRender in " + name);
         }
 
+    }
+
+    public static void FadeUIGroup(string name,float start,float end,float time,Action callback){
+        Transform trans = GameObjectHelper.GetTransformByName(name);
+        CanvasGroup renderer = trans.GetComponent<CanvasGroup>();
+        if (renderer != null)
+        {
+            renderer.alpha = start;
+            renderer.DOFade(end, time).OnComplete(() =>
+            {
+                callback();
+            });
+        }
+        else
+        {
+            Debug.LogError("No CanvasGroup in " + name);
+        }
     }
 
     public static void MoveFrom(string name, Vector3 from, float time, Action callback)

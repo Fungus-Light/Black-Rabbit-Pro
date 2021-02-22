@@ -1,0 +1,10 @@
+[
+    {
+        "name": "example",
+        "levels": [
+            "Features",
+            "DialogMod"
+        ],
+        "entrance": "Feature"
+    }
+]

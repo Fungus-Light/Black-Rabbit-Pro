@@ -4,7 +4,18 @@ declare module "JS/GameEntrance"{
  * This is where the game begin
  * 游戏入口脚本
  */
+import { Transform } from "JS/Utils/Common";
+import { IGameLevel } from "JS/Interface/IGameLevel";
+function Create(): GameEntrance;
 
+class GameEntrance implements IGameLevel {
+    name: string;
+    root: Transform;
+    OnStart(): void;
+    OnUpdate(): void;
+    OnFixedUpdate(): void;
+    OnDestroy(): void;
+}
 }
 
 declare module "JS/LevelLoader"{
@@ -206,6 +217,15 @@ class ActionTrigger {
     RemoveLeaveAct(tag: string): void;
     CleanAllAct(): void;
 }
+
+}
+
+declare module "JS/Tween/Tween"{
+import { Tweens } from "csharp";
+const FadeSprite: typeof Tweens.FadeSprite;
+const FadeUIGroup: typeof Tweens.FadeUIGroup;
+const MoveTo: typeof Tweens.MoveTo;
+const MoveFrom: typeof Tweens.MoveFrom;
 
 }
 

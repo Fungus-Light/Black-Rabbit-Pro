@@ -18,4 +18,11 @@ public class FileHelper
             return content;
         }
     }
+
+    public static string ReadStreamTextFile(string filepath)
+    {
+        string text = File.ReadAllText(Path.Combine(Application.dataPath, "StreamingAssets", filepath).Replace("\\", "/"));
+        return text;
+
+    }
 }
