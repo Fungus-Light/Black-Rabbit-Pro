@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Logic-Maker</title>
+
+    <script src="Lib/Vue/vue.js"></script>
+
     <link rel="stylesheet" href="Lib/xel/material.css">
     <script src="Lib/xel/xel.min.js"></script>
     <link rel="stylesheet" href="Lib/CodeMirror/lib/codemirror.css">
@@ -42,11 +45,23 @@
         height: 30px;
         line-height: 30px;
     }
+
+    input[type=text],
+    select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
 </style>
 
 <body style="background: white;height: 100vh;">
 
     <xml id="toolboxJS" style="display: none">
+
         <category name="Basic Control" colour="%{BKY_LOGIC_HUE}">
             <block type="controls_if"></block>
             <block type="controls_whileUntil"></block>
@@ -80,6 +95,7 @@
     </xml>
 
     <xml id="toolboxLUA" style="display: none">
+
         <category name="Basic Control" colour="%{BKY_LOGIC_HUE}">
             <block type="controls_if"></block>
             <block type="controls_whileUntil"></block>
@@ -168,7 +184,7 @@
 
     </div>
     <div>
-        <div id="JSAPP" style="display: none;">
+        <div id="JSAPP" style="display: block;">
 
             <div style="width: 100%;height: calc( 100vh - 40px ) ;">
                 <div style="height: 100%; width: 10vw;float: left;background-color: rgba(231, 228, 223, 0.753);">
@@ -184,7 +200,23 @@
 
                     </ul>
                 </div>
-                <div id="blocklyAreaJS" style="height: 100%; width: 50vw;float: left;"></div>
+
+                <div style="height: 100%; width: 50vw;float: left;position: relative;">
+                    <div id="blocklyAreaJS" style="height: 100%; width: 100%;"></div>
+                    <div id="jsSearch"
+                        style="position:absolute;top: 30px;right: 10px;z-index: 99;background-color: rgba(255, 255, 255, 0);">
+                        <input @input="valueChange()" @focus="valueChange()" v-model="searchText" type="text" />
+
+                        <x-menu v-if="menuShow" opened style="z-index: 99;width: 100%;padding: 0px;">
+                            <x-menuitem v-for="tag in menuTags" :key="tag" @click="clickMenu(tag)">
+                                <x-label>{{tag}}</x-label>
+                            </x-menuitem>
+                        </x-menu>
+                    </div>
+                </div>
+
+
+
                 <div id="blocklyDivJS" style="position: absolute;"></div>
                 <div style="height: 100%; width: calc( 100% - 60vw ) ;float: left;">
                     <div id="containerJS" style="width: 100%;height: calc( 100% - 100px );"></div>
@@ -194,7 +226,7 @@
             </div>
         </div>
 
-        <div id="LUAAPP" style="display: block;">
+        <div id="LUAAPP" style="display: none;">
             <div style="width: 100%;height: calc( 100vh - 40px ) ;">
                 <div style="height: 100%; width: 10vw;float: left;background-color: rgba(231, 228, 223, 0.753);">
                     <ul>
@@ -209,7 +241,19 @@
 
                     </ul>
                 </div>
-                <div id="blocklyAreaLUA" style="height: 100%; width: 50vw;float: left;"></div>
+                <div style="height: 100%; width: 50vw;float: left;position: relative;">
+                    <div id="blocklyAreaLUA" style="height: 100%; width: 100%;"></div>
+                    <div id="luaSearch"
+                        style="position:absolute;top: 30px;right: 10px;z-index: 99;background-color: rgba(255, 255, 255, 0);">
+                        <input @input="valueChange()" @focus="valueChange()" v-model="searchText" type="text" />
+
+                        <x-menu v-if="menuShow" opened style="z-index: 99;width: 100%;padding: 0px;">
+                            <x-menuitem v-for="tag in menuTags" :key="tag" @click="clickMenu(tag)">
+                                <x-label>{{tag}}</x-label>
+                            </x-menuitem>
+                        </x-menu>
+                    </div>
+                </div>
                 <div id="blocklyDivLUA" style="position: absolute;"></div>
                 <div style="height: 100%; width: calc( 100% - 60vw ) ;float: left;">
                     <div id="containerLUA" style="width: 100%;height: calc( 100% - 100px );"></div>
@@ -229,6 +273,7 @@
     <script src="SRC/js/custom_blocks_js.js"></script>
     <script src="SRC/js/custom_blocks_lua.js"></script>
     <script src="SRC/js/file.js"></script>
+    <script src="SRC/js/Search.js"></script>
 </body>
 
 </html>

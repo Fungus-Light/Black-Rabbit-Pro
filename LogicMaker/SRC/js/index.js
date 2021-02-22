@@ -1,7 +1,7 @@
 const JSbeautyfy = require('js-beautify').js
 const LUAbeatutify = require('lua-fmt')
 
-var isJS = false
+var isJS = true
 
 let JSCodeMirror = CodeMirror(document.getElementById("containerJS"), {
     value: "//drag block and gen code",
