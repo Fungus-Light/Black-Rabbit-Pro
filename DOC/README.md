@@ -1,5 +1,6 @@
-# Black-Rabbit-Pro
+# 基础
 
+## 准备工作
 Unity版本： 2019.4 或以上
 
 
@@ -7,7 +8,7 @@ Unity版本： 2019.4 或以上
 
 **node.js** [下载地址](http://nodejs.cn/download/)
 
-安装node.js后需要设置  cnpm  
+如果是中国用户，推荐设置  cnpm  
 
 > 可以使用 [cnpm](https://github.com/cnpm/cnpm) (gzip 压缩支持) 命令行工具代替默认的 `npm`:
 >
@@ -18,7 +19,9 @@ Unity版本： 2019.4 或以上
 还需要安装**typescript**
 
 ```shell
-cnpm install -g typescript
+npm install -g typescript
+
+npm install -g typescript
 ```
 
 我们使用**VScode**来编码，所以需要设置Unity的编码工具为Vscode，然后打开项目
@@ -27,7 +30,7 @@ cnpm install -g typescript
 
 
 
----
+## 重要的文件夹
 
 有两个重要文件夹：**TsProject**和**GameScript**
 
@@ -39,7 +42,7 @@ GameScript是具体关卡的逻辑代码，一般只关心这个即可
 
 vscode终端进入到GameScript文件夹，通过命令
 
-```shell
+```bash
 npm run Create:Level 关卡名
 ```
 
@@ -49,9 +52,9 @@ npm run Create:Level 关卡名
 
 已经存在的关卡名不会被创建
 
----
+## 关卡脚本结构
 
-```typescript
+```javascript
 class Scene1 implements IGameLevel {
     name: string;
     root: Transform;
@@ -77,35 +80,32 @@ class Scene1 implements IGameLevel {
 
 一般都是在OnStart()里面编写逻辑
 
----
 
-常见的api
+## 常见的api
 
 在GameScript/@types 文件夹里面有定义文件**api.d.ts**
 
-在TsProject文件夹里面运行命令  **npm run build**,就会重新生成框架代码，并且生成定义文件和参考文档
+在TsProject文件夹里面运行命令  **npm run build**,就会重新生成框架代码
 
-参考文档默认被git忽略，生成后位置和Unity项目平级，
-
-最重要的是以**$**开头的一系列函数
+最重要的是以 **$** 开头的一系列函数
 
 这些函数能够查询到以   **$_**   开头命名的物体
 
-比如我在场景里面有一个物体叫  **$_Cube**
+比如我在场景里面有一个物体叫 **$_Cube**
 
 那么我使用 
 
-```typescript
+```javascript
 let cube = $("Cube")  
 ```
 
-就能获取到**$_Cube**物体的Transform组件
+就能获取到 **$_Cube** 物体的Transform组件
 
 例如我有一个 按钮 叫 **$_BTNA**
 
 那么我使用
 
-```typescript
+```javascript
 let BTNA = $Button("BTNA")  
 ```
 
@@ -115,13 +115,13 @@ Button类型是特殊封装过的
 
 所以使用
 
-```typescript
+```javascript
 BTNA.RegClickCallBack("startgame", () => {
-            //To do
+    //To do
 })
 ```
 
-来注册点击事件，第一个参数是标签，目前还没用上，第二个是  ()=>{ } 匿名/箭头函数 ，对应c#的Action
+来注册点击事件，第一个参数是标签，用于标注这个行为，第二个是  ()=>{ } 匿名/箭头函数 ，对应c#的Action
 
 我们在匿名函数里写点击后如何执行
 
@@ -129,19 +129,21 @@ BTNA.RegClickCallBack("startgame", () => {
 
 ！！！！在编辑场景时，选中一个物体，使用快捷键**ctrl + alt + n**  可以快捷添加**$_**前缀
 
----
+## Hello World
+
+我们将使用对话系统来说出 **“Hello World”**
 
 对话模块核心是**CreateDialog()** 函数，
 
 这个函数将会创建一个**DialogManager**对象，例如
 
-```typescript
+```javascript
 let HelloWorld = CreateDialog()
 ```
 
 这个对象目前有以下几个函数
 
-```typescript
+```javascript
 HelloWorld.Say("Hello World")
 HelloWorld.SetCallBack(() => {
     //当整个对话结束后调用
@@ -169,7 +171,7 @@ HelloWorld.Say("这是  HelloWorld.Continue()  执行后才会运行的语句")
 
 但是对话还没有开始，所以在按钮点击里面
 
-```typescript
+```javascript
 BTNA.RegClickCallBack("startgame", () => {
     HelloWorld.Start() //Start()是从头开始的意思
 })
@@ -185,13 +187,11 @@ BTNA.RegClickCallBack("startgame", () => {
 
 然后我们来看Unity实际场景如何调用
 
-场景里必需的两个物体
+场景里必需的物体
 
 ![](./Guide/basic.png)
 
 这两个预制体在 **Assets\FrameWork\Resources\Core**
-
-GameEnv可以不用管
 
 LevelRunner需要配置关卡模块名 为之前脚本名称
 
