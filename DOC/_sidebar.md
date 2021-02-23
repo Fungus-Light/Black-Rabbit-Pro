@@ -1,3 +1,3 @@
-* [介绍](/intro.md)
-* [基础](/README.md)
+* [介绍](/README.md)
+* [基础](/basic.md)
 * [游戏结构](gamestruct.md)
