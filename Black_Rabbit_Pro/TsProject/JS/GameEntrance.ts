@@ -22,6 +22,7 @@ class GameConfig {
     }
     fullscreen: boolean
     entranceBundle: string
+    mode: string
 }
 
 class GamePack {
@@ -86,6 +87,8 @@ class GameEntrance implements IGameLevel {
                 })
 
                 if (EntranceSceneName != null) {
+
+
                     let EntranceBundle = AssetBundle.LoadFromFile(Path.Combine(Application.dataPath, "StreamingAssets", "GamePacks", EntranceBundleName))
                     let ScenePaths = EntranceBundle.GetAllScenePaths();
                     let EntranceScenePath = null;
@@ -99,8 +102,10 @@ class GameEntrance implements IGameLevel {
                     if (EntranceScenePath != null) {
                         $SceneLoader().LoadScene(EntranceScenePath);
                     } else {
-                        Debug.LogError("Can Not Find Entrance Scene Path");
+                        Debug.LogError("Can Not Find EntranceScenePath")
                     }
+
+
                 } else {
                     Debug.LogError("Can Not Find " + EntranceSceneName + " Entance Scene");
                 }

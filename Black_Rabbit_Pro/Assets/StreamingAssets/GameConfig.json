@@ -6,5 +6,6 @@
         "h": 720
     },
     "fullscreen": false,
-    "entranceBundle":"example"
+    "entranceBundle": "example",
+    "mode": "debug"
 }
