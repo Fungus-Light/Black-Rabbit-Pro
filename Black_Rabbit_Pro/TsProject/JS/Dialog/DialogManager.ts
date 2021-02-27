@@ -16,7 +16,7 @@ class DialogManager {
         this.index = 0
     }
 
-    Options(options: Array<singleOption>, pauseHere: boolean): void {
+    Options(options: Array<singleOption>, pauseHere: boolean): DialogManager {
         this.FlowList.push(() => {
             options.forEach((item) => {
                 let OptionDialog: OptionDialog = null;
@@ -40,12 +40,13 @@ class DialogManager {
                 this.Gonext()
             }
         })
+        return this;
     }
 
-    Say(text: string): void
-    Say(text: string, dialogName: string): void
-    Say(text: string, dialogName: string, character: Character): void
-    Say(text: string, dialogName: string, character: Character, clearPrevious: boolean, waitForInput: boolean, fadeWhenDone: boolean, stopVoiceover: boolean, waitForVO: boolean, clip: AudioClip): void
+    Say(text: string): DialogManager
+    Say(text: string, dialogName: string): DialogManager
+    Say(text: string, dialogName: string, character: Character): DialogManager
+    Say(text: string, dialogName: string, character: Character, clearPrevious: boolean, waitForInput: boolean, fadeWhenDone: boolean, stopVoiceover: boolean, waitForVO: boolean, clip: AudioClip): DialogManager
     Say(text: string, dialogName?: string,
         character?: Character,
         clearPrevious?: boolean,
@@ -53,7 +54,7 @@ class DialogManager {
         fadeWhenDone?: boolean,
         stopVoiceover?: boolean,
         waitForVO?: boolean,
-        clip?: AudioClip): void {
+        clip?: AudioClip): DialogManager {
 
         let Dialog: SayDialog = null
 
@@ -106,47 +107,53 @@ class DialogManager {
             })
         })
 
+        return this;
     }
 
-    WaitForFrames(count: number): void {
+    WaitForFrames(count: number): DialogManager {
         this.FlowList.push(() => {
             CommonJsCall.WaitForFrames(Math.floor(count), () => {
                 this.Gonext();
             })
         })
+        return this;
     }
 
-    WaitForSeconds(count: number): void {
+    WaitForSeconds(count: number): DialogManager {
         this.FlowList.push(() => {
             CommonJsCall.WaitForSeconds(count, () => {
                 this.Gonext();
             })
         })
+        return this;
     }
 
-    WaitForSecondsUnscaled(count: number): void {
+    WaitForSecondsUnscaled(count: number): DialogManager {
         this.FlowList.push(() => {
             CommonJsCall.WaitForSecondsRealtime(count, () => {
                 this.Gonext();
             })
         })
+        return this;
     }
 
-    DoAction(action: System.Action) {
+    DoAction(action: System.Action):DialogManager {
         this.FlowList.push(() => {
             CommonJsCall.DoAction(action, () => {
                 this.Gonext()
             })
         })
+        return this;
     }
 
     /**
      * Set The CallBack When Flow is End
      * @param cb 
      */
-    SetCallBack(cb: any) {
+    SetCallBack(cb: any):DialogManager {
         this.CB = cb;
         Debug.LogWarning("Call Back Setted")
+        return this;
     }
 
     Continue(): void {
@@ -183,8 +190,11 @@ function CreateDialog() {
     return new DialogManager;
 }
 
+const $Block = CreateDialog
+
 export {
     DialogManager,
     CreateDialog,
+    $Block,
     option
 }

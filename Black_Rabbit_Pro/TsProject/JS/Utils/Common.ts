@@ -57,20 +57,7 @@ const T = $typeof
  * Get A Transform By It's Name
  * 通过名字获得一个物体的Transform组件
  */
-//const $ = GameObjectHelper.GetTransformByName
-function $(name: string): Transform
-function $<Type extends UnityEngine.Component>(name: string): Type
-function $<Type extends UnityEngine.Component>(name: string): Type | Transform {
-    if (Type ==  undefined) {
-        return GameObjectHelper.GetTransformByName(name)
-    } else {
-        let trans = GameObjectHelper.GetTransformByName(name)
-        let Component = trans.GetComponent(T(Type))
-        if(){
-
-        }
-    }
-}
+const $ = GameObjectHelper.GetTransformByName
 
 function SetActive(trans: Transform, state: boolean) {
     if (trans != null) {
