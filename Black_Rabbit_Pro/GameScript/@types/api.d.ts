@@ -55,20 +55,20 @@ class DialogManager {
     FlowList: Array<System.Action>;
     CB: any;
     constructor();
-    Options(options: Array<singleOption>, pauseHere: boolean): void;
-    Say(text: string): void;
-    Say(text: string, dialogName: string): void;
-    Say(text: string, dialogName: string, character: Character): void;
-    Say(text: string, dialogName: string, character: Character, clearPrevious: boolean, waitForInput: boolean, fadeWhenDone: boolean, stopVoiceover: boolean, waitForVO: boolean, clip: AudioClip): void;
-    WaitForFrames(count: number): void;
-    WaitForSeconds(count: number): void;
-    WaitForSecondsUnscaled(count: number): void;
-    DoAction(action: System.Action): void;
+    Options(options: Array<singleOption>, pauseHere: boolean): DialogManager;
+    Say(text: string): DialogManager;
+    Say(text: string, dialogName: string): DialogManager;
+    Say(text: string, dialogName: string, character: Character): DialogManager;
+    Say(text: string, dialogName: string, character: Character, clearPrevious: boolean, waitForInput: boolean, fadeWhenDone: boolean, stopVoiceover: boolean, waitForVO: boolean, clip: AudioClip): DialogManager;
+    WaitForFrames(count: number): DialogManager;
+    WaitForSeconds(count: number): DialogManager;
+    WaitForSecondsUnscaled(count: number): DialogManager;
+    DoAction(action: System.Action): DialogManager;
     /**
      * Set The CallBack When Flow is End
      * @param cb
      */
-    SetCallBack(cb: any): void;
+    SetCallBack(cb: any): DialogManager;
     Continue(): void;
     private Gonext;
     /**
@@ -77,6 +77,7 @@ class DialogManager {
     Start(): void;
 }
 function CreateDialog(): DialogManager;
+const $Block: typeof CreateDialog;
 
 }
 
@@ -96,16 +97,6 @@ class singleOption {
 function CreateSingleOption(text: string): singleOption;
 function CreateSingleOption(text: string, act: System.Action): singleOption;
 function CreateSingleOption(text: string, act: System.Action, optionDialogName: string): singleOption;
-
-}
-
-declare module "JS/Dialog/Portrait"{
-import { Fungus, DialogHelper } from "csharp";
-class Stage extends Fungus.Stage {
-}
-class PortraitOptions extends Fungus.PortraitOptions {
-}
-const $Stage: typeof DialogHelper.GetStage;
 
 }
 
@@ -179,6 +170,13 @@ class Timeline {
     ReMoveReverseStopCallBack(tag: string): void;
     CleanAllCallBack(): void;
 }
+
+}
+
+declare module "JS/SceneLoader/SceneLoader"{
+import { IScenesLoader } from 'csharp';
+function $SceneLoader(): IScenesLoader;
+function $SceneLoader(name: string): IScenesLoader;
 
 }
 
