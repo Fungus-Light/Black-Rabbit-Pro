@@ -33,10 +33,12 @@ public class LevelRunner : MonoBehaviour
         }
 
         env.Eval(
-            @"let level=require('" + ModName + "').Create(); " +
-            "let loader=require('" + CorePackName + "/" + LevelLoaderName + "');" +
-            "loader.SetLevel('" + LevelModName + "',level)"
-            );
+            $@"
+            let level=require('{ModName}').Create();
+            let loader=require('{CorePackName}/{LevelLoaderName}');
+            loader.SetLevel('{LevelModName}',level)
+            ");
+
 
         var Init = env.Eval<LoaderInit>("loader.Init");
         if (Init != null)
