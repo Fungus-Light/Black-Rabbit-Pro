@@ -21,7 +21,10 @@ public class LoadingScene : MonoBehaviour
 #if UNITY_EDITOR
         if (AssetHelper.Instance.loadType == AssetHelper.LoadType.Assets)
         {
-            EditorSceneManager.OpenScene(name);
+            UnityEngine.SceneManagement.LoadSceneParameters param = new UnityEngine.SceneManagement.LoadSceneParameters();
+            param.loadSceneMode = UnityEngine.SceneManagement.LoadSceneMode.Single;
+            Debug.Log(name);
+            EditorSceneManager.LoadSceneAsyncInPlayMode(name, param);
             yield return null;
         }
         else
