@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.unity.assetbundlebrowser": "1.7.0",
     "com.unity.ide.vscode": "1.2.3",
     "com.unity.test-framework": "1.1.20",
     "com.unity.textmeshpro": "2.1.3",
