@@ -1,4 +1,4 @@
-import { UnityEngine, GameObjectHelper, CommonJsCall, System, SoundLib } from "csharp";
+import { UnityEngine, GameObjectHelper, CommonJsCall, System, SoundLib, GameObjectPool } from "csharp";
 import { $typeof } from "puerts"
 
 /**
@@ -64,6 +64,8 @@ function SetActive(trans: Transform, state: boolean) {
         trans.gameObject.SetActive(state);
     }
 }
+
+class GameObject extends UnityEngine.GameObject { }
 /**
  * QUit The Game
  * 退出游戏
@@ -100,6 +102,35 @@ function PlaySound(tag: string, cb: System.Action) {
 class Input extends UnityEngine.Input { }
 const KeyCode = UnityEngine.KeyCode
 
+class Resources extends UnityEngine.Resources { }
+
+class AssetBundle extends UnityEngine.AssetBundle { }
+
+class Path extends System.IO.Path { }
+
+class Application extends UnityEngine.Application { }
+
+const FullScreenMode = UnityEngine.FullScreenMode
+
+const InitGameObjct = UnityEngine.GameObject.Instantiate
+
+function RegGameObject(obj: GameObject, newName: string) {
+    if (newName.startsWith("$_") == false) {
+        newName = "$_" + newName
+    }
+    if (GameObjectPool.Instance.gameObjectPool.Contains(obj.transform) == false) {
+        if ($(newName) == null) {
+            obj.name = newName
+            GameObjectPool.Instance.gameObjectPool.Add(obj.transform)
+        } else {
+            Debug.LogError("Already Exist this name")
+        }
+    } else {
+        Debug.LogError("Already Exist this Obj")
+    }
+
+}
+
 export {
     Debug,
     Vector3,
@@ -110,6 +141,15 @@ export {
     Input,
     AudioClip,
     KeyCode,
+    FullScreenMode,
+    Resources,
+    AssetBundle,
+    Path,
+    Application,
+    GameObject,
+    
+    RegGameObject,
+
     T,
     $,
     SetActive,
@@ -120,5 +160,6 @@ export {
 
     PlayMusic,
     PlaySound,
-    $SoundLib
+    $SoundLib,
+    InitGameObjct
 }

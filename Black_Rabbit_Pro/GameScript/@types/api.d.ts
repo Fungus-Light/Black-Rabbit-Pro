@@ -298,6 +298,8 @@ const T: typeof $typeof;
  */
 const $: typeof GameObjectHelper.GetTransformByName;
 function SetActive(trans: Transform, state: boolean): void;
+class GameObject extends UnityEngine.GameObject {
+}
 /**
  * QUit The Game
  * 退出游戏
@@ -323,6 +325,17 @@ function PlaySound(tag: string, cb: System.Action): void;
 class Input extends UnityEngine.Input {
 }
 const KeyCode: typeof UnityEngine.KeyCode;
+class Resources extends UnityEngine.Resources {
+}
+class AssetBundle extends UnityEngine.AssetBundle {
+}
+class Path extends System.IO.Path {
+}
+class Application extends UnityEngine.Application {
+}
+const FullScreenMode: typeof UnityEngine.FullScreenMode;
+const InitGameObjct: typeof UnityEngine.Object.Instantiate;
+function RegGameObject(obj: GameObject, newName: string): void;
 
 }
 
@@ -331,6 +344,34 @@ import { UnityEngine } from "csharp";
 class AudioSource extends UnityEngine.AudioSource {
 }
 function $AudioSource(name: string): AudioSource;
+
+}
+
+declare module "JS/Utils/GameConfig"{
+import { UnityEngine } from "csharp";
+class GameConfig {
+    v: number;
+    version: string;
+    resolution: {
+        w: number;
+        h: number;
+    };
+    fullscreen: boolean;
+    entranceBundle: string;
+    mode: "debug" | "release";
+    rate: 60;
+}
+class GamePack {
+    name: string;
+    levels: Array<string>;
+    entrance: string;
+}
+const GameCoreObj: {
+    GameEnv: string;
+};
+function ReadGameConfig(): GameConfig;
+function ReadPackConfig(): Array<GamePack>;
+const SetResolution: typeof UnityEngine.Screen.SetResolution;
 
 }
 

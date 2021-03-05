@@ -86,6 +86,8 @@ public class BindConfig
                 typeof(SoundConfig),
 
                 typeof(Tweens),
+                typeof(AssetHelper),
+                typeof(AssetHelper.LoadType)
             };
         }
     }
