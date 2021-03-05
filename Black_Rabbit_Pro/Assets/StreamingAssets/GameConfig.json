@@ -7,6 +7,6 @@
     },
     "fullscreen": false,
     "entranceBundle": "example",
-    "mode": "debug",
+    "mode": "release",
     "rate": 60
 }
