@@ -1,6 +1,7 @@
 /*==============Dont Delete This============================*/
 import { $Block, CreateDialog, option } from "JS/Dialog/DialogManager";
 import { IGameLevel } from "JS/Interface/IGameLevel";
+import { $SceneLoader } from "JS/SceneLoader/SceneLoader";
 import { Transform, $, Debug, Vector3, QuitGame, WaitForSeconds } from "JS/Utils/Common"
 
 function Create() { return new DialogModDemo(); }
@@ -91,7 +92,7 @@ class DialogModDemo implements IGameLevel {
                     FlowA.Start()
                 }),
                 option("no", () => {
-                    QuitGame()
+                    $SceneLoader().LoadScene("Features")
                 })
             ], false)
 

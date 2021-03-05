@@ -3959,6 +3959,8 @@ declare module 'csharp' {
             
             public constructor();
             
+            public static Fade($name: string, $start: number, $end: number, $time: number, $callback: System.Action):void;
+            
             public static FadeSprite($name: string, $start: number, $end: number, $time: number, $callback: System.Action):void;
             
             public static FadeUIGroup($name: string, $start: number, $end: number, $time: number, $callback: System.Action):void;
@@ -3967,6 +3969,8 @@ declare module 'csharp' {
             
             public static MoveTo($name: string, $to: UnityEngine.Vector3, $time: number, $callback: System.Action):void;
             
+            public static ScaleFromTo($name: string, $from: number, $to: number, $time: number, $callback: System.Action):void;
+            
         }
         
         class AssetHelper extends UnityEngine.MonoBehaviour {
@@ -3974,6 +3978,8 @@ declare module 'csharp' {
             public loadType: AssetHelper.LoadType;
             
             public static Instance: AssetHelper;
+            
+            public Scenes: System.Collections.Generic.Dictionary$2<string, string>;
             
             public constructor();
             

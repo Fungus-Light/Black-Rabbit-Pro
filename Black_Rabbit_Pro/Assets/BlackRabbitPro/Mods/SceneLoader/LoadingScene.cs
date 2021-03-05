@@ -23,13 +23,20 @@ public class LoadingScene : MonoBehaviour
         {
             UnityEngine.SceneManagement.LoadSceneParameters param = new UnityEngine.SceneManagement.LoadSceneParameters();
             param.loadSceneMode = UnityEngine.SceneManagement.LoadSceneMode.Single;
-            Debug.Log(name);
-            EditorSceneManager.LoadSceneAsyncInPlayMode(name, param);
-            yield return null;
+            //Debug.Log(AssetHelper.Instance.Scenes[name.ToLower()]);
+            //Debug.Log(name.ToLower());
+            AsyncOperation loadOperation = EditorSceneManager.LoadSceneAsyncInPlayMode(AssetHelper.Instance.Scenes[name.ToLower()], param);
+            while (!loadOperation.isDone)
+            {
+
+                progress.value = loadOperation.progress;
+
+                yield return null;
+            }
         }
         else
         {
-            AsyncOperation loadOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(name);
+            AsyncOperation loadOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(AssetHelper.Instance.Scenes[name.ToLower()]);
 
             while (!loadOperation.isDone)
             {
@@ -41,7 +48,7 @@ public class LoadingScene : MonoBehaviour
         }
 
 #else
-        AsyncOperation loadOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(name);
+        AsyncOperation loadOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(AssetHelper.Instance.Scenes[name.ToLower()]);
 
         while (!loadOperation.isDone)
         {

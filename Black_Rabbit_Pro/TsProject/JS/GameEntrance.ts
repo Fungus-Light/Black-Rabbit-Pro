@@ -3,7 +3,7 @@
  * 游戏入口脚本
  */
 import { Debug, Transform, WaitForSeconds, T, Application, AssetBundle, InitGameObjct, Path, Resources, FullScreenMode, RegGameObject } from "Utils/Common"
-import { FadeUIGroup } from "Tween/Tween"
+import { Fade, FadeUIGroup } from "Tween/Tween"
 import { IGameLevel } from "Interface/IGameLevel";
 import { UnityEngine, FileHelper, GameObjectPool, AssetHelper } from "csharp";
 import { $SceneLoader } from "SceneLoader/SceneLoader";
@@ -13,10 +13,6 @@ function Create() { return new GameEntrance(); }
 export { Create }
 
 /*=========================================================*/
-
-
-
-class SceneManager extends UnityEngine.SceneManagement.SceneManager { }
 
 class GameEntrance implements IGameLevel {
     name: string;
@@ -46,49 +42,76 @@ class GameEntrance implements IGameLevel {
 
         WaitForSeconds(1, () => {
 
-            FadeUIGroup("LogoUI", 0, 1, 1, () => {
-                Debug.LogWarning("Now Loading the Game !!!")
+            Fade("LogoUI", 0, 1, 1, () => {
 
-                let EntranceBundleName = Config.entranceBundle;
-                let GamePacks = ReadPackConfig()
+                WaitForSeconds(1, () => {
+                    Debug.LogWarning("Now Loading the Game !!!")
 
-                let EntranceSceneName = null
+                    let EntranceBundleName = Config.entranceBundle;
+                    let GamePacks = ReadPackConfig()
 
-                GamePacks.forEach((pack) => {
-                    if (pack.name == EntranceBundleName) {
-                        EntranceSceneName = pack.entrance
+                    let EntranceSceneName = null
+                    let NeededPack: GamePack = null
+
+                    GamePacks.forEach((pack) => {
+                        if (pack.name == EntranceBundleName) {
+                            NeededPack = pack
+                            EntranceSceneName = pack.entrance
+                        }
+                    })
+
+                    if (EntranceSceneName != null) {
+
+                        if (Config.mode == "release") {
+                            AssetHelper.Instance.loadType = AssetHelper.LoadType.Bundles
+
+                            AssetHelper.Instance.Scenes.Clear()
+
+                            let EntranceBundle = AssetBundle.LoadFromFile(Path.Combine(Application.dataPath, "StreamingAssets", "GamePacks", EntranceBundleName))
+                            let ScenePaths = EntranceBundle.GetAllScenePaths();
+                            let EntranceScenePath = null;
+                            for (let i = 0; i < ScenePaths.Length; i++) {
+                                //Debug.Log(ScenePaths.get_Item(i))
+                                if (ScenePaths.get_Item(i).includes(EntranceSceneName)) {
+                                    EntranceScenePath = ScenePaths.get_Item(i)
+                                    break;
+                                }
+                            }
+
+                            NeededPack.levels.forEach(level => {
+                                let scenePath = ""
+                                for (let i = 0; i < ScenePaths.Length; i++) {
+                                    //Debug.Log(ScenePaths.get_Item(i))
+                                    if (ScenePaths.get_Item(i).includes(level)) {
+                                        scenePath = ScenePaths.get_Item(i)
+                                        break;
+                                    }
+                                }
+                                AssetHelper.Instance.Scenes.Add(level.toLowerCase(), scenePath)
+                            })
+
+                            if (EntranceScenePath != null) {
+                                $SceneLoader().LoadScene(EntranceSceneName);
+                            } else {
+                                Debug.LogError("Can Not Find EntranceScenePath")
+                            }
+                        } else {
+                            AssetHelper.Instance.loadType = AssetHelper.LoadType.Assets
+
+                            AssetHelper.Instance.Scenes.Clear()
+
+                            NeededPack.levels.forEach(level => {
+                                AssetHelper.Instance.Scenes.Add(level.toLowerCase(), Path.Combine("Assets", "Games", EntranceBundleName, level + ".unity"))
+                            })
+
+                            //Debug.LogError(RealScenePath)
+                            $SceneLoader().LoadScene(EntranceSceneName);
+                        }
+
+                    } else {
+                        Debug.LogError("Can Not Find " + EntranceSceneName + " Entance Scene");
                     }
                 })
-
-                if (EntranceSceneName != null) {
-
-                    if (Config.mode == "release") {
-                        AssetHelper.Instance.loadType = AssetHelper.LoadType.Bundles
-                        let EntranceBundle = AssetBundle.LoadFromFile(Path.Combine(Application.dataPath, "StreamingAssets", "GamePacks", EntranceBundleName))
-                        let ScenePaths = EntranceBundle.GetAllScenePaths();
-                        let EntranceScenePath = null;
-                        for (let i = 0; i < ScenePaths.Length; i++) {
-                            Debug.Log(ScenePaths.get_Item(i))
-                            if (ScenePaths.get_Item(i).includes(EntranceSceneName)) {
-                                EntranceScenePath = ScenePaths.get_Item(i)
-                                break;
-                            }
-                        }
-                        if (EntranceScenePath != null) {
-                            $SceneLoader().LoadScene(EntranceScenePath);
-                        } else {
-                            Debug.LogError("Can Not Find EntranceScenePath")
-                        }
-                    } else {
-                        AssetHelper.Instance.loadType = AssetHelper.LoadType.Assets
-                        let RealScenePath = Path.Combine("Assets", "Games", EntranceBundleName, EntranceSceneName+".unity")
-                        //Debug.LogError(RealScenePath)
-                        $SceneLoader().LoadScene(RealScenePath);
-                    }
-
-                } else {
-                    Debug.LogError("Can Not Find " + EntranceSceneName + " Entance Scene");
-                }
 
             })
         })

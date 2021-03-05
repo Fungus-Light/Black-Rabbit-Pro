@@ -22,13 +22,8 @@ class LevelLoader {
         this.bindTo.JsStart = () => this.OnStart();
         this.bindTo.JsUpdate = () => this.OnUpdate();
         this.bindTo.JsOnDestroy = () => this.OnDestroy();
-        //this.bindTo.JsAwake = () => this.Init();
         this.bindTo.JsFixedUpdate = () => this.OnFixedUpdate();
     }
-
-    // public Init() {
-    //     //this.Level.Init();
-    // }
 
     public OnStart() {
         Debug.LogWarning("Start Load Level " + this.Level.name);

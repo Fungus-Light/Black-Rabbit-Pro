@@ -18,12 +18,15 @@ public class AssetHelper : MonoBehaviour
         return Instance;
     }
 
+    public Dictionary<string, string> Scenes;
+
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+        Scenes = new Dictionary<string, string>();
     }
 
 }

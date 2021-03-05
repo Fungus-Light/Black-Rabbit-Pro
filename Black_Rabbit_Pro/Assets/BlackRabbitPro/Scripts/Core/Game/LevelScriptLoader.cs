@@ -37,7 +37,7 @@ public class LevelScriptLoader : Puerts.ILoader
             var asset = Resources.Load<TextAsset>(filepath);
             return asset.text;
         }
-        Debug.Log(Path.Combine(Application.dataPath,"StreamingAssets", filepath + ".txt").Replace("\\", "/"));
+        //Debug.Log(Path.Combine(Application.dataPath,"StreamingAssets", filepath + ".txt").Replace("\\", "/"));
         return File.ReadAllText(Path.Combine(Application.dataPath,"StreamingAssets", filepath + ".txt").Replace("\\", "/"));
 
     }

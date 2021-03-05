@@ -220,10 +220,12 @@ class ActionTrigger {
 
 declare module "JS/Tween/Tween"{
 import { Tweens } from "csharp";
+const Fade: typeof Tweens.Fade;
 const FadeSprite: typeof Tweens.FadeSprite;
 const FadeUIGroup: typeof Tweens.FadeUIGroup;
 const MoveTo: typeof Tweens.MoveTo;
 const MoveFrom: typeof Tweens.MoveFrom;
+const ScaleFromTo: typeof Tweens.ScaleFromTo;
 
 }
 
