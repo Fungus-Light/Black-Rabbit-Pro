@@ -1,8 +1,6 @@
 # Black-Rabbit-<strong>Pro</strong>
 
-> A handy game development framework.
-
-
+> A Handy Game Development Framework.
 
 [GitHub](https://github.com/Fungus-Light/Black-Rabbit-Pro)
 [Get Started](#介绍)

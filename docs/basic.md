@@ -21,7 +21,9 @@ Unity版本： 2019.4 或以上
 ```shell
 npm install -g typescript
 
-npm install -g typescript
+# or
+
+cnpm install -g typescript
 ```
 
 我们使用**VScode**来编码，所以需要设置Unity的编码工具为Vscode，然后打开项目
@@ -127,7 +129,7 @@ BTNA.RegClickCallBack("startgame", () => {
 
 
 
-！！！！在编辑场景时，选中一个物体，使用快捷键**ctrl + alt + n**  可以快捷添加**$_**前缀
+！！！！在编辑场景时，选中一个物体，使用快捷键 **ctrl + alt + n**  可以快捷添加 **$_** 前缀
 
 ## Hello World
 
@@ -139,6 +141,10 @@ BTNA.RegClickCallBack("startgame", () => {
 
 ```javascript
 let HelloWorld = CreateDialog()
+```
+或者可以采用简写
+```javascript
+let HelloWorld = $Block()
 ```
 
 这个对象目前有以下几个函数
@@ -165,6 +171,31 @@ HelloWorld.Options([ //第一个参数是 option 对象的数组
     })
 ], true)//这里参数是指是否暂停后面的语句
 HelloWorld.Say("这是  HelloWorld.Continue()  执行后才会运行的语句")
+```
+我们可以采用链式调用写法来简化
+
+```javascript
+HelloWorld.SetCallBack(() => {
+    //当整个对话结束后调用
+    Debug.Log("Dialog End")  //Debug Vector3 等常用类可以直接使用
+})
+HelloWorld.Say("Hello World")
+    .WaitForFrames(60) //等待若干帧
+    .WaitForSeconds(1) //等待若干秒，受游戏速度影响
+    .WaitForSecondsUnscaled(2) //等待若干秒，不受游戏速度影响
+    .DoAction(() => {
+        //在对话进行过程中执行操作
+        Debug.Log("XXXXXXX")
+    })
+    .Options([ //第一个参数是 option 对象的数组
+        option("选项1", () => {
+            HelloWorld.Continue()//继续执行，在暂停对话后用来恢复对话
+        }),
+        option("选项2", () => {
+            Option2Dialog.Start()
+        })
+    ], true)//这里参数是指是否暂停后面的语句
+    .Say("这是  HelloWorld.Continue()  执行后才会运行的语句")
 ```
 
 这些只是定义了整个对话的流程

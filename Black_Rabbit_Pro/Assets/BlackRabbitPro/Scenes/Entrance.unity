@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -448,7 +448,7 @@ PrefabInstance:
     - target: {fileID: 7797364335207238823, guid: 29cf39b83db63f446aa8227d481b3332,
         type: 3}
       propertyPath: LevelModName
-      value: GameEntrance.js
+      value: GameEntrance
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29cf39b83db63f446aa8227d481b3332, type: 3}
