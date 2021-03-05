@@ -1,0 +1,17 @@
+{
+  "name": "gamelauncher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "xel": "^0.0.230"
+  },
+  "devDependencies": {
+    "electron": "^12.0.0"
+  }
+}

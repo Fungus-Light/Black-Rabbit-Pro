@@ -1,0 +1,124 @@
+<html>
+
+<head>
+    <title>Game Launcher</title>
+    <link rel="stylesheet" href="./node_modules/xel/themes/material.css">
+    <script src="node_modules/xel/xel.min.js"></script>
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+</style>
+
+<body>
+    <div style="width: 100%;height: 30px;-webkit-app-region: drag;background-color: rgb(5, 109, 141);">
+        <x-label style="width: 100%;height: 30px;line-height: 30px;padding-left: 5px;color: white;">
+            <strong>Game Launcher</strong>
+        </x-label>
+    </div>
+    <nav style="width: 100%;height: 52px;background-color: rgb(2, 96, 124);">
+        <x-tabs style="width: 100%!important;background-color: rgb(2, 96, 124);">
+            <x-tab id="games" selected>
+                <x-icon name="games"></x-icon>
+                <x-label>Games</x-label>
+            </x-tab>
+
+            <x-tab id="settings">
+                <x-icon name="settings"></x-icon>
+                <x-label>Settings</x-label>
+            </x-tab>
+
+            <x-tab id="mod">
+                <x-icon name="extension"></x-icon>
+                <x-label>Mods</x-label>
+            </x-tab>
+
+            <x-tab id="about">
+                <x-icon name="adjust"></x-icon>
+                <x-label>About</x-label>
+            </x-tab>
+        </x-tabs>
+    </nav>
+
+    <main style="width: 100%;height: calc( 100vh - 82px ) ;background-color: rgb(230, 230, 230);">
+
+        <div id="gamesPage" style="width: 100%;height: 100%;">
+            <br>
+            <form style="width: 80%;margin: auto;">
+                <x-label><strong>Select A Game Pack To Launch</strong></x-label>
+                <br>
+                <x-select style="width: 50%;">
+                    <x-menu>
+                        <x-menuitem value="australia">
+                            <x-label>Australia</x-label>
+                        </x-menuitem>
+
+                        <x-menuitem value="new-zealand">
+                            <x-label>New Zealand</x-label>
+                        </x-menuitem>
+
+                        <x-menuitem value="uk">
+                            <x-label>United Kingdom</x-label>
+                        </x-menuitem>
+
+                        <x-menuitem value="usa">
+                            <x-label>United States</x-label>
+                        </x-menuitem>
+                    </x-menu>
+                </x-select>
+                <hr>
+                <p style="height: 40px;">
+                    If eating three-egg omelets causes weight-gain, budgie eggs are a good substitute.
+                </p>
+                <br>
+                <x-buttons>
+                    <x-button>
+                        <x-label>Launch It</x-label>
+                    </x-button>
+                    <div style="width: 20px;"></div>
+                    <x-button>
+                        <x-label>Quit Launcher</x-label>
+                    </x-button>
+                </x-buttons>
+
+            </form>
+
+        </div>
+
+        <div id="settingPage" style="width: 100%;height: 100%;">
+            <br>
+            <form style="width: 80%;margin: auto;">
+                <x-label><strong>Select A Game Pack To Launch</strong></x-label>
+                <x-select style="width: 50%;">
+                    <x-menu>
+                        <x-menuitem value="australia">
+                            <x-label>Australia</x-label>
+                        </x-menuitem>
+
+                        <x-menuitem value="new-zealand">
+                            <x-label>New Zealand</x-label>
+                        </x-menuitem>
+
+                        <x-menuitem value="uk">
+                            <x-label>United Kingdom</x-label>
+                        </x-menuitem>
+
+                        <x-menuitem value="usa">
+                            <x-label>United States</x-label>
+                        </x-menuitem>
+                    </x-menu>
+                </x-select>
+            </form>
+
+        </div>
+
+    </main>
+
+    <script src="./SRC/index.js"></script>
+
+</body>
+
+</html>
