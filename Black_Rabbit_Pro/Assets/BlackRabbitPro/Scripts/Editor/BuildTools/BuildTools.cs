@@ -7,6 +7,25 @@ using UnityEditor.Build.Reporting;
 
 public class BuildTools
 {
+    [MenuItem("Build/Init Packs")]
+    public static void InitPacks()
+    {
+        DirectoryInfo packDir = new DirectoryInfo(Path.Combine(Application.dataPath, "Games").Replace("\\", "/"));
+        foreach (DirectoryInfo game in packDir.GetDirectories())
+        {
+            string configFile = Path.Combine("Assets", "Games", game.Name, "config.asset");
+            //Debug.Log(configFile);
+            if (File.Exists(configFile))
+            {
+                Debug.Log(configFile + " already exists a config file.");
+            }
+            else
+            {
+                AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<PackConfig>(), configFile);
+            }
+        }
+    }
+
     [MenuItem("Build/Auto Configure Packs")]
     public static void ConfigurePacks()
     {
@@ -18,7 +37,6 @@ public class BuildTools
                 if (file.Extension == ".unity")
                 {
                     AssetImporter scene = AssetImporter.GetAtPath(Path.Combine("Assets/Games", game.Name, file.Name).Replace("\\", "/"));
-                    //Debug.Log(Path.Combine("Assets/Games",game.Name,file.Name).Replace("\\","/"));
                     scene.assetBundleName = game.Name.ToLower();
                 }
             }
@@ -48,8 +66,9 @@ public class BuildTools
             build.assetNames = Assets.ToArray();
             builds.Add(build);
         }
-        string output =Path.Combine(Application.dataPath, "StreamingAssets", "GamePacks").Replace("\\", "/");
-        if(Directory.Exists(output)==false){
+        string output = Path.Combine(Application.dataPath, "StreamingAssets", "GamePacks").Replace("\\", "/");
+        if (Directory.Exists(output) == false)
+        {
             Directory.CreateDirectory(output);
         }
         BuildPipeline.BuildAssetBundles(output, builds.ToArray(), BuildAssetBundleOptions.None, EditorUserBuildSettings.activeBuildTarget);
