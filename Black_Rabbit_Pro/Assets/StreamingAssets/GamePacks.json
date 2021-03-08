@@ -1,10 +1,1 @@
-[
-    {
-        "name": "example",
-        "levels": [
-            "Features",
-            "DialogMod"
-        ],
-        "entrance": "DialogMod"
-    }
-]
+[{"name":"example","entrance":"dialogmod","levels":["dialogmod","features"]}]

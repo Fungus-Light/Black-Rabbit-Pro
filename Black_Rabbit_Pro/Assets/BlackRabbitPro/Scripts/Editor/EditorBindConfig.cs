@@ -22,7 +22,8 @@ public class EditorBindConfig
                 typeof(ScriptableObject),
                 typeof(FileInfo),
                 typeof(FileSystemInfo),
-                typeof(AssetImporter)
+                typeof(AssetImporter),
+                typeof(StreamWriter),
 
             };
         }

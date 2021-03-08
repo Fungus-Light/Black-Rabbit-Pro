@@ -4012,6 +4012,61 @@ declare module 'csharp' {
         
         class StreamWriter extends System.IO.TextWriter {
             
+            public static Null: System.IO.StreamWriter;
+            
+            public get AutoFlush(): boolean;
+            public set AutoFlush(value: boolean);
+            
+            public get BaseStream(): System.IO.Stream;
+            
+            public get Encoding(): System.Text.Encoding;
+            
+            public constructor($stream: System.IO.Stream);
+            
+            public constructor($stream: System.IO.Stream, $encoding: System.Text.Encoding);
+            
+            public constructor($stream: System.IO.Stream, $encoding: System.Text.Encoding, $bufferSize: number);
+            
+            public constructor($stream: System.IO.Stream, $encoding: System.Text.Encoding, $bufferSize: number, $leaveOpen: boolean);
+            
+            public constructor($path: string);
+            
+            public constructor($path: string, $append: boolean);
+            
+            public constructor($path: string, $append: boolean, $encoding: System.Text.Encoding);
+            
+            public constructor($path: string, $append: boolean, $encoding: System.Text.Encoding, $bufferSize: number);
+            
+            public Close():void;
+            
+            public Flush():void;
+            
+            public Write($value: number):void;
+            
+            public Write($buffer: System.Array$1<number>):void;
+            
+            public Write($buffer: System.Array$1<number>, $index: number, $count: number):void;
+            
+            public Write($value: string):void;
+            
+            public WriteAsync($value: number):System.Threading.Tasks.Task;
+            
+            public WriteAsync($value: string):System.Threading.Tasks.Task;
+            
+            public WriteAsync($buffer: System.Array$1<number>, $index: number, $count: number):System.Threading.Tasks.Task;
+            
+            public WriteLineAsync():System.Threading.Tasks.Task;
+            
+            public WriteLineAsync($value: number):System.Threading.Tasks.Task;
+            
+            public WriteLineAsync($value: string):System.Threading.Tasks.Task;
+            
+            public WriteLineAsync($buffer: System.Array$1<number>, $index: number, $count: number):System.Threading.Tasks.Task;
+            
+            public FlushAsync():System.Threading.Tasks.Task;
+            
+            public constructor();
+            
         }
         
         class TextWriter extends System.MarshalByRefObject {
@@ -5323,6 +5378,13 @@ declare module 'csharp' {
     namespace UnityEditor.AssetImporter {
         
         class SourceAssetIdentifier extends System.ValueType {
+            
+        }
+        
+    }
+    namespace System.Threading.Tasks {
+        
+        class Task extends System.Object {
             
         }
         
