@@ -3,44 +3,59 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.Build.Reporting;
+using Puerts;
 
 public class BuildTools
 {
+
     [MenuItem("Build/Init Packs")]
     public static void InitPacks()
     {
-        DirectoryInfo packDir = new DirectoryInfo(Path.Combine(Application.dataPath, "Games").Replace("\\", "/"));
-        foreach (DirectoryInfo game in packDir.GetDirectories())
-        {
-            string configFile = Path.Combine("Assets", "Games", game.Name, "config.asset");
-            //Debug.Log(configFile);
-            if (File.Exists(configFile))
-            {
-                Debug.Log(configFile + " already exists a config file.");
-            }
-            else
-            {
-                AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<PackConfig>(), configFile);
-            }
-        }
+        JsEnv env = new JsEnv();
+        env.Eval("require(\"PacksManager\").InitPacks()");
+        env.Dispose();
     }
 
     [MenuItem("Build/Auto Configure Packs")]
     public static void ConfigurePacks()
     {
-        DirectoryInfo packDir = new DirectoryInfo(Path.Combine(Application.dataPath, "Games"));
-        foreach (DirectoryInfo game in packDir.GetDirectories())
-        {
-            foreach (FileInfo file in game.GetFiles())
-            {
-                if (file.Extension == ".unity")
-                {
-                    AssetImporter scene = AssetImporter.GetAtPath(Path.Combine("Assets/Games", game.Name, file.Name).Replace("\\", "/"));
-                    scene.assetBundleName = game.Name.ToLower();
-                }
-            }
-        }
+        // DirectoryInfo packDir = new DirectoryInfo(Path.Combine(Application.dataPath, "Games"));
+        // foreach (DirectoryInfo game in packDir.GetDirectories())
+        // {
+
+        //     string configFile = Path.Combine("Assets", "Games", game.Name, "config.asset");
+        //     if (File.Exists(configFile))
+        //     {
+        //         PackConfig config = AssetDatabase.LoadAssetAtPath<PackConfig>(configFile);
+
+        //         if (config.entrance == null)
+        //         {
+        //             Debug.LogError(configFile + " must asign entrance!!!");
+        //         }
+        //         else
+        //         {
+        //             foreach (FileInfo file in game.GetFiles())
+        //             {
+        //                 if (file.Extension == ".unity")
+        //                 {
+        //                     AssetImporter scene = AssetImporter.GetAtPath(Path.Combine("Assets/Games", game.Name, file.Name).Replace("\\", "/"));
+        //                     scene.assetBundleName = game.Name.ToLower();
+        //                 }
+        //             }
+        //         }
+
+        //     }
+        //     else
+        //     {
+        //         Debug.LogError("Please Init Packs First!!!");
+        //     }
+        // }
+
+
+        JsEnv env = new JsEnv();
+        env.Eval("require(\"PacksManager\").ConfigurePacks()");
+        env.Dispose();
+
     }
 
     [MenuItem("Build/Build All Packs")]

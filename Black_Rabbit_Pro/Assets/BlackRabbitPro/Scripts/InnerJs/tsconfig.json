@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "commonjs",
+      "jsx": "react",
+      "sourceMap": true,
+      "noImplicitAny": true,
+      "typeRoots": [
+        "../../../BlackRabbitPro/Libs/Puerts/Typing",
+        "../../../Gen/Typing",
+      ],
+      "baseUrl": "SRC",
+      "outDir": "Resources"
+    }
+  }

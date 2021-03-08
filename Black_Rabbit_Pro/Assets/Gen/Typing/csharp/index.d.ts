@@ -2125,6 +2125,20 @@ declare module 'csharp' {
         /** A class you can derive from if you want to create objects that don't need to be attached to game objects. */
         class ScriptableObject extends UnityEngine.Object {
             
+            public constructor();
+            /** Creates an instance of a scriptable object.
+             * @param className The type of the ScriptableObject to create, as the name of the type.
+             * @param type The type of the ScriptableObject to create, as a System.Type instance.
+             * @returns The created ScriptableObject. 
+             */
+            public static CreateInstance($className: string):UnityEngine.ScriptableObject;
+            /** Creates an instance of a scriptable object.
+             * @param className The type of the ScriptableObject to create, as the name of the type.
+             * @param type The type of the ScriptableObject to create, as a System.Type instance.
+             * @returns The created ScriptableObject. 
+             */
+            public static CreateInstance($type: System.Type):UnityEngine.ScriptableObject;
+            
         }
         /** Represents a string as an int for efficient lookup and comparison. Use this for common PropertyNames.
         Internally stores just an int to represent the string. A PropertyName can be created from a string but can not be converted back to a string. The same string always results in the same int representing that string. Thus this is a very efficient string representation in both memory and speed when all you need is comparison.
@@ -2309,6 +2323,14 @@ declare module 'csharp' {
         enum AudioClipLoadType { DecompressOnLoad = 0, CompressedInMemory = 1, Streaming = 2 }
         /** Value describing the current load state of the audio data associated with an AudioClip. */
         enum AudioDataLoadState { Unloaded = 0, Loading = 1, Loaded = 2, Failed = 3 }
+        /** Represent the hash value. */
+        class Hash128 extends System.ValueType {
+            
+        }
+        
+        class LazyLoadReference$1<T> extends System.ValueType {
+            
+        }
         /** Position, size, anchor and pivot information for a rectangle. */
         class RectTransform extends UnityEngine.Transform {
             
@@ -2947,6 +2969,10 @@ declare module 'csharp' {
         }
         
         class MarshalByRefObject extends System.Object {
+            
+        }
+        
+        class DateTime extends System.ValueType {
             
         }
         
@@ -3696,6 +3722,324 @@ declare module 'csharp' {
             
         }
         
+        class DirectoryInfo extends System.IO.FileSystemInfo {
+            
+            public get Exists(): boolean;
+            
+            public get Name(): string;
+            
+            public get Parent(): System.IO.DirectoryInfo;
+            
+            public get Root(): System.IO.DirectoryInfo;
+            
+            public constructor($path: string);
+            
+            public Create():void;
+            
+            public CreateSubdirectory($path: string):System.IO.DirectoryInfo;
+            
+            public GetFiles():System.Array$1<System.IO.FileInfo>;
+            
+            public GetFiles($searchPattern: string):System.Array$1<System.IO.FileInfo>;
+            
+            public GetDirectories():System.Array$1<System.IO.DirectoryInfo>;
+            
+            public GetDirectories($searchPattern: string):System.Array$1<System.IO.DirectoryInfo>;
+            
+            public GetFileSystemInfos():System.Array$1<System.IO.FileSystemInfo>;
+            
+            public GetFileSystemInfos($searchPattern: string):System.Array$1<System.IO.FileSystemInfo>;
+            
+            public GetFileSystemInfos($searchPattern: string, $searchOption: System.IO.SearchOption):System.Array$1<System.IO.FileSystemInfo>;
+            
+            public Delete():void;
+            
+            public Delete($recursive: boolean):void;
+            
+            public MoveTo($destDirName: string):void;
+            
+            public GetDirectories($searchPattern: string, $searchOption: System.IO.SearchOption):System.Array$1<System.IO.DirectoryInfo>;
+            
+            public GetFiles($searchPattern: string, $searchOption: System.IO.SearchOption):System.Array$1<System.IO.FileInfo>;
+            
+            public Create($directorySecurity: System.Security.AccessControl.DirectorySecurity):void;
+            
+            public CreateSubdirectory($path: string, $directorySecurity: System.Security.AccessControl.DirectorySecurity):System.IO.DirectoryInfo;
+            
+            public GetAccessControl():System.Security.AccessControl.DirectorySecurity;
+            
+            public GetAccessControl($includeSections: System.Security.AccessControl.AccessControlSections):System.Security.AccessControl.DirectorySecurity;
+            
+            public SetAccessControl($directorySecurity: System.Security.AccessControl.DirectorySecurity):void;
+            
+            public EnumerateDirectories():System.Collections.Generic.IEnumerable$1<System.IO.DirectoryInfo>;
+            
+            public EnumerateDirectories($searchPattern: string):System.Collections.Generic.IEnumerable$1<System.IO.DirectoryInfo>;
+            
+            public EnumerateDirectories($searchPattern: string, $searchOption: System.IO.SearchOption):System.Collections.Generic.IEnumerable$1<System.IO.DirectoryInfo>;
+            
+            public EnumerateFiles():System.Collections.Generic.IEnumerable$1<System.IO.FileInfo>;
+            
+            public EnumerateFiles($searchPattern: string):System.Collections.Generic.IEnumerable$1<System.IO.FileInfo>;
+            
+            public EnumerateFiles($searchPattern: string, $searchOption: System.IO.SearchOption):System.Collections.Generic.IEnumerable$1<System.IO.FileInfo>;
+            
+            public EnumerateFileSystemInfos():System.Collections.Generic.IEnumerable$1<System.IO.FileSystemInfo>;
+            
+            public EnumerateFileSystemInfos($searchPattern: string):System.Collections.Generic.IEnumerable$1<System.IO.FileSystemInfo>;
+            
+            public EnumerateFileSystemInfos($searchPattern: string, $searchOption: System.IO.SearchOption):System.Collections.Generic.IEnumerable$1<System.IO.FileSystemInfo>;
+            
+            public constructor();
+            
+        }
+        
+        class FileSystemInfo extends System.MarshalByRefObject {
+            
+            public get FullName(): string;
+            
+            public get Extension(): string;
+            
+            public get Name(): string;
+            
+            public get Exists(): boolean;
+            
+            public get CreationTime(): Date;
+            public set CreationTime(value: Date);
+            
+            public get CreationTimeUtc(): Date;
+            public set CreationTimeUtc(value: Date);
+            
+            public get LastAccessTime(): Date;
+            public set LastAccessTime(value: Date);
+            
+            public get LastAccessTimeUtc(): Date;
+            public set LastAccessTimeUtc(value: Date);
+            
+            public get LastWriteTime(): Date;
+            public set LastWriteTime(value: Date);
+            
+            public get LastWriteTimeUtc(): Date;
+            public set LastWriteTimeUtc(value: Date);
+            
+            public get Attributes(): System.IO.FileAttributes;
+            public set Attributes(value: System.IO.FileAttributes);
+            
+            public Delete():void;
+            
+            public Refresh():void;
+            
+            public GetObjectData($info: System.Runtime.Serialization.SerializationInfo, $context: System.Runtime.Serialization.StreamingContext):void;
+            
+        }
+        
+        class FileInfo extends System.IO.FileSystemInfo {
+            
+            public get Name(): string;
+            
+            public get Length(): bigint;
+            
+            public get DirectoryName(): string;
+            
+            public get Directory(): System.IO.DirectoryInfo;
+            
+            public get IsReadOnly(): boolean;
+            public set IsReadOnly(value: boolean);
+            
+            public get Exists(): boolean;
+            
+            public constructor($fileName: string);
+            
+            public GetAccessControl():System.Security.AccessControl.FileSecurity;
+            
+            public GetAccessControl($includeSections: System.Security.AccessControl.AccessControlSections):System.Security.AccessControl.FileSecurity;
+            
+            public SetAccessControl($fileSecurity: System.Security.AccessControl.FileSecurity):void;
+            
+            public OpenText():System.IO.StreamReader;
+            
+            public CreateText():System.IO.StreamWriter;
+            
+            public AppendText():System.IO.StreamWriter;
+            
+            public CopyTo($destFileName: string):System.IO.FileInfo;
+            
+            public CopyTo($destFileName: string, $overwrite: boolean):System.IO.FileInfo;
+            
+            public Create():System.IO.FileStream;
+            
+            public Decrypt():void;
+            
+            public Encrypt():void;
+            
+            public Open($mode: System.IO.FileMode):System.IO.FileStream;
+            
+            public Open($mode: System.IO.FileMode, $access: System.IO.FileAccess):System.IO.FileStream;
+            
+            public Open($mode: System.IO.FileMode, $access: System.IO.FileAccess, $share: System.IO.FileShare):System.IO.FileStream;
+            
+            public OpenRead():System.IO.FileStream;
+            
+            public OpenWrite():System.IO.FileStream;
+            
+            public MoveTo($destFileName: string):void;
+            
+            public Replace($destinationFileName: string, $destinationBackupFileName: string):System.IO.FileInfo;
+            
+            public Replace($destinationFileName: string, $destinationBackupFileName: string, $ignoreMetadataErrors: boolean):System.IO.FileInfo;
+            
+            public constructor();
+            
+        }
+        
+        enum SearchOption { TopDirectoryOnly = 0, AllDirectories = 1 }
+        
+        class File extends System.Object {
+            
+            public static AppendAllText($path: string, $contents: string):void;
+            
+            public static AppendAllText($path: string, $contents: string, $encoding: System.Text.Encoding):void;
+            
+            public static AppendText($path: string):System.IO.StreamWriter;
+            
+            public static Copy($sourceFileName: string, $destFileName: string):void;
+            
+            public static Copy($sourceFileName: string, $destFileName: string, $overwrite: boolean):void;
+            
+            public static Create($path: string):System.IO.FileStream;
+            
+            public static Create($path: string, $bufferSize: number):System.IO.FileStream;
+            
+            public static Create($path: string, $bufferSize: number, $options: System.IO.FileOptions):System.IO.FileStream;
+            
+            public static Create($path: string, $bufferSize: number, $options: System.IO.FileOptions, $fileSecurity: System.Security.AccessControl.FileSecurity):System.IO.FileStream;
+            
+            public static CreateText($path: string):System.IO.StreamWriter;
+            
+            public static Delete($path: string):void;
+            
+            public static Exists($path: string):boolean;
+            
+            public static GetAccessControl($path: string):System.Security.AccessControl.FileSecurity;
+            
+            public static GetAccessControl($path: string, $includeSections: System.Security.AccessControl.AccessControlSections):System.Security.AccessControl.FileSecurity;
+            
+            public static GetAttributes($path: string):System.IO.FileAttributes;
+            
+            public static GetCreationTime($path: string):Date;
+            
+            public static GetCreationTimeUtc($path: string):Date;
+            
+            public static GetLastAccessTime($path: string):Date;
+            
+            public static GetLastAccessTimeUtc($path: string):Date;
+            
+            public static GetLastWriteTime($path: string):Date;
+            
+            public static GetLastWriteTimeUtc($path: string):Date;
+            
+            public static Move($sourceFileName: string, $destFileName: string):void;
+            
+            public static Open($path: string, $mode: System.IO.FileMode):System.IO.FileStream;
+            
+            public static Open($path: string, $mode: System.IO.FileMode, $access: System.IO.FileAccess):System.IO.FileStream;
+            
+            public static Open($path: string, $mode: System.IO.FileMode, $access: System.IO.FileAccess, $share: System.IO.FileShare):System.IO.FileStream;
+            
+            public static OpenRead($path: string):System.IO.FileStream;
+            
+            public static OpenText($path: string):System.IO.StreamReader;
+            
+            public static OpenWrite($path: string):System.IO.FileStream;
+            
+            public static Replace($sourceFileName: string, $destinationFileName: string, $destinationBackupFileName: string):void;
+            
+            public static Replace($sourceFileName: string, $destinationFileName: string, $destinationBackupFileName: string, $ignoreMetadataErrors: boolean):void;
+            
+            public static SetAccessControl($path: string, $fileSecurity: System.Security.AccessControl.FileSecurity):void;
+            
+            public static SetAttributes($path: string, $fileAttributes: System.IO.FileAttributes):void;
+            
+            public static SetCreationTime($path: string, $creationTime: Date):void;
+            
+            public static SetCreationTimeUtc($path: string, $creationTimeUtc: Date):void;
+            
+            public static SetLastAccessTime($path: string, $lastAccessTime: Date):void;
+            
+            public static SetLastAccessTimeUtc($path: string, $lastAccessTimeUtc: Date):void;
+            
+            public static SetLastWriteTime($path: string, $lastWriteTime: Date):void;
+            
+            public static SetLastWriteTimeUtc($path: string, $lastWriteTimeUtc: Date):void;
+            
+            public static ReadAllBytes($path: string):System.Array$1<number>;
+            
+            public static ReadAllLines($path: string):System.Array$1<string>;
+            
+            public static ReadAllLines($path: string, $encoding: System.Text.Encoding):System.Array$1<string>;
+            
+            public static ReadAllText($path: string):string;
+            
+            public static ReadAllText($path: string, $encoding: System.Text.Encoding):string;
+            
+            public static WriteAllBytes($path: string, $bytes: System.Array$1<number>):void;
+            
+            public static WriteAllLines($path: string, $contents: System.Array$1<string>):void;
+            
+            public static WriteAllLines($path: string, $contents: System.Array$1<string>, $encoding: System.Text.Encoding):void;
+            
+            public static WriteAllText($path: string, $contents: string):void;
+            
+            public static WriteAllText($path: string, $contents: string, $encoding: System.Text.Encoding):void;
+            
+            public static Encrypt($path: string):void;
+            
+            public static Decrypt($path: string):void;
+            
+            public static ReadLines($path: string):System.Collections.Generic.IEnumerable$1<string>;
+            
+            public static ReadLines($path: string, $encoding: System.Text.Encoding):System.Collections.Generic.IEnumerable$1<string>;
+            
+            public static AppendAllLines($path: string, $contents: System.Collections.Generic.IEnumerable$1<string>):void;
+            
+            public static AppendAllLines($path: string, $contents: System.Collections.Generic.IEnumerable$1<string>, $encoding: System.Text.Encoding):void;
+            
+            public static WriteAllLines($path: string, $contents: System.Collections.Generic.IEnumerable$1<string>):void;
+            
+            public static WriteAllLines($path: string, $contents: System.Collections.Generic.IEnumerable$1<string>, $encoding: System.Text.Encoding):void;
+            
+        }
+        
+        class StreamWriter extends System.IO.TextWriter {
+            
+        }
+        
+        class TextWriter extends System.MarshalByRefObject {
+            
+        }
+        
+        class FileStream extends System.IO.Stream {
+            
+        }
+        
+        enum FileOptions { None = 0, Encrypted = 16384, DeleteOnClose = 67108864, SequentialScan = 134217728, RandomAccess = 268435456, Asynchronous = 1073741824, WriteThrough = -2147483648 }
+        
+        enum FileAttributes { Archive = 32, Compressed = 2048, Device = 64, Directory = 16, Encrypted = 16384, Hidden = 2, Normal = 128, NotContentIndexed = 8192, Offline = 4096, ReadOnly = 1, ReparsePoint = 1024, SparseFile = 512, System = 4, Temporary = 256, IntegrityStream = 32768, NoScrubData = 131072 }
+        
+        enum FileMode { CreateNew = 1, Create = 2, Open = 3, OpenOrCreate = 4, Truncate = 5, Append = 6 }
+        
+        enum FileAccess { Read = 1, Write = 2, ReadWrite = 3 }
+        
+        enum FileShare { None = 0, Read = 1, Write = 2, ReadWrite = 3, Delete = 4, Inheritable = 16 }
+        
+        class StreamReader extends System.IO.TextReader {
+            
+        }
+        
+        class TextReader extends System.MarshalByRefObject {
+            
+        }
+        
     }
     
         
@@ -3984,6 +4328,16 @@ declare module 'csharp' {
             public constructor();
             
             public static GetAssetHelper():AssetHelper;
+            
+        }
+        
+        class PackConfig extends UnityEngine.ScriptableObject {
+            
+            public entrance: UnityEditor.SceneAsset;
+            
+            public exclude: System.Array$1<UnityEditor.SceneAsset>;
+            
+            public constructor();
             
         }
         
@@ -4445,6 +4799,532 @@ declare module 'csharp' {
     namespace AssetHelper {
         
         enum LoadType { Assets = 0, Bundles = 1 }
+        
+    }
+    namespace System.Security.AccessControl {
+        
+        class DirectorySecurity extends System.Security.AccessControl.FileSystemSecurity {
+            
+        }
+        
+        class FileSystemSecurity extends System.Security.AccessControl.NativeObjectSecurity {
+            
+        }
+        
+        class NativeObjectSecurity extends System.Security.AccessControl.CommonObjectSecurity {
+            
+        }
+        
+        class CommonObjectSecurity extends System.Security.AccessControl.ObjectSecurity {
+            
+        }
+        
+        class ObjectSecurity extends System.Object {
+            
+        }
+        
+        enum AccessControlSections { None = 0, Audit = 1, Access = 2, Owner = 4, Group = 8, All = 15 }
+        
+        class FileSecurity extends System.Security.AccessControl.FileSystemSecurity {
+            
+        }
+        
+    }
+    namespace System.Text {
+        
+        class Encoding extends System.Object {
+            
+        }
+        
+    }
+    namespace UnityEditor {
+        /** An Interface for accessing assets and performing operations on assets. */
+        class AssetDatabase extends System.Object {
+            
+            public constructor();
+            
+            public static add_importPackageStarted($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
+            
+            public static remove_importPackageStarted($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
+            
+            public static add_importPackageCompleted($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
+            
+            public static remove_importPackageCompleted($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
+            
+            public static add_importPackageCancelled($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
+            
+            public static remove_importPackageCancelled($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
+            
+            public static add_importPackageFailed($value: UnityEditor.AssetDatabase.ImportPackageFailedCallback):void;
+            
+            public static remove_importPackageFailed($value: UnityEditor.AssetDatabase.ImportPackageFailedCallback):void;
+            
+            public static IsOpenForEdit($assetOrMetaFilePaths: System.Array$1<string>, $outNotEditablePaths: System.Collections.Generic.List$1<string>, $statusQueryOptions?: UnityEditor.StatusQueryOptions):void;
+            /** Makes a file open for editing in version control.
+             * @param path Specifies the path to a file relative to the project root.
+             * @returns true if Unity successfully made the file editable in the version control system. Otherwise, returns false. 
+             */
+            public static MakeEditable($path: string):boolean;
+            
+            public static MakeEditable($paths: System.Array$1<string>, $prompt?: string, $outNotEditablePaths?: System.Collections.Generic.List$1<string>):boolean;
+            /** Search the asset database using the search filter string.
+             * @param filter The filter string can contain search data.  See below for details about this string.
+             * @param searchInFolders The folders where the search will start.
+             * @returns Array of matching asset. Note that GUIDs will be returned. 
+             */
+            public static FindAssets($filter: string):System.Array$1<string>;
+            /** Search the asset database using the search filter string.
+             * @param filter The filter string can contain search data.  See below for details about this string.
+             * @param searchInFolders The folders where the search will start.
+             * @returns Array of matching asset. Note that GUIDs will be returned. 
+             */
+            public static FindAssets($filter: string, $searchInFolders: System.Array$1<string>):System.Array$1<string>;
+            /** Is object an asset? */
+            public static Contains($obj: UnityEngine.Object):boolean;
+            /** Is object an asset? */
+            public static Contains($instanceID: number):boolean;
+            /** Create a new folder.
+             * @param parentFolder The name of the parent folder.
+             * @param newFolderName The name of the new folder.
+             * @returns The GUID of the newly created folder. 
+             */
+            public static CreateFolder($parentFolder: string, $newFolderName: string):string;
+            /** Is asset a main asset in the project window? */
+            public static IsMainAsset($obj: UnityEngine.Object):boolean;
+            /** Is asset a main asset in the project window? */
+            public static IsMainAsset($instanceID: number):boolean;
+            /** Does the asset form part of another asset? * @param obj The asset Object to query.
+             * @param instanceID Instance ID of the asset Object to query.
+             */
+            public static IsSubAsset($obj: UnityEngine.Object):boolean;
+            /** Does the asset form part of another asset? * @param obj The asset Object to query.
+             * @param instanceID Instance ID of the asset Object to query.
+             */
+            public static IsSubAsset($instanceID: number):boolean;
+            /** Determines whether the Asset is a foreign Asset. */
+            public static IsForeignAsset($obj: UnityEngine.Object):boolean;
+            /** Determines whether the Asset is a foreign Asset. */
+            public static IsForeignAsset($instanceID: number):boolean;
+            /** Determines whether the Asset is a native Asset. */
+            public static IsNativeAsset($obj: UnityEngine.Object):boolean;
+            /** Determines whether the Asset is a native Asset. */
+            public static IsNativeAsset($instanceID: number):boolean;
+            
+            public static GetCurrentCacheServerIp():string;
+            /** Creates a new unique path for an asset. */
+            public static GenerateUniqueAssetPath($path: string):string;
+            
+            public static StartAssetEditing():void;
+            
+            public static StopAssetEditing():void;
+            
+            public static ReleaseCachedFileHandles():void;
+            /** Checks if an asset file can be moved from one folder to another. (Without actually moving the file).
+             * @param oldPath The path where the asset currently resides.
+             * @param newPath The path which the asset should be moved to.
+             * @returns An empty string if the asset can be moved, otherwise an error message. 
+             */
+            public static ValidateMoveAsset($oldPath: string, $newPath: string):string;
+            /** Move an asset file (or folder) from one folder to another.
+             * @param oldPath The path where the asset currently resides.
+             * @param newPath The path which the asset should be moved to.
+             * @returns An empty string if the asset has been successfully moved, otherwise an error message. 
+             */
+            public static MoveAsset($oldPath: string, $newPath: string):string;
+            /** Creates an external Asset from an object (such as a Material) by extracting it from within an imported asset (such as an FBX file).
+             * @param asset The sub-asset to extract.
+             * @param newPath The file path of the new Asset.
+             * @returns An empty string if Unity has successfully extracted the Asset, or an error message if not. 
+             */
+            public static ExtractAsset($asset: UnityEngine.Object, $newPath: string):string;
+            /** Rename an asset file.
+             * @param pathName The path where the asset currently resides.
+             * @param newName The new name which should be given to the asset.
+             * @returns An empty string, if the asset has been successfully renamed, otherwise an error message. 
+             */
+            public static RenameAsset($pathName: string, $newName: string):string;
+            /** Moves the asset at path to the trash. */
+            public static MoveAssetToTrash($path: string):boolean;
+            /** Deletes the asset file at path. * @param path Filesystem path of the asset to be deleted.
+             */
+            public static DeleteAsset($path: string):boolean;
+            /** Import asset at path. */
+            public static ImportAsset($path: string):void;
+            /** Import asset at path. */
+            public static ImportAsset($path: string, $options: UnityEditor.ImportAssetOptions):void;
+            /** Duplicates the asset at path and stores it at newPath. * @param path Filesystem path of the source asset.
+             * @param newPath Filesystem path of the new asset to create.
+             */
+            public static CopyAsset($path: string, $newPath: string):boolean;
+            /** Writes the import settings to disk. */
+            public static WriteImportSettingsIfDirty($path: string):boolean;
+            /** Given a path to a directory in the Assets folder, relative to the project folder, this method will return an array of all its subdirectories. */
+            public static GetSubFolders($path: string):System.Array$1<string>;
+            /** Given a path to a folder, returns true if it exists, false otherwise.
+             * @param path The path to the folder.
+             * @returns Returns true if the folder exists. 
+             */
+            public static IsValidFolder($path: string):boolean;
+            /** Creates a new asset at path. * @param asset Object to use in creating the asset.
+             * @param path Filesystem path for the new asset.
+             */
+            public static CreateAsset($asset: UnityEngine.Object, $path: string):void;
+            /** Adds objectToAdd to an existing asset at path. * @param objectToAdd Object to add to the existing asset.
+             * @param path Filesystem path to the asset.
+             */
+            public static AddObjectToAsset($objectToAdd: UnityEngine.Object, $path: string):void;
+            /** Adds objectToAdd to an existing asset identified by assetObject. */
+            public static AddObjectToAsset($objectToAdd: UnityEngine.Object, $assetObject: UnityEngine.Object):void;
+            /** Specifies which object in the asset file should become the main object after the next import. * @param mainObject The object to become the main object.
+             * @param assetPath Path to the asset file.
+             */
+            public static SetMainObject($mainObject: UnityEngine.Object, $assetPath: string):void;
+            /** Returns the path name relative to the project folder where the asset is stored.
+             * @param instanceID The instance ID of the asset.
+             * @param assetObject A reference to the asset.
+             * @returns The asset path name, or null, or an empty string if the asset does not exist. 
+             */
+            public static GetAssetPath($assetObject: UnityEngine.Object):string;
+            /** Returns the path name relative to the project folder where the asset is stored.
+             * @param instanceID The instance ID of the asset.
+             * @param assetObject A reference to the asset.
+             * @returns The asset path name, or null, or an empty string if the asset does not exist. 
+             */
+            public static GetAssetPath($instanceID: number):string;
+            /** Returns the path name relative to the project folder where the asset is stored. */
+            public static GetAssetOrScenePath($assetObject: UnityEngine.Object):string;
+            /** Gets the path to the text .meta file associated with an asset.
+             * @param path The path to the asset.
+             * @returns The path to the .meta text file or empty string if the file does not exist. 
+             */
+            public static GetTextMetaFilePathFromAssetPath($path: string):string;
+            /** Gets the path to the asset file associated with a text .meta file. */
+            public static GetAssetPathFromTextMetaFilePath($path: string):string;
+            /** Returns the first asset object of type type at given path assetPath.
+             * @param assetPath Path of the asset to load.
+             * @param type Data type of the asset.
+             * @returns The asset matching the parameters. 
+             */
+            public static LoadAssetAtPath($assetPath: string, $type: System.Type):UnityEngine.Object;
+            /** Returns the main asset object at assetPath. * @param assetPath Filesystem path of the asset to load.
+             */
+            public static LoadMainAssetAtPath($assetPath: string):UnityEngine.Object;
+            /** Returns the type of the main asset object at assetPath. * @param assetPath Filesystem path of the asset to load.
+             */
+            public static GetMainAssetTypeAtPath($assetPath: string):System.Type;
+            /** Returns true if the main asset object at assetPath is loaded in memory. * @param assetPath Filesystem path of the asset to load.
+             */
+            public static IsMainAssetAtPathLoaded($assetPath: string):boolean;
+            /** Returns all sub Assets at assetPath. */
+            public static LoadAllAssetRepresentationsAtPath($assetPath: string):System.Array$1<UnityEngine.Object>;
+            /** Returns an array of all Assets at assetPath. * @param assetPath Filesystem path to the asset.
+             */
+            public static LoadAllAssetsAtPath($assetPath: string):System.Array$1<UnityEngine.Object>;
+            
+            public static GetAllAssetPaths():System.Array$1<string>;
+            /** Import any changed assets. */
+            public static Refresh():void;
+            /** Import any changed assets. */
+            public static Refresh($options: UnityEditor.ImportAssetOptions):void;
+            /** Opens the asset with associated application. */
+            public static OpenAsset($instanceID: number):boolean;
+            /** Opens the asset with associated application. */
+            public static OpenAsset($instanceID: number, $lineNumber: number):boolean;
+            /** Opens the asset with associated application. */
+            public static OpenAsset($instanceID: number, $lineNumber: number, $columnNumber: number):boolean;
+            /** Opens the asset with associated application. */
+            public static OpenAsset($target: UnityEngine.Object):boolean;
+            /** Opens the asset with associated application. */
+            public static OpenAsset($target: UnityEngine.Object, $lineNumber: number):boolean;
+            /** Opens the asset with associated application. */
+            public static OpenAsset($target: UnityEngine.Object, $lineNumber: number, $columnNumber: number):boolean;
+            /** Opens the asset(s) with associated application(s). */
+            public static OpenAsset($objects: System.Array$1<UnityEngine.Object>):boolean;
+            /** Get the GUID for the asset at path.
+             * @param path Filesystem path for the asset.
+             * @returns GUID. 
+             */
+            public static AssetPathToGUID($path: string):string;
+            /** Gets the corresponding asset path for the supplied guid, or an empty string if the GUID can't be found. */
+            public static GUIDToAssetPath($guid: string):string;
+            /** Returns the hash of all the dependencies of an asset.
+             * @param path Path to the asset.
+             * @returns Aggregate hash. 
+             */
+            public static GetAssetDependencyHash($path: string):UnityEngine.Hash128;
+            
+            public static SaveAssets():void;
+            /** Retrieves an icon for the asset at the given asset path. */
+            public static GetCachedIcon($path: string):UnityEngine.Texture;
+            /** Replaces that list of labels on an asset. */
+            public static SetLabels($obj: UnityEngine.Object, $labels: System.Array$1<string>):void;
+            /** Returns all labels attached to a given asset. */
+            public static GetLabels($obj: UnityEngine.Object):System.Array$1<string>;
+            /** Removes all labels attached to an asset. */
+            public static ClearLabels($obj: UnityEngine.Object):void;
+            
+            public static GetAllAssetBundleNames():System.Array$1<string>;
+            
+            public static GetUnusedAssetBundleNames():System.Array$1<string>;
+            /** Remove the assetBundle name from the asset database. The forceRemove flag is used to indicate if you want to remove it even it's in use. * @param assetBundleName The assetBundle name you want to remove.
+             * @param forceRemove Flag to indicate if you want to remove the assetBundle name even it's in use.
+             */
+            public static RemoveAssetBundleName($assetBundleName: string, $forceRemove: boolean):boolean;
+            
+            public static RemoveUnusedAssetBundleNames():void;
+            /** Returns an array containing the paths of all assets marked with the specified Asset Bundle name. */
+            public static GetAssetPathsFromAssetBundle($assetBundleName: string):System.Array$1<string>;
+            /** Get the Asset paths for all Assets tagged with assetBundleName and
+                            named assetName. */
+            public static GetAssetPathsFromAssetBundleAndAssetName($assetBundleName: string, $assetName: string):System.Array$1<string>;
+            /** Returns the name of the AssetBundle that a given asset belongs to.
+             * @param assetPath The asset's path.
+             * @returns Returns the name of the AssetBundle that a given asset belongs to. See the method description for more details. 
+             */
+            public static GetImplicitAssetBundleName($assetPath: string):string;
+            /** Returns the name of the AssetBundle Variant that a given asset belongs to.
+             * @param assetPath The asset's path.
+             * @returns Returns the name of the AssetBundle Variant that a given asset belongs to. See the method description for more details. 
+             */
+            public static GetImplicitAssetBundleVariantName($assetPath: string):string;
+            /** Given an assetBundleName, returns the list of AssetBundles that it depends on.
+             * @param assetBundleName The name of the AssetBundle for which dependencies are required.
+             * @param recursive If false, returns only AssetBundles which are direct dependencies of the input; if true, includes all indirect dependencies of the input.
+             * @returns The names of all AssetBundles that the input depends on. 
+             */
+            public static GetAssetBundleDependencies($assetBundleName: string, $recursive: boolean):System.Array$1<string>;
+            /** Returns an array of all the assets that are dependencies of the asset at the specified pathName.
+            Note: GetDependencies() gets the Assets that are referenced by other Assets. For example, a Scene could contain many GameObjects with a Material attached to them. In this case,  GetDependencies() will return the path to the Material Assets, but not the GameObjects as those are not Assets on your disk.
+             * @param pathName The path to the asset for which dependencies are required.
+             * @param recursive Controls whether this method recursively checks and returns all dependencies including indirect dependencies (when set to true), or whether it only returns direct dependencies (when set to false).
+             * @returns The paths of all assets that the input depends on. 
+             */
+            public static GetDependencies($pathName: string):System.Array$1<string>;
+            /** Returns an array of all the assets that are dependencies of the asset at the specified pathName.
+            Note: GetDependencies() gets the Assets that are referenced by other Assets. For example, a Scene could contain many GameObjects with a Material attached to them. In this case,  GetDependencies() will return the path to the Material Assets, but not the GameObjects as those are not Assets on your disk.
+             * @param pathName The path to the asset for which dependencies are required.
+             * @param recursive Controls whether this method recursively checks and returns all dependencies including indirect dependencies (when set to true), or whether it only returns direct dependencies (when set to false).
+             * @returns The paths of all assets that the input depends on. 
+             */
+            public static GetDependencies($pathName: string, $recursive: boolean):System.Array$1<string>;
+            /** Returns an array of the paths of assets that are dependencies of all the assets in the list of pathNames that you provide.
+            Note: GetDependencies() gets the Assets that are referenced by other Assets. For example, a Scene could contain many GameObjects with a Material attached to them. In this case,  GetDependencies() will return the path to the Material Assets, but not the GameObjects as those are not Assets on your disk.
+             * @param pathNames The path to the assets for which dependencies are required.
+             * @param recursive Controls whether this method recursively checks and returns all dependencies including indirect dependencies (when set to true), or whether it only returns direct dependencies (when set to false).
+             * @returns The paths of all assets that the input depends on. 
+             */
+            public static GetDependencies($pathNames: System.Array$1<string>):System.Array$1<string>;
+            /** Returns an array of the paths of assets that are dependencies of all the assets in the list of pathNames that you provide.
+            Note: GetDependencies() gets the Assets that are referenced by other Assets. For example, a Scene could contain many GameObjects with a Material attached to them. In this case,  GetDependencies() will return the path to the Material Assets, but not the GameObjects as those are not Assets on your disk.
+             * @param pathNames The path to the assets for which dependencies are required.
+             * @param recursive Controls whether this method recursively checks and returns all dependencies including indirect dependencies (when set to true), or whether it only returns direct dependencies (when set to false).
+             * @returns The paths of all assets that the input depends on. 
+             */
+            public static GetDependencies($pathNames: System.Array$1<string>, $recursive: boolean):System.Array$1<string>;
+            /** Exports the assets identified by assetPathNames to a unitypackage file in fileName. */
+            public static ExportPackage($assetPathName: string, $fileName: string):void;
+            /** Exports the assets identified by assetPathNames to a unitypackage file in fileName. */
+            public static ExportPackage($assetPathName: string, $fileName: string, $flags: UnityEditor.ExportPackageOptions):void;
+            /** Exports the assets identified by assetPathNames to a unitypackage file in fileName. */
+            public static ExportPackage($assetPathNames: System.Array$1<string>, $fileName: string):void;
+            /** Exports the assets identified by assetPathNames to a unitypackage file in fileName. */
+            public static ExportPackage($assetPathNames: System.Array$1<string>, $fileName: string, $flags: UnityEditor.ExportPackageOptions):void;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetObject: UnityEngine.Object):boolean;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetObject: UnityEngine.Object, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetOrMetaFilePath: string):boolean;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetOrMetaFilePath: string, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetObject: UnityEngine.Object, $message: $Ref<string>):boolean;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetObject: UnityEngine.Object, $message: $Ref<string>, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetOrMetaFilePath: string, $message: $Ref<string>):boolean;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetOrMetaFilePath: string, $message: $Ref<string>, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
+            /** Query whether an asset's metadata (.meta) file is open for edit in version control.
+             * @param assetObject Object representing the asset whose metadata status you wish to query.
+             * @param message Returns a reason for the asset metadata not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset's metadata is considered open for edit by the selected version control system. 
+             */
+            public static IsMetaFileOpenForEdit($assetObject: UnityEngine.Object):boolean;
+            /** Query whether an asset's metadata (.meta) file is open for edit in version control.
+             * @param assetObject Object representing the asset whose metadata status you wish to query.
+             * @param message Returns a reason for the asset metadata not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset's metadata is considered open for edit by the selected version control system. 
+             */
+            public static IsMetaFileOpenForEdit($assetObject: UnityEngine.Object, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
+            /** Query whether an asset's metadata (.meta) file is open for edit in version control.
+             * @param assetObject Object representing the asset whose metadata status you wish to query.
+             * @param message Returns a reason for the asset metadata not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset's metadata is considered open for edit by the selected version control system. 
+             */
+            public static IsMetaFileOpenForEdit($assetObject: UnityEngine.Object, $message: $Ref<string>):boolean;
+            /** Query whether an asset's metadata (.meta) file is open for edit in version control.
+             * @param assetObject Object representing the asset whose metadata status you wish to query.
+             * @param message Returns a reason for the asset metadata not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset's metadata is considered open for edit by the selected version control system. 
+             */
+            public static IsMetaFileOpenForEdit($assetObject: UnityEngine.Object, $message: $Ref<string>, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
+            
+            public static GetBuiltinExtraResource($type: System.Type, $path: string):UnityEngine.Object;
+            
+            public static ForceReserializeAssets($assetPaths: System.Collections.Generic.IEnumerable$1<string>, $options?: UnityEditor.ForceReserializeAssetsOptions):void;
+            /** Warning Use the overload with a long localId parameter. Using the overload with an integer localId parameter can cause an integer overflow in localId. This can happen when the object passed to the API is part of a Prefab.
+            Get the GUID and local file id from an object instance id.
+             * @param instanceID InstanceID of the object to retrieve information for.
+             * @param obj The object to retrieve GUID and File Id for.
+             * @param assetRef The asset reference to retrieve GUID and File Id for.
+             * @param guid The GUID of the asset.
+             * @param localId The local file identifier of this asset.
+             * @returns True if the guid and file id were successfully found, false if not. 
+             */
+            public static TryGetGUIDAndLocalFileIdentifier($obj: UnityEngine.Object, $guid: $Ref<string>, $localId: $Ref<bigint>):boolean;
+            /** Warning Use the overload with a long localId parameter. Using the overload with an integer localId parameter can cause an integer overflow in localId. This can happen when the object passed to the API is part of a Prefab.
+            Get the GUID and local file id from an object instance id.
+             * @param instanceID InstanceID of the object to retrieve information for.
+             * @param obj The object to retrieve GUID and File Id for.
+             * @param assetRef The asset reference to retrieve GUID and File Id for.
+             * @param guid The GUID of the asset.
+             * @param localId The local file identifier of this asset.
+             * @returns True if the guid and file id were successfully found, false if not. 
+             */
+            public static TryGetGUIDAndLocalFileIdentifier($instanceID: number, $guid: $Ref<string>, $localId: $Ref<bigint>):boolean;
+            
+            public static ForceReserializeAssets():void;
+            /** Removes object from its asset (See Also: AssetDatabase.AddObjectToAsset). */
+            public static RemoveObjectFromAsset($objectToRemove: UnityEngine.Object):void;
+            /** Imports package at packagePath into the current project. */
+            public static ImportPackage($packagePath: string, $interactive: boolean):void;
+            
+            public static DisallowAutoRefresh():void;
+            
+            public static AllowAutoRefresh():void;
+            
+        }
+        /** Options for querying the version control system status of a file. */
+        enum StatusQueryOptions { ForceUpdate = 0, UseCachedIfPossible = 1, UseCachedAsync = 2 }
+        /** Asset importing options. */
+        enum ImportAssetOptions { Default = 0, ForceUpdate = 1, ForceSynchronousImport = 8, ImportRecursive = 256, DontDownloadFromCacheServer = 8192, ForceUncompressedImport = 16384 }
+        /** Export package option. Multiple options can be combined together using the | operator. */
+        enum ExportPackageOptions { Default = 0, Interactive = 1, Recurse = 2, IncludeDependencies = 4, IncludeLibraryAssets = 8 }
+        /** Options for AssetDatabase.ForceReserializeAssets. */
+        enum ForceReserializeAssetsOptions { ReserializeAssets = 1, ReserializeMetadata = 2, ReserializeAssetsAndMetadata = 3 }
+        /** SceneAsset is used to reference Scene objects in the Editor. */
+        class SceneAsset extends UnityEngine.Object {
+            
+        }
+        /** Base class from which asset importers for specific asset types derive. */
+        class AssetImporter extends UnityEngine.Object {
+            /** The path name of the asset for this importer. (Read Only) */
+            public get assetPath(): string;
+            /** The value is true when no meta file is provided with the imported asset. */
+            public get importSettingsMissing(): boolean;
+            
+            public get assetTimeStamp(): bigint;
+            /** Get or set any user data. */
+            public get userData(): string;
+            public set userData(value: string);
+            /** Get or set the AssetBundle name. */
+            public get assetBundleName(): string;
+            public set assetBundleName(value: string);
+            /** Get or set the AssetBundle variant. */
+            public get assetBundleVariant(): string;
+            public set assetBundleVariant(value: string);
+            
+            public constructor();
+            /** Set the AssetBundle name and variant. * @param assetBundleName AssetBundle name.
+             * @param assetBundleVariant AssetBundle variant.
+             */
+            public SetAssetBundleNameAndVariant($assetBundleName: string, $assetBundleVariant: string):void;
+            /** Retrieves the asset importer for the asset at path. */
+            public static GetAtPath($path: string):UnityEditor.AssetImporter;
+            
+            public SaveAndReimport():void;
+            
+            public AddRemap($identifier: UnityEditor.AssetImporter.SourceAssetIdentifier, $externalObject: UnityEngine.Object):void;
+            
+            public RemoveRemap($identifier: UnityEditor.AssetImporter.SourceAssetIdentifier):boolean;
+            
+            public GetExternalObjectMap():System.Collections.Generic.Dictionary$2<UnityEditor.AssetImporter.SourceAssetIdentifier, UnityEngine.Object>;
+            /** Checks if the AssetImporter supports remapping the given asset type.
+             * @param type The type of asset to check.
+             * @returns Returns true if the importer supports remapping the given type. Otherwise, returns false. 
+             */
+            public SupportsRemappedAssetType($type: System.Type):boolean;
+            
+        }
+        
+    }
+    namespace UnityEditor.AssetDatabase {
+        
+        type ImportPackageCallback = (packageName: string) => void;
+        var ImportPackageCallback: {new (func: (packageName: string) => void): ImportPackageCallback;}
+        
+        type ImportPackageFailedCallback = (packageName: string, errorMessage: string) => void;
+        var ImportPackageFailedCallback: {new (func: (packageName: string, errorMessage: string) => void): ImportPackageFailedCallback;}
+        
+    }
+    namespace UnityEditor.AssetImporter {
+        
+        class SourceAssetIdentifier extends System.ValueType {
+            
+        }
         
     }
     namespace Fungus {
