@@ -2331,6 +2331,10 @@ declare module 'csharp' {
         class LazyLoadReference$1<T> extends System.ValueType {
             
         }
+        /** Manifest for all the AssetBundles in the build. */
+        class AssetBundleManifest extends UnityEngine.Object {
+            
+        }
         /** Position, size, anchor and pivot information for a rectangle. */
         class RectTransform extends UnityEngine.Transform {
             
@@ -5364,6 +5368,344 @@ declare module 'csharp' {
             public SupportsRemappedAssetType($type: System.Type):boolean;
             
         }
+        /** AssetBundle building map entry. */
+        class AssetBundleBuild extends System.ValueType {
+            /** AssetBundle name. */
+            public assetBundleName: string;
+            /** AssetBundle variant. */
+            public assetBundleVariant: string;
+            /** Asset names which belong to the given AssetBundle. */
+            public assetNames: System.Array$1<string>;
+            /** Addressable name used to load an asset. */
+            public addressableNames: System.Array$1<string>;
+            
+        }
+        /** Lets you programmatically build players or AssetBundles which can be loaded from the web. */
+        class BuildPipeline extends System.Object {
+            /** Is a player currently being built? */
+            public static get isBuildingPlayer(): boolean;
+            
+            public constructor();
+            
+            public static GetBuildTargetGroup($platform: UnityEditor.BuildTarget):UnityEditor.BuildTargetGroup;
+            /** Given a BuildTarget will return the well known string representation for the build target platform.
+             * @param targetPlatform An instance of the BuildTarget enum.
+             * @returns Target platform name represented by the passed in BuildTarget. 
+             */
+            public static GetBuildTargetName($targetPlatform: UnityEditor.BuildTarget):string;
+            
+            public static SetAssetBundleEncryptKey($password: string):void;
+            /** Builds a player. These overloads are still supported, but will be replaced. Please use BuildPlayer (BuildPlayerOptions buildPlayerOptions)  instead.
+             * @param scenes The Scenes to include in the build. If empty, the build only includes the currently open Scene. Paths are relative to the project folder (AssetsMyLevelsMyScene.unity).
+             * @param locationPathName The path where the application will be built.
+             * @param target The BuildTarget to build.
+             * @param options Additional BuildOptions, like whether to run the built player.
+             * @returns An error message if an error occurred. 
+             */
+            public static BuildPlayer($levels: System.Array$1<UnityEditor.EditorBuildSettingsScene>, $locationPathName: string, $target: UnityEditor.BuildTarget, $options: UnityEditor.BuildOptions):UnityEditor.Build.Reporting.BuildReport;
+            /** Builds a player. These overloads are still supported, but will be replaced. Please use BuildPlayer (BuildPlayerOptions buildPlayerOptions)  instead.
+             * @param scenes The Scenes to include in the build. If empty, the build only includes the currently open Scene. Paths are relative to the project folder (AssetsMyLevelsMyScene.unity).
+             * @param locationPathName The path where the application will be built.
+             * @param target The BuildTarget to build.
+             * @param options Additional BuildOptions, like whether to run the built player.
+             * @returns An error message if an error occurred. 
+             */
+            public static BuildPlayer($levels: System.Array$1<string>, $locationPathName: string, $target: UnityEditor.BuildTarget, $options: UnityEditor.BuildOptions):UnityEditor.Build.Reporting.BuildReport;
+            /** Builds a player.
+             * @param buildPlayerOptions Provide various options to control the behavior of BuildPipeline.BuildPlayer.
+             * @returns A BuildReport giving build process information. 
+             */
+            public static BuildPlayer($buildPlayerOptions: UnityEditor.BuildPlayerOptions):UnityEditor.Build.Reporting.BuildReport;
+            /** Build all AssetBundles specified in the editor.
+             * @param outputPath Output path for the AssetBundles.
+             * @param assetBundleOptions AssetBundle building options.
+             * @param targetPlatform Chosen target build platform.
+             * @returns The manifest listing all AssetBundles included in this build. 
+             */
+            public static BuildAssetBundles($outputPath: string, $assetBundleOptions: UnityEditor.BuildAssetBundleOptions, $targetPlatform: UnityEditor.BuildTarget):UnityEngine.AssetBundleManifest;
+            /** Build AssetBundles from a building map.
+             * @param outputPath Output path for the AssetBundles.
+             * @param builds AssetBundle building map.
+             * @param assetBundleOptions AssetBundle building options.
+             * @param targetPlatform Target build platform.
+             * @returns The manifest listing all AssetBundles included in this build. 
+             */
+            public static BuildAssetBundles($outputPath: string, $builds: System.Array$1<UnityEditor.AssetBundleBuild>, $assetBundleOptions: UnityEditor.BuildAssetBundleOptions, $targetPlatform: UnityEditor.BuildTarget):UnityEngine.AssetBundleManifest;
+            /** Extract the crc checksum for the given AssetBundle. */
+            public static GetCRCForAssetBundle($targetPath: string, $crc: $Ref<number>):boolean;
+            /** Extract the hash for the given AssetBundle. */
+            public static GetHashForAssetBundle($targetPath: string, $hash: $Ref<UnityEngine.Hash128>):boolean;
+            /** Returns true if the specified build target is currently available in the Editor. * @param buildTargetGroup build target group
+             * @param target build target
+             */
+            public static IsBuildTargetSupported($buildTargetGroup: UnityEditor.BuildTargetGroup, $target: UnityEditor.BuildTarget):boolean;
+            /** Returns the path of a player directory. For ex., Editor\Data\PlaybackEngines\AndroidPlayer.
+            In some cases the player directory path can be affected by BuildOptions.Development. * @param target Build target.
+             * @param options Build options.
+             * @param buildTargetGroup Build target group.
+             */
+            public static GetPlaybackEngineDirectory($target: UnityEditor.BuildTarget, $options: UnityEditor.BuildOptions):string;
+            /** Returns the path of a player directory. For ex., Editor\Data\PlaybackEngines\AndroidPlayer.
+            In some cases the player directory path can be affected by BuildOptions.Development. * @param target Build target.
+             * @param options Build options.
+             * @param buildTargetGroup Build target group.
+             */
+            public static GetPlaybackEngineDirectory($buildTargetGroup: UnityEditor.BuildTargetGroup, $target: UnityEditor.BuildTarget, $options: UnityEditor.BuildOptions):string;
+            
+        }
+        /** Build target group. */
+        enum BuildTargetGroup { Unknown = 0, Standalone = 1, WebPlayer = 2, iPhone = 4, iOS = 4, PS3 = 5, XBOX360 = 6, Android = 7, WebGL = 13, WSA = 14, Metro = 14, WP8 = 15, BlackBerry = 16, Tizen = 17, PSP2 = 18, PS4 = 19, PSM = 20, XboxOne = 21, SamsungTV = 22, N3DS = 23, WiiU = 24, tvOS = 25, Facebook = 26, Switch = 27, Lumin = 28, Stadia = 29, CloudRendering = 30 }
+        /** Target build platform. */
+        enum BuildTarget { StandaloneOSX = 2, StandaloneOSXUniversal = 3, StandaloneOSXIntel = 4, StandaloneWindows = 5, WebPlayer = 6, WebPlayerStreamed = 7, iOS = 9, PS3 = 10, XBOX360 = 11, Android = 13, StandaloneLinux = 17, StandaloneWindows64 = 19, WebGL = 20, WSAPlayer = 21, StandaloneLinux64 = 24, StandaloneLinuxUniversal = 25, WP8Player = 26, StandaloneOSXIntel64 = 27, BlackBerry = 28, Tizen = 29, PSP2 = 30, PS4 = 31, PSM = 32, XboxOne = 33, SamsungTV = 34, N3DS = 35, WiiU = 36, tvOS = 37, Switch = 38, Lumin = 39, Stadia = 40, CloudRendering = 41, iPhone = -1, BB10 = -1, MetroPlayer = -1, NoTarget = -2 }
+        /** This class is used for entries in the Scenes list, as displayed in the window. This class contains the Scene path of a Scene and an enabled flag that indicates wether the Scene is enabled in the BuildSettings window or not.
+        You can use this class in combination with EditorBuildSettings.scenes to populate the list of Scenes included in the build via script. This is useful when creating custom editor scripts to automate your build pipeline.
+        See EditorBuildSettings.scenes for an example script. */
+        class EditorBuildSettingsScene extends System.Object {
+            
+        }
+        /** Building options. Multiple options can be combined together. */
+        enum BuildOptions { None = 0, Development = 1, AutoRunPlayer = 4, ShowBuiltPlayer = 8, BuildAdditionalStreamedScenes = 16, AcceptExternalModificationsToPlayer = 32, InstallInBuildFolder = 64, WebPlayerOfflineDeployment = 128, ConnectWithProfiler = 256, AllowDebugging = 512, SymlinkLibraries = 1024, UncompressedAssetBundle = 2048, StripDebugSymbols = 0, CompressTextures = 0, ConnectToHost = 4096, EnableHeadlessMode = 16384, BuildScriptsOnly = 32768, PatchPackage = 65536, Il2CPP = 0, ForceEnableAssertions = 131072, CompressWithLz4 = 262144, CompressWithLz4HC = 524288, ForceOptimizeScriptCompilation = 0, ComputeCRC = 1048576, StrictMode = 2097152, IncludeTestAssemblies = 4194304, NoUniqueIdentifier = 8388608, WaitForPlayerConnection = 33554432, EnableCodeCoverage = 67108864, EnableDeepProfilingSupport = 268435456 }
+        /** Provide various options to control the behavior of BuildPipeline.BuildPlayer. */
+        class BuildPlayerOptions extends System.ValueType {
+            
+        }
+        /** Asset Bundle building options. */
+        enum BuildAssetBundleOptions { None = 0, UncompressedAssetBundle = 1, CollectDependencies = 2, CompleteAssets = 4, DisableWriteTypeTree = 8, DeterministicAssetBundle = 16, ForceRebuildAssetBundle = 32, IgnoreTypeTreeChanges = 64, AppendHashToAssetBundleName = 128, ChunkBasedCompression = 256, StrictMode = 512, DryRunBuild = 1024, DisableLoadAssetByFileName = 4096, DisableLoadAssetByFileNameWithExtension = 8192, AssetBundleStripUnityVersion = 32768, EnableProtection = 65536 }
+        /** User build settings for the Editor */
+        class EditorUserBuildSettings extends UnityEngine.Object {
+            /** The currently selected build target group. */
+            public static get selectedBuildTargetGroup(): UnityEditor.BuildTargetGroup;
+            public static set selectedBuildTargetGroup(value: UnityEditor.BuildTargetGroup);
+            /** The currently selected target for a standalone build. */
+            public static get selectedStandaloneTarget(): UnityEditor.BuildTarget;
+            public static set selectedStandaloneTarget(value: UnityEditor.BuildTarget);
+            /** PS4 Build Subtarget. */
+            public static get ps4BuildSubtarget(): UnityEditor.PS4BuildSubtarget;
+            public static set ps4BuildSubtarget(value: UnityEditor.PS4BuildSubtarget);
+            /** Specifies which version of PS4 hardware to target. */
+            public static get ps4HardwareTarget(): UnityEditor.PS4HardwareTarget;
+            public static set ps4HardwareTarget(value: UnityEditor.PS4HardwareTarget);
+            /** Are null references actively validated? */
+            public static get explicitNullChecks(): boolean;
+            public static set explicitNullChecks(value: boolean);
+            /** Are divide by zero's actively validated? */
+            public static get explicitDivideByZeroChecks(): boolean;
+            public static set explicitDivideByZeroChecks(value: boolean);
+            /** Are array bounds actively validated? */
+            public static get explicitArrayBoundsChecks(): boolean;
+            public static set explicitArrayBoundsChecks(value: boolean);
+            /** Build submission materials. */
+            public static get needSubmissionMaterials(): boolean;
+            public static set needSubmissionMaterials(value: boolean);
+            /** Build data compressed with PSArc. */
+            public static get compressWithPsArc(): boolean;
+            public static set compressWithPsArc(value: boolean);
+            /** Force installation of package, even if error. */
+            public static get forceInstallation(): boolean;
+            public static set forceInstallation(value: boolean);
+            /** Places the package on the outer edge of the disk. */
+            public static get movePackageToDiscOuterEdge(): boolean;
+            public static set movePackageToDiscOuterEdge(value: boolean);
+            /** Compress files in package. */
+            public static get compressFilesInPackage(): boolean;
+            public static set compressFilesInPackage(value: boolean);
+            /** Whether the standalone player is built in headless mode. */
+            public static get enableHeadlessMode(): boolean;
+            public static set enableHeadlessMode(value: boolean);
+            /** Is build script only enabled. */
+            public static get buildScriptsOnly(): boolean;
+            public static set buildScriptsOnly(value: boolean);
+            /** Xbox Build subtarget. */
+            public static get xboxBuildSubtarget(): UnityEditor.XboxBuildSubtarget;
+            public static set xboxBuildSubtarget(value: UnityEditor.XboxBuildSubtarget);
+            /** When building an Xbox One Streaming Install package (makepkg.exe) The layout generation code in Unity will assign each Scene and associated assets to individual chunks. Unity will mark Scene 0 as being part of the launch range, IE the set of chunks required to launch the game, you may include additional Scenes in this launch range if you desire, this specifies a range of Scenes (starting at 0) to be included in the launch set.  */
+            public static get streamingInstallLaunchRange(): number;
+            public static set streamingInstallLaunchRange(value: number);
+            /** The currently selected Xbox One Deploy Method. */
+            public static get xboxOneDeployMethod(): UnityEditor.XboxOneDeployMethod;
+            public static set xboxOneDeployMethod(value: UnityEditor.XboxOneDeployMethod);
+            /** The currently selected Xbox One Deploy Drive. */
+            public static get xboxOneDeployDrive(): UnityEditor.XboxOneDeployDrive;
+            public static set xboxOneDeployDrive(value: UnityEditor.XboxOneDeployDrive);
+            
+            public static get xboxOneAdditionalDebugPorts(): string;
+            public static set xboxOneAdditionalDebugPorts(value: string);
+            /** Sets the XBox to reboot and redeploy when the deployment fails. */
+            public static get xboxOneRebootIfDeployFailsAndRetry(): boolean;
+            public static set xboxOneRebootIfDeployFailsAndRetry(value: boolean);
+            /** Android platform options. */
+            public static get androidBuildSubtarget(): UnityEditor.MobileTextureSubtarget;
+            public static set androidBuildSubtarget(value: UnityEditor.MobileTextureSubtarget);
+            /** ETC2 texture decompression fallback on Android devices that don't support ETC2. */
+            public static get androidETC2Fallback(): UnityEditor.AndroidETC2Fallback;
+            public static set androidETC2Fallback(value: UnityEditor.AndroidETC2Fallback);
+            
+            public static get androidBuildSystem(): UnityEditor.AndroidBuildSystem;
+            public static set androidBuildSystem(value: UnityEditor.AndroidBuildSystem);
+            
+            public static get androidBuildType(): UnityEditor.AndroidBuildType;
+            public static set androidBuildType(value: UnityEditor.AndroidBuildType);
+            
+            public static get androidDebugMinification(): UnityEditor.AndroidMinification;
+            public static set androidDebugMinification(value: UnityEditor.AndroidMinification);
+            
+            public static get androidReleaseMinification(): UnityEditor.AndroidMinification;
+            public static set androidReleaseMinification(value: UnityEditor.AndroidMinification);
+            /** Set to true to create a symbols.zip file in the same location as the .apk or .aab file. */
+            public static get androidCreateSymbolsZip(): boolean;
+            public static set androidCreateSymbolsZip(value: boolean);
+            /** Sets and gets target device type for the application to run on when building to Windows Store platform. */
+            public static get wsaSubtarget(): UnityEditor.WSASubtarget;
+            public static set wsaSubtarget(value: UnityEditor.WSASubtarget);
+            /** The build type for the Universal Windows Platform. */
+            public static get wsaUWPBuildType(): UnityEditor.WSAUWPBuildType;
+            public static set wsaUWPBuildType(value: UnityEditor.WSAUWPBuildType);
+            /** Sets and gets target UWP SDK to build Windows Store application against. */
+            public static get wsaUWPSDK(): string;
+            public static set wsaUWPSDK(value: string);
+            
+            public static get wsaMinUWPSDK(): string;
+            public static set wsaMinUWPSDK(value: string);
+            
+            public static get wsaArchitecture(): string;
+            public static set wsaArchitecture(value: string);
+            /** Sets and gets Visual Studio version to build Windows Store application with. */
+            public static get wsaUWPVisualStudioVersion(): string;
+            public static set wsaUWPVisualStudioVersion(value: string);
+            /** Specifies the Windows DevicePortal connection address of the device to deploy and launch the UWP app on when using Build and Run. */
+            public static get windowsDevicePortalAddress(): string;
+            public static set windowsDevicePortalAddress(value: string);
+            /** Specifies the Windows DevicePortal username for the device to deploy and launch the UWP app on when using Build and Run. */
+            public static get windowsDevicePortalUsername(): string;
+            public static set windowsDevicePortalUsername(value: string);
+            /** Specifies the Windows DevicePortal password for the device to deploy and launch the UWP app on when using Build and Run. */
+            public static get windowsDevicePortalPassword(): string;
+            public static set windowsDevicePortalPassword(value: string);
+            /** Sets and gets the Windows device to launch the UWP app when using Build and Run. */
+            public static get wsaBuildAndRunDeployTarget(): UnityEditor.WSABuildAndRunDeployTarget;
+            public static set wsaBuildAndRunDeployTarget(value: UnityEditor.WSABuildAndRunDeployTarget);
+            /** The currently active build target. */
+            public static get activeBuildTarget(): UnityEditor.BuildTarget;
+            /** DEFINE directives for the compiler. */
+            public static get activeScriptCompilationDefines(): System.Array$1<string>;
+            /** Enables a development build. */
+            public static get development(): boolean;
+            public static set development(value: boolean);
+            /** Start the player with a connection to the profiler. */
+            public static get connectProfiler(): boolean;
+            public static set connectProfiler(value: boolean);
+            /** Enables Deep Profiling support in the player. */
+            public static get buildWithDeepProfilingSupport(): boolean;
+            public static set buildWithDeepProfilingSupport(value: boolean);
+            /** Enable source-level debuggers to connect. */
+            public static get allowDebugging(): boolean;
+            public static set allowDebugging(value: boolean);
+            /** Sets the Player to wait for player connection on player start. */
+            public static get waitForPlayerConnection(): boolean;
+            public static set waitForPlayerConnection(value: boolean);
+            /** Export Android Project for use with Android Studio/Gradle. */
+            public static get exportAsGoogleAndroidProject(): boolean;
+            public static set exportAsGoogleAndroidProject(value: boolean);
+            /** Set to true to build an Android App Bundle (aab file) instead of an apk. The default value is false. */
+            public static get buildAppBundle(): boolean;
+            public static set buildAppBundle(value: boolean);
+            /** Symlink runtime libraries with an iOS Xcode project. */
+            public static get symlinkLibraries(): boolean;
+            public static set symlinkLibraries(value: boolean);
+            /** Scheme with which the project will be run in Xcode. */
+            public static get iOSBuildConfigType(): UnityEditor.iOSBuildType;
+            public static set iOSBuildConfigType(value: UnityEditor.iOSBuildType);
+            
+            public static get switchCreateSolutionFile(): boolean;
+            public static set switchCreateSolutionFile(value: boolean);
+            
+            public static get switchCreateRomFile(): boolean;
+            public static set switchCreateRomFile(value: boolean);
+            
+            public static get switchNVNGraphicsDebugger(): boolean;
+            public static set switchNVNGraphicsDebugger(value: boolean);
+            
+            public static get switchNVNShaderDebugging(): boolean;
+            public static set switchNVNShaderDebugging(value: boolean);
+            
+            public static get switchNVNDrawValidation(): boolean;
+            public static set switchNVNDrawValidation(value: boolean);
+            
+            public static get switchEnableHeapInspector(): boolean;
+            public static set switchEnableHeapInspector(value: boolean);
+            
+            public static get switchEnableDebugPad(): boolean;
+            public static set switchEnableDebugPad(value: boolean);
+            
+            public static get switchRedirectWritesToHostMount(): boolean;
+            public static set switchRedirectWritesToHostMount(value: boolean);
+            /** Place the built player in the build folder. */
+            public static get installInBuildFolder(): boolean;
+            public static set installInBuildFolder(value: boolean);
+            /** Instructs the player to wait for managed debugger to attach before executing any script code. */
+            public static get waitForManagedDebugger(): boolean;
+            public static set waitForManagedDebugger(value: boolean);
+            /** Select a new build target to be active.
+             * @param target Target build platform.
+             * @param targetGroup Build target group.
+             * @returns True if the build target was successfully switched, false otherwise (for example, if license checks fail, files are missing, or if the user has cancelled the operation via the UI). 
+             */
+            public static SwitchActiveBuildTarget($targetGroup: UnityEditor.BuildTargetGroup, $target: UnityEditor.BuildTarget):boolean;
+            /** Select a new build target to be active during the next Editor update.
+             * @param targetGroup Target build platform.
+             * @param target Build target group.
+             * @returns True if the build target was successfully switched, false otherwise (for example, if license checks fail, files are missing, or if the user has cancelled the operation via the UI). 
+             */
+            public static SwitchActiveBuildTargetAsync($targetGroup: UnityEditor.BuildTargetGroup, $target: UnityEditor.BuildTarget):boolean;
+            /** Get the current location for the build. */
+            public static GetBuildLocation($target: UnityEditor.BuildTarget):string;
+            /** Set a new location for the build. */
+            public static SetBuildLocation($target: UnityEditor.BuildTarget, $location: string):void;
+            /** Set platform specifc Editor setting. * @param platformName The name of the platform.
+             * @param name The name of the setting.
+             * @param value Setting value.
+             */
+            public static SetPlatformSettings($platformName: string, $name: string, $value: string):void;
+            
+            public static SetPlatformSettings($buildTargetGroup: string, $buildTarget: string, $name: string, $value: string):void;
+            /** Returns value for platform specifc Editor setting. * @param platformName The name of the platform.
+             * @param name The name of the setting.
+             */
+            public static GetPlatformSettings($platformName: string, $name: string):string;
+            
+            public static GetPlatformSettings($buildTargetGroup: string, $platformName: string, $name: string):string;
+            
+        }
+        /** Type of build to generate. */
+        enum PS4BuildSubtarget { PCHosted = 0, Package = 1, Iso = 2 }
+        
+        enum PS4HardwareTarget { BaseOnly = 0, NeoAndBase = 1, ProAndBase = 1 }
+        /** Target Xbox build type. */
+        enum XboxBuildSubtarget { Development = 0, Master = 1, Debug = 2 }
+        
+        enum XboxOneDeployMethod { Push = 0, Pull = 1, RunFromPC = 2, Package = 3, PackageStreaming = 4 }
+        
+        enum XboxOneDeployDrive { Default = 0, Retail = 1, Development = 2, Ext1 = 3, Ext2 = 4, Ext3 = 5, Ext4 = 6, Ext5 = 7, Ext6 = 8, Ext7 = 9 }
+        /** Compressed texture format for target build platform. */
+        enum MobileTextureSubtarget { Generic = 0, DXT = 1, PVRTC = 2, ATC = 3, ETC = 4, ETC2 = 5, ASTC = 6 }
+        /** This enumeration has values for different qualities to decompress ETC2 textures on Android devices that don't support the ETC2 texture format. */
+        enum AndroidETC2Fallback { Quality32Bit = 0, Quality16Bit = 1, Quality32BitDownscaled = 2 }
+        /** Type of Android build system. */
+        enum AndroidBuildSystem { Internal = 0, Gradle = 1, ADT = 2, VisualStudio = 3 }
+        /** Build configurations for the generated project. */
+        enum AndroidBuildType { Debug = 0, Development = 1, Release = 2 }
+        /** How to minify the java code of your binary. */
+        enum AndroidMinification { None = 0, Proguard = 1, Gradle = 2 }
+        /** Target device type for a Windows Store application to run on. */
+        enum WSASubtarget { AnyDevice = 0, PC = 1, Mobile = 2, HoloLens = 3 }
+        
+        enum WSASDK { SDK80 = 0, SDK81 = 1, PhoneSDK81 = 2, UniversalSDK81 = 3, UWP = 4 }
+        /** Determines the output build type when building to Universal Windows Platform. */
+        enum WSAUWPBuildType { XAML = 0, D3D = 1, ExecutableOnly = 2 }
+        /** Specifies the Windows device to deploy and launch the UWP app on when using Build and Run from the Editor. */
+        enum WSABuildAndRunDeployTarget { LocalMachine = 0, WindowsPhone = 1, DevicePortal = 2 }
+        /** Build configurations for the generated Xcode project. */
+        enum iOSBuildType { Debug = 0, Release = 1 }
         
     }
     namespace UnityEditor.AssetDatabase {
@@ -5385,6 +5727,13 @@ declare module 'csharp' {
     namespace System.Threading.Tasks {
         
         class Task extends System.Object {
+            
+        }
+        
+    }
+    namespace UnityEditor.Build.Reporting {
+        /** The BuildReport API gives you information about the Unity build process. */
+        class BuildReport extends UnityEngine.Object {
             
         }
         

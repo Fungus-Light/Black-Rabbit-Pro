@@ -50,7 +50,7 @@ class GameEntrance implements IGameLevel {
                     let EntranceBundleName = Config.entranceBundle;
                     let GamePacks = ReadPackConfig()
 
-                    let EntranceSceneName = null
+                    let EntranceSceneName: string = null
                     let NeededPack: GamePack = null
 
                     GamePacks.forEach((pack) => {
@@ -72,7 +72,7 @@ class GameEntrance implements IGameLevel {
                             let EntranceScenePath = null;
                             for (let i = 0; i < ScenePaths.Length; i++) {
                                 //Debug.Log(ScenePaths.get_Item(i))
-                                if (ScenePaths.get_Item(i).includes(EntranceSceneName)) {
+                                if (ScenePaths.get_Item(i).toLocaleLowerCase().includes(EntranceSceneName)) {
                                     EntranceScenePath = ScenePaths.get_Item(i)
                                     break;
                                 }
@@ -82,7 +82,7 @@ class GameEntrance implements IGameLevel {
                                 let scenePath = ""
                                 for (let i = 0; i < ScenePaths.Length; i++) {
                                     //Debug.Log(ScenePaths.get_Item(i))
-                                    if (ScenePaths.get_Item(i).includes(level)) {
+                                    if (ScenePaths.get_Item(i).toLocaleLowerCase().includes(level.toLocaleLowerCase())) {
                                         scenePath = ScenePaths.get_Item(i)
                                         break;
                                     }
@@ -91,7 +91,7 @@ class GameEntrance implements IGameLevel {
                             })
 
                             if (EntranceScenePath != null) {
-                                $SceneLoader().LoadScene(EntranceSceneName);
+                                $SceneLoader().LoadScene(EntranceSceneName.toLocaleLowerCase());
                             } else {
                                 Debug.LogError("Can Not Find EntranceScenePath")
                             }

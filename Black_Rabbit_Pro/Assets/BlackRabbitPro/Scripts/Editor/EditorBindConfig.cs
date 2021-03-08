@@ -24,6 +24,10 @@ public class EditorBindConfig
                 typeof(FileSystemInfo),
                 typeof(AssetImporter),
                 typeof(StreamWriter),
+                typeof(AssetBundleBuild),
+                typeof(BuildPipeline),
+                typeof(BuildAssetBundleOptions),
+                typeof(EditorUserBuildSettings)
 
             };
         }
