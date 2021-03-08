@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 
 public class NameHelper
 {
@@ -15,5 +16,6 @@ public class NameHelper
                 t.name = "$_" + t.name;
             }
         }
+        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
     }
 }
