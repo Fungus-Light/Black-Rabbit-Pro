@@ -53,6 +53,6 @@ public class BuildTools
             Directory.CreateDirectory(output);
         }
         BuildPipeline.BuildAssetBundles(output, builds.ToArray(), BuildAssetBundleOptions.None, EditorUserBuildSettings.activeBuildTarget);
-
+        AssetDatabase.Refresh();
     }
 }

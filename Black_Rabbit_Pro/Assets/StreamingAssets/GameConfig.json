@@ -1,12 +1,1 @@
-{
-    "v": 1,
-    "version": "v-0.0.1",
-    "resolution": {
-        "w": 1280,
-        "h": 720
-    },
-    "fullscreen": false,
-    "entranceBundle": "example",
-    "mode": "release",
-    "rate": 60
-}
+{"v":1,"version":"v-0.0.1","resolution":{"w":1280,"h":720},"fullscreen":true,"entranceBundle":"example","mode":"debug","rate":60}

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd57e0f9ec302c7479472ea8e64762c7, type: 3}
+  m_Name: DefaultGameConfig
+  m_EditorClassIdentifier: 
+  v: 1
+  version: 0.0.1
+  resolution:
+    w: 1280
+    h: 720
+  fullscreen: 0
+  entranceBundle: example
+  mode: 1
+  rate: 60
