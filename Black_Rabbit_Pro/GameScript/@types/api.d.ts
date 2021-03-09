@@ -173,6 +173,11 @@ class Timeline {
 
 }
 
+declare module "JS/ReactUnity/UReact"{
+let state: string;
+
+}
+
 declare module "JS/SceneLoader/SceneLoader"{
 import { IScenesLoader } from 'csharp';
 function $SceneLoader(): IScenesLoader;
