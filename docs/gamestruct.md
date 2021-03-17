@@ -53,6 +53,40 @@
 
 为了提高可定制程度，在加载时，会读取 **StreamingAssets** 文件夹下的 **GameConfig.json** 文件，你可以在发布时添加自己的启动器。
 
+配置默认游戏设置，可以使用创建 **GameConfig.asset** 文件方式来创建。
 
+方式为 ：
+
+![](GameStruct/gameconfig.png)
+
+一个样例资源在 **Assets/BlackRabbitPro/Resources/DefaultGameConfig.asset** 
+
+选中后在右侧检视窗口可以看到：
+
+![](GameStruct/inspect.png)
+
+点击 **Gen Game Config** 即可生成对应游戏设置 json 文件 
 
 ## 配置关卡信息
+
+配置关卡信息采用极简的方式，
+
+关卡信息相关的功能主要集中在菜单栏的 **Build** 一项
+
+![](GameStruct/menu.png)
+
+首先，我们在 **Assets/Games** 这一个文件夹下创建游戏包，然后点击 **Init Packs** 
+
+将会在每个游戏包里生成一个 **config.asset** 文件，这个配置了这个游戏包的关卡信息
+
+![](GameStruct/init.png)
+
+我们在右侧检视窗口可以看到：
+
+![](GameStruct/detail.png)
+
+这里我们需要指定入口文件，如果我们不希望某个场景被打包，我们就可以将其添加到   **Exclude** 排除项。
+
+确保每个包都配置完成，我们选择 **Auto Configure Packs** ，这将会根据配置，生成关卡包的 json 文件。
+
+如果需要打包，可以选择 **Build All Packs** ,这将会生成全部的游戏包。
