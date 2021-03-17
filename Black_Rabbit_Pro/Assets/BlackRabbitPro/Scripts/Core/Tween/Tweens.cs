@@ -84,6 +84,34 @@ public class Tweens : MonoBehaviour
         }
     }
 
+    public static void FadeColorFromTo(Transform trans, string from, string to, float time, Action act = null)
+    {
+        Color fromColor, toColor;
+        if (ColorUtility.TryParseHtmlString(from, out fromColor) && ColorUtility.TryParseHtmlString(to, out toColor))
+        {
+            var img = trans.GetComponent<Image>();
+            if (img != null)
+            {
+                img.color = fromColor;
+                img.DOColor(toColor, time).SetEase(Ease.InQuart).OnComplete(() => { act?.Invoke(); });
+            }
+            var spr = trans.GetComponent<SpriteRenderer>();
+            if (spr != null)
+            {
+                spr.color = fromColor;
+                spr.DOColor(toColor, time).SetEase(Ease.InQuart).OnComplete(() => { act?.Invoke(); });
+            }
+            var font = trans.GetComponent<Text>();
+            if (font != null)
+            {
+                font.color = fromColor;
+                font.DOColor(toColor, time).SetEase(Ease.InQuart).OnComplete(() => { act?.Invoke(); });
+            }
+
+        }
+
+    }
+
     public static void MoveFrom(string name, Vector3 from, float time, Action callback)
     {
         Transform trans = GameObjectHelper.GetTransformByName(name);
