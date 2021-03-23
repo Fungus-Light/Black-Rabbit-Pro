@@ -12,8 +12,18 @@ function $AudioSource(name: string): AudioSource {
     }
 }
 
+class ParticleSystem extends UnityEngine.ParticleSystem { }
+function $Particle(name:string):ParticleSystem{
+    if ($(name) != null) {
+        return $(name).GetComponent(T(ParticleSystem)) as ParticleSystem;
+    } else {
+        return null;
+    }
+}
+
 export {
     AudioSource,
     $AudioSource,
-
+    ParticleSystem,
+    $Particle,
 }

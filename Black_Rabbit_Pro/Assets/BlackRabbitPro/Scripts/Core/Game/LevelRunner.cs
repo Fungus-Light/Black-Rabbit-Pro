@@ -6,7 +6,7 @@ using Puerts;
 public class LevelRunner : MonoBehaviour
 {
     delegate void LoaderInit(LevelRunner levelRunner);
-
+    public bool AutoInitEnv = true;
     public string PackName = "";
     public string LevelModName = "";
     public string CorePackName = "JS";
@@ -32,12 +32,17 @@ public class LevelRunner : MonoBehaviour
             ModName = PackName + "/" + LevelModName;
         }
 
+        if (AutoInitEnv)
+        {
+            env.Eval($"require('{CorePackName}/AutoInitEnv')", "AutoInitEnv");
+        }
+
         env.Eval(
             $@"
             let level=require('{ModName}').Create();
             let loader=require('{CorePackName}/{LevelLoaderName}');
             loader.SetLevel('{LevelModName}',level)
-            ");
+            ", ModName);
 
 
         var Init = env.Eval<LoaderInit>("loader.Init");

@@ -1,4 +1,8 @@
 
+declare module "JS/AutoInitEnv"{
+
+}
+
 declare module "JS/GameEntrance"{
 /**
  * This is where the game begin
@@ -235,6 +239,13 @@ const ScaleFromTo: typeof Tweens.ScaleFromTo;
 
 }
 
+declare module "JS/Tween/TweenAnim"{
+import { System } from "csharp";
+function JumpOutActive(name: string, overscale: number, timescale: number, callback: System.Action): void;
+function JumpOverScale(name: string, overscale: number, timescale: number, callback: System.Action): void;
+
+}
+
 declare module "JS/UI/UI"{
 import { System, UIHelper, UnityEngine } from "csharp";
 class Button {
@@ -352,6 +363,9 @@ import { UnityEngine } from "csharp";
 class AudioSource extends UnityEngine.AudioSource {
 }
 function $AudioSource(name: string): AudioSource;
+class ParticleSystem extends UnityEngine.ParticleSystem {
+}
+function $Particle(name: string): ParticleSystem;
 
 }
 
