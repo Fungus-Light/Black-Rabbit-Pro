@@ -32,14 +32,6 @@ class GameEntrance implements IGameLevel {
 
         SetResolution(Config.resolution.w, Config.resolution.h, ScreenMode, Config.rate)
 
-        // let GameEnv = Resources.Load(GameCoreObj.GameEnv) as UnityEngine.GameObject
-        // InitGameObjct(GameEnv)
-
-        // let SL = Resources.Load("SceneLoader") as UnityEngine.GameObject
-        // let Loader = InitGameObjct(SL) as UnityEngine.GameObject
-
-        // RegGameObject(Loader, "$_SceneLoader")
-
         WaitForSeconds(1, () => {
 
             Fade("LogoUI", 0, 1, 1, () => {

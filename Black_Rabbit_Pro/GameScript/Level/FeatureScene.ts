@@ -8,6 +8,7 @@ import { GameType } from "csharp";
 import { $Button, $InputField, $Text } from "JS/UI/UI";
 import { RANDOM } from "JS/Utils/MathMod";
 import { $CameraDetector } from "JS/CameraManager/CameraManager";
+import { $SceneLoader } from "JS/SceneLoader/SceneLoader";
 
 function Create() { return new FeatureScene(); }
 export { Create }
@@ -18,6 +19,10 @@ class FeatureScene implements IGameLevel {
     name: string;
     root: Transform;
     OnStart(): void {
+
+        $Button("Back").RegClickCallBack("click", () => {
+            $SceneLoader().LoadScene("SelectLevel")
+        })
 
         Debug.LogWarning("Level FeatureScene Start!!!")
         //#region Hello World flow

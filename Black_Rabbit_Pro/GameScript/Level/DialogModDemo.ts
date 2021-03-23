@@ -92,7 +92,7 @@ class DialogModDemo implements IGameLevel {
                     FlowA.Start()
                 }),
                 option("no", () => {
-                    $SceneLoader().LoadScene("Features")
+                    $SceneLoader().LoadScene("SelectLevel")
                 })
             ], false)
 

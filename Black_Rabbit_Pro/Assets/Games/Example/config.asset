@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31d132d0e87faf429d14b2180b8d72e, type: 3}
   m_Name: config
   m_EditorClassIdentifier: 
-  entrance: {fileID: 102900000, guid: 572ac1be7ea523043861e98e2f306f2a, type: 3}
+  entrance: {fileID: 102900000, guid: 2358d7410b57f3c4fa1f7015b1cffb96, type: 3}
   exclude: []

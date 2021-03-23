@@ -4,6 +4,7 @@ import { Debug, Transform, $ } from "JS/Utils/Common"
 import { Fade, MoveFrom } from "JS/Tween/Tween"
 import { JumpOutActive, JumpOverScale } from "JS/Tween/TweenAnim"
 import { $Button, $Text } from "JS/UI/UI"
+import { $SceneLoader } from "JS/SceneLoader/SceneLoader";
 
 function Create() { return new TweenAnimShow(); }
 export { Create }
@@ -61,10 +62,14 @@ class TweenAnimShow implements IGameLevel {
             if (GlobalCanClick) {
                 GlobalCanClick = false;
                 MoveFrom("Avatar", $("leftPos").position, 2, () => {
-                    GlobalCanClick =true
-                    Message.text="The Avatar MoveFrom Left"
+                    GlobalCanClick = true
+                    Message.text = "The Avatar MoveFrom Left"
                 })
             }
+        })
+
+        $Button("Back").RegClickCallBack("click", () => {
+            $SceneLoader().LoadScene("SelectLevel")
         })
 
     }
