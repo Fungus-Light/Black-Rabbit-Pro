@@ -32,11 +32,6 @@ public class LevelRunner : MonoBehaviour
             ModName = PackName + "/" + LevelModName;
         }
 
-        if (AutoInitEnv)
-        {
-            env.Eval($"require('{CorePackName}/AutoInitEnv')", "AutoInitEnv");
-        }
-
         env.Eval(
             $@"
             let level=require('{ModName}').Create();
@@ -44,6 +39,7 @@ public class LevelRunner : MonoBehaviour
             loader.SetLevel('{LevelModName}',level)
             ", ModName);
 
+        
 
         var Init = env.Eval<LoaderInit>("loader.Init");
         if (Init != null)
@@ -58,6 +54,11 @@ public class LevelRunner : MonoBehaviour
 
     void Start()
     {
+        if (AutoInitEnv)
+        {
+            env.Eval($"require('{CorePackName}/AutoInitEnv')", "AutoInitEnv");
+        }
+        
         if (JsStart != null) JsStart();
     }
 
