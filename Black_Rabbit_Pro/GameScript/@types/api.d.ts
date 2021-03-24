@@ -121,6 +121,19 @@ const $Character: typeof DialogHelper.GetCharacter;
 
 }
 
+declare module "JS/Fungus/FungusMod"{
+import { Fungus } from "csharp";
+class FlowChart {
+    flow: Fungus.Flowchart;
+    constructor(_flow: Fungus.Flowchart);
+    ActBlock(block: string): void;
+    StopBlock(block: string): void;
+    StopAllBlock(): void;
+}
+function $FlowChart(name: string): FlowChart;
+
+}
+
 declare module "JS/Interface/IGameLevel"{
 import { Transform } from "JS/Utils/Common";
 /**

@@ -8,7 +8,7 @@ namespace Fungus.EditorUtils
 {
     public class FlowchartMenuItems
     {
-        //[MenuItem("Tools/Fungus/Create/Flowchart", false, 0)]
+        [MenuItem("Tools/Fungus/Create/Flowchart", false, 0)]
         static void CreateFlowchart()
         {
             GameObject go = SpawnPrefab("Flowchart");

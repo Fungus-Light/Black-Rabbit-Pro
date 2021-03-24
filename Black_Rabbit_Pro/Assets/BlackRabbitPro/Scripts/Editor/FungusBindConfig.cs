@@ -21,7 +21,7 @@ public class FungusBindConfig
                 typeof(PortraitOptions),
                 typeof(PortraitController),
                 typeof(FacingDirection),
-                
+                typeof(Flowchart),
             };
         }
     }

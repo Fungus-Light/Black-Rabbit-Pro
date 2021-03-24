@@ -4118,6 +4118,8 @@ declare module 'csharp' {
         
         class LevelRunner extends UnityEngine.MonoBehaviour {
             
+            public AutoInitEnv: boolean;
+            
             public PackName: string;
             
             public LevelModName: string;
@@ -4894,6 +4896,10 @@ declare module 'csharp' {
     namespace System.Text {
         
         class Encoding extends System.Object {
+            
+        }
+        
+        class StringBuilder extends System.Object {
             
         }
         
@@ -5989,6 +5995,182 @@ declare module 'csharp' {
         enum DisplayType { None = 0, Show = 1, Hide = 2, Replace = 3, MoveToFront = 4 }
         
         enum PositionOffset { None = 0, OffsetLeft = 1, OffsetRight = 2 }
+        
+        class Flowchart extends UnityEngine.MonoBehaviour {
+            
+            public static SubstituteVariableRegexString: string;
+            
+            public get SelectedCommandsStale(): boolean;
+            public set SelectedCommandsStale(value: boolean);
+            
+            public static get CachedFlowcharts(): System.Collections.Generic.List$1<Fungus.Flowchart>;
+            
+            public get ScrollPos(): UnityEngine.Vector2;
+            public set ScrollPos(value: UnityEngine.Vector2);
+            
+            public get VariablesScrollPos(): UnityEngine.Vector2;
+            public set VariablesScrollPos(value: UnityEngine.Vector2);
+            
+            public get VariablesExpanded(): boolean;
+            public set VariablesExpanded(value: boolean);
+            
+            public get BlockViewHeight(): number;
+            public set BlockViewHeight(value: number);
+            
+            public get Zoom(): number;
+            public set Zoom(value: number);
+            
+            public get ScrollViewRect(): UnityEngine.Rect;
+            public set ScrollViewRect(value: UnityEngine.Rect);
+            
+            public get SelectedBlock(): Fungus.Block;
+            public set SelectedBlock(value: Fungus.Block);
+            
+            public get SelectedBlocks(): System.Collections.Generic.List$1<Fungus.Block>;
+            public set SelectedBlocks(value: System.Collections.Generic.List$1<Fungus.Block>);
+            
+            public get SelectedCommands(): System.Collections.Generic.List$1<Fungus.Command>;
+            
+            public get Variables(): System.Collections.Generic.List$1<Fungus.Variable>;
+            
+            public get VariableCount(): number;
+            
+            public get Description(): string;
+            
+            public get StepPause(): number;
+            
+            public get ColorCommands(): boolean;
+            
+            public get SaveSelection(): boolean;
+            
+            public get LocalizationId(): string;
+            
+            public get ShowLineNumbers(): boolean;
+            
+            public get LuaBindingName(): string;
+            
+            public get CenterPosition(): UnityEngine.Vector2;
+            public set CenterPosition(value: UnityEngine.Vector2);
+            
+            public set Version(value: number);
+            
+            public constructor();
+            
+            public static BroadcastFungusMessage($messageName: string):void;
+            
+            public IsActive():boolean;
+            
+            public GetName():string;
+            
+            public NextItemId():number;
+            
+            public CreateBlock($position: UnityEngine.Vector2):Fungus.Block;
+            
+            public FindBlock($blockName: string):Fungus.Block;
+            
+            public HasBlock($blockName: string):boolean;
+            
+            public ExecuteIfHasBlock($blockName: string):boolean;
+            
+            public ExecuteBlock($blockName: string):void;
+            
+            public StopBlock($blockName: string):void;
+            
+            public ExecuteBlock($block: Fungus.Block, $commandIndex?: number, $onComplete?: System.Action):boolean;
+            
+            public StopAllBlocks():void;
+            
+            public SendFungusMessage($messageName: string):void;
+            
+            public GetUniqueVariableKey($originalKey: string, $ignoreVariable?: Fungus.Variable):string;
+            
+            public GetUniqueBlockKey($originalKey: string, $ignoreBlock?: Fungus.Block):string;
+            
+            public GetUniqueLabelKey($originalKey: string, $ignoreLabel: Fungus.Label):string;
+            
+            public GetVariable($key: string):Fungus.Variable;
+            
+            public SetVariable($key: string, $newvariable: Fungus.Variable):void;
+            
+            public HasVariable($key: string):boolean;
+            
+            public GetVariableNames():System.Array$1<string>;
+            
+            public GetPublicVariables():System.Collections.Generic.List$1<Fungus.Variable>;
+            
+            public GetBooleanVariable($key: string):boolean;
+            
+            public SetBooleanVariable($key: string, $value: boolean):void;
+            
+            public GetIntegerVariable($key: string):number;
+            
+            public SetIntegerVariable($key: string, $value: number):void;
+            
+            public GetFloatVariable($key: string):number;
+            
+            public SetFloatVariable($key: string, $value: number):void;
+            
+            public GetStringVariable($key: string):string;
+            
+            public SetStringVariable($key: string, $value: string):void;
+            
+            public GetGameObjectVariable($key: string):UnityEngine.GameObject;
+            
+            public SetGameObjectVariable($key: string, $value: UnityEngine.GameObject):void;
+            
+            public GetTransformVariable($key: string):UnityEngine.Transform;
+            
+            public SetTransformVariable($key: string, $value: UnityEngine.Transform):void;
+            
+            public UpdateHideFlags():void;
+            
+            public ClearSelectedCommands():void;
+            
+            public AddSelectedCommand($command: Fungus.Command):void;
+            
+            public ClearSelectedBlocks():void;
+            
+            public AddSelectedBlock($block: Fungus.Block):void;
+            
+            public DeselectBlock($block: Fungus.Block):boolean;
+            
+            public DeselectBlockNoCheck($b: Fungus.Block):void;
+            
+            public UpdateSelectedCache():void;
+            
+            public ReverseUpdateSelectedCache():void;
+            
+            public Reset($resetCommands: boolean, $resetVariables: boolean):void;
+            
+            public IsCommandSupported($commandInfo: Fungus.CommandInfoAttribute):boolean;
+            
+            public HasExecutingBlocks():boolean;
+            
+            public GetExecutingBlocks():System.Collections.Generic.List$1<Fungus.Block>;
+            
+            public SubstituteVariables($input: string):string;
+            
+            public DetermineSubstituteVariables($str: string, $vars: System.Collections.Generic.List$1<Fungus.Variable>):void;
+            
+            public SubstituteStrings($input: System.Text.StringBuilder):boolean;
+            
+        }
+        
+        class Command extends UnityEngine.MonoBehaviour {
+            
+        }
+        
+        class Variable extends UnityEngine.MonoBehaviour {
+            
+        }
+        
+        class Label extends Fungus.Command {
+            
+        }
+        
+        class CommandInfoAttribute extends System.Attribute {
+            
+        }
         
     }
     
