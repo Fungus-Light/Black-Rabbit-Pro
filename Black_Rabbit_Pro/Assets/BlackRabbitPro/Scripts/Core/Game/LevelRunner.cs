@@ -7,7 +7,7 @@ public class LevelRunner : MonoBehaviour
 {
     delegate void LoaderInit(LevelRunner levelRunner);
     public bool AutoInitEnv = true;
-    public string PackName = "";
+    public string PackName = "Game";
     public string LevelModName = "";
     public string CorePackName = "JS";
     public string LevelLoaderName = "LevelLoader";
