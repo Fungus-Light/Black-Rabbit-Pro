@@ -251,7 +251,7 @@ namespace Fungus.EditorUtils
             }
         }
 
-        [MenuItem("Tools/Fungus/Flowchart Window")]
+        //[MenuItem("Tools/Fungus/Flowchart Window")]
         static void Init()
         {
             GetWindow(typeof(FlowchartWindow), false, "Flowchart");

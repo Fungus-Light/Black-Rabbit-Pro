@@ -142,7 +142,7 @@ namespace Fungus.EditorUtils
             }
         }
 
-        [MenuItem("Tools/Fungus/Utilities/Generate Fungus Varaible")]
+        //[MenuItem("Tools/Fungus/Utilities/Generate Fungus Varaible")]
         public static GenerateVariableWindow ShowWindow()
         {
             var w = GetWindow(typeof(GenerateVariableWindow), true, "Generate Fungus Varaible", true);

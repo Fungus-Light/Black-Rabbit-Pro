@@ -31,34 +31,34 @@ namespace Fungus.EditorUtils
             go.transform.position = Vector3.zero;
         }
 
-        [MenuItem("Tools/Fungus/Create/Tag", false, 53)]
+        //[MenuItem("Tools/Fungus/Create/Tag", false, 53)]
         static void CreateTag()
         {
             GameObject go = FlowchartMenuItems.SpawnPrefab("Tag");
             go.transform.position = Vector3.zero;
         }
 
-        [MenuItem("Tools/Fungus/Create/Audio Tag", false, 54)]
+        //[MenuItem("Tools/Fungus/Create/Audio Tag", false, 54)]
         static void CreateAudioTag()
         {
             GameObject go = FlowchartMenuItems.SpawnPrefab("AudioTag");
             go.transform.position = Vector3.zero;
         }
 
-        [MenuItem("Tools/Fungus/Create/Stage", false, 55)]
+        //[MenuItem("Tools/Fungus/Create/Stage", false, 55)]
         static void CreateStage()
         {
             GameObject go = FlowchartMenuItems.SpawnPrefab("Stage");
             go.transform.position = Vector3.zero;
         }
         
-        [MenuItem("Tools/Fungus/Create/Stage Position", false, 56)]
+        //[MenuItem("Tools/Fungus/Create/Stage Position", false, 56)]
         static void CreateStagePosition()
         {
             FlowchartMenuItems.SpawnPrefab("StagePosition");
         }
 
-        [MenuItem("Tools/Fungus/Create/Localization", false, 57)]
+        //[MenuItem("Tools/Fungus/Create/Localization", false, 57)]
         static void CreateLocalization()
         {
             GameObject go = FlowchartMenuItems.SpawnPrefab("Localization");

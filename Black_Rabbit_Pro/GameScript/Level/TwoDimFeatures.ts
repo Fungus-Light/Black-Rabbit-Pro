@@ -1,5 +1,7 @@
 /*================Dont Delete This=========================*/
 import { IGameLevel } from "JS/Interface/IGameLevel";
+import { $SceneLoader } from "JS/SceneLoader/SceneLoader";
+import { $Button } from "JS/UI/UI";
 import { Debug, Transform, $ } from "JS/Utils/Common"
 
 function Create() { return new TwoDimFeatures(); }
@@ -12,6 +14,10 @@ class TwoDimFeatures implements IGameLevel {
     root: Transform;
     OnStart(): void {
         Debug.LogWarning("Level TwoDimFeatures Start!!!")
+
+        $Button("Back").RegClickCallBack("Click", () => {
+            $SceneLoader().LoadScene("SelectLevel")
+        })
 
         
 
