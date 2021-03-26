@@ -6,13 +6,5 @@
     "build": "tsc -p tsconfig.json",
     "postbuild": "node ./@tools/copyJsFile.js output ../Assets/StreamingAssets/JS/ && node ./@tools/GenApi.js",
     "Gen:Api": "node ./@tools/GenApi.js"
-  },
-  "dependencies": {
-    "react": "^17.0.1",
-    "react-reconciler": "^0.26.1"
-  },
-  "devDependencies": {
-    "@types/react": "^17.0.3",
-    "@types/react-reconciler": "^0.26.0"
   }
 }
