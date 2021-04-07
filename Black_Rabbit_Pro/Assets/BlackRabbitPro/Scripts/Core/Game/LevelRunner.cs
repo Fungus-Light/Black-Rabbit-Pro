@@ -1,11 +1,19 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections;
 using NaughtyAttributes;
 using Puerts;
 
 [RequireComponent(typeof(GameObjectPool))]
 public class LevelRunner : MonoBehaviour
 {
+
+    static IEnumerator _WaitForSeconds(float count, Action CallBack)
+    {
+        yield return new WaitForSeconds(count);
+        CallBack();
+    }
+
     delegate void LoaderInit(LevelRunner levelRunner);
     public bool AutoInitEnv = true;
     public string PackName = "Game";
@@ -23,21 +31,23 @@ public class LevelRunner : MonoBehaviour
     public Action JsOnDestroy;
     void Awake()
     {
-        if(ENVDebugConfig.instance == null){
+        if (ENVDebugConfig.instance == null)
+        {
             GameObject go = Resources.Load("Core/DebugConfig") as GameObject;
             GameObject.Instantiate(go);
         }
 
         if (env == null)
         {
-            env=GlobalJSEnv.Env;
+            env = GlobalJSEnv.Env;
         }
 
         //if (JsAwake != null) JsAwake();
-        
+
     }
 
-    void RunScript(){
+    void RunScript()
+    {
 
         string ModName = LevelModName;
         if (PackName != "")
@@ -46,14 +56,14 @@ public class LevelRunner : MonoBehaviour
         }
 
         env.Eval(
-            "var loader = (function(){"+
+            "var loader = (function(){" +
             $@"
             let level=require('{ModName}').Create();
             let loader=require('{CorePackName}/{LevelLoaderName}');
             loader.SetLevel('{LevelModName}',level)
             return loader;
             "
-            +"})();", ModName);
+            + "})();", ModName);
 
         var Init = env.Eval<LoaderInit>("loader.Init");
         if (Init != null)
@@ -69,12 +79,33 @@ public class LevelRunner : MonoBehaviour
         if (JsStart != null) JsStart();
     }
 
+    async void ConnectToDebugger()
+    {
+        if (ENVDebugConfig.instance.isDebuggerConnected == false)
+        {
+            await GlobalJSEnv.Env.WaitDebuggerAsync();
+            StartCoroutine(_WaitForSeconds(ENVDebugConfig.instance.waitSecond, () =>
+            {
+                ENVDebugConfig.instance.isDebuggerConnected = true;
+                RunScript();
+            }));
+        }
+        else
+        {
+            RunScript();
+        }
+    }
 
     void Start()
     {
-        
-        RunScript();
-        
+        if (ENVDebugConfig.instance.isDebugMode)
+        {
+            ConnectToDebugger();
+        }
+        else
+        {
+            RunScript();
+        }
     }
 
     // Update is called once per frame
@@ -82,7 +113,7 @@ public class LevelRunner : MonoBehaviour
     {
         env.Tick();
         if (JsUpdate != null) JsUpdate();
-        
+
     }
 
     void FixedUpdate()

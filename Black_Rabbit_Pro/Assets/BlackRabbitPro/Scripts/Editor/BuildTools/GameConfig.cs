@@ -65,6 +65,7 @@ public class GameConfig : ScriptableObject
         StreamWriter writer = new StreamWriter(Path.Combine(Application.dataPath, "StreamingAssets", "GameConfig.json").Replace("\\", "/"));
         writer.Write(jsonStr);
         writer.Close();
+        Debug.LogWarning("New Game Config Gened");
     }
 
     [Button("Reset Game Config")]

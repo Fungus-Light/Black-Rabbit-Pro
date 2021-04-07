@@ -47,6 +47,8 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: 3a4d75ed376eb1e44ae4b6835c794106, type: 2}
   isDebugMode: 1
   Port: 4396
+  waitSecond: 1
+  isDebuggerConnected: 0
 --- !u!114 &7482127605271225719
 MonoBehaviour:
   m_ObjectHideFlags: 0

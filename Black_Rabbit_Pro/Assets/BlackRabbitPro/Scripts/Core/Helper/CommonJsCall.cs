@@ -29,6 +29,41 @@ public class CommonJsCall : MonoBehaviour
 #endif
     }
 
+    public static void RegGameObject(GameObject go, string newname)
+    {
+        if (newname.StartsWith("$_") == false)
+        {
+            newname = "$_" + newname;
+        }
+        go.name = newname;
+        if (GameObjectHelper.GetTransformByName(newname) != false)
+        {
+            if (GameObjectPool.Instance.gameObjectPool.Contains(go.transform) == false)
+            {
+                GameObjectPool.Instance.gameObjectPool.Add(go.transform);
+            }
+            else
+            {
+                Debug.LogError("Already Exist this Obj");
+            }
+        }
+        else
+        {
+            Debug.LogError("Already Exist this name");
+        }
+    }
+
+    public static bool IsGameObjectInPool(GameObject go)
+    {
+        if (GameObjectPool.Instance.gameObjectPool.Contains(go.transform))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     static IEnumerator _WaitForFrames(int count, Action CallBack)
     {

@@ -26,7 +26,7 @@ public class LevelScriptLoader : Puerts.ILoader
         {
             return Path.Combine(Application.dataPath, "BlackRabbitPro/Libs/Puerts/Src/Resources", filepath).Replace("\\", "/") + ".txt";
         }
-        return System.IO.Path.Combine(debugRoot, filepath).Replace("\\", "/");
+        return System.IO.Path.Combine(debugRoot, filepath+ ".txt").Replace("\\", "/");
     }
 
     public string ReadFile(string filepath, out string debugpath)
