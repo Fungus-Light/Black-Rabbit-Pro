@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using NaughtyAttributes;
 using Puerts;
 
 [RequireComponent(typeof(GameObjectPool))]
@@ -11,6 +12,12 @@ public class LevelRunner : MonoBehaviour
     public string LevelModName = "";
     public string CorePackName = "JS";
     public string LevelLoaderName = "LevelLoader";
+
+    [HorizontalLine(color: EColor.Blue)]
+    public bool isDebugMode = false;
+    public int DebugPort = 4396;
+
+
     private JsEnv env;
 
     //public Action JsAwake;
@@ -23,7 +30,18 @@ public class LevelRunner : MonoBehaviour
     {
         if (env == null)
         {
-            env = new JsEnv(new LevelScriptLoader(""));
+            if (isDebugMode)
+            {
+                env = new JsEnv(new LevelScriptLoader(""), DebugPort);
+            }
+            else
+            {
+                env = new JsEnv(new LevelScriptLoader(""));
+            }
+        }
+
+        if(isDebugMode){
+            env.WaitDebugger();
         }
 
         string ModName = LevelModName;
@@ -38,8 +56,6 @@ public class LevelRunner : MonoBehaviour
             let loader=require('{CorePackName}/{LevelLoaderName}');
             loader.SetLevel('{LevelModName}',level)
             ", ModName);
-
-        
 
         var Init = env.Eval<LoaderInit>("loader.Init");
         if (Init != null)
@@ -58,7 +74,7 @@ public class LevelRunner : MonoBehaviour
         {
             env.Eval($"require('{CorePackName}/AutoInitEnv')", "AutoInitEnv");
         }
-        
+
         if (JsStart != null) JsStart();
     }
 
@@ -66,6 +82,7 @@ public class LevelRunner : MonoBehaviour
     void Update()
     {
         if (JsUpdate != null) JsUpdate();
+        env.Tick();
     }
 
     void FixedUpdate()
