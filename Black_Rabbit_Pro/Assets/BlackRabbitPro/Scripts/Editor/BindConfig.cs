@@ -76,7 +76,6 @@ public class BindConfig
                 typeof(UnityEvent),
                 typeof(UnityEvent<string>),
                 typeof(Text),
-                typeof(Canvas),
                 typeof(Input),
                 typeof(KeyCode),
 
@@ -103,6 +102,15 @@ public class BindConfig
                 //typeof(Vector3),
             };
         }
+    }
+
+    [Filter]
+    static bool Filter(System.Reflection.MemberInfo memberInfo)
+    {
+        return (memberInfo.DeclaringType.Name == "Flowchart" && memberInfo.Name == "SelectedCommandsStale") ||
+        (memberInfo.DeclaringType.Name == "Input" && memberInfo.Name == "IsJoystickPreconfigured")||
+        (memberInfo.DeclaringType.Name == "MonoBehaviour" && memberInfo.Name == "runInEditMode")||
+        (memberInfo.DeclaringType.Name == "Text" && memberInfo.Name == "OnRebuildRequested");
     }
 
 }

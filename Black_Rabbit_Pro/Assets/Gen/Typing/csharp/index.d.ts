@@ -14,7 +14,2249 @@ declare module 'csharp' {
     
     interface $Task<T> {}
     
+    namespace System.IO {
+        
+        class DirectoryInfo extends System.IO.FileSystemInfo {
+            
+            public get Exists(): boolean;
+            
+            public get Name(): string;
+            
+            public get Parent(): System.IO.DirectoryInfo;
+            
+            public get Root(): System.IO.DirectoryInfo;
+            
+            public constructor($path: string);
+            
+            public Create():void;
+            
+            public CreateSubdirectory($path: string):System.IO.DirectoryInfo;
+            
+            public GetFiles():System.Array$1<System.IO.FileInfo>;
+            
+            public GetFiles($searchPattern: string):System.Array$1<System.IO.FileInfo>;
+            
+            public GetDirectories():System.Array$1<System.IO.DirectoryInfo>;
+            
+            public GetDirectories($searchPattern: string):System.Array$1<System.IO.DirectoryInfo>;
+            
+            public GetFileSystemInfos():System.Array$1<System.IO.FileSystemInfo>;
+            
+            public GetFileSystemInfos($searchPattern: string):System.Array$1<System.IO.FileSystemInfo>;
+            
+            public GetFileSystemInfos($searchPattern: string, $searchOption: System.IO.SearchOption):System.Array$1<System.IO.FileSystemInfo>;
+            
+            public Delete():void;
+            
+            public Delete($recursive: boolean):void;
+            
+            public MoveTo($destDirName: string):void;
+            
+            public GetDirectories($searchPattern: string, $searchOption: System.IO.SearchOption):System.Array$1<System.IO.DirectoryInfo>;
+            
+            public GetFiles($searchPattern: string, $searchOption: System.IO.SearchOption):System.Array$1<System.IO.FileInfo>;
+            
+            public Create($directorySecurity: System.Security.AccessControl.DirectorySecurity):void;
+            
+            public CreateSubdirectory($path: string, $directorySecurity: System.Security.AccessControl.DirectorySecurity):System.IO.DirectoryInfo;
+            
+            public GetAccessControl():System.Security.AccessControl.DirectorySecurity;
+            
+            public GetAccessControl($includeSections: System.Security.AccessControl.AccessControlSections):System.Security.AccessControl.DirectorySecurity;
+            
+            public SetAccessControl($directorySecurity: System.Security.AccessControl.DirectorySecurity):void;
+            
+            public EnumerateDirectories():System.Collections.Generic.IEnumerable$1<System.IO.DirectoryInfo>;
+            
+            public EnumerateDirectories($searchPattern: string):System.Collections.Generic.IEnumerable$1<System.IO.DirectoryInfo>;
+            
+            public EnumerateDirectories($searchPattern: string, $searchOption: System.IO.SearchOption):System.Collections.Generic.IEnumerable$1<System.IO.DirectoryInfo>;
+            
+            public EnumerateFiles():System.Collections.Generic.IEnumerable$1<System.IO.FileInfo>;
+            
+            public EnumerateFiles($searchPattern: string):System.Collections.Generic.IEnumerable$1<System.IO.FileInfo>;
+            
+            public EnumerateFiles($searchPattern: string, $searchOption: System.IO.SearchOption):System.Collections.Generic.IEnumerable$1<System.IO.FileInfo>;
+            
+            public EnumerateFileSystemInfos():System.Collections.Generic.IEnumerable$1<System.IO.FileSystemInfo>;
+            
+            public EnumerateFileSystemInfos($searchPattern: string):System.Collections.Generic.IEnumerable$1<System.IO.FileSystemInfo>;
+            
+            public EnumerateFileSystemInfos($searchPattern: string, $searchOption: System.IO.SearchOption):System.Collections.Generic.IEnumerable$1<System.IO.FileSystemInfo>;
+            
+            public constructor();
+            
+        }
+        
+        class FileSystemInfo extends System.MarshalByRefObject {
+            
+            public get FullName(): string;
+            
+            public get Extension(): string;
+            
+            public get Name(): string;
+            
+            public get Exists(): boolean;
+            
+            public get CreationTime(): Date;
+            public set CreationTime(value: Date);
+            
+            public get CreationTimeUtc(): Date;
+            public set CreationTimeUtc(value: Date);
+            
+            public get LastAccessTime(): Date;
+            public set LastAccessTime(value: Date);
+            
+            public get LastAccessTimeUtc(): Date;
+            public set LastAccessTimeUtc(value: Date);
+            
+            public get LastWriteTime(): Date;
+            public set LastWriteTime(value: Date);
+            
+            public get LastWriteTimeUtc(): Date;
+            public set LastWriteTimeUtc(value: Date);
+            
+            public get Attributes(): System.IO.FileAttributes;
+            public set Attributes(value: System.IO.FileAttributes);
+            
+            public Delete():void;
+            
+            public Refresh():void;
+            
+            public GetObjectData($info: System.Runtime.Serialization.SerializationInfo, $context: System.Runtime.Serialization.StreamingContext):void;
+            
+        }
+        
+        class FileInfo extends System.IO.FileSystemInfo {
+            
+            public get Name(): string;
+            
+            public get Length(): bigint;
+            
+            public get DirectoryName(): string;
+            
+            public get Directory(): System.IO.DirectoryInfo;
+            
+            public get IsReadOnly(): boolean;
+            public set IsReadOnly(value: boolean);
+            
+            public get Exists(): boolean;
+            
+            public constructor($fileName: string);
+            
+            public GetAccessControl():System.Security.AccessControl.FileSecurity;
+            
+            public GetAccessControl($includeSections: System.Security.AccessControl.AccessControlSections):System.Security.AccessControl.FileSecurity;
+            
+            public SetAccessControl($fileSecurity: System.Security.AccessControl.FileSecurity):void;
+            
+            public OpenText():System.IO.StreamReader;
+            
+            public CreateText():System.IO.StreamWriter;
+            
+            public AppendText():System.IO.StreamWriter;
+            
+            public CopyTo($destFileName: string):System.IO.FileInfo;
+            
+            public CopyTo($destFileName: string, $overwrite: boolean):System.IO.FileInfo;
+            
+            public Create():System.IO.FileStream;
+            
+            public Decrypt():void;
+            
+            public Encrypt():void;
+            
+            public Open($mode: System.IO.FileMode):System.IO.FileStream;
+            
+            public Open($mode: System.IO.FileMode, $access: System.IO.FileAccess):System.IO.FileStream;
+            
+            public Open($mode: System.IO.FileMode, $access: System.IO.FileAccess, $share: System.IO.FileShare):System.IO.FileStream;
+            
+            public OpenRead():System.IO.FileStream;
+            
+            public OpenWrite():System.IO.FileStream;
+            
+            public MoveTo($destFileName: string):void;
+            
+            public Replace($destinationFileName: string, $destinationBackupFileName: string):System.IO.FileInfo;
+            
+            public Replace($destinationFileName: string, $destinationBackupFileName: string, $ignoreMetadataErrors: boolean):System.IO.FileInfo;
+            
+            public constructor();
+            
+        }
+        
+        enum SearchOption { TopDirectoryOnly = 0, AllDirectories = 1 }
+        
+        class File extends System.Object {
+            
+            public static AppendAllText($path: string, $contents: string):void;
+            
+            public static AppendAllText($path: string, $contents: string, $encoding: System.Text.Encoding):void;
+            
+            public static AppendText($path: string):System.IO.StreamWriter;
+            
+            public static Copy($sourceFileName: string, $destFileName: string):void;
+            
+            public static Copy($sourceFileName: string, $destFileName: string, $overwrite: boolean):void;
+            
+            public static Create($path: string):System.IO.FileStream;
+            
+            public static Create($path: string, $bufferSize: number):System.IO.FileStream;
+            
+            public static Create($path: string, $bufferSize: number, $options: System.IO.FileOptions):System.IO.FileStream;
+            
+            public static Create($path: string, $bufferSize: number, $options: System.IO.FileOptions, $fileSecurity: System.Security.AccessControl.FileSecurity):System.IO.FileStream;
+            
+            public static CreateText($path: string):System.IO.StreamWriter;
+            
+            public static Delete($path: string):void;
+            
+            public static Exists($path: string):boolean;
+            
+            public static GetAccessControl($path: string):System.Security.AccessControl.FileSecurity;
+            
+            public static GetAccessControl($path: string, $includeSections: System.Security.AccessControl.AccessControlSections):System.Security.AccessControl.FileSecurity;
+            
+            public static GetAttributes($path: string):System.IO.FileAttributes;
+            
+            public static GetCreationTime($path: string):Date;
+            
+            public static GetCreationTimeUtc($path: string):Date;
+            
+            public static GetLastAccessTime($path: string):Date;
+            
+            public static GetLastAccessTimeUtc($path: string):Date;
+            
+            public static GetLastWriteTime($path: string):Date;
+            
+            public static GetLastWriteTimeUtc($path: string):Date;
+            
+            public static Move($sourceFileName: string, $destFileName: string):void;
+            
+            public static Open($path: string, $mode: System.IO.FileMode):System.IO.FileStream;
+            
+            public static Open($path: string, $mode: System.IO.FileMode, $access: System.IO.FileAccess):System.IO.FileStream;
+            
+            public static Open($path: string, $mode: System.IO.FileMode, $access: System.IO.FileAccess, $share: System.IO.FileShare):System.IO.FileStream;
+            
+            public static OpenRead($path: string):System.IO.FileStream;
+            
+            public static OpenText($path: string):System.IO.StreamReader;
+            
+            public static OpenWrite($path: string):System.IO.FileStream;
+            
+            public static Replace($sourceFileName: string, $destinationFileName: string, $destinationBackupFileName: string):void;
+            
+            public static Replace($sourceFileName: string, $destinationFileName: string, $destinationBackupFileName: string, $ignoreMetadataErrors: boolean):void;
+            
+            public static SetAccessControl($path: string, $fileSecurity: System.Security.AccessControl.FileSecurity):void;
+            
+            public static SetAttributes($path: string, $fileAttributes: System.IO.FileAttributes):void;
+            
+            public static SetCreationTime($path: string, $creationTime: Date):void;
+            
+            public static SetCreationTimeUtc($path: string, $creationTimeUtc: Date):void;
+            
+            public static SetLastAccessTime($path: string, $lastAccessTime: Date):void;
+            
+            public static SetLastAccessTimeUtc($path: string, $lastAccessTimeUtc: Date):void;
+            
+            public static SetLastWriteTime($path: string, $lastWriteTime: Date):void;
+            
+            public static SetLastWriteTimeUtc($path: string, $lastWriteTimeUtc: Date):void;
+            
+            public static ReadAllBytes($path: string):System.Array$1<number>;
+            
+            public static ReadAllLines($path: string):System.Array$1<string>;
+            
+            public static ReadAllLines($path: string, $encoding: System.Text.Encoding):System.Array$1<string>;
+            
+            public static ReadAllText($path: string):string;
+            
+            public static ReadAllText($path: string, $encoding: System.Text.Encoding):string;
+            
+            public static WriteAllBytes($path: string, $bytes: System.Array$1<number>):void;
+            
+            public static WriteAllLines($path: string, $contents: System.Array$1<string>):void;
+            
+            public static WriteAllLines($path: string, $contents: System.Array$1<string>, $encoding: System.Text.Encoding):void;
+            
+            public static WriteAllText($path: string, $contents: string):void;
+            
+            public static WriteAllText($path: string, $contents: string, $encoding: System.Text.Encoding):void;
+            
+            public static Encrypt($path: string):void;
+            
+            public static Decrypt($path: string):void;
+            
+            public static ReadLines($path: string):System.Collections.Generic.IEnumerable$1<string>;
+            
+            public static ReadLines($path: string, $encoding: System.Text.Encoding):System.Collections.Generic.IEnumerable$1<string>;
+            
+            public static AppendAllLines($path: string, $contents: System.Collections.Generic.IEnumerable$1<string>):void;
+            
+            public static AppendAllLines($path: string, $contents: System.Collections.Generic.IEnumerable$1<string>, $encoding: System.Text.Encoding):void;
+            
+            public static WriteAllLines($path: string, $contents: System.Collections.Generic.IEnumerable$1<string>):void;
+            
+            public static WriteAllLines($path: string, $contents: System.Collections.Generic.IEnumerable$1<string>, $encoding: System.Text.Encoding):void;
+            
+        }
+        
+        class StreamWriter extends System.IO.TextWriter {
+            
+            public static Null: System.IO.StreamWriter;
+            
+            public get AutoFlush(): boolean;
+            public set AutoFlush(value: boolean);
+            
+            public get BaseStream(): System.IO.Stream;
+            
+            public get Encoding(): System.Text.Encoding;
+            
+            public constructor($stream: System.IO.Stream);
+            
+            public constructor($stream: System.IO.Stream, $encoding: System.Text.Encoding);
+            
+            public constructor($stream: System.IO.Stream, $encoding: System.Text.Encoding, $bufferSize: number);
+            
+            public constructor($stream: System.IO.Stream, $encoding: System.Text.Encoding, $bufferSize: number, $leaveOpen: boolean);
+            
+            public constructor($path: string);
+            
+            public constructor($path: string, $append: boolean);
+            
+            public constructor($path: string, $append: boolean, $encoding: System.Text.Encoding);
+            
+            public constructor($path: string, $append: boolean, $encoding: System.Text.Encoding, $bufferSize: number);
+            
+            public Close():void;
+            
+            public Flush():void;
+            
+            public Write($value: number):void;
+            
+            public Write($buffer: System.Array$1<number>):void;
+            
+            public Write($buffer: System.Array$1<number>, $index: number, $count: number):void;
+            
+            public Write($value: string):void;
+            
+            public WriteAsync($value: number):System.Threading.Tasks.Task;
+            
+            public WriteAsync($value: string):System.Threading.Tasks.Task;
+            
+            public WriteAsync($buffer: System.Array$1<number>, $index: number, $count: number):System.Threading.Tasks.Task;
+            
+            public WriteLineAsync():System.Threading.Tasks.Task;
+            
+            public WriteLineAsync($value: number):System.Threading.Tasks.Task;
+            
+            public WriteLineAsync($value: string):System.Threading.Tasks.Task;
+            
+            public WriteLineAsync($buffer: System.Array$1<number>, $index: number, $count: number):System.Threading.Tasks.Task;
+            
+            public FlushAsync():System.Threading.Tasks.Task;
+            
+            public constructor();
+            
+        }
+        
+        class TextWriter extends System.MarshalByRefObject {
+            
+        }
+        
+        class FileStream extends System.IO.Stream {
+            
+        }
+        
+        class Stream extends System.MarshalByRefObject {
+            
+        }
+        
+        enum FileOptions { None = 0, Encrypted = 16384, DeleteOnClose = 67108864, SequentialScan = 134217728, RandomAccess = 268435456, Asynchronous = 1073741824, WriteThrough = -2147483648 }
+        
+        enum FileAttributes { Archive = 32, Compressed = 2048, Device = 64, Directory = 16, Encrypted = 16384, Hidden = 2, Normal = 128, NotContentIndexed = 8192, Offline = 4096, ReadOnly = 1, ReparsePoint = 1024, SparseFile = 512, System = 4, Temporary = 256, IntegrityStream = 32768, NoScrubData = 131072 }
+        
+        enum FileMode { CreateNew = 1, Create = 2, Open = 3, OpenOrCreate = 4, Truncate = 5, Append = 6 }
+        
+        enum FileAccess { Read = 1, Write = 2, ReadWrite = 3 }
+        
+        enum FileShare { None = 0, Read = 1, Write = 2, ReadWrite = 3, Delete = 4, Inheritable = 16 }
+        
+        class StreamReader extends System.IO.TextReader {
+            
+        }
+        
+        class TextReader extends System.MarshalByRefObject {
+            
+        }
+        
+        class Path extends System.Object {
+            
+            public static AltDirectorySeparatorChar: number;
+            
+            public static DirectorySeparatorChar: number;
+            
+            public static PathSeparator: number;
+            
+            public static VolumeSeparatorChar: number;
+            
+            public static ChangeExtension($path: string, $extension: string):string;
+            
+            public static Combine($path1: string, $path2: string):string;
+            
+            public static GetDirectoryName($path: string):string;
+            
+            public static GetExtension($path: string):string;
+            
+            public static GetFileName($path: string):string;
+            
+            public static GetFileNameWithoutExtension($path: string):string;
+            
+            public static GetFullPath($path: string):string;
+            
+            public static GetPathRoot($path: string):string;
+            
+            public static GetTempFileName():string;
+            
+            public static GetTempPath():string;
+            
+            public static HasExtension($path: string):boolean;
+            
+            public static IsPathRooted($path: string):boolean;
+            
+            public static GetInvalidFileNameChars():System.Array$1<number>;
+            
+            public static GetInvalidPathChars():System.Array$1<number>;
+            
+            public static GetRandomFileName():string;
+            
+            public static Combine(...paths: string[]):string;
+            
+            public static Combine($path1: string, $path2: string, $path3: string):string;
+            
+            public static Combine($path1: string, $path2: string, $path3: string, $path4: string):string;
+            
+        }
+        
+    }
+    namespace System {
+        
+        class MarshalByRefObject extends System.Object {
+            
+        }
+        
+        class Object {
+            
+            public constructor();
+            
+            public Equals($obj: any):boolean;
+            
+            public static Equals($objA: any, $objB: any):boolean;
+            
+            public GetHashCode():number;
+            
+            public GetType():System.Type;
+            
+            public ToString():string;
+            
+            public static ReferenceEquals($objA: any, $objB: any):boolean;
+            
+        }
+        
+        class Boolean extends System.ValueType {
+            
+        }
+        
+        class ValueType extends System.Object {
+            
+        }
+        
+        class String extends System.Object {
+            
+        }
+        
+        class Void extends System.ValueType {
+            
+        }
+        
+        class Array extends System.Object {
+            
+            public get LongLength(): bigint;
+            
+            public get IsFixedSize(): boolean;
+            
+            public get IsReadOnly(): boolean;
+            
+            public get IsSynchronized(): boolean;
+            
+            public get SyncRoot(): any;
+            
+            public get Length(): number;
+            
+            public get Rank(): number;
+            
+            public static CreateInstance($elementType: System.Type, ...lengths: bigint[]):System.Array;
+            
+            public CopyTo($array: System.Array, $index: number):void;
+            
+            public Clone():any;
+            
+            public static BinarySearch($array: System.Array, $value: any):number;
+            
+            public static Copy($sourceArray: System.Array, $destinationArray: System.Array, $length: bigint):void;
+            
+            public static Copy($sourceArray: System.Array, $sourceIndex: bigint, $destinationArray: System.Array, $destinationIndex: bigint, $length: bigint):void;
+            
+            public CopyTo($array: System.Array, $index: bigint):void;
+            
+            public GetLongLength($dimension: number):bigint;
+            
+            public GetValue($index: bigint):any;
+            
+            public GetValue($index1: bigint, $index2: bigint):any;
+            
+            public GetValue($index1: bigint, $index2: bigint, $index3: bigint):any;
+            
+            public GetValue(...indices: bigint[]):any;
+            
+            public static BinarySearch($array: System.Array, $index: number, $length: number, $value: any):number;
+            
+            public static BinarySearch($array: System.Array, $value: any, $comparer: System.Collections.IComparer):number;
+            
+            public static BinarySearch($array: System.Array, $index: number, $length: number, $value: any, $comparer: System.Collections.IComparer):number;
+            
+            public static IndexOf($array: System.Array, $value: any):number;
+            
+            public static IndexOf($array: System.Array, $value: any, $startIndex: number):number;
+            
+            public static IndexOf($array: System.Array, $value: any, $startIndex: number, $count: number):number;
+            
+            public static LastIndexOf($array: System.Array, $value: any):number;
+            
+            public static LastIndexOf($array: System.Array, $value: any, $startIndex: number):number;
+            
+            public static LastIndexOf($array: System.Array, $value: any, $startIndex: number, $count: number):number;
+            
+            public static Reverse($array: System.Array):void;
+            
+            public static Reverse($array: System.Array, $index: number, $length: number):void;
+            
+            public SetValue($value: any, $index: bigint):void;
+            
+            public SetValue($value: any, $index1: bigint, $index2: bigint):void;
+            
+            public SetValue($value: any, $index1: bigint, $index2: bigint, $index3: bigint):void;
+            
+            public SetValue($value: any, ...indices: bigint[]):void;
+            
+            public static Sort($array: System.Array):void;
+            
+            public static Sort($array: System.Array, $index: number, $length: number):void;
+            
+            public static Sort($array: System.Array, $comparer: System.Collections.IComparer):void;
+            
+            public static Sort($array: System.Array, $index: number, $length: number, $comparer: System.Collections.IComparer):void;
+            
+            public static Sort($keys: System.Array, $items: System.Array):void;
+            
+            public static Sort($keys: System.Array, $items: System.Array, $comparer: System.Collections.IComparer):void;
+            
+            public static Sort($keys: System.Array, $items: System.Array, $index: number, $length: number):void;
+            
+            public static Sort($keys: System.Array, $items: System.Array, $index: number, $length: number, $comparer: System.Collections.IComparer):void;
+            
+            public GetEnumerator():System.Collections.IEnumerator;
+            
+            public GetLength($dimension: number):number;
+            
+            public GetLowerBound($dimension: number):number;
+            
+            public GetValue(...indices: number[]):any;
+            
+            public SetValue($value: any, ...indices: number[]):void;
+            
+            public GetUpperBound($dimension: number):number;
+            
+            public GetValue($index: number):any;
+            
+            public GetValue($index1: number, $index2: number):any;
+            
+            public GetValue($index1: number, $index2: number, $index3: number):any;
+            
+            public SetValue($value: any, $index: number):void;
+            
+            public SetValue($value: any, $index1: number, $index2: number):void;
+            
+            public SetValue($value: any, $index1: number, $index2: number, $index3: number):void;
+            
+            public static CreateInstance($elementType: System.Type, $length: number):System.Array;
+            
+            public static CreateInstance($elementType: System.Type, $length1: number, $length2: number):System.Array;
+            
+            public static CreateInstance($elementType: System.Type, $length1: number, $length2: number, $length3: number):System.Array;
+            
+            public static CreateInstance($elementType: System.Type, ...lengths: number[]):System.Array;
+            
+            public static CreateInstance($elementType: System.Type, $lengths: System.Array$1<number>, $lowerBounds: System.Array$1<number>):System.Array;
+            
+            public static Clear($array: System.Array, $index: number, $length: number):void;
+            
+            public static Copy($sourceArray: System.Array, $destinationArray: System.Array, $length: number):void;
+            
+            public static Copy($sourceArray: System.Array, $sourceIndex: number, $destinationArray: System.Array, $destinationIndex: number, $length: number):void;
+            
+            public static ConstrainedCopy($sourceArray: System.Array, $sourceIndex: number, $destinationArray: System.Array, $destinationIndex: number, $length: number):void;
+            
+            public Initialize():void;
+            
+        }
+        
+        class Enum extends System.ValueType {
+            
+        }
+        
+        class Int32 extends System.ValueType {
+            
+        }
+        
+        class DateTime extends System.ValueType {
+            
+        }
+        
+        class Byte extends System.ValueType {
+            
+        }
+        
+        type MulticastDelegate = (...args:any[]) => any;
+        var MulticastDelegate: {new (func: (...args:any[]) => any): MulticastDelegate;}
+        
+        class Delegate extends System.Object {
+            
+            public get Method(): System.Reflection.MethodInfo;
+            
+            public get Target(): any;
+            
+            public static CreateDelegate($type: System.Type, $firstArgument: any, $method: System.Reflection.MethodInfo, $throwOnBindFailure: boolean):Function;
+            
+            public static CreateDelegate($type: System.Type, $firstArgument: any, $method: System.Reflection.MethodInfo):Function;
+            
+            public static CreateDelegate($type: System.Type, $method: System.Reflection.MethodInfo, $throwOnBindFailure: boolean):Function;
+            
+            public static CreateDelegate($type: System.Type, $method: System.Reflection.MethodInfo):Function;
+            
+            public static CreateDelegate($type: System.Type, $target: any, $method: string):Function;
+            
+            public static CreateDelegate($type: System.Type, $target: System.Type, $method: string, $ignoreCase: boolean, $throwOnBindFailure: boolean):Function;
+            
+            public static CreateDelegate($type: System.Type, $target: System.Type, $method: string):Function;
+            
+            public static CreateDelegate($type: System.Type, $target: System.Type, $method: string, $ignoreCase: boolean):Function;
+            
+            public static CreateDelegate($type: System.Type, $target: any, $method: string, $ignoreCase: boolean, $throwOnBindFailure: boolean):Function;
+            
+            public static CreateDelegate($type: System.Type, $target: any, $method: string, $ignoreCase: boolean):Function;
+            
+            public DynamicInvoke(...args: any[]):any;
+            
+            public Clone():any;
+            
+            public GetObjectData($info: System.Runtime.Serialization.SerializationInfo, $context: System.Runtime.Serialization.StreamingContext):void;
+            
+            public GetInvocationList():System.Array$1<Function>;
+            
+            public static Combine($a: Function, $b: Function):Function;
+            
+            public static Combine(...delegates: Function[]):Function;
+            
+            public static Remove($source: Function, $value: Function):Function;
+            
+            public static RemoveAll($source: Function, $value: Function):Function;
+            
+            public static op_Equality($d1: Function, $d2: Function):boolean;
+            
+            public static op_Inequality($d1: Function, $d2: Function):boolean;
+            
+        }
+        
+        class Type extends System.Reflection.MemberInfo {
+            
+            public static FilterAttribute: System.Reflection.MemberFilter;
+            
+            public static FilterName: System.Reflection.MemberFilter;
+            
+            public static FilterNameIgnoreCase: System.Reflection.MemberFilter;
+            
+            public static Missing: any;
+            
+            public static Delimiter: number;
+            
+            public static EmptyTypes: System.Array$1<System.Type>;
+            
+            public get MemberType(): System.Reflection.MemberTypes;
+            
+            public get DeclaringType(): System.Type;
+            
+            public get DeclaringMethod(): System.Reflection.MethodBase;
+            
+            public get ReflectedType(): System.Type;
+            
+            public get StructLayoutAttribute(): System.Runtime.InteropServices.StructLayoutAttribute;
+            
+            public get GUID(): System.Guid;
+            
+            public static get DefaultBinder(): System.Reflection.Binder;
+            
+            public get Module(): System.Reflection.Module;
+            
+            public get Assembly(): System.Reflection.Assembly;
+            
+            public get TypeHandle(): System.RuntimeTypeHandle;
+            
+            public get FullName(): string;
+            
+            public get Namespace(): string;
+            
+            public get AssemblyQualifiedName(): string;
+            
+            public get BaseType(): System.Type;
+            
+            public get TypeInitializer(): System.Reflection.ConstructorInfo;
+            
+            public get IsNested(): boolean;
+            
+            public get Attributes(): System.Reflection.TypeAttributes;
+            
+            public get GenericParameterAttributes(): System.Reflection.GenericParameterAttributes;
+            
+            public get IsVisible(): boolean;
+            
+            public get IsNotPublic(): boolean;
+            
+            public get IsPublic(): boolean;
+            
+            public get IsNestedPublic(): boolean;
+            
+            public get IsNestedPrivate(): boolean;
+            
+            public get IsNestedFamily(): boolean;
+            
+            public get IsNestedAssembly(): boolean;
+            
+            public get IsNestedFamANDAssem(): boolean;
+            
+            public get IsNestedFamORAssem(): boolean;
+            
+            public get IsAutoLayout(): boolean;
+            
+            public get IsLayoutSequential(): boolean;
+            
+            public get IsExplicitLayout(): boolean;
+            
+            public get IsClass(): boolean;
+            
+            public get IsInterface(): boolean;
+            
+            public get IsValueType(): boolean;
+            
+            public get IsAbstract(): boolean;
+            
+            public get IsSealed(): boolean;
+            
+            public get IsEnum(): boolean;
+            
+            public get IsSpecialName(): boolean;
+            
+            public get IsImport(): boolean;
+            
+            public get IsSerializable(): boolean;
+            
+            public get IsAnsiClass(): boolean;
+            
+            public get IsUnicodeClass(): boolean;
+            
+            public get IsAutoClass(): boolean;
+            
+            public get IsArray(): boolean;
+            
+            public get IsGenericType(): boolean;
+            
+            public get IsGenericTypeDefinition(): boolean;
+            
+            public get IsConstructedGenericType(): boolean;
+            
+            public get IsGenericParameter(): boolean;
+            
+            public get GenericParameterPosition(): number;
+            
+            public get ContainsGenericParameters(): boolean;
+            
+            public get IsByRef(): boolean;
+            
+            public get IsPointer(): boolean;
+            
+            public get IsPrimitive(): boolean;
+            
+            public get IsCOMObject(): boolean;
+            
+            public get HasElementType(): boolean;
+            
+            public get IsContextful(): boolean;
+            
+            public get IsMarshalByRef(): boolean;
+            
+            public get GenericTypeArguments(): System.Array$1<System.Type>;
+            
+            public get IsSecurityCritical(): boolean;
+            
+            public get IsSecuritySafeCritical(): boolean;
+            
+            public get IsSecurityTransparent(): boolean;
+            
+            public get UnderlyingSystemType(): System.Type;
+            
+            public static GetType($typeName: string, $assemblyResolver: System.Func$2<System.Reflection.AssemblyName, System.Reflection.Assembly>, $typeResolver: System.Func$4<System.Reflection.Assembly, string, boolean, System.Type>):System.Type;
+            
+            public static GetType($typeName: string, $assemblyResolver: System.Func$2<System.Reflection.AssemblyName, System.Reflection.Assembly>, $typeResolver: System.Func$4<System.Reflection.Assembly, string, boolean, System.Type>, $throwOnError: boolean):System.Type;
+            
+            public static GetType($typeName: string, $assemblyResolver: System.Func$2<System.Reflection.AssemblyName, System.Reflection.Assembly>, $typeResolver: System.Func$4<System.Reflection.Assembly, string, boolean, System.Type>, $throwOnError: boolean, $ignoreCase: boolean):System.Type;
+            
+            public MakePointerType():System.Type;
+            
+            public MakeByRefType():System.Type;
+            
+            public MakeArrayType():System.Type;
+            
+            public MakeArrayType($rank: number):System.Type;
+            
+            public static GetTypeFromProgID($progID: string):System.Type;
+            
+            public static GetTypeFromProgID($progID: string, $throwOnError: boolean):System.Type;
+            
+            public static GetTypeFromProgID($progID: string, $server: string):System.Type;
+            
+            public static GetTypeFromProgID($progID: string, $server: string, $throwOnError: boolean):System.Type;
+            
+            public static GetTypeFromCLSID($clsid: System.Guid):System.Type;
+            
+            public static GetTypeFromCLSID($clsid: System.Guid, $throwOnError: boolean):System.Type;
+            
+            public static GetTypeFromCLSID($clsid: System.Guid, $server: string):System.Type;
+            
+            public static GetTypeFromCLSID($clsid: System.Guid, $server: string, $throwOnError: boolean):System.Type;
+            
+            public static GetTypeCode($type: System.Type):System.TypeCode;
+            
+            public InvokeMember($name: string, $invokeAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $target: any, $args: System.Array$1<any>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>, $culture: System.Globalization.CultureInfo, $namedParameters: System.Array$1<string>):any;
+            
+            public InvokeMember($name: string, $invokeAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $target: any, $args: System.Array$1<any>, $culture: System.Globalization.CultureInfo):any;
+            
+            public InvokeMember($name: string, $invokeAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $target: any, $args: System.Array$1<any>):any;
+            
+            public static GetTypeHandle($o: any):System.RuntimeTypeHandle;
+            
+            public GetArrayRank():number;
+            
+            public GetConstructor($bindingAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $callConvention: System.Reflection.CallingConventions, $types: System.Array$1<System.Type>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.ConstructorInfo;
+            
+            public GetConstructor($bindingAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $types: System.Array$1<System.Type>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.ConstructorInfo;
+            
+            public GetConstructor($types: System.Array$1<System.Type>):System.Reflection.ConstructorInfo;
+            
+            public GetConstructors():System.Array$1<System.Reflection.ConstructorInfo>;
+            
+            public GetConstructors($bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.ConstructorInfo>;
+            
+            public GetMethod($name: string, $bindingAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $callConvention: System.Reflection.CallingConventions, $types: System.Array$1<System.Type>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.MethodInfo;
+            
+            public GetMethod($name: string, $bindingAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $types: System.Array$1<System.Type>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.MethodInfo;
+            
+            public GetMethod($name: string, $types: System.Array$1<System.Type>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.MethodInfo;
+            
+            public GetMethod($name: string, $types: System.Array$1<System.Type>):System.Reflection.MethodInfo;
+            
+            public GetMethod($name: string, $bindingAttr: System.Reflection.BindingFlags):System.Reflection.MethodInfo;
+            
+            public GetMethod($name: string):System.Reflection.MethodInfo;
+            
+            public GetMethods():System.Array$1<System.Reflection.MethodInfo>;
+            
+            public GetMethods($bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.MethodInfo>;
+            
+            public GetField($name: string, $bindingAttr: System.Reflection.BindingFlags):System.Reflection.FieldInfo;
+            
+            public GetField($name: string):System.Reflection.FieldInfo;
+            
+            public GetFields():System.Array$1<System.Reflection.FieldInfo>;
+            
+            public GetFields($bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.FieldInfo>;
+            
+            public GetInterface($name: string):System.Type;
+            
+            public GetInterface($name: string, $ignoreCase: boolean):System.Type;
+            
+            public GetInterfaces():System.Array$1<System.Type>;
+            
+            public FindInterfaces($filter: System.Reflection.TypeFilter, $filterCriteria: any):System.Array$1<System.Type>;
+            
+            public GetEvent($name: string):System.Reflection.EventInfo;
+            
+            public GetEvent($name: string, $bindingAttr: System.Reflection.BindingFlags):System.Reflection.EventInfo;
+            
+            public GetEvents():System.Array$1<System.Reflection.EventInfo>;
+            
+            public GetEvents($bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.EventInfo>;
+            
+            public GetProperty($name: string, $bindingAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $returnType: System.Type, $types: System.Array$1<System.Type>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.PropertyInfo;
+            
+            public GetProperty($name: string, $returnType: System.Type, $types: System.Array$1<System.Type>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.PropertyInfo;
+            
+            public GetProperty($name: string, $bindingAttr: System.Reflection.BindingFlags):System.Reflection.PropertyInfo;
+            
+            public GetProperty($name: string, $returnType: System.Type, $types: System.Array$1<System.Type>):System.Reflection.PropertyInfo;
+            
+            public GetProperty($name: string, $types: System.Array$1<System.Type>):System.Reflection.PropertyInfo;
+            
+            public GetProperty($name: string, $returnType: System.Type):System.Reflection.PropertyInfo;
+            
+            public GetProperty($name: string):System.Reflection.PropertyInfo;
+            
+            public GetProperties($bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.PropertyInfo>;
+            
+            public GetProperties():System.Array$1<System.Reflection.PropertyInfo>;
+            
+            public GetNestedTypes():System.Array$1<System.Type>;
+            
+            public GetNestedTypes($bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Type>;
+            
+            public GetNestedType($name: string):System.Type;
+            
+            public GetNestedType($name: string, $bindingAttr: System.Reflection.BindingFlags):System.Type;
+            
+            public GetMember($name: string):System.Array$1<System.Reflection.MemberInfo>;
+            
+            public GetMember($name: string, $bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.MemberInfo>;
+            
+            public GetMember($name: string, $type: System.Reflection.MemberTypes, $bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.MemberInfo>;
+            
+            public GetMembers():System.Array$1<System.Reflection.MemberInfo>;
+            
+            public GetMembers($bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.MemberInfo>;
+            
+            public GetDefaultMembers():System.Array$1<System.Reflection.MemberInfo>;
+            
+            public FindMembers($memberType: System.Reflection.MemberTypes, $bindingAttr: System.Reflection.BindingFlags, $filter: System.Reflection.MemberFilter, $filterCriteria: any):System.Array$1<System.Reflection.MemberInfo>;
+            
+            public GetGenericParameterConstraints():System.Array$1<System.Type>;
+            
+            public MakeGenericType(...typeArguments: System.Type[]):System.Type;
+            
+            public GetElementType():System.Type;
+            
+            public GetGenericArguments():System.Array$1<System.Type>;
+            
+            public GetGenericTypeDefinition():System.Type;
+            
+            public GetEnumNames():System.Array$1<string>;
+            
+            public GetEnumValues():System.Array;
+            
+            public GetEnumUnderlyingType():System.Type;
+            
+            public IsEnumDefined($value: any):boolean;
+            
+            public GetEnumName($value: any):string;
+            
+            public IsSubclassOf($c: System.Type):boolean;
+            
+            public IsInstanceOfType($o: any):boolean;
+            
+            public IsAssignableFrom($c: System.Type):boolean;
+            
+            public IsEquivalentTo($other: System.Type):boolean;
+            
+            public static GetTypeArray($args: System.Array$1<any>):System.Array$1<System.Type>;
+            
+            public Equals($o: any):boolean;
+            
+            public Equals($o: System.Type):boolean;
+            
+            public static op_Equality($left: System.Type, $right: System.Type):boolean;
+            
+            public static op_Inequality($left: System.Type, $right: System.Type):boolean;
+            
+            public GetInterfaceMap($interfaceType: System.Type):System.Reflection.InterfaceMapping;
+            
+            public GetType():System.Type;
+            
+            public static GetType($typeName: string):System.Type;
+            
+            public static GetType($typeName: string, $throwOnError: boolean):System.Type;
+            
+            public static GetType($typeName: string, $throwOnError: boolean, $ignoreCase: boolean):System.Type;
+            
+            public static ReflectionOnlyGetType($typeName: string, $throwIfNotFound: boolean, $ignoreCase: boolean):System.Type;
+            
+            public static GetTypeFromHandle($handle: System.RuntimeTypeHandle):System.Type;
+            
+            public GetType():System.Type;
+            
+            public Equals($obj: any):boolean;
+            
+            public static Equals($objA: any, $objB: any):boolean;
+            
+        }
+        
+        class Int64 extends System.ValueType {
+            
+        }
+        
+        class UInt64 extends System.ValueType {
+            
+        }
+        
+        class UInt32 extends System.ValueType {
+            
+        }
+        
+        type Action = () => void;
+        var Action: {new (func: () => void): Action;}
+        
+        class Char extends System.ValueType {
+            
+        }
+        
+        class Single extends System.ValueType {
+            
+        }
+        
+        type Action$1<T> = (obj: T) => void;
+        
+        type Func$1<TResult> = () => TResult;
+        
+        class Exception extends System.Object {
+            
+        }
+        
+        type Converter$2<TInput,TOutput> = (input: TInput) => TOutput;
+        
+        type Predicate$1<T> = (obj: T) => boolean;
+        
+        type Comparison$1<T> = (x: T, y: T) => number;
+        
+        class Double extends System.ValueType {
+            
+        }
+        
+        interface Double {
+            
+            ApproxEquals($b: number):boolean;
+            
+            ApproxEquals($b: number):boolean;
+            
+        }
+        
+        
+        type Func$2<T,TResult> = (arg: T) => TResult;
+        
+        type Func$4<T1,T2,T3,TResult> = (arg1: T1, arg2: T2, arg3: T3) => TResult;
+        
+        class Attribute extends System.Object {
+            
+        }
+        
+        class Guid extends System.ValueType {
+            
+        }
+        
+        enum TypeCode { Empty = 0, Object = 1, DBNull = 2, Boolean = 3, Char = 4, SByte = 5, Byte = 6, Int16 = 7, UInt16 = 8, Int32 = 9, UInt32 = 10, Int64 = 11, UInt64 = 12, Single = 13, Double = 14, Decimal = 15, DateTime = 16, String = 18 }
+        
+        class RuntimeTypeHandle extends System.ValueType {
+            
+        }
+        
+        class Random extends System.Object {
+            
+        }
+        
+    }
+    namespace System.Security.AccessControl {
+        
+        class DirectorySecurity extends System.Security.AccessControl.FileSystemSecurity {
+            
+        }
+        
+        class FileSystemSecurity extends System.Security.AccessControl.NativeObjectSecurity {
+            
+        }
+        
+        class NativeObjectSecurity extends System.Security.AccessControl.CommonObjectSecurity {
+            
+        }
+        
+        class CommonObjectSecurity extends System.Security.AccessControl.ObjectSecurity {
+            
+        }
+        
+        class ObjectSecurity extends System.Object {
+            
+        }
+        
+        enum AccessControlSections { None = 0, Audit = 1, Access = 2, Owner = 4, Group = 8, All = 15 }
+        
+        class FileSecurity extends System.Security.AccessControl.FileSystemSecurity {
+            
+        }
+        
+    }
+    namespace System.Collections.Generic {
+        
+        interface IEnumerable$1<T> {
+            
+        }
+        
+        class List$1<T> extends System.Object {
+            
+            public get Capacity(): number;
+            public set Capacity(value: number);
+            
+            public get Count(): number;
+            
+            public constructor();
+            
+            public constructor($capacity: number);
+            
+            public constructor($collection: System.Collections.Generic.IEnumerable$1<T>);
+            
+            public get_Item($index: number):T;
+            
+            public set_Item($index: number, $value: T):void;
+            
+            public Add($item: T):void;
+            
+            public AddRange($collection: System.Collections.Generic.IEnumerable$1<T>):void;
+            
+            public AsReadOnly():System.Collections.ObjectModel.ReadOnlyCollection$1<T>;
+            
+            public BinarySearch($index: number, $count: number, $item: T, $comparer: System.Collections.Generic.IComparer$1<T>):number;
+            
+            public BinarySearch($item: T):number;
+            
+            public BinarySearch($item: T, $comparer: System.Collections.Generic.IComparer$1<T>):number;
+            
+            public Clear():void;
+            
+            public Contains($item: T):boolean;
+            
+            public CopyTo($array: System.Array$1<T>):void;
+            
+            public CopyTo($index: number, $array: System.Array$1<T>, $arrayIndex: number, $count: number):void;
+            
+            public CopyTo($array: System.Array$1<T>, $arrayIndex: number):void;
+            
+            public Exists($match: System.Predicate$1<T>):boolean;
+            
+            public Find($match: System.Predicate$1<T>):T;
+            
+            public FindAll($match: System.Predicate$1<T>):System.Collections.Generic.List$1<T>;
+            
+            public FindIndex($match: System.Predicate$1<T>):number;
+            
+            public FindIndex($startIndex: number, $match: System.Predicate$1<T>):number;
+            
+            public FindIndex($startIndex: number, $count: number, $match: System.Predicate$1<T>):number;
+            
+            public FindLast($match: System.Predicate$1<T>):T;
+            
+            public FindLastIndex($match: System.Predicate$1<T>):number;
+            
+            public FindLastIndex($startIndex: number, $match: System.Predicate$1<T>):number;
+            
+            public FindLastIndex($startIndex: number, $count: number, $match: System.Predicate$1<T>):number;
+            
+            public ForEach($action: System.Action$1<T>):void;
+            
+            public GetEnumerator():System.Collections.Generic.List$1.Enumerator<T>;
+            
+            public GetRange($index: number, $count: number):System.Collections.Generic.List$1<T>;
+            
+            public IndexOf($item: T):number;
+            
+            public IndexOf($item: T, $index: number):number;
+            
+            public IndexOf($item: T, $index: number, $count: number):number;
+            
+            public Insert($index: number, $item: T):void;
+            
+            public InsertRange($index: number, $collection: System.Collections.Generic.IEnumerable$1<T>):void;
+            
+            public LastIndexOf($item: T):number;
+            
+            public LastIndexOf($item: T, $index: number):number;
+            
+            public LastIndexOf($item: T, $index: number, $count: number):number;
+            
+            public Remove($item: T):boolean;
+            
+            public RemoveAll($match: System.Predicate$1<T>):number;
+            
+            public RemoveAt($index: number):void;
+            
+            public RemoveRange($index: number, $count: number):void;
+            
+            public Reverse():void;
+            
+            public Reverse($index: number, $count: number):void;
+            
+            public Sort():void;
+            
+            public Sort($comparer: System.Collections.Generic.IComparer$1<T>):void;
+            
+            public Sort($index: number, $count: number, $comparer: System.Collections.Generic.IComparer$1<T>):void;
+            
+            public Sort($comparison: System.Comparison$1<T>):void;
+            
+            public ToArray():System.Array$1<T>;
+            
+            public TrimExcess():void;
+            
+            public TrueForAll($match: System.Predicate$1<T>):boolean;
+            
+        }
+        
+        class Dictionary$2<TKey,TValue> extends System.Object {
+            
+            public get Comparer(): System.Collections.Generic.IEqualityComparer$1<TKey>;
+            
+            public get Count(): number;
+            
+            public get Keys(): System.Collections.Generic.Dictionary$2.KeyCollection<TKey, TValue>;
+            
+            public get Values(): System.Collections.Generic.Dictionary$2.ValueCollection<TKey, TValue>;
+            
+            public constructor();
+            
+            public constructor($capacity: number);
+            
+            public constructor($comparer: System.Collections.Generic.IEqualityComparer$1<TKey>);
+            
+            public constructor($capacity: number, $comparer: System.Collections.Generic.IEqualityComparer$1<TKey>);
+            
+            public get_Item($key: TKey):TValue;
+            
+            public set_Item($key: TKey, $value: TValue):void;
+            
+            public Add($key: TKey, $value: TValue):void;
+            
+            public Clear():void;
+            
+            public ContainsKey($key: TKey):boolean;
+            
+            public ContainsValue($value: TValue):boolean;
+            
+            public GetEnumerator():System.Collections.Generic.Dictionary$2.Enumerator<TKey, TValue>;
+            
+            public GetObjectData($info: System.Runtime.Serialization.SerializationInfo, $context: System.Runtime.Serialization.StreamingContext):void;
+            
+            public OnDeserialization($sender: any):void;
+            
+            public Remove($key: TKey):boolean;
+            
+            public TryGetValue($key: TKey, $value: $Ref<TValue>):boolean;
+            
+        }
+        
+        interface IComparer$1<T> {
+            
+        }
+        
+        interface IEqualityComparer$1<T> {
+            
+        }
+        
+        interface IDictionary$2<TKey,TValue> {
+            
+        }
+        
+        class KeyValuePair$2<TKey,TValue> extends System.ValueType {
+            
+        }
+        
+    }
+    namespace System.Text {
+        
+        class Encoding extends System.Object {
+            
+        }
+        
+        class StringBuilder extends System.Object {
+            
+        }
+        
+    }
+    namespace UnityEditor {
+        /** An Interface for accessing assets and performing operations on assets. */
+        class AssetDatabase extends System.Object {
+            
+            public constructor();
+            
+            public static add_importPackageStarted($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
+            
+            public static remove_importPackageStarted($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
+            
+            public static add_importPackageCompleted($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
+            
+            public static remove_importPackageCompleted($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
+            
+            public static add_importPackageCancelled($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
+            
+            public static remove_importPackageCancelled($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
+            
+            public static add_importPackageFailed($value: UnityEditor.AssetDatabase.ImportPackageFailedCallback):void;
+            
+            public static remove_importPackageFailed($value: UnityEditor.AssetDatabase.ImportPackageFailedCallback):void;
+            
+            public static IsOpenForEdit($assetOrMetaFilePaths: System.Array$1<string>, $outNotEditablePaths: System.Collections.Generic.List$1<string>, $statusQueryOptions?: UnityEditor.StatusQueryOptions):void;
+            /** Makes a file open for editing in version control.
+             * @param path Specifies the path to a file relative to the project root.
+             * @returns true if Unity successfully made the file editable in the version control system. Otherwise, returns false. 
+             */
+            public static MakeEditable($path: string):boolean;
+            
+            public static MakeEditable($paths: System.Array$1<string>, $prompt?: string, $outNotEditablePaths?: System.Collections.Generic.List$1<string>):boolean;
+            /** Search the asset database using the search filter string.
+             * @param filter The filter string can contain search data.  See below for details about this string.
+             * @param searchInFolders The folders where the search will start.
+             * @returns Array of matching asset. Note that GUIDs will be returned. 
+             */
+            public static FindAssets($filter: string):System.Array$1<string>;
+            /** Search the asset database using the search filter string.
+             * @param filter The filter string can contain search data.  See below for details about this string.
+             * @param searchInFolders The folders where the search will start.
+             * @returns Array of matching asset. Note that GUIDs will be returned. 
+             */
+            public static FindAssets($filter: string, $searchInFolders: System.Array$1<string>):System.Array$1<string>;
+            /** Is object an asset? */
+            public static Contains($obj: UnityEngine.Object):boolean;
+            /** Is object an asset? */
+            public static Contains($instanceID: number):boolean;
+            /** Create a new folder.
+             * @param parentFolder The name of the parent folder.
+             * @param newFolderName The name of the new folder.
+             * @returns The GUID of the newly created folder. 
+             */
+            public static CreateFolder($parentFolder: string, $newFolderName: string):string;
+            /** Is asset a main asset in the project window? */
+            public static IsMainAsset($obj: UnityEngine.Object):boolean;
+            /** Is asset a main asset in the project window? */
+            public static IsMainAsset($instanceID: number):boolean;
+            /** Does the asset form part of another asset? * @param obj The asset Object to query.
+             * @param instanceID Instance ID of the asset Object to query.
+             */
+            public static IsSubAsset($obj: UnityEngine.Object):boolean;
+            /** Does the asset form part of another asset? * @param obj The asset Object to query.
+             * @param instanceID Instance ID of the asset Object to query.
+             */
+            public static IsSubAsset($instanceID: number):boolean;
+            /** Determines whether the Asset is a foreign Asset. */
+            public static IsForeignAsset($obj: UnityEngine.Object):boolean;
+            /** Determines whether the Asset is a foreign Asset. */
+            public static IsForeignAsset($instanceID: number):boolean;
+            /** Determines whether the Asset is a native Asset. */
+            public static IsNativeAsset($obj: UnityEngine.Object):boolean;
+            /** Determines whether the Asset is a native Asset. */
+            public static IsNativeAsset($instanceID: number):boolean;
+            
+            public static GetCurrentCacheServerIp():string;
+            /** Creates a new unique path for an asset. */
+            public static GenerateUniqueAssetPath($path: string):string;
+            
+            public static StartAssetEditing():void;
+            
+            public static StopAssetEditing():void;
+            
+            public static ReleaseCachedFileHandles():void;
+            /** Checks if an asset file can be moved from one folder to another. (Without actually moving the file).
+             * @param oldPath The path where the asset currently resides.
+             * @param newPath The path which the asset should be moved to.
+             * @returns An empty string if the asset can be moved, otherwise an error message. 
+             */
+            public static ValidateMoveAsset($oldPath: string, $newPath: string):string;
+            /** Move an asset file (or folder) from one folder to another.
+             * @param oldPath The path where the asset currently resides.
+             * @param newPath The path which the asset should be moved to.
+             * @returns An empty string if the asset has been successfully moved, otherwise an error message. 
+             */
+            public static MoveAsset($oldPath: string, $newPath: string):string;
+            /** Creates an external Asset from an object (such as a Material) by extracting it from within an imported asset (such as an FBX file).
+             * @param asset The sub-asset to extract.
+             * @param newPath The file path of the new Asset.
+             * @returns An empty string if Unity has successfully extracted the Asset, or an error message if not. 
+             */
+            public static ExtractAsset($asset: UnityEngine.Object, $newPath: string):string;
+            /** Rename an asset file.
+             * @param pathName The path where the asset currently resides.
+             * @param newName The new name which should be given to the asset.
+             * @returns An empty string, if the asset has been successfully renamed, otherwise an error message. 
+             */
+            public static RenameAsset($pathName: string, $newName: string):string;
+            /** Moves the asset at path to the trash. */
+            public static MoveAssetToTrash($path: string):boolean;
+            /** Deletes the asset file at path. * @param path Filesystem path of the asset to be deleted.
+             */
+            public static DeleteAsset($path: string):boolean;
+            /** Import asset at path. */
+            public static ImportAsset($path: string):void;
+            /** Import asset at path. */
+            public static ImportAsset($path: string, $options: UnityEditor.ImportAssetOptions):void;
+            /** Duplicates the asset at path and stores it at newPath. * @param path Filesystem path of the source asset.
+             * @param newPath Filesystem path of the new asset to create.
+             */
+            public static CopyAsset($path: string, $newPath: string):boolean;
+            /** Writes the import settings to disk. */
+            public static WriteImportSettingsIfDirty($path: string):boolean;
+            /** Given a path to a directory in the Assets folder, relative to the project folder, this method will return an array of all its subdirectories. */
+            public static GetSubFolders($path: string):System.Array$1<string>;
+            /** Given a path to a folder, returns true if it exists, false otherwise.
+             * @param path The path to the folder.
+             * @returns Returns true if the folder exists. 
+             */
+            public static IsValidFolder($path: string):boolean;
+            /** Creates a new asset at path. * @param asset Object to use in creating the asset.
+             * @param path Filesystem path for the new asset.
+             */
+            public static CreateAsset($asset: UnityEngine.Object, $path: string):void;
+            /** Adds objectToAdd to an existing asset at path. * @param objectToAdd Object to add to the existing asset.
+             * @param path Filesystem path to the asset.
+             */
+            public static AddObjectToAsset($objectToAdd: UnityEngine.Object, $path: string):void;
+            /** Adds objectToAdd to an existing asset identified by assetObject. */
+            public static AddObjectToAsset($objectToAdd: UnityEngine.Object, $assetObject: UnityEngine.Object):void;
+            /** Specifies which object in the asset file should become the main object after the next import. * @param mainObject The object to become the main object.
+             * @param assetPath Path to the asset file.
+             */
+            public static SetMainObject($mainObject: UnityEngine.Object, $assetPath: string):void;
+            /** Returns the path name relative to the project folder where the asset is stored.
+             * @param instanceID The instance ID of the asset.
+             * @param assetObject A reference to the asset.
+             * @returns The asset path name, or null, or an empty string if the asset does not exist. 
+             */
+            public static GetAssetPath($assetObject: UnityEngine.Object):string;
+            /** Returns the path name relative to the project folder where the asset is stored.
+             * @param instanceID The instance ID of the asset.
+             * @param assetObject A reference to the asset.
+             * @returns The asset path name, or null, or an empty string if the asset does not exist. 
+             */
+            public static GetAssetPath($instanceID: number):string;
+            /** Returns the path name relative to the project folder where the asset is stored. */
+            public static GetAssetOrScenePath($assetObject: UnityEngine.Object):string;
+            /** Gets the path to the text .meta file associated with an asset.
+             * @param path The path to the asset.
+             * @returns The path to the .meta text file or empty string if the file does not exist. 
+             */
+            public static GetTextMetaFilePathFromAssetPath($path: string):string;
+            /** Gets the path to the asset file associated with a text .meta file. */
+            public static GetAssetPathFromTextMetaFilePath($path: string):string;
+            /** Returns the first asset object of type type at given path assetPath.
+             * @param assetPath Path of the asset to load.
+             * @param type Data type of the asset.
+             * @returns The asset matching the parameters. 
+             */
+            public static LoadAssetAtPath($assetPath: string, $type: System.Type):UnityEngine.Object;
+            /** Returns the main asset object at assetPath. * @param assetPath Filesystem path of the asset to load.
+             */
+            public static LoadMainAssetAtPath($assetPath: string):UnityEngine.Object;
+            /** Returns the type of the main asset object at assetPath. * @param assetPath Filesystem path of the asset to load.
+             */
+            public static GetMainAssetTypeAtPath($assetPath: string):System.Type;
+            /** Returns true if the main asset object at assetPath is loaded in memory. * @param assetPath Filesystem path of the asset to load.
+             */
+            public static IsMainAssetAtPathLoaded($assetPath: string):boolean;
+            /** Returns all sub Assets at assetPath. */
+            public static LoadAllAssetRepresentationsAtPath($assetPath: string):System.Array$1<UnityEngine.Object>;
+            /** Returns an array of all Assets at assetPath. * @param assetPath Filesystem path to the asset.
+             */
+            public static LoadAllAssetsAtPath($assetPath: string):System.Array$1<UnityEngine.Object>;
+            
+            public static GetAllAssetPaths():System.Array$1<string>;
+            /** Import any changed assets. */
+            public static Refresh():void;
+            /** Import any changed assets. */
+            public static Refresh($options: UnityEditor.ImportAssetOptions):void;
+            /** Opens the asset with associated application. */
+            public static OpenAsset($instanceID: number):boolean;
+            /** Opens the asset with associated application. */
+            public static OpenAsset($instanceID: number, $lineNumber: number):boolean;
+            /** Opens the asset with associated application. */
+            public static OpenAsset($instanceID: number, $lineNumber: number, $columnNumber: number):boolean;
+            /** Opens the asset with associated application. */
+            public static OpenAsset($target: UnityEngine.Object):boolean;
+            /** Opens the asset with associated application. */
+            public static OpenAsset($target: UnityEngine.Object, $lineNumber: number):boolean;
+            /** Opens the asset with associated application. */
+            public static OpenAsset($target: UnityEngine.Object, $lineNumber: number, $columnNumber: number):boolean;
+            /** Opens the asset(s) with associated application(s). */
+            public static OpenAsset($objects: System.Array$1<UnityEngine.Object>):boolean;
+            /** Get the GUID for the asset at path.
+             * @param path Filesystem path for the asset.
+             * @returns GUID. 
+             */
+            public static AssetPathToGUID($path: string):string;
+            /** Gets the corresponding asset path for the supplied guid, or an empty string if the GUID can't be found. */
+            public static GUIDToAssetPath($guid: string):string;
+            /** Returns the hash of all the dependencies of an asset.
+             * @param path Path to the asset.
+             * @returns Aggregate hash. 
+             */
+            public static GetAssetDependencyHash($path: string):UnityEngine.Hash128;
+            
+            public static SaveAssets():void;
+            /** Retrieves an icon for the asset at the given asset path. */
+            public static GetCachedIcon($path: string):UnityEngine.Texture;
+            /** Replaces that list of labels on an asset. */
+            public static SetLabels($obj: UnityEngine.Object, $labels: System.Array$1<string>):void;
+            /** Returns all labels attached to a given asset. */
+            public static GetLabels($obj: UnityEngine.Object):System.Array$1<string>;
+            /** Removes all labels attached to an asset. */
+            public static ClearLabels($obj: UnityEngine.Object):void;
+            
+            public static GetAllAssetBundleNames():System.Array$1<string>;
+            
+            public static GetUnusedAssetBundleNames():System.Array$1<string>;
+            /** Remove the assetBundle name from the asset database. The forceRemove flag is used to indicate if you want to remove it even it's in use. * @param assetBundleName The assetBundle name you want to remove.
+             * @param forceRemove Flag to indicate if you want to remove the assetBundle name even it's in use.
+             */
+            public static RemoveAssetBundleName($assetBundleName: string, $forceRemove: boolean):boolean;
+            
+            public static RemoveUnusedAssetBundleNames():void;
+            /** Returns an array containing the paths of all assets marked with the specified Asset Bundle name. */
+            public static GetAssetPathsFromAssetBundle($assetBundleName: string):System.Array$1<string>;
+            /** Get the Asset paths for all Assets tagged with assetBundleName and
+                            named assetName. */
+            public static GetAssetPathsFromAssetBundleAndAssetName($assetBundleName: string, $assetName: string):System.Array$1<string>;
+            /** Returns the name of the AssetBundle that a given asset belongs to.
+             * @param assetPath The asset's path.
+             * @returns Returns the name of the AssetBundle that a given asset belongs to. See the method description for more details. 
+             */
+            public static GetImplicitAssetBundleName($assetPath: string):string;
+            /** Returns the name of the AssetBundle Variant that a given asset belongs to.
+             * @param assetPath The asset's path.
+             * @returns Returns the name of the AssetBundle Variant that a given asset belongs to. See the method description for more details. 
+             */
+            public static GetImplicitAssetBundleVariantName($assetPath: string):string;
+            /** Given an assetBundleName, returns the list of AssetBundles that it depends on.
+             * @param assetBundleName The name of the AssetBundle for which dependencies are required.
+             * @param recursive If false, returns only AssetBundles which are direct dependencies of the input; if true, includes all indirect dependencies of the input.
+             * @returns The names of all AssetBundles that the input depends on. 
+             */
+            public static GetAssetBundleDependencies($assetBundleName: string, $recursive: boolean):System.Array$1<string>;
+            /** Returns an array of all the assets that are dependencies of the asset at the specified pathName.
+            Note: GetDependencies() gets the Assets that are referenced by other Assets. For example, a Scene could contain many GameObjects with a Material attached to them. In this case,  GetDependencies() will return the path to the Material Assets, but not the GameObjects as those are not Assets on your disk.
+             * @param pathName The path to the asset for which dependencies are required.
+             * @param recursive Controls whether this method recursively checks and returns all dependencies including indirect dependencies (when set to true), or whether it only returns direct dependencies (when set to false).
+             * @returns The paths of all assets that the input depends on. 
+             */
+            public static GetDependencies($pathName: string):System.Array$1<string>;
+            /** Returns an array of all the assets that are dependencies of the asset at the specified pathName.
+            Note: GetDependencies() gets the Assets that are referenced by other Assets. For example, a Scene could contain many GameObjects with a Material attached to them. In this case,  GetDependencies() will return the path to the Material Assets, but not the GameObjects as those are not Assets on your disk.
+             * @param pathName The path to the asset for which dependencies are required.
+             * @param recursive Controls whether this method recursively checks and returns all dependencies including indirect dependencies (when set to true), or whether it only returns direct dependencies (when set to false).
+             * @returns The paths of all assets that the input depends on. 
+             */
+            public static GetDependencies($pathName: string, $recursive: boolean):System.Array$1<string>;
+            /** Returns an array of the paths of assets that are dependencies of all the assets in the list of pathNames that you provide.
+            Note: GetDependencies() gets the Assets that are referenced by other Assets. For example, a Scene could contain many GameObjects with a Material attached to them. In this case,  GetDependencies() will return the path to the Material Assets, but not the GameObjects as those are not Assets on your disk.
+             * @param pathNames The path to the assets for which dependencies are required.
+             * @param recursive Controls whether this method recursively checks and returns all dependencies including indirect dependencies (when set to true), or whether it only returns direct dependencies (when set to false).
+             * @returns The paths of all assets that the input depends on. 
+             */
+            public static GetDependencies($pathNames: System.Array$1<string>):System.Array$1<string>;
+            /** Returns an array of the paths of assets that are dependencies of all the assets in the list of pathNames that you provide.
+            Note: GetDependencies() gets the Assets that are referenced by other Assets. For example, a Scene could contain many GameObjects with a Material attached to them. In this case,  GetDependencies() will return the path to the Material Assets, but not the GameObjects as those are not Assets on your disk.
+             * @param pathNames The path to the assets for which dependencies are required.
+             * @param recursive Controls whether this method recursively checks and returns all dependencies including indirect dependencies (when set to true), or whether it only returns direct dependencies (when set to false).
+             * @returns The paths of all assets that the input depends on. 
+             */
+            public static GetDependencies($pathNames: System.Array$1<string>, $recursive: boolean):System.Array$1<string>;
+            /** Exports the assets identified by assetPathNames to a unitypackage file in fileName. */
+            public static ExportPackage($assetPathName: string, $fileName: string):void;
+            /** Exports the assets identified by assetPathNames to a unitypackage file in fileName. */
+            public static ExportPackage($assetPathName: string, $fileName: string, $flags: UnityEditor.ExportPackageOptions):void;
+            /** Exports the assets identified by assetPathNames to a unitypackage file in fileName. */
+            public static ExportPackage($assetPathNames: System.Array$1<string>, $fileName: string):void;
+            /** Exports the assets identified by assetPathNames to a unitypackage file in fileName. */
+            public static ExportPackage($assetPathNames: System.Array$1<string>, $fileName: string, $flags: UnityEditor.ExportPackageOptions):void;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetObject: UnityEngine.Object):boolean;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetObject: UnityEngine.Object, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetOrMetaFilePath: string):boolean;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetOrMetaFilePath: string, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetObject: UnityEngine.Object, $message: $Ref<string>):boolean;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetObject: UnityEngine.Object, $message: $Ref<string>, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetOrMetaFilePath: string, $message: $Ref<string>):boolean;
+            /** Query whether an Asset file is open for editing in version control.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered open for edit by the selected version control system. 
+             */
+            public static IsOpenForEdit($assetOrMetaFilePath: string, $message: $Ref<string>, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
+            /** Query whether an asset's metadata (.meta) file is open for edit in version control.
+             * @param assetObject Object representing the asset whose metadata status you wish to query.
+             * @param message Returns a reason for the asset metadata not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset's metadata is considered open for edit by the selected version control system. 
+             */
+            public static IsMetaFileOpenForEdit($assetObject: UnityEngine.Object):boolean;
+            /** Query whether an asset's metadata (.meta) file is open for edit in version control.
+             * @param assetObject Object representing the asset whose metadata status you wish to query.
+             * @param message Returns a reason for the asset metadata not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset's metadata is considered open for edit by the selected version control system. 
+             */
+            public static IsMetaFileOpenForEdit($assetObject: UnityEngine.Object, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
+            /** Query whether an asset's metadata (.meta) file is open for edit in version control.
+             * @param assetObject Object representing the asset whose metadata status you wish to query.
+             * @param message Returns a reason for the asset metadata not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset's metadata is considered open for edit by the selected version control system. 
+             */
+            public static IsMetaFileOpenForEdit($assetObject: UnityEngine.Object, $message: $Ref<string>):boolean;
+            /** Query whether an asset's metadata (.meta) file is open for edit in version control.
+             * @param assetObject Object representing the asset whose metadata status you wish to query.
+             * @param message Returns a reason for the asset metadata not being open for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset's metadata is considered open for edit by the selected version control system. 
+             */
+            public static IsMetaFileOpenForEdit($assetObject: UnityEngine.Object, $message: $Ref<string>, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
+            
+            public static GetBuiltinExtraResource($type: System.Type, $path: string):UnityEngine.Object;
+            
+            public static ForceReserializeAssets($assetPaths: System.Collections.Generic.IEnumerable$1<string>, $options?: UnityEditor.ForceReserializeAssetsOptions):void;
+            /** Warning Use the overload with a long localId parameter. Using the overload with an integer localId parameter can cause an integer overflow in localId. This can happen when the object passed to the API is part of a Prefab.
+            Get the GUID and local file id from an object instance id.
+             * @param instanceID InstanceID of the object to retrieve information for.
+             * @param obj The object to retrieve GUID and File Id for.
+             * @param assetRef The asset reference to retrieve GUID and File Id for.
+             * @param guid The GUID of the asset.
+             * @param localId The local file identifier of this asset.
+             * @returns True if the guid and file id were successfully found, false if not. 
+             */
+            public static TryGetGUIDAndLocalFileIdentifier($obj: UnityEngine.Object, $guid: $Ref<string>, $localId: $Ref<bigint>):boolean;
+            /** Warning Use the overload with a long localId parameter. Using the overload with an integer localId parameter can cause an integer overflow in localId. This can happen when the object passed to the API is part of a Prefab.
+            Get the GUID and local file id from an object instance id.
+             * @param instanceID InstanceID of the object to retrieve information for.
+             * @param obj The object to retrieve GUID and File Id for.
+             * @param assetRef The asset reference to retrieve GUID and File Id for.
+             * @param guid The GUID of the asset.
+             * @param localId The local file identifier of this asset.
+             * @returns True if the guid and file id were successfully found, false if not. 
+             */
+            public static TryGetGUIDAndLocalFileIdentifier($instanceID: number, $guid: $Ref<string>, $localId: $Ref<bigint>):boolean;
+            
+            public static ForceReserializeAssets():void;
+            /** Removes object from its asset (See Also: AssetDatabase.AddObjectToAsset). */
+            public static RemoveObjectFromAsset($objectToRemove: UnityEngine.Object):void;
+            /** Imports package at packagePath into the current project. */
+            public static ImportPackage($packagePath: string, $interactive: boolean):void;
+            
+            public static DisallowAutoRefresh():void;
+            
+            public static AllowAutoRefresh():void;
+            
+        }
+        /** Options for querying the version control system status of a file. */
+        enum StatusQueryOptions { ForceUpdate = 0, UseCachedIfPossible = 1, UseCachedAsync = 2 }
+        /** Asset importing options. */
+        enum ImportAssetOptions { Default = 0, ForceUpdate = 1, ForceSynchronousImport = 8, ImportRecursive = 256, DontDownloadFromCacheServer = 8192, ForceUncompressedImport = 16384 }
+        /** Export package option. Multiple options can be combined together using the | operator. */
+        enum ExportPackageOptions { Default = 0, Interactive = 1, Recurse = 2, IncludeDependencies = 4, IncludeLibraryAssets = 8 }
+        /** Options for AssetDatabase.ForceReserializeAssets. */
+        enum ForceReserializeAssetsOptions { ReserializeAssets = 1, ReserializeMetadata = 2, ReserializeAssetsAndMetadata = 3 }
+        /** Base class from which asset importers for specific asset types derive. */
+        class AssetImporter extends UnityEngine.Object {
+            /** The path name of the asset for this importer. (Read Only) */
+            public get assetPath(): string;
+            /** The value is true when no meta file is provided with the imported asset. */
+            public get importSettingsMissing(): boolean;
+            
+            public get assetTimeStamp(): bigint;
+            /** Get or set any user data. */
+            public get userData(): string;
+            public set userData(value: string);
+            /** Get or set the AssetBundle name. */
+            public get assetBundleName(): string;
+            public set assetBundleName(value: string);
+            /** Get or set the AssetBundle variant. */
+            public get assetBundleVariant(): string;
+            public set assetBundleVariant(value: string);
+            
+            public constructor();
+            /** Set the AssetBundle name and variant. * @param assetBundleName AssetBundle name.
+             * @param assetBundleVariant AssetBundle variant.
+             */
+            public SetAssetBundleNameAndVariant($assetBundleName: string, $assetBundleVariant: string):void;
+            /** Retrieves the asset importer for the asset at path. */
+            public static GetAtPath($path: string):UnityEditor.AssetImporter;
+            
+            public SaveAndReimport():void;
+            
+            public AddRemap($identifier: UnityEditor.AssetImporter.SourceAssetIdentifier, $externalObject: UnityEngine.Object):void;
+            
+            public RemoveRemap($identifier: UnityEditor.AssetImporter.SourceAssetIdentifier):boolean;
+            
+            public GetExternalObjectMap():System.Collections.Generic.Dictionary$2<UnityEditor.AssetImporter.SourceAssetIdentifier, UnityEngine.Object>;
+            /** Checks if the AssetImporter supports remapping the given asset type.
+             * @param type The type of asset to check.
+             * @returns Returns true if the importer supports remapping the given type. Otherwise, returns false. 
+             */
+            public SupportsRemappedAssetType($type: System.Type):boolean;
+            
+        }
+        /** AssetBundle building map entry. */
+        class AssetBundleBuild extends System.ValueType {
+            /** AssetBundle name. */
+            public assetBundleName: string;
+            /** AssetBundle variant. */
+            public assetBundleVariant: string;
+            /** Asset names which belong to the given AssetBundle. */
+            public assetNames: System.Array$1<string>;
+            /** Addressable name used to load an asset. */
+            public addressableNames: System.Array$1<string>;
+            
+        }
+        /** Lets you programmatically build players or AssetBundles which can be loaded from the web. */
+        class BuildPipeline extends System.Object {
+            /** Is a player currently being built? */
+            public static get isBuildingPlayer(): boolean;
+            
+            public constructor();
+            
+            public static GetBuildTargetGroup($platform: UnityEditor.BuildTarget):UnityEditor.BuildTargetGroup;
+            /** Given a BuildTarget will return the well known string representation for the build target platform.
+             * @param targetPlatform An instance of the BuildTarget enum.
+             * @returns Target platform name represented by the passed in BuildTarget. 
+             */
+            public static GetBuildTargetName($targetPlatform: UnityEditor.BuildTarget):string;
+            
+            public static SetAssetBundleEncryptKey($password: string):void;
+            /** Builds a player. These overloads are still supported, but will be replaced. Please use BuildPlayer (BuildPlayerOptions buildPlayerOptions)  instead.
+             * @param scenes The Scenes to include in the build. If empty, the build only includes the currently open Scene. Paths are relative to the project folder (AssetsMyLevelsMyScene.unity).
+             * @param locationPathName The path where the application will be built.
+             * @param target The BuildTarget to build.
+             * @param options Additional BuildOptions, like whether to run the built player.
+             * @returns An error message if an error occurred. 
+             */
+            public static BuildPlayer($levels: System.Array$1<UnityEditor.EditorBuildSettingsScene>, $locationPathName: string, $target: UnityEditor.BuildTarget, $options: UnityEditor.BuildOptions):UnityEditor.Build.Reporting.BuildReport;
+            /** Builds a player. These overloads are still supported, but will be replaced. Please use BuildPlayer (BuildPlayerOptions buildPlayerOptions)  instead.
+             * @param scenes The Scenes to include in the build. If empty, the build only includes the currently open Scene. Paths are relative to the project folder (AssetsMyLevelsMyScene.unity).
+             * @param locationPathName The path where the application will be built.
+             * @param target The BuildTarget to build.
+             * @param options Additional BuildOptions, like whether to run the built player.
+             * @returns An error message if an error occurred. 
+             */
+            public static BuildPlayer($levels: System.Array$1<string>, $locationPathName: string, $target: UnityEditor.BuildTarget, $options: UnityEditor.BuildOptions):UnityEditor.Build.Reporting.BuildReport;
+            /** Builds a player.
+             * @param buildPlayerOptions Provide various options to control the behavior of BuildPipeline.BuildPlayer.
+             * @returns A BuildReport giving build process information. 
+             */
+            public static BuildPlayer($buildPlayerOptions: UnityEditor.BuildPlayerOptions):UnityEditor.Build.Reporting.BuildReport;
+            /** Build all AssetBundles specified in the editor.
+             * @param outputPath Output path for the AssetBundles.
+             * @param assetBundleOptions AssetBundle building options.
+             * @param targetPlatform Chosen target build platform.
+             * @returns The manifest listing all AssetBundles included in this build. 
+             */
+            public static BuildAssetBundles($outputPath: string, $assetBundleOptions: UnityEditor.BuildAssetBundleOptions, $targetPlatform: UnityEditor.BuildTarget):UnityEngine.AssetBundleManifest;
+            /** Build AssetBundles from a building map.
+             * @param outputPath Output path for the AssetBundles.
+             * @param builds AssetBundle building map.
+             * @param assetBundleOptions AssetBundle building options.
+             * @param targetPlatform Target build platform.
+             * @returns The manifest listing all AssetBundles included in this build. 
+             */
+            public static BuildAssetBundles($outputPath: string, $builds: System.Array$1<UnityEditor.AssetBundleBuild>, $assetBundleOptions: UnityEditor.BuildAssetBundleOptions, $targetPlatform: UnityEditor.BuildTarget):UnityEngine.AssetBundleManifest;
+            /** Extract the crc checksum for the given AssetBundle. */
+            public static GetCRCForAssetBundle($targetPath: string, $crc: $Ref<number>):boolean;
+            /** Extract the hash for the given AssetBundle. */
+            public static GetHashForAssetBundle($targetPath: string, $hash: $Ref<UnityEngine.Hash128>):boolean;
+            /** Returns true if the specified build target is currently available in the Editor. * @param buildTargetGroup build target group
+             * @param target build target
+             */
+            public static IsBuildTargetSupported($buildTargetGroup: UnityEditor.BuildTargetGroup, $target: UnityEditor.BuildTarget):boolean;
+            /** Returns the path of a player directory. For ex., Editor\Data\PlaybackEngines\AndroidPlayer.
+            In some cases the player directory path can be affected by BuildOptions.Development. * @param target Build target.
+             * @param options Build options.
+             * @param buildTargetGroup Build target group.
+             */
+            public static GetPlaybackEngineDirectory($target: UnityEditor.BuildTarget, $options: UnityEditor.BuildOptions):string;
+            /** Returns the path of a player directory. For ex., Editor\Data\PlaybackEngines\AndroidPlayer.
+            In some cases the player directory path can be affected by BuildOptions.Development. * @param target Build target.
+             * @param options Build options.
+             * @param buildTargetGroup Build target group.
+             */
+            public static GetPlaybackEngineDirectory($buildTargetGroup: UnityEditor.BuildTargetGroup, $target: UnityEditor.BuildTarget, $options: UnityEditor.BuildOptions):string;
+            
+        }
+        /** Build target group. */
+        enum BuildTargetGroup { Unknown = 0, Standalone = 1, WebPlayer = 2, iPhone = 4, iOS = 4, PS3 = 5, XBOX360 = 6, Android = 7, WebGL = 13, WSA = 14, Metro = 14, WP8 = 15, BlackBerry = 16, Tizen = 17, PSP2 = 18, PS4 = 19, PSM = 20, XboxOne = 21, SamsungTV = 22, N3DS = 23, WiiU = 24, tvOS = 25, Facebook = 26, Switch = 27, Lumin = 28, Stadia = 29, CloudRendering = 30 }
+        /** Target build platform. */
+        enum BuildTarget { StandaloneOSX = 2, StandaloneOSXUniversal = 3, StandaloneOSXIntel = 4, StandaloneWindows = 5, WebPlayer = 6, WebPlayerStreamed = 7, iOS = 9, PS3 = 10, XBOX360 = 11, Android = 13, StandaloneLinux = 17, StandaloneWindows64 = 19, WebGL = 20, WSAPlayer = 21, StandaloneLinux64 = 24, StandaloneLinuxUniversal = 25, WP8Player = 26, StandaloneOSXIntel64 = 27, BlackBerry = 28, Tizen = 29, PSP2 = 30, PS4 = 31, PSM = 32, XboxOne = 33, SamsungTV = 34, N3DS = 35, WiiU = 36, tvOS = 37, Switch = 38, Lumin = 39, Stadia = 40, CloudRendering = 41, iPhone = -1, BB10 = -1, MetroPlayer = -1, NoTarget = -2 }
+        /** This class is used for entries in the Scenes list, as displayed in the window. This class contains the Scene path of a Scene and an enabled flag that indicates wether the Scene is enabled in the BuildSettings window or not.
+        You can use this class in combination with EditorBuildSettings.scenes to populate the list of Scenes included in the build via script. This is useful when creating custom editor scripts to automate your build pipeline.
+        See EditorBuildSettings.scenes for an example script. */
+        class EditorBuildSettingsScene extends System.Object {
+            
+        }
+        /** Building options. Multiple options can be combined together. */
+        enum BuildOptions { None = 0, Development = 1, AutoRunPlayer = 4, ShowBuiltPlayer = 8, BuildAdditionalStreamedScenes = 16, AcceptExternalModificationsToPlayer = 32, InstallInBuildFolder = 64, WebPlayerOfflineDeployment = 128, ConnectWithProfiler = 256, AllowDebugging = 512, SymlinkLibraries = 1024, UncompressedAssetBundle = 2048, StripDebugSymbols = 0, CompressTextures = 0, ConnectToHost = 4096, EnableHeadlessMode = 16384, BuildScriptsOnly = 32768, PatchPackage = 65536, Il2CPP = 0, ForceEnableAssertions = 131072, CompressWithLz4 = 262144, CompressWithLz4HC = 524288, ForceOptimizeScriptCompilation = 0, ComputeCRC = 1048576, StrictMode = 2097152, IncludeTestAssemblies = 4194304, NoUniqueIdentifier = 8388608, WaitForPlayerConnection = 33554432, EnableCodeCoverage = 67108864, EnableDeepProfilingSupport = 268435456 }
+        /** Provide various options to control the behavior of BuildPipeline.BuildPlayer. */
+        class BuildPlayerOptions extends System.ValueType {
+            
+        }
+        /** Asset Bundle building options. */
+        enum BuildAssetBundleOptions { None = 0, UncompressedAssetBundle = 1, CollectDependencies = 2, CompleteAssets = 4, DisableWriteTypeTree = 8, DeterministicAssetBundle = 16, ForceRebuildAssetBundle = 32, IgnoreTypeTreeChanges = 64, AppendHashToAssetBundleName = 128, ChunkBasedCompression = 256, StrictMode = 512, DryRunBuild = 1024, DisableLoadAssetByFileName = 4096, DisableLoadAssetByFileNameWithExtension = 8192, AssetBundleStripUnityVersion = 32768, EnableProtection = 65536 }
+        /** User build settings for the Editor */
+        class EditorUserBuildSettings extends UnityEngine.Object {
+            /** The currently selected build target group. */
+            public static get selectedBuildTargetGroup(): UnityEditor.BuildTargetGroup;
+            public static set selectedBuildTargetGroup(value: UnityEditor.BuildTargetGroup);
+            /** The currently selected target for a standalone build. */
+            public static get selectedStandaloneTarget(): UnityEditor.BuildTarget;
+            public static set selectedStandaloneTarget(value: UnityEditor.BuildTarget);
+            /** PS4 Build Subtarget. */
+            public static get ps4BuildSubtarget(): UnityEditor.PS4BuildSubtarget;
+            public static set ps4BuildSubtarget(value: UnityEditor.PS4BuildSubtarget);
+            /** Specifies which version of PS4 hardware to target. */
+            public static get ps4HardwareTarget(): UnityEditor.PS4HardwareTarget;
+            public static set ps4HardwareTarget(value: UnityEditor.PS4HardwareTarget);
+            /** Are null references actively validated? */
+            public static get explicitNullChecks(): boolean;
+            public static set explicitNullChecks(value: boolean);
+            /** Are divide by zero's actively validated? */
+            public static get explicitDivideByZeroChecks(): boolean;
+            public static set explicitDivideByZeroChecks(value: boolean);
+            /** Are array bounds actively validated? */
+            public static get explicitArrayBoundsChecks(): boolean;
+            public static set explicitArrayBoundsChecks(value: boolean);
+            /** Build submission materials. */
+            public static get needSubmissionMaterials(): boolean;
+            public static set needSubmissionMaterials(value: boolean);
+            /** Build data compressed with PSArc. */
+            public static get compressWithPsArc(): boolean;
+            public static set compressWithPsArc(value: boolean);
+            /** Force installation of package, even if error. */
+            public static get forceInstallation(): boolean;
+            public static set forceInstallation(value: boolean);
+            /** Places the package on the outer edge of the disk. */
+            public static get movePackageToDiscOuterEdge(): boolean;
+            public static set movePackageToDiscOuterEdge(value: boolean);
+            /** Compress files in package. */
+            public static get compressFilesInPackage(): boolean;
+            public static set compressFilesInPackage(value: boolean);
+            /** Whether the standalone player is built in headless mode. */
+            public static get enableHeadlessMode(): boolean;
+            public static set enableHeadlessMode(value: boolean);
+            /** Is build script only enabled. */
+            public static get buildScriptsOnly(): boolean;
+            public static set buildScriptsOnly(value: boolean);
+            /** Xbox Build subtarget. */
+            public static get xboxBuildSubtarget(): UnityEditor.XboxBuildSubtarget;
+            public static set xboxBuildSubtarget(value: UnityEditor.XboxBuildSubtarget);
+            /** When building an Xbox One Streaming Install package (makepkg.exe) The layout generation code in Unity will assign each Scene and associated assets to individual chunks. Unity will mark Scene 0 as being part of the launch range, IE the set of chunks required to launch the game, you may include additional Scenes in this launch range if you desire, this specifies a range of Scenes (starting at 0) to be included in the launch set.  */
+            public static get streamingInstallLaunchRange(): number;
+            public static set streamingInstallLaunchRange(value: number);
+            /** The currently selected Xbox One Deploy Method. */
+            public static get xboxOneDeployMethod(): UnityEditor.XboxOneDeployMethod;
+            public static set xboxOneDeployMethod(value: UnityEditor.XboxOneDeployMethod);
+            /** The currently selected Xbox One Deploy Drive. */
+            public static get xboxOneDeployDrive(): UnityEditor.XboxOneDeployDrive;
+            public static set xboxOneDeployDrive(value: UnityEditor.XboxOneDeployDrive);
+            
+            public static get xboxOneAdditionalDebugPorts(): string;
+            public static set xboxOneAdditionalDebugPorts(value: string);
+            /** Sets the XBox to reboot and redeploy when the deployment fails. */
+            public static get xboxOneRebootIfDeployFailsAndRetry(): boolean;
+            public static set xboxOneRebootIfDeployFailsAndRetry(value: boolean);
+            /** Android platform options. */
+            public static get androidBuildSubtarget(): UnityEditor.MobileTextureSubtarget;
+            public static set androidBuildSubtarget(value: UnityEditor.MobileTextureSubtarget);
+            /** ETC2 texture decompression fallback on Android devices that don't support ETC2. */
+            public static get androidETC2Fallback(): UnityEditor.AndroidETC2Fallback;
+            public static set androidETC2Fallback(value: UnityEditor.AndroidETC2Fallback);
+            
+            public static get androidBuildSystem(): UnityEditor.AndroidBuildSystem;
+            public static set androidBuildSystem(value: UnityEditor.AndroidBuildSystem);
+            
+            public static get androidBuildType(): UnityEditor.AndroidBuildType;
+            public static set androidBuildType(value: UnityEditor.AndroidBuildType);
+            
+            public static get androidDebugMinification(): UnityEditor.AndroidMinification;
+            public static set androidDebugMinification(value: UnityEditor.AndroidMinification);
+            
+            public static get androidReleaseMinification(): UnityEditor.AndroidMinification;
+            public static set androidReleaseMinification(value: UnityEditor.AndroidMinification);
+            /** Set to true to create a symbols.zip file in the same location as the .apk or .aab file. */
+            public static get androidCreateSymbolsZip(): boolean;
+            public static set androidCreateSymbolsZip(value: boolean);
+            /** Sets and gets target device type for the application to run on when building to Windows Store platform. */
+            public static get wsaSubtarget(): UnityEditor.WSASubtarget;
+            public static set wsaSubtarget(value: UnityEditor.WSASubtarget);
+            /** The build type for the Universal Windows Platform. */
+            public static get wsaUWPBuildType(): UnityEditor.WSAUWPBuildType;
+            public static set wsaUWPBuildType(value: UnityEditor.WSAUWPBuildType);
+            /** Sets and gets target UWP SDK to build Windows Store application against. */
+            public static get wsaUWPSDK(): string;
+            public static set wsaUWPSDK(value: string);
+            
+            public static get wsaMinUWPSDK(): string;
+            public static set wsaMinUWPSDK(value: string);
+            
+            public static get wsaArchitecture(): string;
+            public static set wsaArchitecture(value: string);
+            /** Sets and gets Visual Studio version to build Windows Store application with. */
+            public static get wsaUWPVisualStudioVersion(): string;
+            public static set wsaUWPVisualStudioVersion(value: string);
+            /** Specifies the Windows DevicePortal connection address of the device to deploy and launch the UWP app on when using Build and Run. */
+            public static get windowsDevicePortalAddress(): string;
+            public static set windowsDevicePortalAddress(value: string);
+            /** Specifies the Windows DevicePortal username for the device to deploy and launch the UWP app on when using Build and Run. */
+            public static get windowsDevicePortalUsername(): string;
+            public static set windowsDevicePortalUsername(value: string);
+            /** Specifies the Windows DevicePortal password for the device to deploy and launch the UWP app on when using Build and Run. */
+            public static get windowsDevicePortalPassword(): string;
+            public static set windowsDevicePortalPassword(value: string);
+            /** Sets and gets the Windows device to launch the UWP app when using Build and Run. */
+            public static get wsaBuildAndRunDeployTarget(): UnityEditor.WSABuildAndRunDeployTarget;
+            public static set wsaBuildAndRunDeployTarget(value: UnityEditor.WSABuildAndRunDeployTarget);
+            /** The currently active build target. */
+            public static get activeBuildTarget(): UnityEditor.BuildTarget;
+            /** DEFINE directives for the compiler. */
+            public static get activeScriptCompilationDefines(): System.Array$1<string>;
+            /** Enables a development build. */
+            public static get development(): boolean;
+            public static set development(value: boolean);
+            /** Start the player with a connection to the profiler. */
+            public static get connectProfiler(): boolean;
+            public static set connectProfiler(value: boolean);
+            /** Enables Deep Profiling support in the player. */
+            public static get buildWithDeepProfilingSupport(): boolean;
+            public static set buildWithDeepProfilingSupport(value: boolean);
+            /** Enable source-level debuggers to connect. */
+            public static get allowDebugging(): boolean;
+            public static set allowDebugging(value: boolean);
+            /** Sets the Player to wait for player connection on player start. */
+            public static get waitForPlayerConnection(): boolean;
+            public static set waitForPlayerConnection(value: boolean);
+            /** Export Android Project for use with Android Studio/Gradle. */
+            public static get exportAsGoogleAndroidProject(): boolean;
+            public static set exportAsGoogleAndroidProject(value: boolean);
+            /** Set to true to build an Android App Bundle (aab file) instead of an apk. The default value is false. */
+            public static get buildAppBundle(): boolean;
+            public static set buildAppBundle(value: boolean);
+            /** Symlink runtime libraries with an iOS Xcode project. */
+            public static get symlinkLibraries(): boolean;
+            public static set symlinkLibraries(value: boolean);
+            /** Scheme with which the project will be run in Xcode. */
+            public static get iOSBuildConfigType(): UnityEditor.iOSBuildType;
+            public static set iOSBuildConfigType(value: UnityEditor.iOSBuildType);
+            
+            public static get switchCreateSolutionFile(): boolean;
+            public static set switchCreateSolutionFile(value: boolean);
+            
+            public static get switchCreateRomFile(): boolean;
+            public static set switchCreateRomFile(value: boolean);
+            
+            public static get switchNVNGraphicsDebugger(): boolean;
+            public static set switchNVNGraphicsDebugger(value: boolean);
+            
+            public static get switchNVNShaderDebugging(): boolean;
+            public static set switchNVNShaderDebugging(value: boolean);
+            
+            public static get switchNVNDrawValidation(): boolean;
+            public static set switchNVNDrawValidation(value: boolean);
+            
+            public static get switchEnableHeapInspector(): boolean;
+            public static set switchEnableHeapInspector(value: boolean);
+            
+            public static get switchEnableDebugPad(): boolean;
+            public static set switchEnableDebugPad(value: boolean);
+            
+            public static get switchRedirectWritesToHostMount(): boolean;
+            public static set switchRedirectWritesToHostMount(value: boolean);
+            /** Place the built player in the build folder. */
+            public static get installInBuildFolder(): boolean;
+            public static set installInBuildFolder(value: boolean);
+            /** Instructs the player to wait for managed debugger to attach before executing any script code. */
+            public static get waitForManagedDebugger(): boolean;
+            public static set waitForManagedDebugger(value: boolean);
+            /** Select a new build target to be active.
+             * @param target Target build platform.
+             * @param targetGroup Build target group.
+             * @returns True if the build target was successfully switched, false otherwise (for example, if license checks fail, files are missing, or if the user has cancelled the operation via the UI). 
+             */
+            public static SwitchActiveBuildTarget($targetGroup: UnityEditor.BuildTargetGroup, $target: UnityEditor.BuildTarget):boolean;
+            /** Select a new build target to be active during the next Editor update.
+             * @param targetGroup Target build platform.
+             * @param target Build target group.
+             * @returns True if the build target was successfully switched, false otherwise (for example, if license checks fail, files are missing, or if the user has cancelled the operation via the UI). 
+             */
+            public static SwitchActiveBuildTargetAsync($targetGroup: UnityEditor.BuildTargetGroup, $target: UnityEditor.BuildTarget):boolean;
+            /** Get the current location for the build. */
+            public static GetBuildLocation($target: UnityEditor.BuildTarget):string;
+            /** Set a new location for the build. */
+            public static SetBuildLocation($target: UnityEditor.BuildTarget, $location: string):void;
+            /** Set platform specifc Editor setting. * @param platformName The name of the platform.
+             * @param name The name of the setting.
+             * @param value Setting value.
+             */
+            public static SetPlatformSettings($platformName: string, $name: string, $value: string):void;
+            
+            public static SetPlatformSettings($buildTargetGroup: string, $buildTarget: string, $name: string, $value: string):void;
+            /** Returns value for platform specifc Editor setting. * @param platformName The name of the platform.
+             * @param name The name of the setting.
+             */
+            public static GetPlatformSettings($platformName: string, $name: string):string;
+            
+            public static GetPlatformSettings($buildTargetGroup: string, $platformName: string, $name: string):string;
+            
+        }
+        /** Type of build to generate. */
+        enum PS4BuildSubtarget { PCHosted = 0, Package = 1, Iso = 2 }
+        
+        enum PS4HardwareTarget { BaseOnly = 0, NeoAndBase = 1, ProAndBase = 1 }
+        /** Target Xbox build type. */
+        enum XboxBuildSubtarget { Development = 0, Master = 1, Debug = 2 }
+        
+        enum XboxOneDeployMethod { Push = 0, Pull = 1, RunFromPC = 2, Package = 3, PackageStreaming = 4 }
+        
+        enum XboxOneDeployDrive { Default = 0, Retail = 1, Development = 2, Ext1 = 3, Ext2 = 4, Ext3 = 5, Ext4 = 6, Ext5 = 7, Ext6 = 8, Ext7 = 9 }
+        /** Compressed texture format for target build platform. */
+        enum MobileTextureSubtarget { Generic = 0, DXT = 1, PVRTC = 2, ATC = 3, ETC = 4, ETC2 = 5, ASTC = 6 }
+        /** This enumeration has values for different qualities to decompress ETC2 textures on Android devices that don't support the ETC2 texture format. */
+        enum AndroidETC2Fallback { Quality32Bit = 0, Quality16Bit = 1, Quality32BitDownscaled = 2 }
+        /** Type of Android build system. */
+        enum AndroidBuildSystem { Internal = 0, Gradle = 1, ADT = 2, VisualStudio = 3 }
+        /** Build configurations for the generated project. */
+        enum AndroidBuildType { Debug = 0, Development = 1, Release = 2 }
+        /** How to minify the java code of your binary. */
+        enum AndroidMinification { None = 0, Proguard = 1, Gradle = 2 }
+        /** Target device type for a Windows Store application to run on. */
+        enum WSASubtarget { AnyDevice = 0, PC = 1, Mobile = 2, HoloLens = 3 }
+        
+        enum WSASDK { SDK80 = 0, SDK81 = 1, PhoneSDK81 = 2, UniversalSDK81 = 3, UWP = 4 }
+        /** Determines the output build type when building to Universal Windows Platform. */
+        enum WSAUWPBuildType { XAML = 0, D3D = 1, ExecutableOnly = 2 }
+        /** Specifies the Windows device to deploy and launch the UWP app on when using Build and Run from the Editor. */
+        enum WSABuildAndRunDeployTarget { LocalMachine = 0, WindowsPhone = 1, DevicePortal = 2 }
+        /** Build configurations for the generated Xcode project. */
+        enum iOSBuildType { Debug = 0, Release = 1 }
+        /** SceneAsset is used to reference Scene objects in the Editor. */
+        class SceneAsset extends UnityEngine.Object {
+            
+        }
+        
+    }
+    namespace UnityEditor.AssetDatabase {
+        
+        type ImportPackageCallback = (packageName: string) => void;
+        var ImportPackageCallback: {new (func: (packageName: string) => void): ImportPackageCallback;}
+        
+        type ImportPackageFailedCallback = (packageName: string, errorMessage: string) => void;
+        var ImportPackageFailedCallback: {new (func: (packageName: string, errorMessage: string) => void): ImportPackageFailedCallback;}
+        
+    }
     namespace UnityEngine {
+        /** Base class for all objects Unity can reference. */
+        class Object extends System.Object {
+            /** The name of the object. */
+            public get name(): string;
+            public set name(value: string);
+            /** Should the object be hidden, saved with the Scene or modifiable by the user? */
+            public get hideFlags(): UnityEngine.HideFlags;
+            public set hideFlags(value: UnityEngine.HideFlags);
+            
+            public constructor();
+            
+            public GetInstanceID():number;
+            
+            public static op_Implicit($exists: UnityEngine.Object):boolean;
+            /** Clones the object original and returns the clone.
+             * @param original An existing object that you want to make a copy of.
+             * @param position Position for the new object.
+             * @param rotation Orientation of the new object.
+             * @param parent Parent that will be assigned to the new object.
+             * @param instantiateInWorldSpace When you assign a parent Object, pass true to position the new object directly in world space. Pass false to set the Object’s position relative to its new parent..
+             * @returns The instantiated clone. 
+             */
+            public static Instantiate($original: UnityEngine.Object, $position: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion):UnityEngine.Object;
+            /** Clones the object original and returns the clone.
+             * @param original An existing object that you want to make a copy of.
+             * @param position Position for the new object.
+             * @param rotation Orientation of the new object.
+             * @param parent Parent that will be assigned to the new object.
+             * @param instantiateInWorldSpace When you assign a parent Object, pass true to position the new object directly in world space. Pass false to set the Object’s position relative to its new parent..
+             * @returns The instantiated clone. 
+             */
+            public static Instantiate($original: UnityEngine.Object, $position: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion, $parent: UnityEngine.Transform):UnityEngine.Object;
+            /** Clones the object original and returns the clone.
+             * @param original An existing object that you want to make a copy of.
+             * @param position Position for the new object.
+             * @param rotation Orientation of the new object.
+             * @param parent Parent that will be assigned to the new object.
+             * @param instantiateInWorldSpace When you assign a parent Object, pass true to position the new object directly in world space. Pass false to set the Object’s position relative to its new parent..
+             * @returns The instantiated clone. 
+             */
+            public static Instantiate($original: UnityEngine.Object):UnityEngine.Object;
+            /** Clones the object original and returns the clone.
+             * @param original An existing object that you want to make a copy of.
+             * @param position Position for the new object.
+             * @param rotation Orientation of the new object.
+             * @param parent Parent that will be assigned to the new object.
+             * @param instantiateInWorldSpace When you assign a parent Object, pass true to position the new object directly in world space. Pass false to set the Object’s position relative to its new parent..
+             * @returns The instantiated clone. 
+             */
+            public static Instantiate($original: UnityEngine.Object, $parent: UnityEngine.Transform):UnityEngine.Object;
+            /** Clones the object original and returns the clone.
+             * @param original An existing object that you want to make a copy of.
+             * @param position Position for the new object.
+             * @param rotation Orientation of the new object.
+             * @param parent Parent that will be assigned to the new object.
+             * @param instantiateInWorldSpace When you assign a parent Object, pass true to position the new object directly in world space. Pass false to set the Object’s position relative to its new parent..
+             * @returns The instantiated clone. 
+             */
+            public static Instantiate($original: UnityEngine.Object, $parent: UnityEngine.Transform, $instantiateInWorldSpace: boolean):UnityEngine.Object;
+            
+            public static Instantiate($original: UnityEngine.Object):UnityEngine.Object;
+            
+            public static Instantiate($original: UnityEngine.Object, $position: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion):UnityEngine.Object;
+            
+            public static Instantiate($original: UnityEngine.Object, $position: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion, $parent: UnityEngine.Transform):UnityEngine.Object;
+            
+            public static Instantiate($original: UnityEngine.Object, $parent: UnityEngine.Transform):UnityEngine.Object;
+            
+            public static Instantiate($original: UnityEngine.Object, $parent: UnityEngine.Transform, $worldPositionStays: boolean):UnityEngine.Object;
+            /** Removes a GameObject, component or asset. * @param obj The object to destroy.
+             * @param t The optional amount of time to delay before destroying the object.
+             */
+            public static Destroy($obj: UnityEngine.Object, $t: number):void;
+            /** Removes a GameObject, component or asset. * @param obj The object to destroy.
+             * @param t The optional amount of time to delay before destroying the object.
+             */
+            public static Destroy($obj: UnityEngine.Object):void;
+            /** Destroys the object obj immediately. You are strongly recommended to use Destroy instead. * @param obj Object to be destroyed.
+             * @param allowDestroyingAssets Set to true to allow assets to be destroyed.
+             */
+            public static DestroyImmediate($obj: UnityEngine.Object, $allowDestroyingAssets: boolean):void;
+            /** Destroys the object obj immediately. You are strongly recommended to use Destroy instead. * @param obj Object to be destroyed.
+             * @param allowDestroyingAssets Set to true to allow assets to be destroyed.
+             */
+            public static DestroyImmediate($obj: UnityEngine.Object):void;
+            /** Returns a list of all active loaded objects of Type type.
+             * @param type The type of object to find.
+             * @param includeInactive If true, components attached to inactive GameObjects are also included.
+             * @returns The array of objects found matching the type specified. 
+             */
+            public static FindObjectsOfType($type: System.Type):System.Array$1<UnityEngine.Object>;
+            /** Do not destroy the target Object when loading a new Scene. * @param target An Object not destroyed on Scene change.
+             */
+            public static DontDestroyOnLoad($target: UnityEngine.Object):void;
+            /** Returns the first active loaded object of Type type.
+             * @param type The type of object to find.
+             * @returns This returns the  Object that matches the specified type. It returns null if no Object matches the type. 
+             */
+            public static FindObjectOfType($type: System.Type):UnityEngine.Object;
+            
+            public static op_Equality($x: UnityEngine.Object, $y: UnityEngine.Object):boolean;
+            
+            public static op_Inequality($x: UnityEngine.Object, $y: UnityEngine.Object):boolean;
+            
+        }
+        /** Represent the hash value. */
+        class Hash128 extends System.ValueType {
+            
+        }
+        /** Base class for texture handling. Contains functionality that is common to both Texture2D and RenderTexture classes. */
+        class Texture extends UnityEngine.Object {
+            
+        }
+        
+        class LazyLoadReference$1<T> extends System.ValueType {
+            
+        }
+        /** Manifest for all the AssetBundles in the build. */
+        class AssetBundleManifest extends UnityEngine.Object {
+            
+        }
+        /** A class you can derive from if you want to create objects that don't need to be attached to game objects. */
+        class ScriptableObject extends UnityEngine.Object {
+            
+            public constructor();
+            /** Creates an instance of a scriptable object.
+             * @param className The type of the ScriptableObject to create, as the name of the type.
+             * @param type The type of the ScriptableObject to create, as a System.Type instance.
+             * @returns The created ScriptableObject. 
+             */
+            public static CreateInstance($className: string):UnityEngine.ScriptableObject;
+            /** Creates an instance of a scriptable object.
+             * @param className The type of the ScriptableObject to create, as the name of the type.
+             * @param type The type of the ScriptableObject to create, as a System.Type instance.
+             * @returns The created ScriptableObject. 
+             */
+            public static CreateInstance($type: System.Type):UnityEngine.ScriptableObject;
+            
+        }
         /** Access to application run-time data. */
         class Application extends System.Object {
             /** Returns true when called in any kind of built Player, or when called in the Editor in Play Mode (Read Only). */
@@ -148,111 +2390,6 @@ declare module 'csharp' {
             public static add_quitting($value: System.Action):void;
             
             public static remove_quitting($value: System.Action):void;
-            
-        }
-        /** Base class for all objects Unity can reference. */
-        class Object extends System.Object {
-            /** The name of the object. */
-            public get name(): string;
-            public set name(value: string);
-            /** Should the object be hidden, saved with the Scene or modifiable by the user? */
-            public get hideFlags(): UnityEngine.HideFlags;
-            public set hideFlags(value: UnityEngine.HideFlags);
-            
-            public constructor();
-            
-            public GetInstanceID():number;
-            
-            public static op_Implicit($exists: UnityEngine.Object):boolean;
-            /** Clones the object original and returns the clone.
-             * @param original An existing object that you want to make a copy of.
-             * @param position Position for the new object.
-             * @param rotation Orientation of the new object.
-             * @param parent Parent that will be assigned to the new object.
-             * @param instantiateInWorldSpace When you assign a parent Object, pass true to position the new object directly in world space. Pass false to set the Object’s position relative to its new parent..
-             * @returns The instantiated clone. 
-             */
-            public static Instantiate($original: UnityEngine.Object, $position: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion):UnityEngine.Object;
-            /** Clones the object original and returns the clone.
-             * @param original An existing object that you want to make a copy of.
-             * @param position Position for the new object.
-             * @param rotation Orientation of the new object.
-             * @param parent Parent that will be assigned to the new object.
-             * @param instantiateInWorldSpace When you assign a parent Object, pass true to position the new object directly in world space. Pass false to set the Object’s position relative to its new parent..
-             * @returns The instantiated clone. 
-             */
-            public static Instantiate($original: UnityEngine.Object, $position: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion, $parent: UnityEngine.Transform):UnityEngine.Object;
-            /** Clones the object original and returns the clone.
-             * @param original An existing object that you want to make a copy of.
-             * @param position Position for the new object.
-             * @param rotation Orientation of the new object.
-             * @param parent Parent that will be assigned to the new object.
-             * @param instantiateInWorldSpace When you assign a parent Object, pass true to position the new object directly in world space. Pass false to set the Object’s position relative to its new parent..
-             * @returns The instantiated clone. 
-             */
-            public static Instantiate($original: UnityEngine.Object):UnityEngine.Object;
-            /** Clones the object original and returns the clone.
-             * @param original An existing object that you want to make a copy of.
-             * @param position Position for the new object.
-             * @param rotation Orientation of the new object.
-             * @param parent Parent that will be assigned to the new object.
-             * @param instantiateInWorldSpace When you assign a parent Object, pass true to position the new object directly in world space. Pass false to set the Object’s position relative to its new parent..
-             * @returns The instantiated clone. 
-             */
-            public static Instantiate($original: UnityEngine.Object, $parent: UnityEngine.Transform):UnityEngine.Object;
-            /** Clones the object original and returns the clone.
-             * @param original An existing object that you want to make a copy of.
-             * @param position Position for the new object.
-             * @param rotation Orientation of the new object.
-             * @param parent Parent that will be assigned to the new object.
-             * @param instantiateInWorldSpace When you assign a parent Object, pass true to position the new object directly in world space. Pass false to set the Object’s position relative to its new parent..
-             * @returns The instantiated clone. 
-             */
-            public static Instantiate($original: UnityEngine.Object, $parent: UnityEngine.Transform, $instantiateInWorldSpace: boolean):UnityEngine.Object;
-            
-            public static Instantiate($original: UnityEngine.Object):UnityEngine.Object;
-            
-            public static Instantiate($original: UnityEngine.Object, $position: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion):UnityEngine.Object;
-            
-            public static Instantiate($original: UnityEngine.Object, $position: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion, $parent: UnityEngine.Transform):UnityEngine.Object;
-            
-            public static Instantiate($original: UnityEngine.Object, $parent: UnityEngine.Transform):UnityEngine.Object;
-            
-            public static Instantiate($original: UnityEngine.Object, $parent: UnityEngine.Transform, $worldPositionStays: boolean):UnityEngine.Object;
-            /** Removes a GameObject, component or asset. * @param obj The object to destroy.
-             * @param t The optional amount of time to delay before destroying the object.
-             */
-            public static Destroy($obj: UnityEngine.Object, $t: number):void;
-            /** Removes a GameObject, component or asset. * @param obj The object to destroy.
-             * @param t The optional amount of time to delay before destroying the object.
-             */
-            public static Destroy($obj: UnityEngine.Object):void;
-            /** Destroys the object obj immediately. You are strongly recommended to use Destroy instead. * @param obj Object to be destroyed.
-             * @param allowDestroyingAssets Set to true to allow assets to be destroyed.
-             */
-            public static DestroyImmediate($obj: UnityEngine.Object, $allowDestroyingAssets: boolean):void;
-            /** Destroys the object obj immediately. You are strongly recommended to use Destroy instead. * @param obj Object to be destroyed.
-             * @param allowDestroyingAssets Set to true to allow assets to be destroyed.
-             */
-            public static DestroyImmediate($obj: UnityEngine.Object):void;
-            /** Returns a list of all active loaded objects of Type type.
-             * @param type The type of object to find.
-             * @param includeInactive If true, components attached to inactive GameObjects are also included.
-             * @returns The array of objects found matching the type specified. 
-             */
-            public static FindObjectsOfType($type: System.Type):System.Array$1<UnityEngine.Object>;
-            /** Do not destroy the target Object when loading a new Scene. * @param target An Object not destroyed on Scene change.
-             */
-            public static DontDestroyOnLoad($target: UnityEngine.Object):void;
-            /** Returns the first active loaded object of Type type.
-             * @param type The type of object to find.
-             * @returns This returns the  Object that matches the specified type. It returns null if no Object matches the type. 
-             */
-            public static FindObjectOfType($type: System.Type):UnityEngine.Object;
-            
-            public static op_Equality($x: UnityEngine.Object, $y: UnityEngine.Object):boolean;
-            
-            public static op_Inequality($x: UnityEngine.Object, $y: UnityEngine.Object):boolean;
             
         }
         /** Application installation mode (Read Only). */
@@ -1893,9 +4030,6 @@ declare module 'csharp' {
             /** Disabling this lets you skip the GUI layout phase. */
             public get useGUILayout(): boolean;
             public set useGUILayout(value: boolean);
-            /** Allow a specific instance of a MonoBehaviour to run in edit mode (only available in the editor). */
-            public get runInEditMode(): boolean;
-            public set runInEditMode(value: boolean);
             
             public constructor();
             
@@ -2122,24 +4256,6 @@ declare module 'csharp' {
             public constructor($text: string);
             
         }
-        /** A class you can derive from if you want to create objects that don't need to be attached to game objects. */
-        class ScriptableObject extends UnityEngine.Object {
-            
-            public constructor();
-            /** Creates an instance of a scriptable object.
-             * @param className The type of the ScriptableObject to create, as the name of the type.
-             * @param type The type of the ScriptableObject to create, as a System.Type instance.
-             * @returns The created ScriptableObject. 
-             */
-            public static CreateInstance($className: string):UnityEngine.ScriptableObject;
-            /** Creates an instance of a scriptable object.
-             * @param className The type of the ScriptableObject to create, as the name of the type.
-             * @param type The type of the ScriptableObject to create, as a System.Type instance.
-             * @returns The created ScriptableObject. 
-             */
-            public static CreateInstance($type: System.Type):UnityEngine.ScriptableObject;
-            
-        }
         /** Represents a string as an int for efficient lookup and comparison. Use this for common PropertyNames.
         Internally stores just an int to represent the string. A PropertyName can be created from a string but can not be converted back to a string. The same string always results in the same int representing that string. Thus this is a very efficient string representation in both memory and speed when all you need is comparison.
         PropertyName is serializable.
@@ -2161,10 +4277,6 @@ declare module 'csharp' {
         }
         /** Class that can be used to generate text for rendering. */
         class TextGenerator extends System.Object {
-            
-        }
-        /** Base class for texture handling. Contains functionality that is common to both Texture2D and RenderTexture classes. */
-        class Texture extends UnityEngine.Object {
             
         }
         /** Script interface for. */
@@ -2267,11 +4379,6 @@ declare module 'csharp' {
             public static GetMouseButtonUp($button: number):boolean;
             
             public static ResetInputAxes():void;
-            /** Determine whether a particular joystick model has been preconfigured by Unity. (Linux-only).
-             * @param joystickName The name of the joystick to check (returned by Input.GetJoystickNames).
-             * @returns True if the joystick layout has been preconfigured; false otherwise. 
-             */
-            public static IsJoystickPreconfigured($joystickName: string):boolean;
             
             public static GetJoystickNames():System.Array$1<string>;
             /** Call Input.GetTouch to obtain a Touch struct.
@@ -2323,946 +4430,12 @@ declare module 'csharp' {
         enum AudioClipLoadType { DecompressOnLoad = 0, CompressedInMemory = 1, Streaming = 2 }
         /** Value describing the current load state of the audio data associated with an AudioClip. */
         enum AudioDataLoadState { Unloaded = 0, Loading = 1, Loaded = 2, Failed = 3 }
-        /** Represent the hash value. */
-        class Hash128 extends System.ValueType {
-            
-        }
-        
-        class LazyLoadReference$1<T> extends System.ValueType {
-            
-        }
-        /** Manifest for all the AssetBundles in the build. */
-        class AssetBundleManifest extends UnityEngine.Object {
-            
-        }
         /** Position, size, anchor and pivot information for a rectangle. */
         class RectTransform extends UnityEngine.Transform {
             
         }
         /** Represents a Sprite object for use in 2D gameplay. */
         class Sprite extends UnityEngine.Object {
-            
-        }
-        
-    }
-    namespace System {
-        
-        class Object {
-            
-            public constructor();
-            
-            public Equals($obj: any):boolean;
-            
-            public static Equals($objA: any, $objB: any):boolean;
-            
-            public GetHashCode():number;
-            
-            public GetType():System.Type;
-            
-            public ToString():string;
-            
-            public static ReferenceEquals($objA: any, $objB: any):boolean;
-            
-        }
-        
-        class Void extends System.ValueType {
-            
-        }
-        
-        class ValueType extends System.Object {
-            
-        }
-        
-        class Int32 extends System.ValueType {
-            
-        }
-        
-        class Boolean extends System.ValueType {
-            
-        }
-        
-        class Single extends System.ValueType {
-            
-        }
-        
-        class String extends System.Object {
-            
-        }
-        
-        class Enum extends System.ValueType {
-            
-        }
-        
-        type MulticastDelegate = (...args:any[]) => any;
-        var MulticastDelegate: {new (func: (...args:any[]) => any): MulticastDelegate;}
-        
-        class Delegate extends System.Object {
-            
-            public get Method(): System.Reflection.MethodInfo;
-            
-            public get Target(): any;
-            
-            public static CreateDelegate($type: System.Type, $firstArgument: any, $method: System.Reflection.MethodInfo, $throwOnBindFailure: boolean):Function;
-            
-            public static CreateDelegate($type: System.Type, $firstArgument: any, $method: System.Reflection.MethodInfo):Function;
-            
-            public static CreateDelegate($type: System.Type, $method: System.Reflection.MethodInfo, $throwOnBindFailure: boolean):Function;
-            
-            public static CreateDelegate($type: System.Type, $method: System.Reflection.MethodInfo):Function;
-            
-            public static CreateDelegate($type: System.Type, $target: any, $method: string):Function;
-            
-            public static CreateDelegate($type: System.Type, $target: System.Type, $method: string, $ignoreCase: boolean, $throwOnBindFailure: boolean):Function;
-            
-            public static CreateDelegate($type: System.Type, $target: System.Type, $method: string):Function;
-            
-            public static CreateDelegate($type: System.Type, $target: System.Type, $method: string, $ignoreCase: boolean):Function;
-            
-            public static CreateDelegate($type: System.Type, $target: any, $method: string, $ignoreCase: boolean, $throwOnBindFailure: boolean):Function;
-            
-            public static CreateDelegate($type: System.Type, $target: any, $method: string, $ignoreCase: boolean):Function;
-            
-            public DynamicInvoke(...args: any[]):any;
-            
-            public Clone():any;
-            
-            public GetObjectData($info: System.Runtime.Serialization.SerializationInfo, $context: System.Runtime.Serialization.StreamingContext):void;
-            
-            public GetInvocationList():System.Array$1<Function>;
-            
-            public static Combine($a: Function, $b: Function):Function;
-            
-            public static Combine(...delegates: Function[]):Function;
-            
-            public static Remove($source: Function, $value: Function):Function;
-            
-            public static RemoveAll($source: Function, $value: Function):Function;
-            
-            public static op_Equality($d1: Function, $d2: Function):boolean;
-            
-            public static op_Inequality($d1: Function, $d2: Function):boolean;
-            
-        }
-        
-        type Action$1<T> = (obj: T) => void;
-        
-        type Func$1<TResult> = () => TResult;
-        
-        type Action = () => void;
-        var Action: {new (func: () => void): Action;}
-        
-        class Exception extends System.Object {
-            
-        }
-        
-        type Converter$2<TInput,TOutput> = (input: TInput) => TOutput;
-        
-        type Predicate$1<T> = (obj: T) => boolean;
-        
-        type Comparison$1<T> = (x: T, y: T) => number;
-        
-        class UInt64 extends System.ValueType {
-            
-        }
-        
-        class Double extends System.ValueType {
-            
-        }
-        
-        interface Double {
-            
-            ApproxEquals($b: number):boolean;
-            
-            ApproxEquals($b: number):boolean;
-            
-        }
-        
-        
-        class Type extends System.Reflection.MemberInfo {
-            
-            public static FilterAttribute: System.Reflection.MemberFilter;
-            
-            public static FilterName: System.Reflection.MemberFilter;
-            
-            public static FilterNameIgnoreCase: System.Reflection.MemberFilter;
-            
-            public static Missing: any;
-            
-            public static Delimiter: number;
-            
-            public static EmptyTypes: System.Array$1<System.Type>;
-            
-            public get MemberType(): System.Reflection.MemberTypes;
-            
-            public get DeclaringType(): System.Type;
-            
-            public get DeclaringMethod(): System.Reflection.MethodBase;
-            
-            public get ReflectedType(): System.Type;
-            
-            public get StructLayoutAttribute(): System.Runtime.InteropServices.StructLayoutAttribute;
-            
-            public get GUID(): System.Guid;
-            
-            public static get DefaultBinder(): System.Reflection.Binder;
-            
-            public get Module(): System.Reflection.Module;
-            
-            public get Assembly(): System.Reflection.Assembly;
-            
-            public get TypeHandle(): System.RuntimeTypeHandle;
-            
-            public get FullName(): string;
-            
-            public get Namespace(): string;
-            
-            public get AssemblyQualifiedName(): string;
-            
-            public get BaseType(): System.Type;
-            
-            public get TypeInitializer(): System.Reflection.ConstructorInfo;
-            
-            public get IsNested(): boolean;
-            
-            public get Attributes(): System.Reflection.TypeAttributes;
-            
-            public get GenericParameterAttributes(): System.Reflection.GenericParameterAttributes;
-            
-            public get IsVisible(): boolean;
-            
-            public get IsNotPublic(): boolean;
-            
-            public get IsPublic(): boolean;
-            
-            public get IsNestedPublic(): boolean;
-            
-            public get IsNestedPrivate(): boolean;
-            
-            public get IsNestedFamily(): boolean;
-            
-            public get IsNestedAssembly(): boolean;
-            
-            public get IsNestedFamANDAssem(): boolean;
-            
-            public get IsNestedFamORAssem(): boolean;
-            
-            public get IsAutoLayout(): boolean;
-            
-            public get IsLayoutSequential(): boolean;
-            
-            public get IsExplicitLayout(): boolean;
-            
-            public get IsClass(): boolean;
-            
-            public get IsInterface(): boolean;
-            
-            public get IsValueType(): boolean;
-            
-            public get IsAbstract(): boolean;
-            
-            public get IsSealed(): boolean;
-            
-            public get IsEnum(): boolean;
-            
-            public get IsSpecialName(): boolean;
-            
-            public get IsImport(): boolean;
-            
-            public get IsSerializable(): boolean;
-            
-            public get IsAnsiClass(): boolean;
-            
-            public get IsUnicodeClass(): boolean;
-            
-            public get IsAutoClass(): boolean;
-            
-            public get IsArray(): boolean;
-            
-            public get IsGenericType(): boolean;
-            
-            public get IsGenericTypeDefinition(): boolean;
-            
-            public get IsConstructedGenericType(): boolean;
-            
-            public get IsGenericParameter(): boolean;
-            
-            public get GenericParameterPosition(): number;
-            
-            public get ContainsGenericParameters(): boolean;
-            
-            public get IsByRef(): boolean;
-            
-            public get IsPointer(): boolean;
-            
-            public get IsPrimitive(): boolean;
-            
-            public get IsCOMObject(): boolean;
-            
-            public get HasElementType(): boolean;
-            
-            public get IsContextful(): boolean;
-            
-            public get IsMarshalByRef(): boolean;
-            
-            public get GenericTypeArguments(): System.Array$1<System.Type>;
-            
-            public get IsSecurityCritical(): boolean;
-            
-            public get IsSecuritySafeCritical(): boolean;
-            
-            public get IsSecurityTransparent(): boolean;
-            
-            public get UnderlyingSystemType(): System.Type;
-            
-            public static GetType($typeName: string, $assemblyResolver: System.Func$2<System.Reflection.AssemblyName, System.Reflection.Assembly>, $typeResolver: System.Func$4<System.Reflection.Assembly, string, boolean, System.Type>):System.Type;
-            
-            public static GetType($typeName: string, $assemblyResolver: System.Func$2<System.Reflection.AssemblyName, System.Reflection.Assembly>, $typeResolver: System.Func$4<System.Reflection.Assembly, string, boolean, System.Type>, $throwOnError: boolean):System.Type;
-            
-            public static GetType($typeName: string, $assemblyResolver: System.Func$2<System.Reflection.AssemblyName, System.Reflection.Assembly>, $typeResolver: System.Func$4<System.Reflection.Assembly, string, boolean, System.Type>, $throwOnError: boolean, $ignoreCase: boolean):System.Type;
-            
-            public MakePointerType():System.Type;
-            
-            public MakeByRefType():System.Type;
-            
-            public MakeArrayType():System.Type;
-            
-            public MakeArrayType($rank: number):System.Type;
-            
-            public static GetTypeFromProgID($progID: string):System.Type;
-            
-            public static GetTypeFromProgID($progID: string, $throwOnError: boolean):System.Type;
-            
-            public static GetTypeFromProgID($progID: string, $server: string):System.Type;
-            
-            public static GetTypeFromProgID($progID: string, $server: string, $throwOnError: boolean):System.Type;
-            
-            public static GetTypeFromCLSID($clsid: System.Guid):System.Type;
-            
-            public static GetTypeFromCLSID($clsid: System.Guid, $throwOnError: boolean):System.Type;
-            
-            public static GetTypeFromCLSID($clsid: System.Guid, $server: string):System.Type;
-            
-            public static GetTypeFromCLSID($clsid: System.Guid, $server: string, $throwOnError: boolean):System.Type;
-            
-            public static GetTypeCode($type: System.Type):System.TypeCode;
-            
-            public InvokeMember($name: string, $invokeAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $target: any, $args: System.Array$1<any>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>, $culture: System.Globalization.CultureInfo, $namedParameters: System.Array$1<string>):any;
-            
-            public InvokeMember($name: string, $invokeAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $target: any, $args: System.Array$1<any>, $culture: System.Globalization.CultureInfo):any;
-            
-            public InvokeMember($name: string, $invokeAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $target: any, $args: System.Array$1<any>):any;
-            
-            public static GetTypeHandle($o: any):System.RuntimeTypeHandle;
-            
-            public GetArrayRank():number;
-            
-            public GetConstructor($bindingAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $callConvention: System.Reflection.CallingConventions, $types: System.Array$1<System.Type>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.ConstructorInfo;
-            
-            public GetConstructor($bindingAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $types: System.Array$1<System.Type>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.ConstructorInfo;
-            
-            public GetConstructor($types: System.Array$1<System.Type>):System.Reflection.ConstructorInfo;
-            
-            public GetConstructors():System.Array$1<System.Reflection.ConstructorInfo>;
-            
-            public GetConstructors($bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.ConstructorInfo>;
-            
-            public GetMethod($name: string, $bindingAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $callConvention: System.Reflection.CallingConventions, $types: System.Array$1<System.Type>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.MethodInfo;
-            
-            public GetMethod($name: string, $bindingAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $types: System.Array$1<System.Type>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.MethodInfo;
-            
-            public GetMethod($name: string, $types: System.Array$1<System.Type>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.MethodInfo;
-            
-            public GetMethod($name: string, $types: System.Array$1<System.Type>):System.Reflection.MethodInfo;
-            
-            public GetMethod($name: string, $bindingAttr: System.Reflection.BindingFlags):System.Reflection.MethodInfo;
-            
-            public GetMethod($name: string):System.Reflection.MethodInfo;
-            
-            public GetMethods():System.Array$1<System.Reflection.MethodInfo>;
-            
-            public GetMethods($bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.MethodInfo>;
-            
-            public GetField($name: string, $bindingAttr: System.Reflection.BindingFlags):System.Reflection.FieldInfo;
-            
-            public GetField($name: string):System.Reflection.FieldInfo;
-            
-            public GetFields():System.Array$1<System.Reflection.FieldInfo>;
-            
-            public GetFields($bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.FieldInfo>;
-            
-            public GetInterface($name: string):System.Type;
-            
-            public GetInterface($name: string, $ignoreCase: boolean):System.Type;
-            
-            public GetInterfaces():System.Array$1<System.Type>;
-            
-            public FindInterfaces($filter: System.Reflection.TypeFilter, $filterCriteria: any):System.Array$1<System.Type>;
-            
-            public GetEvent($name: string):System.Reflection.EventInfo;
-            
-            public GetEvent($name: string, $bindingAttr: System.Reflection.BindingFlags):System.Reflection.EventInfo;
-            
-            public GetEvents():System.Array$1<System.Reflection.EventInfo>;
-            
-            public GetEvents($bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.EventInfo>;
-            
-            public GetProperty($name: string, $bindingAttr: System.Reflection.BindingFlags, $binder: System.Reflection.Binder, $returnType: System.Type, $types: System.Array$1<System.Type>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.PropertyInfo;
-            
-            public GetProperty($name: string, $returnType: System.Type, $types: System.Array$1<System.Type>, $modifiers: System.Array$1<System.Reflection.ParameterModifier>):System.Reflection.PropertyInfo;
-            
-            public GetProperty($name: string, $bindingAttr: System.Reflection.BindingFlags):System.Reflection.PropertyInfo;
-            
-            public GetProperty($name: string, $returnType: System.Type, $types: System.Array$1<System.Type>):System.Reflection.PropertyInfo;
-            
-            public GetProperty($name: string, $types: System.Array$1<System.Type>):System.Reflection.PropertyInfo;
-            
-            public GetProperty($name: string, $returnType: System.Type):System.Reflection.PropertyInfo;
-            
-            public GetProperty($name: string):System.Reflection.PropertyInfo;
-            
-            public GetProperties($bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.PropertyInfo>;
-            
-            public GetProperties():System.Array$1<System.Reflection.PropertyInfo>;
-            
-            public GetNestedTypes():System.Array$1<System.Type>;
-            
-            public GetNestedTypes($bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Type>;
-            
-            public GetNestedType($name: string):System.Type;
-            
-            public GetNestedType($name: string, $bindingAttr: System.Reflection.BindingFlags):System.Type;
-            
-            public GetMember($name: string):System.Array$1<System.Reflection.MemberInfo>;
-            
-            public GetMember($name: string, $bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.MemberInfo>;
-            
-            public GetMember($name: string, $type: System.Reflection.MemberTypes, $bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.MemberInfo>;
-            
-            public GetMembers():System.Array$1<System.Reflection.MemberInfo>;
-            
-            public GetMembers($bindingAttr: System.Reflection.BindingFlags):System.Array$1<System.Reflection.MemberInfo>;
-            
-            public GetDefaultMembers():System.Array$1<System.Reflection.MemberInfo>;
-            
-            public FindMembers($memberType: System.Reflection.MemberTypes, $bindingAttr: System.Reflection.BindingFlags, $filter: System.Reflection.MemberFilter, $filterCriteria: any):System.Array$1<System.Reflection.MemberInfo>;
-            
-            public GetGenericParameterConstraints():System.Array$1<System.Type>;
-            
-            public MakeGenericType(...typeArguments: System.Type[]):System.Type;
-            
-            public GetElementType():System.Type;
-            
-            public GetGenericArguments():System.Array$1<System.Type>;
-            
-            public GetGenericTypeDefinition():System.Type;
-            
-            public GetEnumNames():System.Array$1<string>;
-            
-            public GetEnumValues():System.Array;
-            
-            public GetEnumUnderlyingType():System.Type;
-            
-            public IsEnumDefined($value: any):boolean;
-            
-            public GetEnumName($value: any):string;
-            
-            public IsSubclassOf($c: System.Type):boolean;
-            
-            public IsInstanceOfType($o: any):boolean;
-            
-            public IsAssignableFrom($c: System.Type):boolean;
-            
-            public IsEquivalentTo($other: System.Type):boolean;
-            
-            public static GetTypeArray($args: System.Array$1<any>):System.Array$1<System.Type>;
-            
-            public Equals($o: any):boolean;
-            
-            public Equals($o: System.Type):boolean;
-            
-            public static op_Equality($left: System.Type, $right: System.Type):boolean;
-            
-            public static op_Inequality($left: System.Type, $right: System.Type):boolean;
-            
-            public GetInterfaceMap($interfaceType: System.Type):System.Reflection.InterfaceMapping;
-            
-            public GetType():System.Type;
-            
-            public static GetType($typeName: string):System.Type;
-            
-            public static GetType($typeName: string, $throwOnError: boolean):System.Type;
-            
-            public static GetType($typeName: string, $throwOnError: boolean, $ignoreCase: boolean):System.Type;
-            
-            public static ReflectionOnlyGetType($typeName: string, $throwIfNotFound: boolean, $ignoreCase: boolean):System.Type;
-            
-            public static GetTypeFromHandle($handle: System.RuntimeTypeHandle):System.Type;
-            
-            public GetType():System.Type;
-            
-            public Equals($obj: any):boolean;
-            
-            public static Equals($objA: any, $objB: any):boolean;
-            
-        }
-        
-        class Array extends System.Object {
-            
-            public get LongLength(): bigint;
-            
-            public get IsFixedSize(): boolean;
-            
-            public get IsReadOnly(): boolean;
-            
-            public get IsSynchronized(): boolean;
-            
-            public get SyncRoot(): any;
-            
-            public get Length(): number;
-            
-            public get Rank(): number;
-            
-            public static CreateInstance($elementType: System.Type, ...lengths: bigint[]):System.Array;
-            
-            public CopyTo($array: System.Array, $index: number):void;
-            
-            public Clone():any;
-            
-            public static BinarySearch($array: System.Array, $value: any):number;
-            
-            public static Copy($sourceArray: System.Array, $destinationArray: System.Array, $length: bigint):void;
-            
-            public static Copy($sourceArray: System.Array, $sourceIndex: bigint, $destinationArray: System.Array, $destinationIndex: bigint, $length: bigint):void;
-            
-            public CopyTo($array: System.Array, $index: bigint):void;
-            
-            public GetLongLength($dimension: number):bigint;
-            
-            public GetValue($index: bigint):any;
-            
-            public GetValue($index1: bigint, $index2: bigint):any;
-            
-            public GetValue($index1: bigint, $index2: bigint, $index3: bigint):any;
-            
-            public GetValue(...indices: bigint[]):any;
-            
-            public static BinarySearch($array: System.Array, $index: number, $length: number, $value: any):number;
-            
-            public static BinarySearch($array: System.Array, $value: any, $comparer: System.Collections.IComparer):number;
-            
-            public static BinarySearch($array: System.Array, $index: number, $length: number, $value: any, $comparer: System.Collections.IComparer):number;
-            
-            public static IndexOf($array: System.Array, $value: any):number;
-            
-            public static IndexOf($array: System.Array, $value: any, $startIndex: number):number;
-            
-            public static IndexOf($array: System.Array, $value: any, $startIndex: number, $count: number):number;
-            
-            public static LastIndexOf($array: System.Array, $value: any):number;
-            
-            public static LastIndexOf($array: System.Array, $value: any, $startIndex: number):number;
-            
-            public static LastIndexOf($array: System.Array, $value: any, $startIndex: number, $count: number):number;
-            
-            public static Reverse($array: System.Array):void;
-            
-            public static Reverse($array: System.Array, $index: number, $length: number):void;
-            
-            public SetValue($value: any, $index: bigint):void;
-            
-            public SetValue($value: any, $index1: bigint, $index2: bigint):void;
-            
-            public SetValue($value: any, $index1: bigint, $index2: bigint, $index3: bigint):void;
-            
-            public SetValue($value: any, ...indices: bigint[]):void;
-            
-            public static Sort($array: System.Array):void;
-            
-            public static Sort($array: System.Array, $index: number, $length: number):void;
-            
-            public static Sort($array: System.Array, $comparer: System.Collections.IComparer):void;
-            
-            public static Sort($array: System.Array, $index: number, $length: number, $comparer: System.Collections.IComparer):void;
-            
-            public static Sort($keys: System.Array, $items: System.Array):void;
-            
-            public static Sort($keys: System.Array, $items: System.Array, $comparer: System.Collections.IComparer):void;
-            
-            public static Sort($keys: System.Array, $items: System.Array, $index: number, $length: number):void;
-            
-            public static Sort($keys: System.Array, $items: System.Array, $index: number, $length: number, $comparer: System.Collections.IComparer):void;
-            
-            public GetEnumerator():System.Collections.IEnumerator;
-            
-            public GetLength($dimension: number):number;
-            
-            public GetLowerBound($dimension: number):number;
-            
-            public GetValue(...indices: number[]):any;
-            
-            public SetValue($value: any, ...indices: number[]):void;
-            
-            public GetUpperBound($dimension: number):number;
-            
-            public GetValue($index: number):any;
-            
-            public GetValue($index1: number, $index2: number):any;
-            
-            public GetValue($index1: number, $index2: number, $index3: number):any;
-            
-            public SetValue($value: any, $index: number):void;
-            
-            public SetValue($value: any, $index1: number, $index2: number):void;
-            
-            public SetValue($value: any, $index1: number, $index2: number, $index3: number):void;
-            
-            public static CreateInstance($elementType: System.Type, $length: number):System.Array;
-            
-            public static CreateInstance($elementType: System.Type, $length1: number, $length2: number):System.Array;
-            
-            public static CreateInstance($elementType: System.Type, $length1: number, $length2: number, $length3: number):System.Array;
-            
-            public static CreateInstance($elementType: System.Type, ...lengths: number[]):System.Array;
-            
-            public static CreateInstance($elementType: System.Type, $lengths: System.Array$1<number>, $lowerBounds: System.Array$1<number>):System.Array;
-            
-            public static Clear($array: System.Array, $index: number, $length: number):void;
-            
-            public static Copy($sourceArray: System.Array, $destinationArray: System.Array, $length: number):void;
-            
-            public static Copy($sourceArray: System.Array, $sourceIndex: number, $destinationArray: System.Array, $destinationIndex: number, $length: number):void;
-            
-            public static ConstrainedCopy($sourceArray: System.Array, $sourceIndex: number, $destinationArray: System.Array, $destinationIndex: number, $length: number):void;
-            
-            public Initialize():void;
-            
-        }
-        
-        class Int64 extends System.ValueType {
-            
-        }
-        
-        class Char extends System.ValueType {
-            
-        }
-        
-        type Func$2<T,TResult> = (arg: T) => TResult;
-        
-        type Func$4<T1,T2,T3,TResult> = (arg1: T1, arg2: T2, arg3: T3) => TResult;
-        
-        class Attribute extends System.Object {
-            
-        }
-        
-        class Guid extends System.ValueType {
-            
-        }
-        
-        enum TypeCode { Empty = 0, Object = 1, DBNull = 2, Boolean = 3, Char = 4, SByte = 5, Byte = 6, Int16 = 7, UInt16 = 8, Int32 = 9, UInt32 = 10, Int64 = 11, UInt64 = 12, Single = 13, Double = 14, Decimal = 15, DateTime = 16, String = 18 }
-        
-        class RuntimeTypeHandle extends System.ValueType {
-            
-        }
-        
-        class UInt32 extends System.ValueType {
-            
-        }
-        
-        class Byte extends System.ValueType {
-            
-        }
-        
-        class MarshalByRefObject extends System.Object {
-            
-        }
-        
-        class DateTime extends System.ValueType {
-            
-        }
-        
-        class Random extends System.Object {
-            
-        }
-        
-    }
-    namespace UnityEngine.Application {
-        
-        type AdvertisingIdentifierCallback = (advertisingId: string, trackingEnabled: boolean, errorMsg: string) => void;
-        var AdvertisingIdentifierCallback: {new (func: (advertisingId: string, trackingEnabled: boolean, errorMsg: string) => void): AdvertisingIdentifierCallback;}
-        
-        type LowMemoryCallback = () => void;
-        var LowMemoryCallback: {new (func: () => void): LowMemoryCallback;}
-        
-        type LogCallback = (condition: string, stackTrace: string, type: UnityEngine.LogType) => void;
-        var LogCallback: {new (func: (condition: string, stackTrace: string, type: UnityEngine.LogType) => void): LogCallback;}
-        
-    }
-    namespace UnityEngine.Events {
-        /** Zero argument delegate used by UnityEvents. */
-        type UnityAction = () => void;
-        var UnityAction: {new (func: () => void): UnityAction;}
-        
-        type UnityAction$2<T0,T1> = (arg0: T0, arg1: T1) => void;
-        
-        type UnityAction$1<T0> = (arg0: T0) => void;
-        /** A zero argument persistent callback that can be saved with the Scene. */
-        class UnityEvent extends UnityEngine.Events.UnityEventBase {
-            
-            public constructor();
-            /** Add a non persistent listener to the UnityEvent. * @param call Callback function.
-             */
-            public AddListener($call: UnityEngine.Events.UnityAction):void;
-            /** Remove a non persistent listener from the UnityEvent. * @param call Callback function.
-             */
-            public RemoveListener($call: UnityEngine.Events.UnityAction):void;
-            
-            public Invoke():void;
-            
-        }
-        /** Abstract base class for UnityEvents. */
-        class UnityEventBase extends System.Object {
-            
-        }
-        
-        class UnityEvent$1<T0> extends UnityEngine.Events.UnityEventBase {
-            
-            public AddListener($call: UnityEngine.Events.UnityAction$1<T0>):void;
-            
-            public RemoveListener($call: UnityEngine.Events.UnityAction$1<T0>):void;
-            
-            public Invoke($arg0: T0):void;
-            
-        }
-        
-    }
-    namespace System.Collections.Generic {
-        
-        class List$1<T> extends System.Object {
-            
-            public get Capacity(): number;
-            public set Capacity(value: number);
-            
-            public get Count(): number;
-            
-            public constructor();
-            
-            public constructor($capacity: number);
-            
-            public constructor($collection: System.Collections.Generic.IEnumerable$1<T>);
-            
-            public get_Item($index: number):T;
-            
-            public set_Item($index: number, $value: T):void;
-            
-            public Add($item: T):void;
-            
-            public AddRange($collection: System.Collections.Generic.IEnumerable$1<T>):void;
-            
-            public AsReadOnly():System.Collections.ObjectModel.ReadOnlyCollection$1<T>;
-            
-            public BinarySearch($index: number, $count: number, $item: T, $comparer: System.Collections.Generic.IComparer$1<T>):number;
-            
-            public BinarySearch($item: T):number;
-            
-            public BinarySearch($item: T, $comparer: System.Collections.Generic.IComparer$1<T>):number;
-            
-            public Clear():void;
-            
-            public Contains($item: T):boolean;
-            
-            public CopyTo($array: System.Array$1<T>):void;
-            
-            public CopyTo($index: number, $array: System.Array$1<T>, $arrayIndex: number, $count: number):void;
-            
-            public CopyTo($array: System.Array$1<T>, $arrayIndex: number):void;
-            
-            public Exists($match: System.Predicate$1<T>):boolean;
-            
-            public Find($match: System.Predicate$1<T>):T;
-            
-            public FindAll($match: System.Predicate$1<T>):System.Collections.Generic.List$1<T>;
-            
-            public FindIndex($match: System.Predicate$1<T>):number;
-            
-            public FindIndex($startIndex: number, $match: System.Predicate$1<T>):number;
-            
-            public FindIndex($startIndex: number, $count: number, $match: System.Predicate$1<T>):number;
-            
-            public FindLast($match: System.Predicate$1<T>):T;
-            
-            public FindLastIndex($match: System.Predicate$1<T>):number;
-            
-            public FindLastIndex($startIndex: number, $match: System.Predicate$1<T>):number;
-            
-            public FindLastIndex($startIndex: number, $count: number, $match: System.Predicate$1<T>):number;
-            
-            public ForEach($action: System.Action$1<T>):void;
-            
-            public GetEnumerator():System.Collections.Generic.List$1.Enumerator<T>;
-            
-            public GetRange($index: number, $count: number):System.Collections.Generic.List$1<T>;
-            
-            public IndexOf($item: T):number;
-            
-            public IndexOf($item: T, $index: number):number;
-            
-            public IndexOf($item: T, $index: number, $count: number):number;
-            
-            public Insert($index: number, $item: T):void;
-            
-            public InsertRange($index: number, $collection: System.Collections.Generic.IEnumerable$1<T>):void;
-            
-            public LastIndexOf($item: T):number;
-            
-            public LastIndexOf($item: T, $index: number):number;
-            
-            public LastIndexOf($item: T, $index: number, $count: number):number;
-            
-            public Remove($item: T):boolean;
-            
-            public RemoveAll($match: System.Predicate$1<T>):number;
-            
-            public RemoveAt($index: number):void;
-            
-            public RemoveRange($index: number, $count: number):void;
-            
-            public Reverse():void;
-            
-            public Reverse($index: number, $count: number):void;
-            
-            public Sort():void;
-            
-            public Sort($comparer: System.Collections.Generic.IComparer$1<T>):void;
-            
-            public Sort($index: number, $count: number, $comparer: System.Collections.Generic.IComparer$1<T>):void;
-            
-            public Sort($comparison: System.Comparison$1<T>):void;
-            
-            public ToArray():System.Array$1<T>;
-            
-            public TrimExcess():void;
-            
-            public TrueForAll($match: System.Predicate$1<T>):boolean;
-            
-        }
-        
-        interface IEnumerable$1<T> {
-            
-        }
-        
-        interface IComparer$1<T> {
-            
-        }
-        
-        class Dictionary$2<TKey,TValue> extends System.Object {
-            
-            public get Comparer(): System.Collections.Generic.IEqualityComparer$1<TKey>;
-            
-            public get Count(): number;
-            
-            public get Keys(): System.Collections.Generic.Dictionary$2.KeyCollection<TKey, TValue>;
-            
-            public get Values(): System.Collections.Generic.Dictionary$2.ValueCollection<TKey, TValue>;
-            
-            public constructor();
-            
-            public constructor($capacity: number);
-            
-            public constructor($comparer: System.Collections.Generic.IEqualityComparer$1<TKey>);
-            
-            public constructor($capacity: number, $comparer: System.Collections.Generic.IEqualityComparer$1<TKey>);
-            
-            public get_Item($key: TKey):TValue;
-            
-            public set_Item($key: TKey, $value: TValue):void;
-            
-            public Add($key: TKey, $value: TValue):void;
-            
-            public Clear():void;
-            
-            public ContainsKey($key: TKey):boolean;
-            
-            public ContainsValue($value: TValue):boolean;
-            
-            public GetEnumerator():System.Collections.Generic.Dictionary$2.Enumerator<TKey, TValue>;
-            
-            public GetObjectData($info: System.Runtime.Serialization.SerializationInfo, $context: System.Runtime.Serialization.StreamingContext):void;
-            
-            public OnDeserialization($sender: any):void;
-            
-            public Remove($key: TKey):boolean;
-            
-            public TryGetValue($key: TKey, $value: $Ref<TValue>):boolean;
-            
-        }
-        
-        interface IEqualityComparer$1<T> {
-            
-        }
-        
-        interface IDictionary$2<TKey,TValue> {
-            
-        }
-        
-        class KeyValuePair$2<TKey,TValue> extends System.ValueType {
-            
-        }
-        
-    }
-    namespace System.Collections.ObjectModel {
-        
-        class ReadOnlyCollection$1<T> extends System.Object {
-            
-        }
-        
-    }
-    namespace System.Collections.Generic.List$1 {
-        
-        class Enumerator<T> extends System.ValueType {
-            
-        }
-        
-    }
-    namespace System.Collections.Generic.Dictionary$2 {
-        
-        class KeyCollection<TKey,TValue> extends System.Object {
-            
-        }
-        
-        class ValueCollection<TKey,TValue> extends System.Object {
-            
-        }
-        
-        class Enumerator<TKey,TValue> extends System.ValueType {
-            
-        }
-        
-    }
-    namespace System.Runtime.Serialization {
-        
-        class SerializationInfo extends System.Object {
-            
-        }
-        
-        class StreamingContext extends System.ValueType {
-            
-        }
-        
-    }
-    namespace System.Collections {
-        
-        interface IEnumerator {
-            
-        }
-        
-        interface IComparer {
-            
-        }
-        
-    }
-    namespace UnityEngine.Audio {
-        /** Object representing a group in the mixer. */
-        class AudioMixerGroup extends UnityEngine.Object {
             
         }
         
@@ -3334,6 +4507,454 @@ declare module 'csharp' {
         enum GenericParameterAttributes { None = 0, VarianceMask = 3, Covariant = 1, Contravariant = 2, SpecialConstraintMask = 28, ReferenceTypeConstraint = 4, NotNullableValueTypeConstraint = 8, DefaultConstructorConstraint = 16 }
         
         class InterfaceMapping extends System.ValueType {
+            
+        }
+        
+    }
+    namespace UnityEditor.AssetImporter {
+        
+        class SourceAssetIdentifier extends System.ValueType {
+            
+        }
+        
+    }
+    namespace UnityEditor.Build.Reporting {
+        /** The BuildReport API gives you information about the Unity build process. */
+        class BuildReport extends UnityEngine.Object {
+            
+        }
+        
+    }
+    
+        
+        class PackConfig extends UnityEngine.ScriptableObject {
+            
+            public entrance: UnityEditor.SceneAsset;
+            
+            public exclude: System.Array$1<UnityEditor.SceneAsset>;
+            
+            public constructor();
+            
+        }
+        
+        class BRPSceneManager extends System.Object {
+            
+            public constructor();
+            
+            public static GetSceneLoader($name: string):IScenesLoader;
+            
+        }
+        
+        interface IScenesLoader {
+            
+            LoadScene($name: string):void;
+            
+        }
+        
+        class LevelRunner extends UnityEngine.MonoBehaviour {
+            
+            public AutoInitEnv: boolean;
+            
+            public PackName: string;
+            
+            public LevelModName: string;
+            
+            public CorePackName: string;
+            
+            public LevelLoaderName: string;
+            
+            public JsStart: System.Action;
+            
+            public JsUpdate: System.Action;
+            
+            public JsFixedUpdate: System.Action;
+            
+            public JsOnDestroy: System.Action;
+            
+            public constructor();
+            
+        }
+        
+        class FileHelper extends System.Object {
+            
+            public constructor();
+            
+            public static ReadTextFile($path: string):string;
+            
+            public static ReadStreamTextFile($filepath: string):string;
+            
+        }
+        
+        class GameObjectHelper extends System.Object {
+            
+            public constructor();
+            
+            public static GetTransformByName($name: string):UnityEngine.Transform;
+            
+        }
+        
+        class GameObjectPool extends UnityEngine.MonoBehaviour {
+            
+            public static Instance: GameObjectPool;
+            
+            public gameObjectPool: System.Collections.Generic.List$1<UnityEngine.Transform>;
+            
+            public constructor();
+            
+            public Find($n: string):UnityEngine.Transform;
+            
+        }
+        
+        class CommonJsCall extends UnityEngine.MonoBehaviour {
+            
+            public static Instance: CommonJsCall;
+            
+            public constructor();
+            
+            public static QuitGame():void;
+            
+            public static WaitForFrames($count: number, $CallBack: System.Action):void;
+            
+            public static WaitForSecondsRealtime($count: number, $CallBack: System.Action):void;
+            
+            public static WaitForSeconds($count: number, $CallBack: System.Action):void;
+            
+            public static DoAction($action: System.Action, $callBack: System.Action):void;
+            
+        }
+        
+        class TimelineHelper extends System.Object {
+            
+            public static GetTimeline($name: string):UnityEngine.Playables.PlayableDirector;
+            
+            public static ApproxEquals($a: number, $b: number):boolean;
+            
+            public static ApproxEquals($a: number, $b: number):boolean;
+            
+            public static ReverseTimeline($PD: UnityEngine.Playables.PlayableDirector, $cb: System.Action):void;
+            
+            public static _ReverseTimeline($PD: UnityEngine.Playables.PlayableDirector, $cb: System.Action):System.Collections.IEnumerator;
+            
+        }
+        
+        class CharacterManager extends UnityEngine.MonoBehaviour {
+            
+            public CharacterController: ICharacterController;
+            
+            public constructor();
+            
+            public static GetCharacterManager($n: string):CharacterManager;
+            
+            public EnableCharacterMovement():void;
+            
+            public DisableCharacterMovement():void;
+            
+        }
+        
+        interface ICharacterController {
+            
+        }
+        
+        interface ITrigger {
+            
+            EnterAct: System.Collections.Generic.Dictionary$2<string, System.Action>;
+            
+            LeaveAct: System.Collections.Generic.Dictionary$2<string, System.Action>;
+            
+            isUseful: boolean;
+            
+            GameType: GameType;
+            
+            MakeUseful():void;
+            
+            MakeUseless():void;
+            
+        }
+        
+        enum GameType { FPS = 0, TPS = 1, AVG = 2 }
+        
+        interface IActionTrigger {
+            
+            code: UnityEngine.KeyCode;
+            
+            interAction: System.Action;
+            
+            PlayerTag: string;
+            
+            interActable: boolean;
+            
+            EnterAct: System.Collections.Generic.Dictionary$2<string, System.Action>;
+            
+            LeaveAct: System.Collections.Generic.Dictionary$2<string, System.Action>;
+            
+            isUseful: boolean;
+            
+            GameType: GameType;
+            
+            MakeUseful():void;
+            
+            MakeUseless():void;
+            
+            MakeInterActable():void;
+            
+            MakeDisInterActable():void;
+            
+        }
+        
+        class TriggerHelper extends System.Object {
+            
+            public constructor();
+            
+            public static GetTrigger($name: string):ITrigger;
+            
+            public static GetActionTrigger($name: string):IActionTrigger;
+            
+        }
+        
+        interface ICameraDetector {
+            
+            detectRange: number;
+            
+            ISDetecting: boolean;
+            
+            StartDetecting():void;
+            
+            StopDetecting():void;
+            
+        }
+        
+        class CameraManager extends UnityEngine.MonoBehaviour {
+            
+            public constructor();
+            
+            public static GetCameraDetector($name: string):ICameraDetector;
+            
+        }
+        
+        class UIHelper extends System.Object {
+            
+            public constructor();
+            
+            public static GetCanvas($name: string):UnityEngine.Canvas;
+            
+            public static GetButton($name: string):UnityEngine.UI.Button;
+            
+            public static GetText($name: string):UnityEngine.UI.Text;
+            
+            public static GetInputField($name: string):UnityEngine.UI.InputField;
+            
+        }
+        
+        class SoundLib extends UnityEngine.MonoBehaviour {
+            
+            public config: SoundConfig;
+            
+            public static Instance: SoundLib;
+            
+            public constructor();
+            
+            public static GetSoundLib():SoundLib;
+            
+            public GetSound($tag: string):UnityEngine.AudioClip;
+            
+            public GetMusic($tag: string):UnityEngine.AudioClip;
+            
+        }
+        
+        class SoundConfig extends UnityEngine.ScriptableObject {
+            
+            public SoundLib: System.Collections.Generic.List$1<TagSound>;
+            
+            public MusicLib: System.Collections.Generic.List$1<TagSound>;
+            
+            public tag: string;
+            
+            public clip: UnityEngine.AudioClip;
+            
+            public constructor();
+            
+            public AddToMusic():void;
+            
+            public AddToSound():void;
+            
+            public ClearMusic():void;
+            
+            public ClearSound():void;
+            
+        }
+        
+        class TagSound extends System.Object {
+            
+            public tag: string;
+            
+            public clip: UnityEngine.AudioClip;
+            
+            public constructor();
+            
+            public constructor($t: string, $c: UnityEngine.AudioClip);
+            
+        }
+        
+        class Tweens extends UnityEngine.MonoBehaviour {
+            
+            public constructor();
+            
+            public static Fade($name: string, $start: number, $end: number, $time: number, $callback: System.Action):void;
+            
+            public static FadeSprite($name: string, $start: number, $end: number, $time: number, $callback: System.Action):void;
+            
+            public static FadeUIGroup($name: string, $start: number, $end: number, $time: number, $callback: System.Action):void;
+            
+            public static FadeColorFromTo($trans: UnityEngine.Transform, $from: string, $to: string, $time: number, $act?: System.Action):void;
+            
+            public static MoveFrom($name: string, $from: UnityEngine.Vector3, $time: number, $callback: System.Action):void;
+            
+            public static MoveTo($name: string, $to: UnityEngine.Vector3, $time: number, $callback: System.Action):void;
+            
+            public static ScaleFromTo($name: string, $from: number, $to: number, $time: number, $callback: System.Action):void;
+            
+        }
+        
+        class AssetHelper extends UnityEngine.MonoBehaviour {
+            
+            public loadType: AssetHelper.LoadType;
+            
+            public static Instance: AssetHelper;
+            
+            public Scenes: System.Collections.Generic.Dictionary$2<string, string>;
+            
+            public constructor();
+            
+            public static GetAssetHelper():AssetHelper;
+            
+        }
+        
+        enum LeanTweenType { notUsed = 0, linear = 1, easeOutQuad = 2, easeInQuad = 3, easeInOutQuad = 4, easeInCubic = 5, easeOutCubic = 6, easeInOutCubic = 7, easeInQuart = 8, easeOutQuart = 9, easeInOutQuart = 10, easeInQuint = 11, easeOutQuint = 12, easeInOutQuint = 13, easeInSine = 14, easeOutSine = 15, easeInOutSine = 16, easeInExpo = 17, easeOutExpo = 18, easeInOutExpo = 19, easeInCirc = 20, easeOutCirc = 21, easeInOutCirc = 22, easeInBounce = 23, easeOutBounce = 24, easeInOutBounce = 25, easeInBack = 26, easeOutBack = 27, easeInOutBack = 28, easeInElastic = 29, easeOutElastic = 30, easeInOutElastic = 31, easeSpring = 32, easeShake = 33, punch = 34, once = 35, clamp = 36, pingPong = 37, animationCurve = 38 }
+        
+        class DialogHelper extends UnityEngine.MonoBehaviour {
+            
+            public constructor();
+            
+            public static GetCharacter($name: string):Fungus.Character;
+            
+            public static GetStage($name: string):Fungus.Stage;
+            
+            public static GetStage():Fungus.Stage;
+            
+        }
+        
+    
+    namespace System.Runtime.Serialization {
+        
+        class SerializationInfo extends System.Object {
+            
+        }
+        
+        class StreamingContext extends System.ValueType {
+            
+        }
+        
+    }
+    namespace System.Threading.Tasks {
+        
+        class Task extends System.Object {
+            
+        }
+        
+    }
+    namespace UnityEngine.Application {
+        
+        type AdvertisingIdentifierCallback = (advertisingId: string, trackingEnabled: boolean, errorMsg: string) => void;
+        var AdvertisingIdentifierCallback: {new (func: (advertisingId: string, trackingEnabled: boolean, errorMsg: string) => void): AdvertisingIdentifierCallback;}
+        
+        type LowMemoryCallback = () => void;
+        var LowMemoryCallback: {new (func: () => void): LowMemoryCallback;}
+        
+        type LogCallback = (condition: string, stackTrace: string, type: UnityEngine.LogType) => void;
+        var LogCallback: {new (func: (condition: string, stackTrace: string, type: UnityEngine.LogType) => void): LogCallback;}
+        
+    }
+    namespace UnityEngine.Events {
+        /** Zero argument delegate used by UnityEvents. */
+        type UnityAction = () => void;
+        var UnityAction: {new (func: () => void): UnityAction;}
+        
+        type UnityAction$2<T0,T1> = (arg0: T0, arg1: T1) => void;
+        
+        type UnityAction$1<T0> = (arg0: T0) => void;
+        /** A zero argument persistent callback that can be saved with the Scene. */
+        class UnityEvent extends UnityEngine.Events.UnityEventBase {
+            
+            public constructor();
+            /** Add a non persistent listener to the UnityEvent. * @param call Callback function.
+             */
+            public AddListener($call: UnityEngine.Events.UnityAction):void;
+            /** Remove a non persistent listener from the UnityEvent. * @param call Callback function.
+             */
+            public RemoveListener($call: UnityEngine.Events.UnityAction):void;
+            
+            public Invoke():void;
+            
+        }
+        /** Abstract base class for UnityEvents. */
+        class UnityEventBase extends System.Object {
+            
+        }
+        
+        class UnityEvent$1<T0> extends UnityEngine.Events.UnityEventBase {
+            
+            public AddListener($call: UnityEngine.Events.UnityAction$1<T0>):void;
+            
+            public RemoveListener($call: UnityEngine.Events.UnityAction$1<T0>):void;
+            
+            public Invoke($arg0: T0):void;
+            
+        }
+        
+    }
+    namespace System.Collections.ObjectModel {
+        
+        class ReadOnlyCollection$1<T> extends System.Object {
+            
+        }
+        
+    }
+    namespace System.Collections.Generic.List$1 {
+        
+        class Enumerator<T> extends System.ValueType {
+            
+        }
+        
+    }
+    namespace System.Collections.Generic.Dictionary$2 {
+        
+        class KeyCollection<TKey,TValue> extends System.Object {
+            
+        }
+        
+        class ValueCollection<TKey,TValue> extends System.Object {
+            
+        }
+        
+        class Enumerator<TKey,TValue> extends System.ValueType {
+            
+        }
+        
+    }
+    namespace System.Collections {
+        
+        interface IEnumerator {
+            
+        }
+        
+        interface IComparer {
+            
+        }
+        
+    }
+    namespace UnityEngine.Audio {
+        /** Object representing a group in the mixer. */
+        class AudioMixerGroup extends UnityEngine.Object {
             
         }
         
@@ -3672,753 +5293,6 @@ declare module 'csharp' {
         var WillRenderCanvases: {new (func: () => void): WillRenderCanvases;}
         
     }
-    namespace System.IO {
-        
-        class Path extends System.Object {
-            
-            public static AltDirectorySeparatorChar: number;
-            
-            public static DirectorySeparatorChar: number;
-            
-            public static PathSeparator: number;
-            
-            public static VolumeSeparatorChar: number;
-            
-            public static ChangeExtension($path: string, $extension: string):string;
-            
-            public static Combine($path1: string, $path2: string):string;
-            
-            public static GetDirectoryName($path: string):string;
-            
-            public static GetExtension($path: string):string;
-            
-            public static GetFileName($path: string):string;
-            
-            public static GetFileNameWithoutExtension($path: string):string;
-            
-            public static GetFullPath($path: string):string;
-            
-            public static GetPathRoot($path: string):string;
-            
-            public static GetTempFileName():string;
-            
-            public static GetTempPath():string;
-            
-            public static HasExtension($path: string):boolean;
-            
-            public static IsPathRooted($path: string):boolean;
-            
-            public static GetInvalidFileNameChars():System.Array$1<number>;
-            
-            public static GetInvalidPathChars():System.Array$1<number>;
-            
-            public static GetRandomFileName():string;
-            
-            public static Combine(...paths: string[]):string;
-            
-            public static Combine($path1: string, $path2: string, $path3: string):string;
-            
-            public static Combine($path1: string, $path2: string, $path3: string, $path4: string):string;
-            
-        }
-        
-        class Stream extends System.MarshalByRefObject {
-            
-        }
-        
-        class DirectoryInfo extends System.IO.FileSystemInfo {
-            
-            public get Exists(): boolean;
-            
-            public get Name(): string;
-            
-            public get Parent(): System.IO.DirectoryInfo;
-            
-            public get Root(): System.IO.DirectoryInfo;
-            
-            public constructor($path: string);
-            
-            public Create():void;
-            
-            public CreateSubdirectory($path: string):System.IO.DirectoryInfo;
-            
-            public GetFiles():System.Array$1<System.IO.FileInfo>;
-            
-            public GetFiles($searchPattern: string):System.Array$1<System.IO.FileInfo>;
-            
-            public GetDirectories():System.Array$1<System.IO.DirectoryInfo>;
-            
-            public GetDirectories($searchPattern: string):System.Array$1<System.IO.DirectoryInfo>;
-            
-            public GetFileSystemInfos():System.Array$1<System.IO.FileSystemInfo>;
-            
-            public GetFileSystemInfos($searchPattern: string):System.Array$1<System.IO.FileSystemInfo>;
-            
-            public GetFileSystemInfos($searchPattern: string, $searchOption: System.IO.SearchOption):System.Array$1<System.IO.FileSystemInfo>;
-            
-            public Delete():void;
-            
-            public Delete($recursive: boolean):void;
-            
-            public MoveTo($destDirName: string):void;
-            
-            public GetDirectories($searchPattern: string, $searchOption: System.IO.SearchOption):System.Array$1<System.IO.DirectoryInfo>;
-            
-            public GetFiles($searchPattern: string, $searchOption: System.IO.SearchOption):System.Array$1<System.IO.FileInfo>;
-            
-            public Create($directorySecurity: System.Security.AccessControl.DirectorySecurity):void;
-            
-            public CreateSubdirectory($path: string, $directorySecurity: System.Security.AccessControl.DirectorySecurity):System.IO.DirectoryInfo;
-            
-            public GetAccessControl():System.Security.AccessControl.DirectorySecurity;
-            
-            public GetAccessControl($includeSections: System.Security.AccessControl.AccessControlSections):System.Security.AccessControl.DirectorySecurity;
-            
-            public SetAccessControl($directorySecurity: System.Security.AccessControl.DirectorySecurity):void;
-            
-            public EnumerateDirectories():System.Collections.Generic.IEnumerable$1<System.IO.DirectoryInfo>;
-            
-            public EnumerateDirectories($searchPattern: string):System.Collections.Generic.IEnumerable$1<System.IO.DirectoryInfo>;
-            
-            public EnumerateDirectories($searchPattern: string, $searchOption: System.IO.SearchOption):System.Collections.Generic.IEnumerable$1<System.IO.DirectoryInfo>;
-            
-            public EnumerateFiles():System.Collections.Generic.IEnumerable$1<System.IO.FileInfo>;
-            
-            public EnumerateFiles($searchPattern: string):System.Collections.Generic.IEnumerable$1<System.IO.FileInfo>;
-            
-            public EnumerateFiles($searchPattern: string, $searchOption: System.IO.SearchOption):System.Collections.Generic.IEnumerable$1<System.IO.FileInfo>;
-            
-            public EnumerateFileSystemInfos():System.Collections.Generic.IEnumerable$1<System.IO.FileSystemInfo>;
-            
-            public EnumerateFileSystemInfos($searchPattern: string):System.Collections.Generic.IEnumerable$1<System.IO.FileSystemInfo>;
-            
-            public EnumerateFileSystemInfos($searchPattern: string, $searchOption: System.IO.SearchOption):System.Collections.Generic.IEnumerable$1<System.IO.FileSystemInfo>;
-            
-            public constructor();
-            
-        }
-        
-        class FileSystemInfo extends System.MarshalByRefObject {
-            
-            public get FullName(): string;
-            
-            public get Extension(): string;
-            
-            public get Name(): string;
-            
-            public get Exists(): boolean;
-            
-            public get CreationTime(): Date;
-            public set CreationTime(value: Date);
-            
-            public get CreationTimeUtc(): Date;
-            public set CreationTimeUtc(value: Date);
-            
-            public get LastAccessTime(): Date;
-            public set LastAccessTime(value: Date);
-            
-            public get LastAccessTimeUtc(): Date;
-            public set LastAccessTimeUtc(value: Date);
-            
-            public get LastWriteTime(): Date;
-            public set LastWriteTime(value: Date);
-            
-            public get LastWriteTimeUtc(): Date;
-            public set LastWriteTimeUtc(value: Date);
-            
-            public get Attributes(): System.IO.FileAttributes;
-            public set Attributes(value: System.IO.FileAttributes);
-            
-            public Delete():void;
-            
-            public Refresh():void;
-            
-            public GetObjectData($info: System.Runtime.Serialization.SerializationInfo, $context: System.Runtime.Serialization.StreamingContext):void;
-            
-        }
-        
-        class FileInfo extends System.IO.FileSystemInfo {
-            
-            public get Name(): string;
-            
-            public get Length(): bigint;
-            
-            public get DirectoryName(): string;
-            
-            public get Directory(): System.IO.DirectoryInfo;
-            
-            public get IsReadOnly(): boolean;
-            public set IsReadOnly(value: boolean);
-            
-            public get Exists(): boolean;
-            
-            public constructor($fileName: string);
-            
-            public GetAccessControl():System.Security.AccessControl.FileSecurity;
-            
-            public GetAccessControl($includeSections: System.Security.AccessControl.AccessControlSections):System.Security.AccessControl.FileSecurity;
-            
-            public SetAccessControl($fileSecurity: System.Security.AccessControl.FileSecurity):void;
-            
-            public OpenText():System.IO.StreamReader;
-            
-            public CreateText():System.IO.StreamWriter;
-            
-            public AppendText():System.IO.StreamWriter;
-            
-            public CopyTo($destFileName: string):System.IO.FileInfo;
-            
-            public CopyTo($destFileName: string, $overwrite: boolean):System.IO.FileInfo;
-            
-            public Create():System.IO.FileStream;
-            
-            public Decrypt():void;
-            
-            public Encrypt():void;
-            
-            public Open($mode: System.IO.FileMode):System.IO.FileStream;
-            
-            public Open($mode: System.IO.FileMode, $access: System.IO.FileAccess):System.IO.FileStream;
-            
-            public Open($mode: System.IO.FileMode, $access: System.IO.FileAccess, $share: System.IO.FileShare):System.IO.FileStream;
-            
-            public OpenRead():System.IO.FileStream;
-            
-            public OpenWrite():System.IO.FileStream;
-            
-            public MoveTo($destFileName: string):void;
-            
-            public Replace($destinationFileName: string, $destinationBackupFileName: string):System.IO.FileInfo;
-            
-            public Replace($destinationFileName: string, $destinationBackupFileName: string, $ignoreMetadataErrors: boolean):System.IO.FileInfo;
-            
-            public constructor();
-            
-        }
-        
-        enum SearchOption { TopDirectoryOnly = 0, AllDirectories = 1 }
-        
-        class File extends System.Object {
-            
-            public static AppendAllText($path: string, $contents: string):void;
-            
-            public static AppendAllText($path: string, $contents: string, $encoding: System.Text.Encoding):void;
-            
-            public static AppendText($path: string):System.IO.StreamWriter;
-            
-            public static Copy($sourceFileName: string, $destFileName: string):void;
-            
-            public static Copy($sourceFileName: string, $destFileName: string, $overwrite: boolean):void;
-            
-            public static Create($path: string):System.IO.FileStream;
-            
-            public static Create($path: string, $bufferSize: number):System.IO.FileStream;
-            
-            public static Create($path: string, $bufferSize: number, $options: System.IO.FileOptions):System.IO.FileStream;
-            
-            public static Create($path: string, $bufferSize: number, $options: System.IO.FileOptions, $fileSecurity: System.Security.AccessControl.FileSecurity):System.IO.FileStream;
-            
-            public static CreateText($path: string):System.IO.StreamWriter;
-            
-            public static Delete($path: string):void;
-            
-            public static Exists($path: string):boolean;
-            
-            public static GetAccessControl($path: string):System.Security.AccessControl.FileSecurity;
-            
-            public static GetAccessControl($path: string, $includeSections: System.Security.AccessControl.AccessControlSections):System.Security.AccessControl.FileSecurity;
-            
-            public static GetAttributes($path: string):System.IO.FileAttributes;
-            
-            public static GetCreationTime($path: string):Date;
-            
-            public static GetCreationTimeUtc($path: string):Date;
-            
-            public static GetLastAccessTime($path: string):Date;
-            
-            public static GetLastAccessTimeUtc($path: string):Date;
-            
-            public static GetLastWriteTime($path: string):Date;
-            
-            public static GetLastWriteTimeUtc($path: string):Date;
-            
-            public static Move($sourceFileName: string, $destFileName: string):void;
-            
-            public static Open($path: string, $mode: System.IO.FileMode):System.IO.FileStream;
-            
-            public static Open($path: string, $mode: System.IO.FileMode, $access: System.IO.FileAccess):System.IO.FileStream;
-            
-            public static Open($path: string, $mode: System.IO.FileMode, $access: System.IO.FileAccess, $share: System.IO.FileShare):System.IO.FileStream;
-            
-            public static OpenRead($path: string):System.IO.FileStream;
-            
-            public static OpenText($path: string):System.IO.StreamReader;
-            
-            public static OpenWrite($path: string):System.IO.FileStream;
-            
-            public static Replace($sourceFileName: string, $destinationFileName: string, $destinationBackupFileName: string):void;
-            
-            public static Replace($sourceFileName: string, $destinationFileName: string, $destinationBackupFileName: string, $ignoreMetadataErrors: boolean):void;
-            
-            public static SetAccessControl($path: string, $fileSecurity: System.Security.AccessControl.FileSecurity):void;
-            
-            public static SetAttributes($path: string, $fileAttributes: System.IO.FileAttributes):void;
-            
-            public static SetCreationTime($path: string, $creationTime: Date):void;
-            
-            public static SetCreationTimeUtc($path: string, $creationTimeUtc: Date):void;
-            
-            public static SetLastAccessTime($path: string, $lastAccessTime: Date):void;
-            
-            public static SetLastAccessTimeUtc($path: string, $lastAccessTimeUtc: Date):void;
-            
-            public static SetLastWriteTime($path: string, $lastWriteTime: Date):void;
-            
-            public static SetLastWriteTimeUtc($path: string, $lastWriteTimeUtc: Date):void;
-            
-            public static ReadAllBytes($path: string):System.Array$1<number>;
-            
-            public static ReadAllLines($path: string):System.Array$1<string>;
-            
-            public static ReadAllLines($path: string, $encoding: System.Text.Encoding):System.Array$1<string>;
-            
-            public static ReadAllText($path: string):string;
-            
-            public static ReadAllText($path: string, $encoding: System.Text.Encoding):string;
-            
-            public static WriteAllBytes($path: string, $bytes: System.Array$1<number>):void;
-            
-            public static WriteAllLines($path: string, $contents: System.Array$1<string>):void;
-            
-            public static WriteAllLines($path: string, $contents: System.Array$1<string>, $encoding: System.Text.Encoding):void;
-            
-            public static WriteAllText($path: string, $contents: string):void;
-            
-            public static WriteAllText($path: string, $contents: string, $encoding: System.Text.Encoding):void;
-            
-            public static Encrypt($path: string):void;
-            
-            public static Decrypt($path: string):void;
-            
-            public static ReadLines($path: string):System.Collections.Generic.IEnumerable$1<string>;
-            
-            public static ReadLines($path: string, $encoding: System.Text.Encoding):System.Collections.Generic.IEnumerable$1<string>;
-            
-            public static AppendAllLines($path: string, $contents: System.Collections.Generic.IEnumerable$1<string>):void;
-            
-            public static AppendAllLines($path: string, $contents: System.Collections.Generic.IEnumerable$1<string>, $encoding: System.Text.Encoding):void;
-            
-            public static WriteAllLines($path: string, $contents: System.Collections.Generic.IEnumerable$1<string>):void;
-            
-            public static WriteAllLines($path: string, $contents: System.Collections.Generic.IEnumerable$1<string>, $encoding: System.Text.Encoding):void;
-            
-        }
-        
-        class StreamWriter extends System.IO.TextWriter {
-            
-            public static Null: System.IO.StreamWriter;
-            
-            public get AutoFlush(): boolean;
-            public set AutoFlush(value: boolean);
-            
-            public get BaseStream(): System.IO.Stream;
-            
-            public get Encoding(): System.Text.Encoding;
-            
-            public constructor($stream: System.IO.Stream);
-            
-            public constructor($stream: System.IO.Stream, $encoding: System.Text.Encoding);
-            
-            public constructor($stream: System.IO.Stream, $encoding: System.Text.Encoding, $bufferSize: number);
-            
-            public constructor($stream: System.IO.Stream, $encoding: System.Text.Encoding, $bufferSize: number, $leaveOpen: boolean);
-            
-            public constructor($path: string);
-            
-            public constructor($path: string, $append: boolean);
-            
-            public constructor($path: string, $append: boolean, $encoding: System.Text.Encoding);
-            
-            public constructor($path: string, $append: boolean, $encoding: System.Text.Encoding, $bufferSize: number);
-            
-            public Close():void;
-            
-            public Flush():void;
-            
-            public Write($value: number):void;
-            
-            public Write($buffer: System.Array$1<number>):void;
-            
-            public Write($buffer: System.Array$1<number>, $index: number, $count: number):void;
-            
-            public Write($value: string):void;
-            
-            public WriteAsync($value: number):System.Threading.Tasks.Task;
-            
-            public WriteAsync($value: string):System.Threading.Tasks.Task;
-            
-            public WriteAsync($buffer: System.Array$1<number>, $index: number, $count: number):System.Threading.Tasks.Task;
-            
-            public WriteLineAsync():System.Threading.Tasks.Task;
-            
-            public WriteLineAsync($value: number):System.Threading.Tasks.Task;
-            
-            public WriteLineAsync($value: string):System.Threading.Tasks.Task;
-            
-            public WriteLineAsync($buffer: System.Array$1<number>, $index: number, $count: number):System.Threading.Tasks.Task;
-            
-            public FlushAsync():System.Threading.Tasks.Task;
-            
-            public constructor();
-            
-        }
-        
-        class TextWriter extends System.MarshalByRefObject {
-            
-        }
-        
-        class FileStream extends System.IO.Stream {
-            
-        }
-        
-        enum FileOptions { None = 0, Encrypted = 16384, DeleteOnClose = 67108864, SequentialScan = 134217728, RandomAccess = 268435456, Asynchronous = 1073741824, WriteThrough = -2147483648 }
-        
-        enum FileAttributes { Archive = 32, Compressed = 2048, Device = 64, Directory = 16, Encrypted = 16384, Hidden = 2, Normal = 128, NotContentIndexed = 8192, Offline = 4096, ReadOnly = 1, ReparsePoint = 1024, SparseFile = 512, System = 4, Temporary = 256, IntegrityStream = 32768, NoScrubData = 131072 }
-        
-        enum FileMode { CreateNew = 1, Create = 2, Open = 3, OpenOrCreate = 4, Truncate = 5, Append = 6 }
-        
-        enum FileAccess { Read = 1, Write = 2, ReadWrite = 3 }
-        
-        enum FileShare { None = 0, Read = 1, Write = 2, ReadWrite = 3, Delete = 4, Inheritable = 16 }
-        
-        class StreamReader extends System.IO.TextReader {
-            
-        }
-        
-        class TextReader extends System.MarshalByRefObject {
-            
-        }
-        
-    }
-    
-        
-        class BRPSceneManager extends System.Object {
-            
-            public constructor();
-            
-            public static GetSceneLoader($name: string):IScenesLoader;
-            
-        }
-        
-        interface IScenesLoader {
-            
-            LoadScene($name: string):void;
-            
-        }
-        
-        class LevelRunner extends UnityEngine.MonoBehaviour {
-            
-            public AutoInitEnv: boolean;
-            
-            public PackName: string;
-            
-            public LevelModName: string;
-            
-            public CorePackName: string;
-            
-            public LevelLoaderName: string;
-            
-            public JsStart: System.Action;
-            
-            public JsUpdate: System.Action;
-            
-            public JsFixedUpdate: System.Action;
-            
-            public JsOnDestroy: System.Action;
-            
-            public constructor();
-            
-        }
-        
-        class FileHelper extends System.Object {
-            
-            public constructor();
-            
-            public static ReadTextFile($path: string):string;
-            
-            public static ReadStreamTextFile($filepath: string):string;
-            
-        }
-        
-        class GameObjectHelper extends System.Object {
-            
-            public constructor();
-            
-            public static GetTransformByName($name: string):UnityEngine.Transform;
-            
-        }
-        
-        class GameObjectPool extends UnityEngine.MonoBehaviour {
-            
-            public static Instance: GameObjectPool;
-            
-            public gameObjectPool: System.Collections.Generic.List$1<UnityEngine.Transform>;
-            
-            public constructor();
-            
-            public Find($n: string):UnityEngine.Transform;
-            
-        }
-        
-        class CommonJsCall extends UnityEngine.MonoBehaviour {
-            
-            public static Instance: CommonJsCall;
-            
-            public constructor();
-            
-            public static QuitGame():void;
-            
-            public static WaitForFrames($count: number, $CallBack: System.Action):void;
-            
-            public static WaitForSecondsRealtime($count: number, $CallBack: System.Action):void;
-            
-            public static WaitForSeconds($count: number, $CallBack: System.Action):void;
-            
-            public static DoAction($action: System.Action, $callBack: System.Action):void;
-            
-        }
-        
-        class TimelineHelper extends System.Object {
-            
-            public static GetTimeline($name: string):UnityEngine.Playables.PlayableDirector;
-            
-            public static ApproxEquals($a: number, $b: number):boolean;
-            
-            public static ApproxEquals($a: number, $b: number):boolean;
-            
-            public static ReverseTimeline($PD: UnityEngine.Playables.PlayableDirector, $cb: System.Action):void;
-            
-            public static _ReverseTimeline($PD: UnityEngine.Playables.PlayableDirector, $cb: System.Action):System.Collections.IEnumerator;
-            
-        }
-        
-        class CharacterManager extends UnityEngine.MonoBehaviour {
-            
-            public CharacterController: ICharacterController;
-            
-            public constructor();
-            
-            public static GetCharacterManager($n: string):CharacterManager;
-            
-            public EnableCharacterMovement():void;
-            
-            public DisableCharacterMovement():void;
-            
-        }
-        
-        interface ICharacterController {
-            
-        }
-        
-        interface ITrigger {
-            
-            EnterAct: System.Collections.Generic.Dictionary$2<string, System.Action>;
-            
-            LeaveAct: System.Collections.Generic.Dictionary$2<string, System.Action>;
-            
-            isUseful: boolean;
-            
-            GameType: GameType;
-            
-            MakeUseful():void;
-            
-            MakeUseless():void;
-            
-        }
-        
-        enum GameType { FPS = 0, TPS = 1, AVG = 2 }
-        
-        interface IActionTrigger {
-            
-            code: UnityEngine.KeyCode;
-            
-            interAction: System.Action;
-            
-            PlayerTag: string;
-            
-            interActable: boolean;
-            
-            EnterAct: System.Collections.Generic.Dictionary$2<string, System.Action>;
-            
-            LeaveAct: System.Collections.Generic.Dictionary$2<string, System.Action>;
-            
-            isUseful: boolean;
-            
-            GameType: GameType;
-            
-            MakeUseful():void;
-            
-            MakeUseless():void;
-            
-            MakeInterActable():void;
-            
-            MakeDisInterActable():void;
-            
-        }
-        
-        class TriggerHelper extends System.Object {
-            
-            public constructor();
-            
-            public static GetTrigger($name: string):ITrigger;
-            
-            public static GetActionTrigger($name: string):IActionTrigger;
-            
-        }
-        
-        interface ICameraDetector {
-            
-            detectRange: number;
-            
-            ISDetecting: boolean;
-            
-            StartDetecting():void;
-            
-            StopDetecting():void;
-            
-        }
-        
-        class CameraManager extends UnityEngine.MonoBehaviour {
-            
-            public constructor();
-            
-            public static GetCameraDetector($name: string):ICameraDetector;
-            
-        }
-        
-        class UIHelper extends System.Object {
-            
-            public constructor();
-            
-            public static GetCanvas($name: string):UnityEngine.Canvas;
-            
-            public static GetButton($name: string):UnityEngine.UI.Button;
-            
-            public static GetText($name: string):UnityEngine.UI.Text;
-            
-            public static GetInputField($name: string):UnityEngine.UI.InputField;
-            
-        }
-        
-        class SoundLib extends UnityEngine.MonoBehaviour {
-            
-            public config: SoundConfig;
-            
-            public static Instance: SoundLib;
-            
-            public constructor();
-            
-            public static GetSoundLib():SoundLib;
-            
-            public GetSound($tag: string):UnityEngine.AudioClip;
-            
-            public GetMusic($tag: string):UnityEngine.AudioClip;
-            
-        }
-        
-        class SoundConfig extends UnityEngine.ScriptableObject {
-            
-            public SoundLib: System.Collections.Generic.List$1<TagSound>;
-            
-            public MusicLib: System.Collections.Generic.List$1<TagSound>;
-            
-            public tag: string;
-            
-            public clip: UnityEngine.AudioClip;
-            
-            public constructor();
-            
-            public AddToMusic():void;
-            
-            public AddToSound():void;
-            
-            public ClearMusic():void;
-            
-            public ClearSound():void;
-            
-        }
-        
-        class TagSound extends System.Object {
-            
-            public tag: string;
-            
-            public clip: UnityEngine.AudioClip;
-            
-            public constructor();
-            
-            public constructor($t: string, $c: UnityEngine.AudioClip);
-            
-        }
-        
-        class Tweens extends UnityEngine.MonoBehaviour {
-            
-            public constructor();
-            
-            public static Fade($name: string, $start: number, $end: number, $time: number, $callback: System.Action):void;
-            
-            public static FadeSprite($name: string, $start: number, $end: number, $time: number, $callback: System.Action):void;
-            
-            public static FadeUIGroup($name: string, $start: number, $end: number, $time: number, $callback: System.Action):void;
-            
-            public static FadeColorFromTo($trans: UnityEngine.Transform, $from: string, $to: string, $time: number, $act?: System.Action):void;
-            
-            public static MoveFrom($name: string, $from: UnityEngine.Vector3, $time: number, $callback: System.Action):void;
-            
-            public static MoveTo($name: string, $to: UnityEngine.Vector3, $time: number, $callback: System.Action):void;
-            
-            public static ScaleFromTo($name: string, $from: number, $to: number, $time: number, $callback: System.Action):void;
-            
-        }
-        
-        class AssetHelper extends UnityEngine.MonoBehaviour {
-            
-            public loadType: AssetHelper.LoadType;
-            
-            public static Instance: AssetHelper;
-            
-            public Scenes: System.Collections.Generic.Dictionary$2<string, string>;
-            
-            public constructor();
-            
-            public static GetAssetHelper():AssetHelper;
-            
-        }
-        
-        class PackConfig extends UnityEngine.ScriptableObject {
-            
-            public entrance: UnityEditor.SceneAsset;
-            
-            public exclude: System.Array$1<UnityEditor.SceneAsset>;
-            
-            public constructor();
-            
-        }
-        
-        enum LeanTweenType { notUsed = 0, linear = 1, easeOutQuad = 2, easeInQuad = 3, easeInOutQuad = 4, easeInCubic = 5, easeOutCubic = 6, easeInOutCubic = 7, easeInQuart = 8, easeOutQuart = 9, easeInOutQuart = 10, easeInQuint = 11, easeOutQuint = 12, easeInOutQuint = 13, easeInSine = 14, easeOutSine = 15, easeInOutSine = 16, easeInExpo = 17, easeOutExpo = 18, easeInOutExpo = 19, easeInCirc = 20, easeOutCirc = 21, easeInOutCirc = 22, easeInBounce = 23, easeOutBounce = 24, easeInOutBounce = 25, easeInBack = 26, easeOutBack = 27, easeInOutBack = 28, easeInElastic = 29, easeOutElastic = 30, easeInOutElastic = 31, easeSpring = 32, easeShake = 33, punch = 34, once = 35, clamp = 36, pingPong = 37, animationCurve = 38 }
-        
-        class DialogHelper extends UnityEngine.MonoBehaviour {
-            
-            public constructor();
-            
-            public static GetCharacter($name: string):Fungus.Character;
-            
-            public static GetStage($name: string):Fungus.Stage;
-            
-            public static GetStage():Fungus.Stage;
-            
-        }
-        
-    
     namespace UnityEngine.Playables {
         /** Instantiates a PlayableAsset and controls playback of Playable objects. */
         class PlayableDirector extends UnityEngine.Behaviour {
@@ -4642,8 +5516,6 @@ declare module 'csharp' {
             
             public CalculateLayoutInputVertical():void;
             
-            public OnRebuildRequested():void;
-            
         }
         
         class MaskableGraphic extends UnityEngine.UI.Graphic {
@@ -4862,888 +5734,6 @@ declare module 'csharp' {
     namespace AssetHelper {
         
         enum LoadType { Assets = 0, Bundles = 1 }
-        
-    }
-    namespace System.Security.AccessControl {
-        
-        class DirectorySecurity extends System.Security.AccessControl.FileSystemSecurity {
-            
-        }
-        
-        class FileSystemSecurity extends System.Security.AccessControl.NativeObjectSecurity {
-            
-        }
-        
-        class NativeObjectSecurity extends System.Security.AccessControl.CommonObjectSecurity {
-            
-        }
-        
-        class CommonObjectSecurity extends System.Security.AccessControl.ObjectSecurity {
-            
-        }
-        
-        class ObjectSecurity extends System.Object {
-            
-        }
-        
-        enum AccessControlSections { None = 0, Audit = 1, Access = 2, Owner = 4, Group = 8, All = 15 }
-        
-        class FileSecurity extends System.Security.AccessControl.FileSystemSecurity {
-            
-        }
-        
-    }
-    namespace System.Text {
-        
-        class Encoding extends System.Object {
-            
-        }
-        
-        class StringBuilder extends System.Object {
-            
-        }
-        
-    }
-    namespace UnityEditor {
-        /** An Interface for accessing assets and performing operations on assets. */
-        class AssetDatabase extends System.Object {
-            
-            public constructor();
-            
-            public static add_importPackageStarted($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
-            
-            public static remove_importPackageStarted($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
-            
-            public static add_importPackageCompleted($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
-            
-            public static remove_importPackageCompleted($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
-            
-            public static add_importPackageCancelled($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
-            
-            public static remove_importPackageCancelled($value: UnityEditor.AssetDatabase.ImportPackageCallback):void;
-            
-            public static add_importPackageFailed($value: UnityEditor.AssetDatabase.ImportPackageFailedCallback):void;
-            
-            public static remove_importPackageFailed($value: UnityEditor.AssetDatabase.ImportPackageFailedCallback):void;
-            
-            public static IsOpenForEdit($assetOrMetaFilePaths: System.Array$1<string>, $outNotEditablePaths: System.Collections.Generic.List$1<string>, $statusQueryOptions?: UnityEditor.StatusQueryOptions):void;
-            /** Makes a file open for editing in version control.
-             * @param path Specifies the path to a file relative to the project root.
-             * @returns true if Unity successfully made the file editable in the version control system. Otherwise, returns false. 
-             */
-            public static MakeEditable($path: string):boolean;
-            
-            public static MakeEditable($paths: System.Array$1<string>, $prompt?: string, $outNotEditablePaths?: System.Collections.Generic.List$1<string>):boolean;
-            /** Search the asset database using the search filter string.
-             * @param filter The filter string can contain search data.  See below for details about this string.
-             * @param searchInFolders The folders where the search will start.
-             * @returns Array of matching asset. Note that GUIDs will be returned. 
-             */
-            public static FindAssets($filter: string):System.Array$1<string>;
-            /** Search the asset database using the search filter string.
-             * @param filter The filter string can contain search data.  See below for details about this string.
-             * @param searchInFolders The folders where the search will start.
-             * @returns Array of matching asset. Note that GUIDs will be returned. 
-             */
-            public static FindAssets($filter: string, $searchInFolders: System.Array$1<string>):System.Array$1<string>;
-            /** Is object an asset? */
-            public static Contains($obj: UnityEngine.Object):boolean;
-            /** Is object an asset? */
-            public static Contains($instanceID: number):boolean;
-            /** Create a new folder.
-             * @param parentFolder The name of the parent folder.
-             * @param newFolderName The name of the new folder.
-             * @returns The GUID of the newly created folder. 
-             */
-            public static CreateFolder($parentFolder: string, $newFolderName: string):string;
-            /** Is asset a main asset in the project window? */
-            public static IsMainAsset($obj: UnityEngine.Object):boolean;
-            /** Is asset a main asset in the project window? */
-            public static IsMainAsset($instanceID: number):boolean;
-            /** Does the asset form part of another asset? * @param obj The asset Object to query.
-             * @param instanceID Instance ID of the asset Object to query.
-             */
-            public static IsSubAsset($obj: UnityEngine.Object):boolean;
-            /** Does the asset form part of another asset? * @param obj The asset Object to query.
-             * @param instanceID Instance ID of the asset Object to query.
-             */
-            public static IsSubAsset($instanceID: number):boolean;
-            /** Determines whether the Asset is a foreign Asset. */
-            public static IsForeignAsset($obj: UnityEngine.Object):boolean;
-            /** Determines whether the Asset is a foreign Asset. */
-            public static IsForeignAsset($instanceID: number):boolean;
-            /** Determines whether the Asset is a native Asset. */
-            public static IsNativeAsset($obj: UnityEngine.Object):boolean;
-            /** Determines whether the Asset is a native Asset. */
-            public static IsNativeAsset($instanceID: number):boolean;
-            
-            public static GetCurrentCacheServerIp():string;
-            /** Creates a new unique path for an asset. */
-            public static GenerateUniqueAssetPath($path: string):string;
-            
-            public static StartAssetEditing():void;
-            
-            public static StopAssetEditing():void;
-            
-            public static ReleaseCachedFileHandles():void;
-            /** Checks if an asset file can be moved from one folder to another. (Without actually moving the file).
-             * @param oldPath The path where the asset currently resides.
-             * @param newPath The path which the asset should be moved to.
-             * @returns An empty string if the asset can be moved, otherwise an error message. 
-             */
-            public static ValidateMoveAsset($oldPath: string, $newPath: string):string;
-            /** Move an asset file (or folder) from one folder to another.
-             * @param oldPath The path where the asset currently resides.
-             * @param newPath The path which the asset should be moved to.
-             * @returns An empty string if the asset has been successfully moved, otherwise an error message. 
-             */
-            public static MoveAsset($oldPath: string, $newPath: string):string;
-            /** Creates an external Asset from an object (such as a Material) by extracting it from within an imported asset (such as an FBX file).
-             * @param asset The sub-asset to extract.
-             * @param newPath The file path of the new Asset.
-             * @returns An empty string if Unity has successfully extracted the Asset, or an error message if not. 
-             */
-            public static ExtractAsset($asset: UnityEngine.Object, $newPath: string):string;
-            /** Rename an asset file.
-             * @param pathName The path where the asset currently resides.
-             * @param newName The new name which should be given to the asset.
-             * @returns An empty string, if the asset has been successfully renamed, otherwise an error message. 
-             */
-            public static RenameAsset($pathName: string, $newName: string):string;
-            /** Moves the asset at path to the trash. */
-            public static MoveAssetToTrash($path: string):boolean;
-            /** Deletes the asset file at path. * @param path Filesystem path of the asset to be deleted.
-             */
-            public static DeleteAsset($path: string):boolean;
-            /** Import asset at path. */
-            public static ImportAsset($path: string):void;
-            /** Import asset at path. */
-            public static ImportAsset($path: string, $options: UnityEditor.ImportAssetOptions):void;
-            /** Duplicates the asset at path and stores it at newPath. * @param path Filesystem path of the source asset.
-             * @param newPath Filesystem path of the new asset to create.
-             */
-            public static CopyAsset($path: string, $newPath: string):boolean;
-            /** Writes the import settings to disk. */
-            public static WriteImportSettingsIfDirty($path: string):boolean;
-            /** Given a path to a directory in the Assets folder, relative to the project folder, this method will return an array of all its subdirectories. */
-            public static GetSubFolders($path: string):System.Array$1<string>;
-            /** Given a path to a folder, returns true if it exists, false otherwise.
-             * @param path The path to the folder.
-             * @returns Returns true if the folder exists. 
-             */
-            public static IsValidFolder($path: string):boolean;
-            /** Creates a new asset at path. * @param asset Object to use in creating the asset.
-             * @param path Filesystem path for the new asset.
-             */
-            public static CreateAsset($asset: UnityEngine.Object, $path: string):void;
-            /** Adds objectToAdd to an existing asset at path. * @param objectToAdd Object to add to the existing asset.
-             * @param path Filesystem path to the asset.
-             */
-            public static AddObjectToAsset($objectToAdd: UnityEngine.Object, $path: string):void;
-            /** Adds objectToAdd to an existing asset identified by assetObject. */
-            public static AddObjectToAsset($objectToAdd: UnityEngine.Object, $assetObject: UnityEngine.Object):void;
-            /** Specifies which object in the asset file should become the main object after the next import. * @param mainObject The object to become the main object.
-             * @param assetPath Path to the asset file.
-             */
-            public static SetMainObject($mainObject: UnityEngine.Object, $assetPath: string):void;
-            /** Returns the path name relative to the project folder where the asset is stored.
-             * @param instanceID The instance ID of the asset.
-             * @param assetObject A reference to the asset.
-             * @returns The asset path name, or null, or an empty string if the asset does not exist. 
-             */
-            public static GetAssetPath($assetObject: UnityEngine.Object):string;
-            /** Returns the path name relative to the project folder where the asset is stored.
-             * @param instanceID The instance ID of the asset.
-             * @param assetObject A reference to the asset.
-             * @returns The asset path name, or null, or an empty string if the asset does not exist. 
-             */
-            public static GetAssetPath($instanceID: number):string;
-            /** Returns the path name relative to the project folder where the asset is stored. */
-            public static GetAssetOrScenePath($assetObject: UnityEngine.Object):string;
-            /** Gets the path to the text .meta file associated with an asset.
-             * @param path The path to the asset.
-             * @returns The path to the .meta text file or empty string if the file does not exist. 
-             */
-            public static GetTextMetaFilePathFromAssetPath($path: string):string;
-            /** Gets the path to the asset file associated with a text .meta file. */
-            public static GetAssetPathFromTextMetaFilePath($path: string):string;
-            /** Returns the first asset object of type type at given path assetPath.
-             * @param assetPath Path of the asset to load.
-             * @param type Data type of the asset.
-             * @returns The asset matching the parameters. 
-             */
-            public static LoadAssetAtPath($assetPath: string, $type: System.Type):UnityEngine.Object;
-            /** Returns the main asset object at assetPath. * @param assetPath Filesystem path of the asset to load.
-             */
-            public static LoadMainAssetAtPath($assetPath: string):UnityEngine.Object;
-            /** Returns the type of the main asset object at assetPath. * @param assetPath Filesystem path of the asset to load.
-             */
-            public static GetMainAssetTypeAtPath($assetPath: string):System.Type;
-            /** Returns true if the main asset object at assetPath is loaded in memory. * @param assetPath Filesystem path of the asset to load.
-             */
-            public static IsMainAssetAtPathLoaded($assetPath: string):boolean;
-            /** Returns all sub Assets at assetPath. */
-            public static LoadAllAssetRepresentationsAtPath($assetPath: string):System.Array$1<UnityEngine.Object>;
-            /** Returns an array of all Assets at assetPath. * @param assetPath Filesystem path to the asset.
-             */
-            public static LoadAllAssetsAtPath($assetPath: string):System.Array$1<UnityEngine.Object>;
-            
-            public static GetAllAssetPaths():System.Array$1<string>;
-            /** Import any changed assets. */
-            public static Refresh():void;
-            /** Import any changed assets. */
-            public static Refresh($options: UnityEditor.ImportAssetOptions):void;
-            /** Opens the asset with associated application. */
-            public static OpenAsset($instanceID: number):boolean;
-            /** Opens the asset with associated application. */
-            public static OpenAsset($instanceID: number, $lineNumber: number):boolean;
-            /** Opens the asset with associated application. */
-            public static OpenAsset($instanceID: number, $lineNumber: number, $columnNumber: number):boolean;
-            /** Opens the asset with associated application. */
-            public static OpenAsset($target: UnityEngine.Object):boolean;
-            /** Opens the asset with associated application. */
-            public static OpenAsset($target: UnityEngine.Object, $lineNumber: number):boolean;
-            /** Opens the asset with associated application. */
-            public static OpenAsset($target: UnityEngine.Object, $lineNumber: number, $columnNumber: number):boolean;
-            /** Opens the asset(s) with associated application(s). */
-            public static OpenAsset($objects: System.Array$1<UnityEngine.Object>):boolean;
-            /** Get the GUID for the asset at path.
-             * @param path Filesystem path for the asset.
-             * @returns GUID. 
-             */
-            public static AssetPathToGUID($path: string):string;
-            /** Gets the corresponding asset path for the supplied guid, or an empty string if the GUID can't be found. */
-            public static GUIDToAssetPath($guid: string):string;
-            /** Returns the hash of all the dependencies of an asset.
-             * @param path Path to the asset.
-             * @returns Aggregate hash. 
-             */
-            public static GetAssetDependencyHash($path: string):UnityEngine.Hash128;
-            
-            public static SaveAssets():void;
-            /** Retrieves an icon for the asset at the given asset path. */
-            public static GetCachedIcon($path: string):UnityEngine.Texture;
-            /** Replaces that list of labels on an asset. */
-            public static SetLabels($obj: UnityEngine.Object, $labels: System.Array$1<string>):void;
-            /** Returns all labels attached to a given asset. */
-            public static GetLabels($obj: UnityEngine.Object):System.Array$1<string>;
-            /** Removes all labels attached to an asset. */
-            public static ClearLabels($obj: UnityEngine.Object):void;
-            
-            public static GetAllAssetBundleNames():System.Array$1<string>;
-            
-            public static GetUnusedAssetBundleNames():System.Array$1<string>;
-            /** Remove the assetBundle name from the asset database. The forceRemove flag is used to indicate if you want to remove it even it's in use. * @param assetBundleName The assetBundle name you want to remove.
-             * @param forceRemove Flag to indicate if you want to remove the assetBundle name even it's in use.
-             */
-            public static RemoveAssetBundleName($assetBundleName: string, $forceRemove: boolean):boolean;
-            
-            public static RemoveUnusedAssetBundleNames():void;
-            /** Returns an array containing the paths of all assets marked with the specified Asset Bundle name. */
-            public static GetAssetPathsFromAssetBundle($assetBundleName: string):System.Array$1<string>;
-            /** Get the Asset paths for all Assets tagged with assetBundleName and
-                            named assetName. */
-            public static GetAssetPathsFromAssetBundleAndAssetName($assetBundleName: string, $assetName: string):System.Array$1<string>;
-            /** Returns the name of the AssetBundle that a given asset belongs to.
-             * @param assetPath The asset's path.
-             * @returns Returns the name of the AssetBundle that a given asset belongs to. See the method description for more details. 
-             */
-            public static GetImplicitAssetBundleName($assetPath: string):string;
-            /** Returns the name of the AssetBundle Variant that a given asset belongs to.
-             * @param assetPath The asset's path.
-             * @returns Returns the name of the AssetBundle Variant that a given asset belongs to. See the method description for more details. 
-             */
-            public static GetImplicitAssetBundleVariantName($assetPath: string):string;
-            /** Given an assetBundleName, returns the list of AssetBundles that it depends on.
-             * @param assetBundleName The name of the AssetBundle for which dependencies are required.
-             * @param recursive If false, returns only AssetBundles which are direct dependencies of the input; if true, includes all indirect dependencies of the input.
-             * @returns The names of all AssetBundles that the input depends on. 
-             */
-            public static GetAssetBundleDependencies($assetBundleName: string, $recursive: boolean):System.Array$1<string>;
-            /** Returns an array of all the assets that are dependencies of the asset at the specified pathName.
-            Note: GetDependencies() gets the Assets that are referenced by other Assets. For example, a Scene could contain many GameObjects with a Material attached to them. In this case,  GetDependencies() will return the path to the Material Assets, but not the GameObjects as those are not Assets on your disk.
-             * @param pathName The path to the asset for which dependencies are required.
-             * @param recursive Controls whether this method recursively checks and returns all dependencies including indirect dependencies (when set to true), or whether it only returns direct dependencies (when set to false).
-             * @returns The paths of all assets that the input depends on. 
-             */
-            public static GetDependencies($pathName: string):System.Array$1<string>;
-            /** Returns an array of all the assets that are dependencies of the asset at the specified pathName.
-            Note: GetDependencies() gets the Assets that are referenced by other Assets. For example, a Scene could contain many GameObjects with a Material attached to them. In this case,  GetDependencies() will return the path to the Material Assets, but not the GameObjects as those are not Assets on your disk.
-             * @param pathName The path to the asset for which dependencies are required.
-             * @param recursive Controls whether this method recursively checks and returns all dependencies including indirect dependencies (when set to true), or whether it only returns direct dependencies (when set to false).
-             * @returns The paths of all assets that the input depends on. 
-             */
-            public static GetDependencies($pathName: string, $recursive: boolean):System.Array$1<string>;
-            /** Returns an array of the paths of assets that are dependencies of all the assets in the list of pathNames that you provide.
-            Note: GetDependencies() gets the Assets that are referenced by other Assets. For example, a Scene could contain many GameObjects with a Material attached to them. In this case,  GetDependencies() will return the path to the Material Assets, but not the GameObjects as those are not Assets on your disk.
-             * @param pathNames The path to the assets for which dependencies are required.
-             * @param recursive Controls whether this method recursively checks and returns all dependencies including indirect dependencies (when set to true), or whether it only returns direct dependencies (when set to false).
-             * @returns The paths of all assets that the input depends on. 
-             */
-            public static GetDependencies($pathNames: System.Array$1<string>):System.Array$1<string>;
-            /** Returns an array of the paths of assets that are dependencies of all the assets in the list of pathNames that you provide.
-            Note: GetDependencies() gets the Assets that are referenced by other Assets. For example, a Scene could contain many GameObjects with a Material attached to them. In this case,  GetDependencies() will return the path to the Material Assets, but not the GameObjects as those are not Assets on your disk.
-             * @param pathNames The path to the assets for which dependencies are required.
-             * @param recursive Controls whether this method recursively checks and returns all dependencies including indirect dependencies (when set to true), or whether it only returns direct dependencies (when set to false).
-             * @returns The paths of all assets that the input depends on. 
-             */
-            public static GetDependencies($pathNames: System.Array$1<string>, $recursive: boolean):System.Array$1<string>;
-            /** Exports the assets identified by assetPathNames to a unitypackage file in fileName. */
-            public static ExportPackage($assetPathName: string, $fileName: string):void;
-            /** Exports the assets identified by assetPathNames to a unitypackage file in fileName. */
-            public static ExportPackage($assetPathName: string, $fileName: string, $flags: UnityEditor.ExportPackageOptions):void;
-            /** Exports the assets identified by assetPathNames to a unitypackage file in fileName. */
-            public static ExportPackage($assetPathNames: System.Array$1<string>, $fileName: string):void;
-            /** Exports the assets identified by assetPathNames to a unitypackage file in fileName. */
-            public static ExportPackage($assetPathNames: System.Array$1<string>, $fileName: string, $flags: UnityEditor.ExportPackageOptions):void;
-            /** Query whether an Asset file is open for editing in version control.
-             * @param assetObject Object representing the asset whose status you wish to query.
-             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
-             * @param message Returns a reason for the asset not being open for edit.
-             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
-             * @returns True if the asset is considered open for edit by the selected version control system. 
-             */
-            public static IsOpenForEdit($assetObject: UnityEngine.Object):boolean;
-            /** Query whether an Asset file is open for editing in version control.
-             * @param assetObject Object representing the asset whose status you wish to query.
-             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
-             * @param message Returns a reason for the asset not being open for edit.
-             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
-             * @returns True if the asset is considered open for edit by the selected version control system. 
-             */
-            public static IsOpenForEdit($assetObject: UnityEngine.Object, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
-            /** Query whether an Asset file is open for editing in version control.
-             * @param assetObject Object representing the asset whose status you wish to query.
-             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
-             * @param message Returns a reason for the asset not being open for edit.
-             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
-             * @returns True if the asset is considered open for edit by the selected version control system. 
-             */
-            public static IsOpenForEdit($assetOrMetaFilePath: string):boolean;
-            /** Query whether an Asset file is open for editing in version control.
-             * @param assetObject Object representing the asset whose status you wish to query.
-             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
-             * @param message Returns a reason for the asset not being open for edit.
-             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
-             * @returns True if the asset is considered open for edit by the selected version control system. 
-             */
-            public static IsOpenForEdit($assetOrMetaFilePath: string, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
-            /** Query whether an Asset file is open for editing in version control.
-             * @param assetObject Object representing the asset whose status you wish to query.
-             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
-             * @param message Returns a reason for the asset not being open for edit.
-             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
-             * @returns True if the asset is considered open for edit by the selected version control system. 
-             */
-            public static IsOpenForEdit($assetObject: UnityEngine.Object, $message: $Ref<string>):boolean;
-            /** Query whether an Asset file is open for editing in version control.
-             * @param assetObject Object representing the asset whose status you wish to query.
-             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
-             * @param message Returns a reason for the asset not being open for edit.
-             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
-             * @returns True if the asset is considered open for edit by the selected version control system. 
-             */
-            public static IsOpenForEdit($assetObject: UnityEngine.Object, $message: $Ref<string>, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
-            /** Query whether an Asset file is open for editing in version control.
-             * @param assetObject Object representing the asset whose status you wish to query.
-             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
-             * @param message Returns a reason for the asset not being open for edit.
-             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
-             * @returns True if the asset is considered open for edit by the selected version control system. 
-             */
-            public static IsOpenForEdit($assetOrMetaFilePath: string, $message: $Ref<string>):boolean;
-            /** Query whether an Asset file is open for editing in version control.
-             * @param assetObject Object representing the asset whose status you wish to query.
-             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
-             * @param message Returns a reason for the asset not being open for edit.
-             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
-             * @returns True if the asset is considered open for edit by the selected version control system. 
-             */
-            public static IsOpenForEdit($assetOrMetaFilePath: string, $message: $Ref<string>, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
-            /** Query whether an asset's metadata (.meta) file is open for edit in version control.
-             * @param assetObject Object representing the asset whose metadata status you wish to query.
-             * @param message Returns a reason for the asset metadata not being open for edit.
-             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
-             * @returns True if the asset's metadata is considered open for edit by the selected version control system. 
-             */
-            public static IsMetaFileOpenForEdit($assetObject: UnityEngine.Object):boolean;
-            /** Query whether an asset's metadata (.meta) file is open for edit in version control.
-             * @param assetObject Object representing the asset whose metadata status you wish to query.
-             * @param message Returns a reason for the asset metadata not being open for edit.
-             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
-             * @returns True if the asset's metadata is considered open for edit by the selected version control system. 
-             */
-            public static IsMetaFileOpenForEdit($assetObject: UnityEngine.Object, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
-            /** Query whether an asset's metadata (.meta) file is open for edit in version control.
-             * @param assetObject Object representing the asset whose metadata status you wish to query.
-             * @param message Returns a reason for the asset metadata not being open for edit.
-             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
-             * @returns True if the asset's metadata is considered open for edit by the selected version control system. 
-             */
-            public static IsMetaFileOpenForEdit($assetObject: UnityEngine.Object, $message: $Ref<string>):boolean;
-            /** Query whether an asset's metadata (.meta) file is open for edit in version control.
-             * @param assetObject Object representing the asset whose metadata status you wish to query.
-             * @param message Returns a reason for the asset metadata not being open for edit.
-             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
-             * @returns True if the asset's metadata is considered open for edit by the selected version control system. 
-             */
-            public static IsMetaFileOpenForEdit($assetObject: UnityEngine.Object, $message: $Ref<string>, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
-            
-            public static GetBuiltinExtraResource($type: System.Type, $path: string):UnityEngine.Object;
-            
-            public static ForceReserializeAssets($assetPaths: System.Collections.Generic.IEnumerable$1<string>, $options?: UnityEditor.ForceReserializeAssetsOptions):void;
-            /** Warning Use the overload with a long localId parameter. Using the overload with an integer localId parameter can cause an integer overflow in localId. This can happen when the object passed to the API is part of a Prefab.
-            Get the GUID and local file id from an object instance id.
-             * @param instanceID InstanceID of the object to retrieve information for.
-             * @param obj The object to retrieve GUID and File Id for.
-             * @param assetRef The asset reference to retrieve GUID and File Id for.
-             * @param guid The GUID of the asset.
-             * @param localId The local file identifier of this asset.
-             * @returns True if the guid and file id were successfully found, false if not. 
-             */
-            public static TryGetGUIDAndLocalFileIdentifier($obj: UnityEngine.Object, $guid: $Ref<string>, $localId: $Ref<bigint>):boolean;
-            /** Warning Use the overload with a long localId parameter. Using the overload with an integer localId parameter can cause an integer overflow in localId. This can happen when the object passed to the API is part of a Prefab.
-            Get the GUID and local file id from an object instance id.
-             * @param instanceID InstanceID of the object to retrieve information for.
-             * @param obj The object to retrieve GUID and File Id for.
-             * @param assetRef The asset reference to retrieve GUID and File Id for.
-             * @param guid The GUID of the asset.
-             * @param localId The local file identifier of this asset.
-             * @returns True if the guid and file id were successfully found, false if not. 
-             */
-            public static TryGetGUIDAndLocalFileIdentifier($instanceID: number, $guid: $Ref<string>, $localId: $Ref<bigint>):boolean;
-            
-            public static ForceReserializeAssets():void;
-            /** Removes object from its asset (See Also: AssetDatabase.AddObjectToAsset). */
-            public static RemoveObjectFromAsset($objectToRemove: UnityEngine.Object):void;
-            /** Imports package at packagePath into the current project. */
-            public static ImportPackage($packagePath: string, $interactive: boolean):void;
-            
-            public static DisallowAutoRefresh():void;
-            
-            public static AllowAutoRefresh():void;
-            
-        }
-        /** Options for querying the version control system status of a file. */
-        enum StatusQueryOptions { ForceUpdate = 0, UseCachedIfPossible = 1, UseCachedAsync = 2 }
-        /** Asset importing options. */
-        enum ImportAssetOptions { Default = 0, ForceUpdate = 1, ForceSynchronousImport = 8, ImportRecursive = 256, DontDownloadFromCacheServer = 8192, ForceUncompressedImport = 16384 }
-        /** Export package option. Multiple options can be combined together using the | operator. */
-        enum ExportPackageOptions { Default = 0, Interactive = 1, Recurse = 2, IncludeDependencies = 4, IncludeLibraryAssets = 8 }
-        /** Options for AssetDatabase.ForceReserializeAssets. */
-        enum ForceReserializeAssetsOptions { ReserializeAssets = 1, ReserializeMetadata = 2, ReserializeAssetsAndMetadata = 3 }
-        /** SceneAsset is used to reference Scene objects in the Editor. */
-        class SceneAsset extends UnityEngine.Object {
-            
-        }
-        /** Base class from which asset importers for specific asset types derive. */
-        class AssetImporter extends UnityEngine.Object {
-            /** The path name of the asset for this importer. (Read Only) */
-            public get assetPath(): string;
-            /** The value is true when no meta file is provided with the imported asset. */
-            public get importSettingsMissing(): boolean;
-            
-            public get assetTimeStamp(): bigint;
-            /** Get or set any user data. */
-            public get userData(): string;
-            public set userData(value: string);
-            /** Get or set the AssetBundle name. */
-            public get assetBundleName(): string;
-            public set assetBundleName(value: string);
-            /** Get or set the AssetBundle variant. */
-            public get assetBundleVariant(): string;
-            public set assetBundleVariant(value: string);
-            
-            public constructor();
-            /** Set the AssetBundle name and variant. * @param assetBundleName AssetBundle name.
-             * @param assetBundleVariant AssetBundle variant.
-             */
-            public SetAssetBundleNameAndVariant($assetBundleName: string, $assetBundleVariant: string):void;
-            /** Retrieves the asset importer for the asset at path. */
-            public static GetAtPath($path: string):UnityEditor.AssetImporter;
-            
-            public SaveAndReimport():void;
-            
-            public AddRemap($identifier: UnityEditor.AssetImporter.SourceAssetIdentifier, $externalObject: UnityEngine.Object):void;
-            
-            public RemoveRemap($identifier: UnityEditor.AssetImporter.SourceAssetIdentifier):boolean;
-            
-            public GetExternalObjectMap():System.Collections.Generic.Dictionary$2<UnityEditor.AssetImporter.SourceAssetIdentifier, UnityEngine.Object>;
-            /** Checks if the AssetImporter supports remapping the given asset type.
-             * @param type The type of asset to check.
-             * @returns Returns true if the importer supports remapping the given type. Otherwise, returns false. 
-             */
-            public SupportsRemappedAssetType($type: System.Type):boolean;
-            
-        }
-        /** AssetBundle building map entry. */
-        class AssetBundleBuild extends System.ValueType {
-            /** AssetBundle name. */
-            public assetBundleName: string;
-            /** AssetBundle variant. */
-            public assetBundleVariant: string;
-            /** Asset names which belong to the given AssetBundle. */
-            public assetNames: System.Array$1<string>;
-            /** Addressable name used to load an asset. */
-            public addressableNames: System.Array$1<string>;
-            
-        }
-        /** Lets you programmatically build players or AssetBundles which can be loaded from the web. */
-        class BuildPipeline extends System.Object {
-            /** Is a player currently being built? */
-            public static get isBuildingPlayer(): boolean;
-            
-            public constructor();
-            
-            public static GetBuildTargetGroup($platform: UnityEditor.BuildTarget):UnityEditor.BuildTargetGroup;
-            /** Given a BuildTarget will return the well known string representation for the build target platform.
-             * @param targetPlatform An instance of the BuildTarget enum.
-             * @returns Target platform name represented by the passed in BuildTarget. 
-             */
-            public static GetBuildTargetName($targetPlatform: UnityEditor.BuildTarget):string;
-            
-            public static SetAssetBundleEncryptKey($password: string):void;
-            /** Builds a player. These overloads are still supported, but will be replaced. Please use BuildPlayer (BuildPlayerOptions buildPlayerOptions)  instead.
-             * @param scenes The Scenes to include in the build. If empty, the build only includes the currently open Scene. Paths are relative to the project folder (AssetsMyLevelsMyScene.unity).
-             * @param locationPathName The path where the application will be built.
-             * @param target The BuildTarget to build.
-             * @param options Additional BuildOptions, like whether to run the built player.
-             * @returns An error message if an error occurred. 
-             */
-            public static BuildPlayer($levels: System.Array$1<UnityEditor.EditorBuildSettingsScene>, $locationPathName: string, $target: UnityEditor.BuildTarget, $options: UnityEditor.BuildOptions):UnityEditor.Build.Reporting.BuildReport;
-            /** Builds a player. These overloads are still supported, but will be replaced. Please use BuildPlayer (BuildPlayerOptions buildPlayerOptions)  instead.
-             * @param scenes The Scenes to include in the build. If empty, the build only includes the currently open Scene. Paths are relative to the project folder (AssetsMyLevelsMyScene.unity).
-             * @param locationPathName The path where the application will be built.
-             * @param target The BuildTarget to build.
-             * @param options Additional BuildOptions, like whether to run the built player.
-             * @returns An error message if an error occurred. 
-             */
-            public static BuildPlayer($levels: System.Array$1<string>, $locationPathName: string, $target: UnityEditor.BuildTarget, $options: UnityEditor.BuildOptions):UnityEditor.Build.Reporting.BuildReport;
-            /** Builds a player.
-             * @param buildPlayerOptions Provide various options to control the behavior of BuildPipeline.BuildPlayer.
-             * @returns A BuildReport giving build process information. 
-             */
-            public static BuildPlayer($buildPlayerOptions: UnityEditor.BuildPlayerOptions):UnityEditor.Build.Reporting.BuildReport;
-            /** Build all AssetBundles specified in the editor.
-             * @param outputPath Output path for the AssetBundles.
-             * @param assetBundleOptions AssetBundle building options.
-             * @param targetPlatform Chosen target build platform.
-             * @returns The manifest listing all AssetBundles included in this build. 
-             */
-            public static BuildAssetBundles($outputPath: string, $assetBundleOptions: UnityEditor.BuildAssetBundleOptions, $targetPlatform: UnityEditor.BuildTarget):UnityEngine.AssetBundleManifest;
-            /** Build AssetBundles from a building map.
-             * @param outputPath Output path for the AssetBundles.
-             * @param builds AssetBundle building map.
-             * @param assetBundleOptions AssetBundle building options.
-             * @param targetPlatform Target build platform.
-             * @returns The manifest listing all AssetBundles included in this build. 
-             */
-            public static BuildAssetBundles($outputPath: string, $builds: System.Array$1<UnityEditor.AssetBundleBuild>, $assetBundleOptions: UnityEditor.BuildAssetBundleOptions, $targetPlatform: UnityEditor.BuildTarget):UnityEngine.AssetBundleManifest;
-            /** Extract the crc checksum for the given AssetBundle. */
-            public static GetCRCForAssetBundle($targetPath: string, $crc: $Ref<number>):boolean;
-            /** Extract the hash for the given AssetBundle. */
-            public static GetHashForAssetBundle($targetPath: string, $hash: $Ref<UnityEngine.Hash128>):boolean;
-            /** Returns true if the specified build target is currently available in the Editor. * @param buildTargetGroup build target group
-             * @param target build target
-             */
-            public static IsBuildTargetSupported($buildTargetGroup: UnityEditor.BuildTargetGroup, $target: UnityEditor.BuildTarget):boolean;
-            /** Returns the path of a player directory. For ex., Editor\Data\PlaybackEngines\AndroidPlayer.
-            In some cases the player directory path can be affected by BuildOptions.Development. * @param target Build target.
-             * @param options Build options.
-             * @param buildTargetGroup Build target group.
-             */
-            public static GetPlaybackEngineDirectory($target: UnityEditor.BuildTarget, $options: UnityEditor.BuildOptions):string;
-            /** Returns the path of a player directory. For ex., Editor\Data\PlaybackEngines\AndroidPlayer.
-            In some cases the player directory path can be affected by BuildOptions.Development. * @param target Build target.
-             * @param options Build options.
-             * @param buildTargetGroup Build target group.
-             */
-            public static GetPlaybackEngineDirectory($buildTargetGroup: UnityEditor.BuildTargetGroup, $target: UnityEditor.BuildTarget, $options: UnityEditor.BuildOptions):string;
-            
-        }
-        /** Build target group. */
-        enum BuildTargetGroup { Unknown = 0, Standalone = 1, WebPlayer = 2, iPhone = 4, iOS = 4, PS3 = 5, XBOX360 = 6, Android = 7, WebGL = 13, WSA = 14, Metro = 14, WP8 = 15, BlackBerry = 16, Tizen = 17, PSP2 = 18, PS4 = 19, PSM = 20, XboxOne = 21, SamsungTV = 22, N3DS = 23, WiiU = 24, tvOS = 25, Facebook = 26, Switch = 27, Lumin = 28, Stadia = 29, CloudRendering = 30 }
-        /** Target build platform. */
-        enum BuildTarget { StandaloneOSX = 2, StandaloneOSXUniversal = 3, StandaloneOSXIntel = 4, StandaloneWindows = 5, WebPlayer = 6, WebPlayerStreamed = 7, iOS = 9, PS3 = 10, XBOX360 = 11, Android = 13, StandaloneLinux = 17, StandaloneWindows64 = 19, WebGL = 20, WSAPlayer = 21, StandaloneLinux64 = 24, StandaloneLinuxUniversal = 25, WP8Player = 26, StandaloneOSXIntel64 = 27, BlackBerry = 28, Tizen = 29, PSP2 = 30, PS4 = 31, PSM = 32, XboxOne = 33, SamsungTV = 34, N3DS = 35, WiiU = 36, tvOS = 37, Switch = 38, Lumin = 39, Stadia = 40, CloudRendering = 41, iPhone = -1, BB10 = -1, MetroPlayer = -1, NoTarget = -2 }
-        /** This class is used for entries in the Scenes list, as displayed in the window. This class contains the Scene path of a Scene and an enabled flag that indicates wether the Scene is enabled in the BuildSettings window or not.
-        You can use this class in combination with EditorBuildSettings.scenes to populate the list of Scenes included in the build via script. This is useful when creating custom editor scripts to automate your build pipeline.
-        See EditorBuildSettings.scenes for an example script. */
-        class EditorBuildSettingsScene extends System.Object {
-            
-        }
-        /** Building options. Multiple options can be combined together. */
-        enum BuildOptions { None = 0, Development = 1, AutoRunPlayer = 4, ShowBuiltPlayer = 8, BuildAdditionalStreamedScenes = 16, AcceptExternalModificationsToPlayer = 32, InstallInBuildFolder = 64, WebPlayerOfflineDeployment = 128, ConnectWithProfiler = 256, AllowDebugging = 512, SymlinkLibraries = 1024, UncompressedAssetBundle = 2048, StripDebugSymbols = 0, CompressTextures = 0, ConnectToHost = 4096, EnableHeadlessMode = 16384, BuildScriptsOnly = 32768, PatchPackage = 65536, Il2CPP = 0, ForceEnableAssertions = 131072, CompressWithLz4 = 262144, CompressWithLz4HC = 524288, ForceOptimizeScriptCompilation = 0, ComputeCRC = 1048576, StrictMode = 2097152, IncludeTestAssemblies = 4194304, NoUniqueIdentifier = 8388608, WaitForPlayerConnection = 33554432, EnableCodeCoverage = 67108864, EnableDeepProfilingSupport = 268435456 }
-        /** Provide various options to control the behavior of BuildPipeline.BuildPlayer. */
-        class BuildPlayerOptions extends System.ValueType {
-            
-        }
-        /** Asset Bundle building options. */
-        enum BuildAssetBundleOptions { None = 0, UncompressedAssetBundle = 1, CollectDependencies = 2, CompleteAssets = 4, DisableWriteTypeTree = 8, DeterministicAssetBundle = 16, ForceRebuildAssetBundle = 32, IgnoreTypeTreeChanges = 64, AppendHashToAssetBundleName = 128, ChunkBasedCompression = 256, StrictMode = 512, DryRunBuild = 1024, DisableLoadAssetByFileName = 4096, DisableLoadAssetByFileNameWithExtension = 8192, AssetBundleStripUnityVersion = 32768, EnableProtection = 65536 }
-        /** User build settings for the Editor */
-        class EditorUserBuildSettings extends UnityEngine.Object {
-            /** The currently selected build target group. */
-            public static get selectedBuildTargetGroup(): UnityEditor.BuildTargetGroup;
-            public static set selectedBuildTargetGroup(value: UnityEditor.BuildTargetGroup);
-            /** The currently selected target for a standalone build. */
-            public static get selectedStandaloneTarget(): UnityEditor.BuildTarget;
-            public static set selectedStandaloneTarget(value: UnityEditor.BuildTarget);
-            /** PS4 Build Subtarget. */
-            public static get ps4BuildSubtarget(): UnityEditor.PS4BuildSubtarget;
-            public static set ps4BuildSubtarget(value: UnityEditor.PS4BuildSubtarget);
-            /** Specifies which version of PS4 hardware to target. */
-            public static get ps4HardwareTarget(): UnityEditor.PS4HardwareTarget;
-            public static set ps4HardwareTarget(value: UnityEditor.PS4HardwareTarget);
-            /** Are null references actively validated? */
-            public static get explicitNullChecks(): boolean;
-            public static set explicitNullChecks(value: boolean);
-            /** Are divide by zero's actively validated? */
-            public static get explicitDivideByZeroChecks(): boolean;
-            public static set explicitDivideByZeroChecks(value: boolean);
-            /** Are array bounds actively validated? */
-            public static get explicitArrayBoundsChecks(): boolean;
-            public static set explicitArrayBoundsChecks(value: boolean);
-            /** Build submission materials. */
-            public static get needSubmissionMaterials(): boolean;
-            public static set needSubmissionMaterials(value: boolean);
-            /** Build data compressed with PSArc. */
-            public static get compressWithPsArc(): boolean;
-            public static set compressWithPsArc(value: boolean);
-            /** Force installation of package, even if error. */
-            public static get forceInstallation(): boolean;
-            public static set forceInstallation(value: boolean);
-            /** Places the package on the outer edge of the disk. */
-            public static get movePackageToDiscOuterEdge(): boolean;
-            public static set movePackageToDiscOuterEdge(value: boolean);
-            /** Compress files in package. */
-            public static get compressFilesInPackage(): boolean;
-            public static set compressFilesInPackage(value: boolean);
-            /** Whether the standalone player is built in headless mode. */
-            public static get enableHeadlessMode(): boolean;
-            public static set enableHeadlessMode(value: boolean);
-            /** Is build script only enabled. */
-            public static get buildScriptsOnly(): boolean;
-            public static set buildScriptsOnly(value: boolean);
-            /** Xbox Build subtarget. */
-            public static get xboxBuildSubtarget(): UnityEditor.XboxBuildSubtarget;
-            public static set xboxBuildSubtarget(value: UnityEditor.XboxBuildSubtarget);
-            /** When building an Xbox One Streaming Install package (makepkg.exe) The layout generation code in Unity will assign each Scene and associated assets to individual chunks. Unity will mark Scene 0 as being part of the launch range, IE the set of chunks required to launch the game, you may include additional Scenes in this launch range if you desire, this specifies a range of Scenes (starting at 0) to be included in the launch set.  */
-            public static get streamingInstallLaunchRange(): number;
-            public static set streamingInstallLaunchRange(value: number);
-            /** The currently selected Xbox One Deploy Method. */
-            public static get xboxOneDeployMethod(): UnityEditor.XboxOneDeployMethod;
-            public static set xboxOneDeployMethod(value: UnityEditor.XboxOneDeployMethod);
-            /** The currently selected Xbox One Deploy Drive. */
-            public static get xboxOneDeployDrive(): UnityEditor.XboxOneDeployDrive;
-            public static set xboxOneDeployDrive(value: UnityEditor.XboxOneDeployDrive);
-            
-            public static get xboxOneAdditionalDebugPorts(): string;
-            public static set xboxOneAdditionalDebugPorts(value: string);
-            /** Sets the XBox to reboot and redeploy when the deployment fails. */
-            public static get xboxOneRebootIfDeployFailsAndRetry(): boolean;
-            public static set xboxOneRebootIfDeployFailsAndRetry(value: boolean);
-            /** Android platform options. */
-            public static get androidBuildSubtarget(): UnityEditor.MobileTextureSubtarget;
-            public static set androidBuildSubtarget(value: UnityEditor.MobileTextureSubtarget);
-            /** ETC2 texture decompression fallback on Android devices that don't support ETC2. */
-            public static get androidETC2Fallback(): UnityEditor.AndroidETC2Fallback;
-            public static set androidETC2Fallback(value: UnityEditor.AndroidETC2Fallback);
-            
-            public static get androidBuildSystem(): UnityEditor.AndroidBuildSystem;
-            public static set androidBuildSystem(value: UnityEditor.AndroidBuildSystem);
-            
-            public static get androidBuildType(): UnityEditor.AndroidBuildType;
-            public static set androidBuildType(value: UnityEditor.AndroidBuildType);
-            
-            public static get androidDebugMinification(): UnityEditor.AndroidMinification;
-            public static set androidDebugMinification(value: UnityEditor.AndroidMinification);
-            
-            public static get androidReleaseMinification(): UnityEditor.AndroidMinification;
-            public static set androidReleaseMinification(value: UnityEditor.AndroidMinification);
-            /** Set to true to create a symbols.zip file in the same location as the .apk or .aab file. */
-            public static get androidCreateSymbolsZip(): boolean;
-            public static set androidCreateSymbolsZip(value: boolean);
-            /** Sets and gets target device type for the application to run on when building to Windows Store platform. */
-            public static get wsaSubtarget(): UnityEditor.WSASubtarget;
-            public static set wsaSubtarget(value: UnityEditor.WSASubtarget);
-            /** The build type for the Universal Windows Platform. */
-            public static get wsaUWPBuildType(): UnityEditor.WSAUWPBuildType;
-            public static set wsaUWPBuildType(value: UnityEditor.WSAUWPBuildType);
-            /** Sets and gets target UWP SDK to build Windows Store application against. */
-            public static get wsaUWPSDK(): string;
-            public static set wsaUWPSDK(value: string);
-            
-            public static get wsaMinUWPSDK(): string;
-            public static set wsaMinUWPSDK(value: string);
-            
-            public static get wsaArchitecture(): string;
-            public static set wsaArchitecture(value: string);
-            /** Sets and gets Visual Studio version to build Windows Store application with. */
-            public static get wsaUWPVisualStudioVersion(): string;
-            public static set wsaUWPVisualStudioVersion(value: string);
-            /** Specifies the Windows DevicePortal connection address of the device to deploy and launch the UWP app on when using Build and Run. */
-            public static get windowsDevicePortalAddress(): string;
-            public static set windowsDevicePortalAddress(value: string);
-            /** Specifies the Windows DevicePortal username for the device to deploy and launch the UWP app on when using Build and Run. */
-            public static get windowsDevicePortalUsername(): string;
-            public static set windowsDevicePortalUsername(value: string);
-            /** Specifies the Windows DevicePortal password for the device to deploy and launch the UWP app on when using Build and Run. */
-            public static get windowsDevicePortalPassword(): string;
-            public static set windowsDevicePortalPassword(value: string);
-            /** Sets and gets the Windows device to launch the UWP app when using Build and Run. */
-            public static get wsaBuildAndRunDeployTarget(): UnityEditor.WSABuildAndRunDeployTarget;
-            public static set wsaBuildAndRunDeployTarget(value: UnityEditor.WSABuildAndRunDeployTarget);
-            /** The currently active build target. */
-            public static get activeBuildTarget(): UnityEditor.BuildTarget;
-            /** DEFINE directives for the compiler. */
-            public static get activeScriptCompilationDefines(): System.Array$1<string>;
-            /** Enables a development build. */
-            public static get development(): boolean;
-            public static set development(value: boolean);
-            /** Start the player with a connection to the profiler. */
-            public static get connectProfiler(): boolean;
-            public static set connectProfiler(value: boolean);
-            /** Enables Deep Profiling support in the player. */
-            public static get buildWithDeepProfilingSupport(): boolean;
-            public static set buildWithDeepProfilingSupport(value: boolean);
-            /** Enable source-level debuggers to connect. */
-            public static get allowDebugging(): boolean;
-            public static set allowDebugging(value: boolean);
-            /** Sets the Player to wait for player connection on player start. */
-            public static get waitForPlayerConnection(): boolean;
-            public static set waitForPlayerConnection(value: boolean);
-            /** Export Android Project for use with Android Studio/Gradle. */
-            public static get exportAsGoogleAndroidProject(): boolean;
-            public static set exportAsGoogleAndroidProject(value: boolean);
-            /** Set to true to build an Android App Bundle (aab file) instead of an apk. The default value is false. */
-            public static get buildAppBundle(): boolean;
-            public static set buildAppBundle(value: boolean);
-            /** Symlink runtime libraries with an iOS Xcode project. */
-            public static get symlinkLibraries(): boolean;
-            public static set symlinkLibraries(value: boolean);
-            /** Scheme with which the project will be run in Xcode. */
-            public static get iOSBuildConfigType(): UnityEditor.iOSBuildType;
-            public static set iOSBuildConfigType(value: UnityEditor.iOSBuildType);
-            
-            public static get switchCreateSolutionFile(): boolean;
-            public static set switchCreateSolutionFile(value: boolean);
-            
-            public static get switchCreateRomFile(): boolean;
-            public static set switchCreateRomFile(value: boolean);
-            
-            public static get switchNVNGraphicsDebugger(): boolean;
-            public static set switchNVNGraphicsDebugger(value: boolean);
-            
-            public static get switchNVNShaderDebugging(): boolean;
-            public static set switchNVNShaderDebugging(value: boolean);
-            
-            public static get switchNVNDrawValidation(): boolean;
-            public static set switchNVNDrawValidation(value: boolean);
-            
-            public static get switchEnableHeapInspector(): boolean;
-            public static set switchEnableHeapInspector(value: boolean);
-            
-            public static get switchEnableDebugPad(): boolean;
-            public static set switchEnableDebugPad(value: boolean);
-            
-            public static get switchRedirectWritesToHostMount(): boolean;
-            public static set switchRedirectWritesToHostMount(value: boolean);
-            /** Place the built player in the build folder. */
-            public static get installInBuildFolder(): boolean;
-            public static set installInBuildFolder(value: boolean);
-            /** Instructs the player to wait for managed debugger to attach before executing any script code. */
-            public static get waitForManagedDebugger(): boolean;
-            public static set waitForManagedDebugger(value: boolean);
-            /** Select a new build target to be active.
-             * @param target Target build platform.
-             * @param targetGroup Build target group.
-             * @returns True if the build target was successfully switched, false otherwise (for example, if license checks fail, files are missing, or if the user has cancelled the operation via the UI). 
-             */
-            public static SwitchActiveBuildTarget($targetGroup: UnityEditor.BuildTargetGroup, $target: UnityEditor.BuildTarget):boolean;
-            /** Select a new build target to be active during the next Editor update.
-             * @param targetGroup Target build platform.
-             * @param target Build target group.
-             * @returns True if the build target was successfully switched, false otherwise (for example, if license checks fail, files are missing, or if the user has cancelled the operation via the UI). 
-             */
-            public static SwitchActiveBuildTargetAsync($targetGroup: UnityEditor.BuildTargetGroup, $target: UnityEditor.BuildTarget):boolean;
-            /** Get the current location for the build. */
-            public static GetBuildLocation($target: UnityEditor.BuildTarget):string;
-            /** Set a new location for the build. */
-            public static SetBuildLocation($target: UnityEditor.BuildTarget, $location: string):void;
-            /** Set platform specifc Editor setting. * @param platformName The name of the platform.
-             * @param name The name of the setting.
-             * @param value Setting value.
-             */
-            public static SetPlatformSettings($platformName: string, $name: string, $value: string):void;
-            
-            public static SetPlatformSettings($buildTargetGroup: string, $buildTarget: string, $name: string, $value: string):void;
-            /** Returns value for platform specifc Editor setting. * @param platformName The name of the platform.
-             * @param name The name of the setting.
-             */
-            public static GetPlatformSettings($platformName: string, $name: string):string;
-            
-            public static GetPlatformSettings($buildTargetGroup: string, $platformName: string, $name: string):string;
-            
-        }
-        /** Type of build to generate. */
-        enum PS4BuildSubtarget { PCHosted = 0, Package = 1, Iso = 2 }
-        
-        enum PS4HardwareTarget { BaseOnly = 0, NeoAndBase = 1, ProAndBase = 1 }
-        /** Target Xbox build type. */
-        enum XboxBuildSubtarget { Development = 0, Master = 1, Debug = 2 }
-        
-        enum XboxOneDeployMethod { Push = 0, Pull = 1, RunFromPC = 2, Package = 3, PackageStreaming = 4 }
-        
-        enum XboxOneDeployDrive { Default = 0, Retail = 1, Development = 2, Ext1 = 3, Ext2 = 4, Ext3 = 5, Ext4 = 6, Ext5 = 7, Ext6 = 8, Ext7 = 9 }
-        /** Compressed texture format for target build platform. */
-        enum MobileTextureSubtarget { Generic = 0, DXT = 1, PVRTC = 2, ATC = 3, ETC = 4, ETC2 = 5, ASTC = 6 }
-        /** This enumeration has values for different qualities to decompress ETC2 textures on Android devices that don't support the ETC2 texture format. */
-        enum AndroidETC2Fallback { Quality32Bit = 0, Quality16Bit = 1, Quality32BitDownscaled = 2 }
-        /** Type of Android build system. */
-        enum AndroidBuildSystem { Internal = 0, Gradle = 1, ADT = 2, VisualStudio = 3 }
-        /** Build configurations for the generated project. */
-        enum AndroidBuildType { Debug = 0, Development = 1, Release = 2 }
-        /** How to minify the java code of your binary. */
-        enum AndroidMinification { None = 0, Proguard = 1, Gradle = 2 }
-        /** Target device type for a Windows Store application to run on. */
-        enum WSASubtarget { AnyDevice = 0, PC = 1, Mobile = 2, HoloLens = 3 }
-        
-        enum WSASDK { SDK80 = 0, SDK81 = 1, PhoneSDK81 = 2, UniversalSDK81 = 3, UWP = 4 }
-        /** Determines the output build type when building to Universal Windows Platform. */
-        enum WSAUWPBuildType { XAML = 0, D3D = 1, ExecutableOnly = 2 }
-        /** Specifies the Windows device to deploy and launch the UWP app on when using Build and Run from the Editor. */
-        enum WSABuildAndRunDeployTarget { LocalMachine = 0, WindowsPhone = 1, DevicePortal = 2 }
-        /** Build configurations for the generated Xcode project. */
-        enum iOSBuildType { Debug = 0, Release = 1 }
-        
-    }
-    namespace UnityEditor.AssetDatabase {
-        
-        type ImportPackageCallback = (packageName: string) => void;
-        var ImportPackageCallback: {new (func: (packageName: string) => void): ImportPackageCallback;}
-        
-        type ImportPackageFailedCallback = (packageName: string, errorMessage: string) => void;
-        var ImportPackageFailedCallback: {new (func: (packageName: string, errorMessage: string) => void): ImportPackageFailedCallback;}
-        
-    }
-    namespace UnityEditor.AssetImporter {
-        
-        class SourceAssetIdentifier extends System.ValueType {
-            
-        }
-        
-    }
-    namespace System.Threading.Tasks {
-        
-        class Task extends System.Object {
-            
-        }
-        
-    }
-    namespace UnityEditor.Build.Reporting {
-        /** The BuildReport API gives you information about the Unity build process. */
-        class BuildReport extends UnityEngine.Object {
-            
-        }
         
     }
     namespace Fungus {
@@ -5999,9 +5989,6 @@ declare module 'csharp' {
         class Flowchart extends UnityEngine.MonoBehaviour {
             
             public static SubstituteVariableRegexString: string;
-            
-            public get SelectedCommandsStale(): boolean;
-            public set SelectedCommandsStale(value: boolean);
             
             public static get CachedFlowcharts(): System.Collections.Generic.List$1<Fungus.Flowchart>;
             
