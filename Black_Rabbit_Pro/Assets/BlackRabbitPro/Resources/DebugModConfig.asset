@@ -16,6 +16,7 @@ MonoBehaviour:
   - PackName: JS
     Mods:
     - LevelLoader
+    - GameEntrance
   - PackName: Game
     Mods:
     - DialogModDemo
