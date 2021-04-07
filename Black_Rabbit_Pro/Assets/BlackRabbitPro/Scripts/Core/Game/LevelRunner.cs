@@ -13,11 +13,6 @@ public class LevelRunner : MonoBehaviour
     public string CorePackName = "JS";
     public string LevelLoaderName = "LevelLoader";
 
-    [HorizontalLine(color: EColor.Blue)]
-    public bool isDebugMode = false;
-    public int DebugPort = 4396;
-
-
     private JsEnv env;
 
     //public Action JsAwake;
@@ -28,21 +23,21 @@ public class LevelRunner : MonoBehaviour
     public Action JsOnDestroy;
     void Awake()
     {
-        if (env == null)
-        {
-            if (isDebugMode)
-            {
-                env = new JsEnv(new LevelScriptLoader(""), DebugPort);
-            }
-            else
-            {
-                env = new JsEnv(new LevelScriptLoader(""));
-            }
+        if(ENVDebugConfig.instance == null){
+            GameObject go = Resources.Load("Core/DebugConfig") as GameObject;
+            GameObject.Instantiate(go);
         }
 
-        if(isDebugMode){
-            env.WaitDebugger();
+        if (env == null)
+        {
+            env=GlobalJSEnv.Env;
         }
+
+        //if (JsAwake != null) JsAwake();
+        
+    }
+
+    void RunScript(){
 
         string ModName = LevelModName;
         if (PackName != "")
@@ -51,11 +46,14 @@ public class LevelRunner : MonoBehaviour
         }
 
         env.Eval(
+            "var loader = (function(){"+
             $@"
             let level=require('{ModName}').Create();
             let loader=require('{CorePackName}/{LevelLoaderName}');
             loader.SetLevel('{LevelModName}',level)
-            ", ModName);
+            return loader;
+            "
+            +"})();", ModName);
 
         var Init = env.Eval<LoaderInit>("loader.Init");
         if (Init != null)
@@ -63,13 +61,6 @@ public class LevelRunner : MonoBehaviour
             Init(this);
         }
 
-        //if (JsAwake != null) JsAwake();
-
-    }
-
-
-    void Start()
-    {
         if (AutoInitEnv)
         {
             env.Eval($"require('{CorePackName}/AutoInitEnv')", "AutoInitEnv");
@@ -78,11 +69,20 @@ public class LevelRunner : MonoBehaviour
         if (JsStart != null) JsStart();
     }
 
+
+    void Start()
+    {
+        
+        RunScript();
+        
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (JsUpdate != null) JsUpdate();
         env.Tick();
+        if (JsUpdate != null) JsUpdate();
+        
     }
 
     void FixedUpdate()

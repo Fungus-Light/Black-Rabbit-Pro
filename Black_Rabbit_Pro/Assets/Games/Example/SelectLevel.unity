@@ -1178,3 +1178,5 @@ MonoBehaviour:
   LevelModName: SelectLevel
   CorePackName: JS
   LevelLoaderName: LevelLoader
+  isDebugMode: 1
+  DebugPort: 4396

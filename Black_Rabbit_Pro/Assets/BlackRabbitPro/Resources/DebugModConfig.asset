@@ -9,15 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd57e0f9ec302c7479472ea8e64762c7, type: 3}
-  m_Name: DefaultGameConfig
+  m_Script: {fileID: 11500000, guid: f6744fe7daddca746b5726b41c843058, type: 3}
+  m_Name: DebugModConfig
   m_EditorClassIdentifier: 
-  v: 1
-  version: 0.0.1
-  resolution:
-    w: 1280
-    h: 720
-  fullscreen: 0
-  entranceBundle: example
-  mode: 0
-  rate: 60
+  Packs:
+  - PackName: JS
+    Mods:
+    - LevelLoader
+  - PackName: Game
+    Mods:
+    - DialogModDemo
+    - FeatureScene
+    - SelectLevel
+    - TweenAnimShow
