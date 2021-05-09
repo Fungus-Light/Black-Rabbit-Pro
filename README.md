@@ -21,3 +21,9 @@
 - CSharp代码更规范
 
 此外，**Black-Rabbit-Pro** 依旧保留了对强叙事游戏的优势，可以轻松制作叙事类游戏。
+
+---
+
+配置方式见[[文档](https://fungus-light.github.io/Black-Rabbit-Pro/)]
+
+如需本地使用文档，可以使用任何一种本地托管服务器，托管docs目录
