@@ -33,7 +33,7 @@ public class LevelRunner : MonoBehaviour
     {
         if (ENVDebugConfig.instance == null)
         {
-            GameObject go = Resources.Load("Core/DebugConfig") as GameObject;
+            GameObject go = Resources.Load("DebugConfig") as GameObject;
             GameObject.Instantiate(go);
         }
 
@@ -63,7 +63,7 @@ public class LevelRunner : MonoBehaviour
             loader.SetLevel('{LevelModName}',level)
             return loader;
             "
-            + "})();", ModName);
+            + "})();", ModName+":Runner");
 
         var Init = env.Eval<LoaderInit>("loader.Init");
         if (Init != null)

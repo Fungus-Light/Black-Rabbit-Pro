@@ -13,13 +13,6 @@ MonoBehaviour:
   m_Name: DebugModConfig
   m_EditorClassIdentifier: 
   Packs:
-  - PackName: JS
-    Mods:
-    - LevelLoader
-    - GameEntrance
   - PackName: Game
     Mods:
-    - DialogModDemo
-    - FeatureScene
-    - SelectLevel
-    - TweenAnimShow
+    - helloworld

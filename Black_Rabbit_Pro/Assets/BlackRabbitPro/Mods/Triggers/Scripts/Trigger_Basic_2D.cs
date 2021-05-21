@@ -24,34 +24,34 @@ public class Trigger_Basic_2D : MonoBehaviour,ITrigger
         this.GetComponent<Collider>().isTrigger = true;
     }
 
-    void OnTriggerEnter2D(Collider other)
-    {
-        if (isUseful)
-        {
-            foreach (string key in EnterAct.Keys)
-            {
-                if (key == other.tag)
-                {
-                    EnterAct[key]();
-                }
-            }
-        }
+    // void OnTriggerEnter2D(Collider other)
+    // {
+    //     if (isUseful)
+    //     {
+    //         foreach (string key in EnterAct.Keys)
+    //         {
+    //             if (key == other.tag)
+    //             {
+    //                 EnterAct[key]();
+    //             }
+    //         }
+    //     }
 
-    }
+    // }
 
-    void OnTriggerExit2D(Collider other)
-    {
-        if (isUseful)
-        {
-            foreach (string key in LeaveAct.Keys)
-            {
-                if (key == other.tag)
-                {
-                    LeaveAct[key]();
-                }
-            }
-        }
-    }
+    // void OnTriggerExit2D(Collider other)
+    // {
+    //     if (isUseful)
+    //     {
+    //         foreach (string key in LeaveAct.Keys)
+    //         {
+    //             if (key == other.tag)
+    //             {
+    //                 LeaveAct[key]();
+    //             }
+    //         }
+    //     }
+    // }
 
     void Update()
     {

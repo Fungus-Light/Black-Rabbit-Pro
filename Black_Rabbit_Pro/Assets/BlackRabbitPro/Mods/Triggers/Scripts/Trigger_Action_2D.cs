@@ -49,58 +49,58 @@ public class Trigger_Action_2D : MonoBehaviour,IActionTrigger
         }
     }
 
-    void OnTriggerEnter2D(Collider other)
-    {
-        if (isUseful)
-        {
-            if (other.tag == PlayerTag && this.GameType == GameType.TPS)
-            {
-                MakeInterActable();
-            }
+    // void OnTriggerEnter2D(Collider other)
+    // {
+    //     if (isUseful)
+    //     {
+    //         if (other.tag == PlayerTag && this.GameType == GameType.TPS)
+    //         {
+    //             MakeInterActable();
+    //         }
 
-            if (this.GameType == GameType.TPS)
-            {
-                foreach (string key in EnterAct.Keys)
-                {
-                    if (key == other.tag)
-                    {
-                        EnterAct[key]();
-                    }
-                }
-            }
+    //         if (this.GameType == GameType.TPS)
+    //         {
+    //             foreach (string key in EnterAct.Keys)
+    //             {
+    //                 if (key == other.tag)
+    //                 {
+    //                     EnterAct[key]();
+    //                 }
+    //             }
+    //         }
 
-        }
-        else
-        {
-            interActable = false;
-        }
+    //     }
+    //     else
+    //     {
+    //         interActable = false;
+    //     }
 
-    }
+    // }
 
-    void OnTriggerExit2D(Collider other)
-    {
-        if (isUseful)
-        {
-            if (other.tag == PlayerTag && this.GameType == GameType.TPS)
-            {
-                MakeDisInterActable();
-            }
+    // void OnTriggerExit2D(Collider other)
+    // {
+    //     if (isUseful)
+    //     {
+    //         if (other.tag == PlayerTag && this.GameType == GameType.TPS)
+    //         {
+    //             MakeDisInterActable();
+    //         }
 
-            if (this.GameType == GameType.TPS)
-            {
-                foreach (string key in LeaveAct.Keys)
-                {
-                    if (key == other.tag)
-                    {
-                        LeaveAct[key]();
-                    }
-                }
-            }
+    //         if (this.GameType == GameType.TPS)
+    //         {
+    //             foreach (string key in LeaveAct.Keys)
+    //             {
+    //                 if (key == other.tag)
+    //                 {
+    //                     LeaveAct[key]();
+    //                 }
+    //             }
+    //         }
 
-        }
-        else
-        {
-            interActable = false;
-        }
-    }
+    //     }
+    //     else
+    //     {
+    //         interActable = false;
+    //     }
+    // }
 }

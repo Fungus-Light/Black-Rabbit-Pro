@@ -1,14 +1,18 @@
 # 基础
 
 ## 准备工作
-Unity版本： 2019.4 或以上
 
+Unity版本： 2019.4 或以上
 
 需要的其他开发环境：
 
-**node.js** [下载地址](http://nodejs.cn/download/)
+**node.js**，请根据自身网络环境选择下载方式
 
-如果是中国用户，推荐设置  cnpm  
+[Download | Node.js (nodejs.org)](https://nodejs.org/en/download/)
+
+[下载 | Node.js 中文网 (nodejs.cn)](http://nodejs.cn/download/)
+
+如果是中国用户，推荐设置  cnpm
 
 > 可以使用 [cnpm](https://github.com/cnpm/cnpm) (gzip 压缩支持) 命令行工具代替默认的 `npm`:
 >
@@ -28,9 +32,9 @@ cnpm install -g typescript
 
 我们使用**VScode**来编码，所以需要设置Unity的编码工具为Vscode，然后打开项目
 
+![](./Guide/seteditor.png)
+
 ![](./Guide/open.png)
-
-
 
 ## 重要的文件夹
 
@@ -40,9 +44,11 @@ TsProject是框架使用的，如果不增加框架内容可以不管
 
 GameScript是具体关卡的逻辑代码，一般只关心这个即可
 
+**PS:** 这个划分不是必须的，但是是推荐的，理论上完全可以把所有逻辑全都放在TsProject里，但是为了区分框架和逻辑，故这样划分。
 
+- **创建新关卡脚本**
 
-vscode终端进入到GameScript文件夹，通过命令
+vscode集成终端进入到GameScript文件夹，通过命令
 
 ```bash
 npm run Create:Level 关卡名
@@ -80,8 +86,7 @@ class Scene1 implements IGameLevel {
 
 各个函数分别对应Unity的生命周期
 
-一般都是在OnStart()里面编写逻辑
-
+一般都是在OnStart()里面编写配置逻辑，在Update()里编写循环逻辑等
 
 ## 常见的api
 
@@ -95,7 +100,7 @@ class Scene1 implements IGameLevel {
 
 比如我在场景里面有一个物体叫 **$_Cube**
 
-那么我使用 
+那么我使用
 
 ```javascript
 let cube = $("Cube")  
@@ -115,7 +120,7 @@ let BTNA = $Button("BTNA")
 
 Button类型是特殊封装过的
 
-所以使用
+所以可以使用
 
 ```javascript
 BTNA.RegClickCallBack("startgame", () => {
@@ -127,27 +132,31 @@ BTNA.RegClickCallBack("startgame", () => {
 
 我们在匿名函数里写点击后如何执行
 
-
-
 ！！！！在编辑场景时，选中一个物体，使用快捷键 **ctrl + alt + n**  可以快捷添加 **$_** 前缀
 
 ## Hello World
 
 我们将使用对话系统来说出 **“Hello World”**
 
+首先我们新建一个空白场景，添加一个按钮，按钮名字为 **$_BTNA**
+
+![](./Guide/init.png)
+
 对话模块核心是**CreateDialog()** 函数，
 
-这个函数将会创建一个**DialogManager**对象，例如
+这个函数将会创建一个**DialogManager**对话管理器对象，例如
 
 ```javascript
 let HelloWorld = CreateDialog()
 ```
+
 或者可以采用简写
+
 ```javascript
 let HelloWorld = $Block()
 ```
 
-这个对象目前有以下几个函数
+这个对象有以下一些函数
 
 ```javascript
 HelloWorld.Say("Hello World")
@@ -172,6 +181,7 @@ HelloWorld.Options([ //第一个参数是 option 对象的数组
 ], true)//这里参数是指是否暂停后面的语句
 HelloWorld.Say("这是  HelloWorld.Continue()  执行后才会运行的语句")
 ```
+
 我们可以采用链式调用写法来简化
 
 ```javascript
@@ -198,14 +208,66 @@ HelloWorld.Say("Hello World")
     .Say("这是  HelloWorld.Continue()  执行后才会运行的语句")
 ```
 
-这些只是定义了整个对话的流程
+这些只是定义了整个对话的流程，而且我们的对话很简洁，在OnStart方法里，我们写如下代码，VSCode一般会自动补全模块的import
 
-但是对话还没有开始，所以在按钮点击里面
+```javascript
+let SayHello = $Block()
+SayHello.Say("Hello World!!!");
+```
+
+但是对话还没有开始，我们首先要获取到按钮，所以输入
+
+```javascript
+let BTNA =$Button("BTNA")
+```
+
+接着在按钮点击里面
 
 ```javascript
 BTNA.RegClickCallBack("startgame", () => {
-    HelloWorld.Start() //Start()是从头开始的意思
+    BTNA.RegClickCallBack("click",()=>{
+        SayHello.Start()
+    })//Start()是从头开始的意思
 })
+```
+
+完整的代码如下：
+
+```javascript
+/*================Dont Delete This=========================*/
+import { $Block } from "JS/Dialog/DialogManager";
+import { IGameLevel } from "JS/Interface/IGameLevel";
+import { $Button } from "JS/UI/UI";
+import { Debug, Transform , $ } from "JS/Utils/Common"
+
+function Create() { return new helloworld(); }
+export { Create }
+
+/*=========================================================*/
+
+class helloworld implements IGameLevel {
+    name: string;
+    root: Transform;
+    OnStart(): void {
+        Debug.LogWarning("Level helloworld Start!!!")
+        let SayHello = $Block()
+        SayHello.Say("Hello World!!!");
+        let BTNA =$Button("BTNA")
+        BTNA.RegClickCallBack("click",()=>{
+            SayHello.Start()
+        })
+    }
+    OnUpdate(): void {
+
+    }
+    OnFixedUpdate(): void {
+
+    }
+    OnDestroy(): void {
+
+    }
+
+}
 ```
 
 ---
@@ -216,19 +278,18 @@ BTNA.RegClickCallBack("startgame", () => {
 
 这会编译ts代码并复制到Unity项目里面
 
-然后我们来看Unity实际场景如何调用
+然后我们来看Unity实际场景如何使用脚本
 
-场景里必需的物体
+我们在场景里新建一个空物体，你可以选择任意命名，这里我取名为**LevelRunner**
 
-![](./Guide/basic.png)
+![](./Guide/runner.png)
 
-这两个预制体在 **Assets\FrameWork\Resources\Core**
+然后我们选择它，使用快捷键**ctrl+alt+i** ,就可以快速将其初始化为关卡管理器
 
 LevelRunner需要配置关卡模块名 为之前脚本名称
 
 ![](./Guide/levelconfig.png)
 
-然后运行，点击按钮
+然后运行场景，点击按钮
 
 ![](./Guide/hello.png)
-
