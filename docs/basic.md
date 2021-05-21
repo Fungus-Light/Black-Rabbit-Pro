@@ -36,6 +36,16 @@ cnpm install -g typescript
 
 ![](./Guide/open.png)
 
+## 下载并解压
+
+在release页面下载版本并解压
+
+[Releases · Fungus-Light/Black-Rabbit-Pro (github.com)](https://github.com/Fungus-Light/Black-Rabbit-Pro/releases)
+
+使用Unity打开里面的**BlackRabbitPro**项目文件夹
+
+![](./Guide/down.png)
+
 ## 重要的文件夹
 
 有两个重要文件夹：**TsProject**和**GameScript**
