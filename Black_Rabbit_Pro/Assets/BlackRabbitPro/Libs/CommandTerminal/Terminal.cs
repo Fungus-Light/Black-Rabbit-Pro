@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Text;
 using System.Collections;
 using UnityEngine.Assertions;
+using Puerts;
 
 namespace CommandTerminal
 {
@@ -14,6 +15,10 @@ namespace CommandTerminal
 
     public class Terminal : MonoBehaviour
     {
+        public static Terminal Instance;
+
+        public static JsEnv TerminalEnv;
+
         [Header("Window")]
 
         [Range(0, 1)]
@@ -156,6 +161,21 @@ namespace CommandTerminal
         void OnDisable()
         {
             Application.logMessageReceived -= HandleUnityLog;
+        }
+
+        void Awake(){
+            if(Instance==null){
+                Instance=this;
+            }
+            if(TerminalEnv==null){
+                TerminalEnv = new JsEnv(new LevelScriptLoader(""));
+                TerminalEnv.Eval(@"
+                const API = require('JS/TerminalCommands').Commands;
+                const APIHelp = require('JS/TerminalCommands').Help;
+                const $ = require('JS/TerminalCommands').$;
+                const T = require('JS/TerminalCommands').T;
+                ","[Terminal ENV]->");
+            }
         }
 
         void Start()

@@ -11,6 +11,10 @@ class GameConfig {
     entranceBundle: string
     mode: "debug" | "release"
     rate: 60
+    isDebugMode:boolean
+    Port:number
+    waitSecond:number
+    debugFiles:Array<string>
 }
 
 class GamePack {

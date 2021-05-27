@@ -55,6 +55,21 @@ namespace CommandTerminal
             Terminal.Log(JoinArguments(args));
         }
 
+        [RegisterCommand(Help = "Eval Internal JS Code")]
+        static void CommandEval(CommandArg[] args) {
+            //Terminal.Log(JoinArguments(args));
+            //UnityEngine.Debug.LogWarning(JoinArguments(args));
+            string command = JoinArguments(args);
+            Terminal.TerminalEnv.Eval(command);
+        }
+
+        [RegisterCommand(Help = "List All Internal JS Code")]
+        static void CommandAPIHelp(CommandArg[] args) {
+            //Terminal.Log(JoinArguments(args));
+            //UnityEngine.Debug.LogWarning(JoinArguments(args));
+            Terminal.TerminalEnv.Eval("APIHelp()");
+        }
+
     #if DEBUG
         [RegisterCommand(Help = "Outputs the StackTrace of the previous message", MaxArgCount = 0)]
         static void CommandTrace(CommandArg[] args) {

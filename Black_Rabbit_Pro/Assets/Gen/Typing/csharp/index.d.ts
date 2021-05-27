@@ -4613,6 +4613,10 @@ declare module 'csharp' {
             
             public static QuitGame():void;
             
+            public static RegGameObject($go: UnityEngine.GameObject, $newname: string):void;
+            
+            public static IsGameObjectInPool($go: UnityEngine.GameObject):boolean;
+            
             public static WaitForFrames($count: number, $CallBack: System.Action):void;
             
             public static WaitForSecondsRealtime($count: number, $CallBack: System.Action):void;
@@ -4826,6 +4830,8 @@ declare module 'csharp' {
             public constructor();
             
             public static GetAssetHelper():AssetHelper;
+            
+            public GetAllScenes():System.Array$1<string>;
             
         }
         

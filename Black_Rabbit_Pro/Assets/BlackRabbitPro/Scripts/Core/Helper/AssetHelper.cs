@@ -20,6 +20,14 @@ public class AssetHelper : MonoBehaviour
 
     public Dictionary<string, string> Scenes;
 
+    public string[] GetAllScenes(){
+        List<string> allScenes =new List<string>();
+        foreach(string key in Scenes.Keys){
+            allScenes.Add(Scenes[key]);
+        }
+        return allScenes.ToArray();
+    }
+
     void Awake()
     {
         if (Instance == null)

@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class DontDestroyMe : MonoBehaviour
 {
-    void Awake(){
-        DontDestroyOnLoad(this.gameObject);
+    private bool isExist = false;
+    void Awake()
+    {
+        if (isExist == false)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            isExist = true;
+        }
     }
 }

@@ -14,7 +14,8 @@
     "outDir": "output",
     "baseUrl": "JS",
     "declaration": true,
-    "declarationDir": "./def"
+    "declarationDir": "./def",
+    "allowJs": false
   },
   "typedocOptions": {
     "entryPoints": [

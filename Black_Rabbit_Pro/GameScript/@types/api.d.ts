@@ -39,6 +39,19 @@ function SetLevel(name: string, Level: IGameLevel): void;
 
 }
 
+declare module "JS/TerminalCommands"{
+import { UnityEngine } from "csharp";
+import { $, T } from "JS/Utils/Common";
+const Commands: {
+    TestWork: () => void;
+    Message: typeof UnityEngine.Debug.Log;
+    LoadScene: (scene: string) => void;
+    ListScenes: () => void;
+};
+function Help(): void;
+
+}
+
 declare module "JS/CameraManager/CameraManager"{
 import { CameraManager, ICameraDetector } from "csharp";
 const $CameraDetector: typeof CameraManager.GetCameraDetector;
@@ -395,6 +408,10 @@ class GameConfig {
     entranceBundle: string;
     mode: "debug" | "release";
     rate: 60;
+    isDebugMode: boolean;
+    Port: number;
+    waitSecond: number;
+    debugFiles: Array<string>;
 }
 class GamePack {
     name: string;

@@ -29,13 +29,12 @@ public class LevelRunner : MonoBehaviour
 
     public Action JsFixedUpdate;
     public Action JsOnDestroy;
+
+    private ConfigStruct config;
     void Awake()
     {
-        if (ENVDebugConfig.instance == null)
-        {
-            GameObject go = Resources.Load("DebugConfig") as GameObject;
-            GameObject.Instantiate(go);
-        }
+        string configStr = FileHelper.ReadStreamTextFile("GameConfig.json");
+        config = JsonUtility.FromJson<ConfigStruct>(configStr);
 
         if (env == null)
         {
@@ -63,7 +62,7 @@ public class LevelRunner : MonoBehaviour
             loader.SetLevel('{LevelModName}',level)
             return loader;
             "
-            + "})();", ModName+":Runner");
+            + "})();", ModName + ":Runner");
 
         var Init = env.Eval<LoaderInit>("loader.Init");
         if (Init != null)
@@ -81,12 +80,12 @@ public class LevelRunner : MonoBehaviour
 
     async void ConnectToDebugger()
     {
-        if (ENVDebugConfig.instance.isDebuggerConnected == false)
+        if (GlobalJSEnv.isDebuggerConnected == false)
         {
             await GlobalJSEnv.Env.WaitDebuggerAsync();
-            StartCoroutine(_WaitForSeconds(ENVDebugConfig.instance.waitSecond, () =>
+            StartCoroutine(_WaitForSeconds(config.waitSecond, () =>
             {
-                ENVDebugConfig.instance.isDebuggerConnected = true;
+                GlobalJSEnv.isDebuggerConnected = true;
                 RunScript();
             }));
         }
@@ -98,7 +97,7 @@ public class LevelRunner : MonoBehaviour
 
     void Start()
     {
-        if (ENVDebugConfig.instance.isDebugMode)
+        if (config.isDebugMode)
         {
             ConnectToDebugger();
         }

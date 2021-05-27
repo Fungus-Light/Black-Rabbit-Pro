@@ -15,11 +15,17 @@ class SelectLevel implements IGameLevel {
     OnStart(): void {
         Debug.LogWarning("Level SelectLevel Start!!!")
 
+        let helloBTN = $Button("helloworld");
+
         let dialogBTN = $Button("dialogmod");
 
         let featureBTN = $Button("feature")
 
         let tweenAnimBTN = $Button("tweenAnim")
+
+        helloBTN.RegClickCallBack("click",()=>{
+            $SceneLoader().LoadScene("HelloWorld")
+        })
 
         dialogBTN.RegClickCallBack("click", () => {
             $SceneLoader().LoadScene("DialogMod")

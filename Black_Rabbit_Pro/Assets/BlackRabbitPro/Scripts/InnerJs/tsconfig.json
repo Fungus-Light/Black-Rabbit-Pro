@@ -10,6 +10,7 @@
         "../../../Gen/Typing",
       ],
       "baseUrl": "SRC",
+      "allowJs": true,
       "outDir": "Resources"
     }
   }
