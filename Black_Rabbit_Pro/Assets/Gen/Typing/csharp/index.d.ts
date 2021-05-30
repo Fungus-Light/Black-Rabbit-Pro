@@ -4805,11 +4805,15 @@ declare module 'csharp' {
             
             public static Fade($name: string, $start: number, $end: number, $time: number, $callback: System.Action):void;
             
+            public static Fade($trans: UnityEngine.Transform, $start: number, $end: number, $time: number, $callback: System.Action):void;
+            
             public static FadeSprite($name: string, $start: number, $end: number, $time: number, $callback: System.Action):void;
             
             public static FadeUIGroup($name: string, $start: number, $end: number, $time: number, $callback: System.Action):void;
             
             public static FadeColorFromTo($trans: UnityEngine.Transform, $from: string, $to: string, $time: number, $act?: System.Action):void;
+            
+            public static FadeColorFromTo($name: string, $from: string, $to: string, $time: number, $act?: System.Action):void;
             
             public static MoveFrom($name: string, $from: UnityEngine.Vector3, $time: number, $callback: System.Action):void;
             

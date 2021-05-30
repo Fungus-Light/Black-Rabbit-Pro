@@ -1,6 +1,7 @@
 /*================Dont Delete This=========================*/
 import { IGameLevel } from "JS/Interface/IGameLevel";
 import { $SceneLoader } from "JS/SceneLoader/SceneLoader";
+import { Fade } from "JS/Tween/Tween";
 import { $Button } from "JS/UI/UI";
 import { Debug, Transform, $ } from "JS/Utils/Common"
 
@@ -18,8 +19,6 @@ class TwoDimFeatures implements IGameLevel {
         $Button("Back").RegClickCallBack("Click", () => {
             $SceneLoader().LoadScene("SelectLevel")
         })
-
-        
 
     }
     OnUpdate(): void {

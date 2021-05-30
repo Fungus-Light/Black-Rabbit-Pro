@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trigger_Action_2D : MonoBehaviour,IActionTrigger
+[RequireComponent(typeof(Collider2D))]
+public class Trigger_Action_2D : MonoBehaviour, IActionTrigger
 {
     public string PlayerTag { get; set; }
     public KeyCode code { get; set; }
@@ -12,6 +13,9 @@ public class Trigger_Action_2D : MonoBehaviour,IActionTrigger
     public GameType GameType { get; set; }
     public bool isUseful { get; set; }
     public bool interActable { get; set; }
+
+    public TextMesh Message;
+    public float FadeTime = 0.5f;
 
     public void MakeUseful()
     {
@@ -34,7 +38,9 @@ public class Trigger_Action_2D : MonoBehaviour,IActionTrigger
 
     void Awake()
     {
-        this.GetComponent<Collider>().isTrigger = true;
+        this.GetComponent<Collider2D>().isTrigger = true;
+        Message = this.transform.GetChild(0).GetComponent<TextMesh>();
+        Tweens.Fade(Message.transform, 0, 0, 0, null);
     }
 
     void Update()
@@ -49,58 +55,56 @@ public class Trigger_Action_2D : MonoBehaviour,IActionTrigger
         }
     }
 
-    // void OnTriggerEnter2D(Collider other)
-    // {
-    //     if (isUseful)
-    //     {
-    //         if (other.tag == PlayerTag && this.GameType == GameType.TPS)
-    //         {
-    //             MakeInterActable();
-    //         }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (isUseful)
+        {
+            if (PlayerTag == other.tag)
+            {
+                Tweens.Fade(Message.transform, 0, 1, FadeTime, null);
+                MakeInterActable();
+            }
 
-    //         if (this.GameType == GameType.TPS)
-    //         {
-    //             foreach (string key in EnterAct.Keys)
-    //             {
-    //                 if (key == other.tag)
-    //                 {
-    //                     EnterAct[key]();
-    //                 }
-    //             }
-    //         }
 
-    //     }
-    //     else
-    //     {
-    //         interActable = false;
-    //     }
+            foreach (string key in EnterAct.Keys)
+            {
+                if (key == other.tag)
+                {
+                    EnterAct[key]();
+                }
+            }
 
-    // }
 
-    // void OnTriggerExit2D(Collider other)
-    // {
-    //     if (isUseful)
-    //     {
-    //         if (other.tag == PlayerTag && this.GameType == GameType.TPS)
-    //         {
-    //             MakeDisInterActable();
-    //         }
+        }
+        else
+        {
+            interActable = false;
+        }
+    }
 
-    //         if (this.GameType == GameType.TPS)
-    //         {
-    //             foreach (string key in LeaveAct.Keys)
-    //             {
-    //                 if (key == other.tag)
-    //                 {
-    //                     LeaveAct[key]();
-    //                 }
-    //             }
-    //         }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (isUseful)
+        {
+            if (PlayerTag == other.tag)
+            {
+                Tweens.Fade(Message.transform, 1, 0, FadeTime, null);
+                MakeDisInterActable();
+            }
 
-    //     }
-    //     else
-    //     {
-    //         interActable = false;
-    //     }
-    // }
+
+            foreach (string key in LeaveAct.Keys)
+            {
+                if (key == other.tag)
+                {
+                    LeaveAct[key]();
+                }
+            }
+
+        }
+        else
+        {
+            interActable = false;
+        }
+    }
 }

@@ -9,9 +9,20 @@ public class Tweens : MonoBehaviour
 
     public static void Fade(string name, float start, float end, float time, Action callback)
     {
-
         Transform trans = GameObjectHelper.GetTransformByName(name);
 
+        if (trans != null)
+        {
+            Fade(trans, start, end, time, callback);
+        }
+        else
+        {
+            Debug.LogError("No Render in " + name);
+        }
+    }
+
+    public static void Fade(Transform trans, float start, float end, float time, Action callback)
+    {
         if (trans != null)
         {
             var cg = trans.GetComponent<CanvasGroup>();
@@ -38,12 +49,17 @@ public class Tweens : MonoBehaviour
                 font.color = new Color(font.color.r, font.color.g, font.color.b, start);
                 font.DOColor(new Color(font.color.r, font.color.g, font.color.b, end), time).SetEase(Ease.InQuart).OnComplete(() => { callback?.Invoke(); });
             }
+            var textMesh = trans.GetComponent<TextMesh>();
+            if (textMesh != null)
+            {
+                textMesh.color = new Color(textMesh.color.r, textMesh.color.g, textMesh.color.b, start);
+                DOTween.To(() => textMesh.color.a, x => textMesh.color = new Color(textMesh.color.r, textMesh.color.g, textMesh.color.b, x), end, time);
+            }
         }
         else
         {
-            Debug.LogError("No SpriteRender in " + name);
+            Debug.LogError("No Render in " + trans.name);
         }
-
 
     }
 
@@ -107,7 +123,20 @@ public class Tweens : MonoBehaviour
                 font.color = fromColor;
                 font.DOColor(toColor, time).SetEase(Ease.InQuart).OnComplete(() => { act?.Invoke(); });
             }
+        }
 
+    }
+
+    public static void FadeColorFromTo(string name, string from, string to, float time, Action act = null)
+    {
+        Transform trans = GameObjectHelper.GetTransformByName(name);
+        if (trans != null)
+        {
+            FadeColorFromTo(trans, from, to, time, act);
+        }
+        else
+        {
+            Debug.LogError("No Render in " + name);
         }
 
     }
