@@ -53,7 +53,7 @@ class Trigger {
     constructor(trigger: ITrigger, type: GameType) {
 
         this.UTrigger = trigger;
-        this.UTrigger.isUseful = true;
+        this.UTrigger.isUseful = false;
         this.UTrigger.GameType = type;
     }
 

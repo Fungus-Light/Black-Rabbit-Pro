@@ -11,6 +11,7 @@ public class Trigger_Basic_2D : MonoBehaviour, ITrigger
     public GameType GameType { get; set; }
     public bool isUseful { get; set; }
 
+    public bool IsMessageUse = false;
     public TextMesh Message;
     public float FadeTime = 0.5f;
 
@@ -26,15 +27,19 @@ public class Trigger_Basic_2D : MonoBehaviour, ITrigger
     void Awake()
     {
         this.GetComponent<Collider2D>().isTrigger = true;
-        Message = this.transform.GetChild(0).GetComponent<TextMesh>();
-        Tweens.Fade(Message.transform, 0, 0, 0, null);
+        if (IsMessageUse)
+        {
+            Message = this.transform.GetChild(0).GetComponent<TextMesh>();
+            Tweens.Fade(Message.transform, 0, 0, 0, null);
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isUseful)
         {
-            if (EnterAct.ContainsKey(collision.tag))
+            if (EnterAct.ContainsKey(collision.tag) && IsMessageUse)
             {
                 Tweens.Fade(Message.transform, 0, 1, FadeTime, null);
             }
@@ -57,7 +62,10 @@ public class Trigger_Basic_2D : MonoBehaviour, ITrigger
 
             if (EnterAct.ContainsKey(collision.tag))
             {
-                Tweens.Fade(Message.transform, 1, 0, FadeTime, null);
+                if (IsMessageUse)
+                {
+                    Tweens.Fade(Message.transform, 1, 0, FadeTime, null);
+                }
             }
 
             foreach (string key in LeaveAct.Keys)

@@ -14,6 +14,7 @@ public class Trigger_Action_2D : MonoBehaviour, IActionTrigger
     public bool isUseful { get; set; }
     public bool interActable { get; set; }
 
+    public bool IsMessageUse = false;
     public TextMesh Message;
     public float FadeTime = 0.5f;
 
@@ -39,8 +40,13 @@ public class Trigger_Action_2D : MonoBehaviour, IActionTrigger
     void Awake()
     {
         this.GetComponent<Collider2D>().isTrigger = true;
-        Message = this.transform.GetChild(0).GetComponent<TextMesh>();
-        Tweens.Fade(Message.transform, 0, 0, 0, null);
+
+        if (IsMessageUse)
+        {
+            Message = this.transform.GetChild(0).GetComponent<TextMesh>();
+            Tweens.Fade(Message.transform, 0, 0, 0, null);
+        }
+
     }
 
     void Update()
@@ -59,9 +65,12 @@ public class Trigger_Action_2D : MonoBehaviour, IActionTrigger
     {
         if (isUseful)
         {
-            if (PlayerTag == other.tag)
+            if (PlayerTag == PlayerTag)
             {
-                Tweens.Fade(Message.transform, 0, 1, FadeTime, null);
+                if(IsMessageUse){
+                    Tweens.Fade(Message.transform, 0, 1, FadeTime, null);
+                }
+                
                 MakeInterActable();
             }
 
@@ -86,9 +95,12 @@ public class Trigger_Action_2D : MonoBehaviour, IActionTrigger
     {
         if (isUseful)
         {
-            if (PlayerTag == other.tag)
+            if (PlayerTag == PlayerTag)
             {
-                Tweens.Fade(Message.transform, 1, 0, FadeTime, null);
+                if(IsMessageUse){
+                    Tweens.Fade(Message.transform, 1, 0, FadeTime, null);
+                }
+                
                 MakeDisInterActable();
             }
 
