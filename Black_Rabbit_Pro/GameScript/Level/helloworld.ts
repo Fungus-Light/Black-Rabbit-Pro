@@ -1,6 +1,7 @@
 /*================Dont Delete This=========================*/
 import { $Block } from "JS/Dialog/DialogManager";
 import { IGameLevel } from "JS/Interface/IGameLevel";
+import { $SceneLoader } from "JS/SceneLoader/SceneLoader";
 import { $Button } from "JS/UI/UI";
 import { Debug, Transform , $ } from "JS/Utils/Common"
 
@@ -20,6 +21,10 @@ class helloworld implements IGameLevel {
         BTNA.RegClickCallBack("click",()=>{
             SayHello.Start()
         })
+
+        $Button("Back").RegClickCallBack("click",()=>{
+            $SceneLoader().LoadScene("SelectLevel")
+        });
     }
     OnUpdate(): void {
 

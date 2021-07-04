@@ -28,6 +28,8 @@ namespace Puerts
 
         internal readonly GenericDelegateFactory genericDelegateFactory;
 
+        internal readonly JSObjectFactory jsObjectFactory;
+
         private readonly ILoader loader;
 
         public static List<JsEnv> jsEnvs = new List<JsEnv>();
@@ -51,7 +53,7 @@ namespace Puerts
 
         public JsEnv(ILoader loader, int debugPort, IntPtr externalRuntime, IntPtr externalContext)
         {
-            const int libVersionExpect = 10;
+            const int libVersionExpect = 11;
             int libVersion = PuertsDLL.GetLibVersion();
             if (libVersion != libVersionExpect)
             {
@@ -94,6 +96,7 @@ namespace Puerts
             objectPool = new ObjectPool();
             TypeRegister = new TypeRegister(this);
             genericDelegateFactory = new GenericDelegateFactory(this);
+            jsObjectFactory = new JSObjectFactory();
 
             GeneralGetterManager = new GeneralGetterManager(this);
             GeneralSetterManager = new GeneralSetterManager(this);
@@ -621,54 +624,92 @@ namespace Puerts
             }
         }
 
-        Queue<IntPtr> pendingReleaseFuncs = new Queue<IntPtr>();
-        Queue<IntPtr> pendingReleaseObjs = new Queue<IntPtr>();
+        Dictionary<IntPtr, int> funcRefCount = new Dictionary<IntPtr, int>();
+        HashSet<IntPtr> pendingReleaseObjs = new HashSet<IntPtr>();
 
-        internal void addPenddingReleaseFunc(IntPtr nativeJsFuncPtr)
+        internal void IncFuncRef(IntPtr nativeJsFuncPtr)
+        {
+            if (disposed || nativeJsFuncPtr == IntPtr.Zero) return;
+            lock (funcRefCount)
+            {
+                int refCount;
+                if (funcRefCount.TryGetValue(nativeJsFuncPtr, out refCount))
+                {
+                    ++refCount;
+                }
+                else
+                {
+                    refCount = 1;
+                }
+                funcRefCount[nativeJsFuncPtr] = refCount;
+            }
+        }
+
+        internal void DecFuncRef(IntPtr nativeJsFuncPtr)
         {
             if (disposed || nativeJsFuncPtr == IntPtr.Zero) return;
 
-            lock (pendingReleaseFuncs)
+            lock (funcRefCount)
             {
-                pendingReleaseFuncs.Enqueue(nativeJsFuncPtr);
+                funcRefCount[nativeJsFuncPtr] = funcRefCount[nativeJsFuncPtr] - 1;
             }
         }
+
         internal void addPenddingReleaseObject(IntPtr nativeJsObjPtr)
         {
             if (disposed || nativeJsObjPtr == IntPtr.Zero) return;
 
             lock (pendingReleaseObjs)
             {
-                pendingReleaseObjs.Enqueue(nativeJsObjPtr);
+                pendingReleaseObjs.Add(nativeJsObjPtr);
             }
         }
 
+        List<IntPtr> pendingRemovedList = new List<IntPtr>();
+
         internal void ReleasePendingJSFunctions()
         {
-            lock (pendingReleaseFuncs)
+            lock (funcRefCount)
             {
-                while (pendingReleaseFuncs.Count > 0)
+                pendingRemovedList.Clear();
+                foreach (var kv in funcRefCount)
                 {
-                    IntPtr nativeJsFuncPtr = pendingReleaseFuncs.Dequeue();
+                    if (kv.Value <= 0) pendingRemovedList.Add(kv.Key);
+                }
+                for(int i = 0; i  < pendingRemovedList.Count; ++i)
+                {
+                    var nativeJsFuncPtr = pendingRemovedList[i];
+                    funcRefCount.Remove(nativeJsFuncPtr);
                     if (!genericDelegateFactory.IsJsFunctionAlive(nativeJsFuncPtr))
                     {
                         PuertsDLL.ReleaseJSFunction(isolate, nativeJsFuncPtr);
                     }
                 }
+                pendingRemovedList.Clear();
             }
         }
+
+        internal void RemoveJSObjectFromPendingRelease(IntPtr nativeJsObjPtr)
+        {
+            if (disposed || nativeJsObjPtr == IntPtr.Zero) return;
+            lock (pendingReleaseObjs)
+            {
+                pendingReleaseObjs.Remove(nativeJsObjPtr);
+            }
+        }
+
         internal void ReleasePendingJSObjects()
         {
             lock (pendingReleaseObjs)
             {
-                while (pendingReleaseObjs.Count > 0)
+                foreach(var nativeJsObjPtr in pendingReleaseObjs)
                 {
-                    IntPtr nativeJsObjPtr = pendingReleaseObjs.Dequeue();
-                    if (!JSObject.IsJsObjectAlive(nativeJsObjPtr))
+                    if (!jsObjectFactory.IsJsObjectAlive(nativeJsObjPtr))
                     {
                         PuertsDLL.ReleaseJSObject(isolate, nativeJsObjPtr);
                     }
                 }
+                pendingReleaseObjs.Clear();
             }
         }
     }
