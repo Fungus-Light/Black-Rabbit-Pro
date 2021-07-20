@@ -139,9 +139,18 @@ public class toolsCombine : EditorWindow
             itemHeight = 20
         };
 
-        FuncList.onSelectionChanged += (objects) =>
+        FuncList.onSelectionChange += (objects) =>
         {
-            FuncItem item = (FuncItem)objects[0];
+            int p = 0;
+            FuncItem item = items[0];
+            foreach (System.Object obj in objects)
+            {
+                p++;
+                if (p == 1)
+                {
+                    item = (FuncItem)obj;
+                }
+            }
             //Debug.Log(item.key + " will open " + item.target);
 
             for (int i = 0; i < rightBox.childCount; i++)
