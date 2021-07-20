@@ -114,4 +114,72 @@ public class CommonJsCall : MonoBehaviour
         Instance.StartCoroutine(_DoAction(action, callBack));
     }
 
+    public static void SetActive(Transform trans, bool state)
+    {
+
+        if (trans != null)
+        {
+            trans.gameObject.SetActive(state);
+        }
+        else
+        {
+            throw new NullReferenceException("This transform is null!!!");
+        }
+    }
+
+    public static void SetActive(string name, bool state)
+    {
+        Transform trans = GameObjectHelper.GetTransformByName(name);
+        if (trans != null)
+        {
+            SetActive(trans, state);
+        }
+        else
+        {
+            throw new NullReferenceException("Can not find " + name);
+        }
+    }
+
+    public static void PlayAnim(Transform trans, string animName, Action cb)
+    {
+        if (trans != null)
+        {
+            Animation anim = trans.GetComponent<Animation>();
+            if (anim != null)
+            {
+                if (anim.GetClip(animName) != null)
+                {
+                    float delay = anim.GetClip(animName).length;
+                    anim.Play(animName);
+                    WaitForSeconds(delay,cb);
+                }
+                else
+                {
+                    Debug.LogError("No such AnimationClip " + animName);
+                }
+            }
+            else
+            {
+                throw new NullReferenceException("There is no Animation component in " + trans.name);
+            }
+        }
+        else
+        {
+            throw new NullReferenceException("This transform is null!!!");
+        }
+    }
+
+    public static void PlayAnim(string name, string animName, Action cb)
+    {
+        Transform trans = GameObjectHelper.GetTransformByName(name);
+        if (trans != null)
+        {
+            PlayAnim(trans,animName,cb);
+        }
+        else
+        {
+            throw new NullReferenceException("Can not find "+name);
+        }
+    }
+
 }
