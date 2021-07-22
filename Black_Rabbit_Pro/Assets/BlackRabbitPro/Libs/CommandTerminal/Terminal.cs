@@ -214,11 +214,14 @@ namespace CommandTerminal
             {
                 SetState(TerminalState.OpenSmall);
                 initial_open = true;
+                SetupWindow();
             }
             else if (Event.current.Equals(Event.KeyboardEvent(ToggleFullHotkey)))
             {
                 SetState(TerminalState.OpenFull);
                 initial_open = true;
+                SetupWindow();
+                
             }
 
             if (ShowGUIButtons)
