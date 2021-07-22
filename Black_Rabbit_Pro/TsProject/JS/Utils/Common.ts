@@ -114,6 +114,8 @@ const FullScreenMode = UnityEngine.FullScreenMode
 
 const InitGameObjct = UnityEngine.GameObject.Instantiate
 
+const PlayAnim = CommonJsCall.PlayAnim
+
 function RegGameObject(obj: GameObject, newName: string) {
     if (newName.startsWith("$_") == false) {
         newName = "$_" + newName
@@ -161,5 +163,7 @@ export {
     PlayMusic,
     PlaySound,
     $SoundLib,
-    InitGameObjct
+    InitGameObjct,
+
+    PlayAnim
 }

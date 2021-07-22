@@ -380,6 +380,7 @@ class Application extends UnityEngine.Application {
 }
 const FullScreenMode: typeof UnityEngine.FullScreenMode;
 const InitGameObjct: typeof UnityEngine.Object.Instantiate;
+const PlayAnim: typeof CommonJsCall.PlayAnim;
 function RegGameObject(obj: GameObject, newName: string): void;
 
 }

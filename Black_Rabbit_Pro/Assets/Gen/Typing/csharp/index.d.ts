@@ -630,6 +630,8 @@ declare module 'csharp' {
             
         }
         
+        type Action$1<T> = (obj: T) => void;
+        
         type MulticastDelegate = (...args:any[]) => any;
         var MulticastDelegate: {new (func: (...args:any[]) => any): MulticastDelegate;}
         
@@ -1013,11 +1015,15 @@ declare module 'csharp' {
             
         }
         
-        class UInt64 extends System.ValueType {
+        class UInt32 extends System.ValueType {
             
         }
         
-        class UInt32 extends System.ValueType {
+        class UInt16 extends System.ValueType {
+            
+        }
+        
+        class UInt64 extends System.ValueType {
             
         }
         
@@ -1032,11 +1038,13 @@ declare module 'csharp' {
             
         }
         
-        type Action$1<T> = (obj: T) => void;
-        
         type Func$1<TResult> = () => TResult;
         
         class Exception extends System.Object {
+            
+        }
+        
+        interface IFormatProvider {
             
         }
         
@@ -1299,6 +1307,12 @@ declare module 'csharp' {
     namespace UnityEditor {
         /** An Interface for accessing assets and performing operations on assets. */
         class AssetDatabase extends System.Object {
+            /** Callback raised whenever a package import successfully completes that lists the items selected to be imported. */
+            public static onImportPackageItemsCompleted: System.Action$1<System.Array$1<string>>;
+            /** Changes during Refresh if anything has changed that can invalidate any artifact. */
+            public static get GlobalArtifactDependencyVersion(): number;
+            /** Changes whenever a new artifact is added to the artifact database. */
+            public static get GlobalArtifactProcessedVersion(): number;
             
             public constructor();
             
@@ -1317,6 +1331,8 @@ declare module 'csharp' {
             public static add_importPackageFailed($value: UnityEditor.AssetDatabase.ImportPackageFailedCallback):void;
             
             public static remove_importPackageFailed($value: UnityEditor.AssetDatabase.ImportPackageFailedCallback):void;
+            
+            public static CanOpenForEdit($assetOrMetaFilePaths: System.Array$1<string>, $outNotEditablePaths: System.Collections.Generic.List$1<string>, $statusQueryOptions?: UnityEditor.StatusQueryOptions):void;
             
             public static IsOpenForEdit($assetOrMetaFilePaths: System.Array$1<string>, $outNotEditablePaths: System.Collections.Generic.List$1<string>, $statusQueryOptions?: UnityEditor.StatusQueryOptions):void;
             /** Makes a file open for editing in version control.
@@ -1342,10 +1358,11 @@ declare module 'csharp' {
             public static Contains($obj: UnityEngine.Object):boolean;
             /** Is object an asset? */
             public static Contains($instanceID: number):boolean;
-            /** Create a new folder.
-             * @param parentFolder The name of the parent folder.
+            /** Creates a new folder, in the specified parent folder.
+            The parent folder string must start with the "Assets" folder, and all folders within the parent folder string must already exist. For example, when specifying "AssetsParentFolder1Parentfolder2/", the new folder will be created in "ParentFolder2" only if ParentFolder1 and ParentFolder2 already exist.
+             * @param parentFolder The path to the parent folder. Must start with "Assets/".
              * @param newFolderName The name of the new folder.
-             * @returns The GUID of the newly created folder. 
+             * @returns The GUID of the newly created folder, if the folder was created successfully. Otherwise returns an empty string. 
              */
             public static CreateFolder($parentFolder: string, $newFolderName: string):string;
             /** Is asset a main asset in the project window? */
@@ -1402,17 +1419,28 @@ declare module 'csharp' {
              * @returns An empty string, if the asset has been successfully renamed, otherwise an error message. 
              */
             public static RenameAsset($pathName: string, $newName: string):string;
-            /** Moves the asset at path to the trash. */
+            /** Moves the specified asset  or folder to the OS trash.
+             * @param path Project relative path of the asset or folder to be deleted.
+             * @returns Returns true if the asset has been successfully removed, false if it doesn't exist or couldn't be removed. 
+             */
             public static MoveAssetToTrash($path: string):boolean;
-            /** Deletes the asset file at path. * @param path Filesystem path of the asset to be deleted.
+            
+            public static MoveAssetsToTrash($paths: System.Array$1<string>, $outFailedPaths: System.Collections.Generic.List$1<string>):boolean;
+            /** Deletes the specified asset or folder.
+             * @param path Project relative path of the asset or folder to be deleted.
+             * @returns Returns true if the asset has been successfully removed, false if it doesn't exist or couldn't be removed. 
              */
             public static DeleteAsset($path: string):boolean;
+            
+            public static DeleteAssets($paths: System.Array$1<string>, $outFailedPaths: System.Collections.Generic.List$1<string>):boolean;
             /** Import asset at path. */
             public static ImportAsset($path: string):void;
             /** Import asset at path. */
             public static ImportAsset($path: string, $options: UnityEditor.ImportAssetOptions):void;
-            /** Duplicates the asset at path and stores it at newPath. * @param path Filesystem path of the source asset.
+            /** Duplicates the asset at path and stores it at newPath.
+             * @param path Filesystem path of the source asset.
              * @param newPath Filesystem path of the new asset to create.
+             * @returns Returns true if the copy operation is successful or false if part of the process fails. 
              */
             public static CopyAsset($path: string, $newPath: string):boolean;
             /** Writes the import settings to disk. */
@@ -1465,12 +1493,19 @@ declare module 'csharp' {
              * @returns The asset matching the parameters. 
              */
             public static LoadAssetAtPath($assetPath: string, $type: System.Type):UnityEngine.Object;
-            /** Returns the main asset object at assetPath. * @param assetPath Filesystem path of the asset to load.
+            /** Returns the main asset object at assetPath.
+            The "main" Asset is the Asset at the root of a hierarchy (such as a Maya file which may contain multiples meshes and GameObjects). * @param assetPath Filesystem path of the asset to load.
              */
             public static LoadMainAssetAtPath($assetPath: string):UnityEngine.Object;
             /** Returns the type of the main asset object at assetPath. * @param assetPath Filesystem path of the asset to load.
              */
             public static GetMainAssetTypeAtPath($assetPath: string):System.Type;
+            /** Gets an object's type from an Asset path and a local file identifier.
+             * @param assetPath The Asset's path.
+             * @param localIdentifierInFile The object's local file identifier.
+             * @returns The object's type. 
+             */
+            public static GetTypeFromPathAndFileID($assetPath: string, $localIdentifierInFile: bigint):System.Type;
             /** Returns true if the main asset object at assetPath is loaded in memory. * @param assetPath Filesystem path of the asset to load.
              */
             public static IsMainAssetAtPathLoaded($assetPath: string):boolean;
@@ -1499,15 +1534,35 @@ declare module 'csharp' {
             public static OpenAsset($target: UnityEngine.Object, $lineNumber: number, $columnNumber: number):boolean;
             /** Opens the asset(s) with associated application(s). */
             public static OpenAsset($objects: System.Array$1<UnityEngine.Object>):boolean;
+            /** Gets the corresponding asset path for the supplied GUID, or an empty string if the GUID can't be found.
+             * @param guid The GUID of an asset.
+             * @returns Path of the asset relative to the project folder. 
+             */
+            public static GUIDToAssetPath($guid: string):string;
+            /** Gets the corresponding asset path for the supplied GUID, or an empty string if the GUID can't be found.
+             * @param guid The GUID of an asset.
+             * @returns Path of the asset relative to the project folder. 
+             */
+            public static GUIDToAssetPath($guid: UnityEditor.GUID):string;
+            /** Get the GUID for the asset at path.
+             * @param path Filesystem path for the asset. All paths are relative to the project folder.
+             * @returns The GUID of the asset. An all-zero GUID denotes an invalid asset path. 
+             */
+            public static GUIDFromAssetPath($path: string):UnityEditor.GUID;
             /** Get the GUID for the asset at path.
              * @param path Filesystem path for the asset.
              * @returns GUID. 
              */
             public static AssetPathToGUID($path: string):string;
-            /** Gets the corresponding asset path for the supplied guid, or an empty string if the GUID can't be found. */
-            public static GUIDToAssetPath($guid: string):string;
             /** Returns the hash of all the dependencies of an asset.
              * @param path Path to the asset.
+             * @param guid GUID of the asset.
+             * @returns Aggregate hash. 
+             */
+            public static GetAssetDependencyHash($guid: UnityEditor.GUID):UnityEngine.Hash128;
+            /** Returns the hash of all the dependencies of an asset.
+             * @param path Path to the asset.
+             * @param guid GUID of the asset.
              * @returns Aggregate hash. 
              */
             public static GetAssetDependencyHash($path: string):UnityEngine.Hash128;
@@ -1517,6 +1572,8 @@ declare module 'csharp' {
             public static GetCachedIcon($path: string):UnityEngine.Texture;
             /** Replaces that list of labels on an asset. */
             public static SetLabels($obj: UnityEngine.Object, $labels: System.Array$1<string>):void;
+            
+            public static GetLabels($guid: UnityEditor.GUID):System.Array$1<string>;
             /** Returns all labels attached to a given asset. */
             public static GetLabels($obj: UnityEngine.Object):System.Array$1<string>;
             /** Removes all labels attached to an asset. */
@@ -1588,6 +1645,70 @@ declare module 'csharp' {
             public static ExportPackage($assetPathNames: System.Array$1<string>, $fileName: string):void;
             /** Exports the assets identified by assetPathNames to a unitypackage file in fileName. */
             public static ExportPackage($assetPathNames: System.Array$1<string>, $fileName: string, $flags: UnityEditor.ExportPackageOptions):void;
+            /** Query whether an Asset file can be opened for editing in version control and is not exclusively locked by another user or otherwise unavailable.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being available for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered available for edit by the selected version control system. 
+             */
+            public static CanOpenForEdit($assetObject: UnityEngine.Object):boolean;
+            /** Query whether an Asset file can be opened for editing in version control and is not exclusively locked by another user or otherwise unavailable.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being available for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered available for edit by the selected version control system. 
+             */
+            public static CanOpenForEdit($assetObject: UnityEngine.Object, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
+            /** Query whether an Asset file can be opened for editing in version control and is not exclusively locked by another user or otherwise unavailable.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being available for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered available for edit by the selected version control system. 
+             */
+            public static CanOpenForEdit($assetOrMetaFilePath: string):boolean;
+            /** Query whether an Asset file can be opened for editing in version control and is not exclusively locked by another user or otherwise unavailable.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being available for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered available for edit by the selected version control system. 
+             */
+            public static CanOpenForEdit($assetOrMetaFilePath: string, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
+            /** Query whether an Asset file can be opened for editing in version control and is not exclusively locked by another user or otherwise unavailable.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being available for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered available for edit by the selected version control system. 
+             */
+            public static CanOpenForEdit($assetObject: UnityEngine.Object, $message: $Ref<string>):boolean;
+            /** Query whether an Asset file can be opened for editing in version control and is not exclusively locked by another user or otherwise unavailable.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being available for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered available for edit by the selected version control system. 
+             */
+            public static CanOpenForEdit($assetObject: UnityEngine.Object, $message: $Ref<string>, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
+            /** Query whether an Asset file can be opened for editing in version control and is not exclusively locked by another user or otherwise unavailable.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being available for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered available for edit by the selected version control system. 
+             */
+            public static CanOpenForEdit($assetOrMetaFilePath: string, $message: $Ref<string>):boolean;
+            /** Query whether an Asset file can be opened for editing in version control and is not exclusively locked by another user or otherwise unavailable.
+             * @param assetObject Object representing the asset whose status you wish to query.
+             * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
+             * @param message Returns a reason for the asset not being available for edit.
+             * @param statusOptions Options for how the version control system should be queried. These options can effect the speed and accuracy of the query. Default is StatusQueryOptions.UseCachedIfPossible.
+             * @returns True if the asset is considered available for edit by the selected version control system. 
+             */
+            public static CanOpenForEdit($assetOrMetaFilePath: string, $message: $Ref<string>, $statusOptions: UnityEditor.StatusQueryOptions):boolean;
             /** Query whether an Asset file is open for editing in version control.
              * @param assetObject Object representing the asset whose status you wish to query.
              * @param assetOrMetaFilePath Path to the asset file or its .meta file on disk, relative to project folder.
@@ -1684,22 +1805,20 @@ declare module 'csharp' {
             public static GetBuiltinExtraResource($type: System.Type, $path: string):UnityEngine.Object;
             
             public static ForceReserializeAssets($assetPaths: System.Collections.Generic.IEnumerable$1<string>, $options?: UnityEditor.ForceReserializeAssetsOptions):void;
-            /** Warning Use the overload with a long localId parameter. Using the overload with an integer localId parameter can cause an integer overflow in localId. This can happen when the object passed to the API is part of a Prefab.
-            Get the GUID and local file id from an object instance id.
+            /** Get the GUID and local file id from an object instance id.
              * @param instanceID InstanceID of the object to retrieve information for.
              * @param obj The object to retrieve GUID and File Id for.
              * @param assetRef The asset reference to retrieve GUID and File Id for.
-             * @param guid The GUID of the asset.
+             * @param guid The GUID of an asset.
              * @param localId The local file identifier of this asset.
              * @returns True if the guid and file id were successfully found, false if not. 
              */
             public static TryGetGUIDAndLocalFileIdentifier($obj: UnityEngine.Object, $guid: $Ref<string>, $localId: $Ref<bigint>):boolean;
-            /** Warning Use the overload with a long localId parameter. Using the overload with an integer localId parameter can cause an integer overflow in localId. This can happen when the object passed to the API is part of a Prefab.
-            Get the GUID and local file id from an object instance id.
+            /** Get the GUID and local file id from an object instance id.
              * @param instanceID InstanceID of the object to retrieve information for.
              * @param obj The object to retrieve GUID and File Id for.
              * @param assetRef The asset reference to retrieve GUID and File Id for.
-             * @param guid The GUID of the asset.
+             * @param guid The GUID of an asset.
              * @param localId The local file identifier of this asset.
              * @returns True if the guid and file id were successfully found, false if not. 
              */
@@ -1714,16 +1833,80 @@ declare module 'csharp' {
             public static DisallowAutoRefresh():void;
             
             public static AllowAutoRefresh():void;
+            /** Clears the importer override for the asset. * @param path Asset path.
+             */
+            public static ClearImporterOverride($path: string):void;
+            
+            public static IsCacheServerEnabled():boolean;
+            /** Returns the type of the override importer.
+             * @param path Asset path.
+             * @returns Importer type. 
+             */
+            public static GetImporterOverride($path: string):System.Type;
+            /** Gets the importer types associated with a given Asset type.
+             * @param path The Asset path.
+             * @returns Returns an array of importer types that can handle the specified Asset. 
+             */
+            public static GetAvailableImporterTypes($path: string):System.Array$1<System.Type>;
+            /** Checks the availability of the Cache Server.
+             * @param ip The IP address of the Cache Server.
+             * @param port The Port number of the Cache Server.
+             * @returns Returns true when Editor can connect to the Cache Server. Returns false otherwise. 
+             */
+            public static CanConnectToCacheServer($ip: string, $port: number):boolean;
+            
+            public static RefreshSettings():void;
+            
+            public static add_cacheServerConnectionChanged($value: System.Action$1<UnityEditor.CacheServerConnectionChangedParameters>):void;
+            
+            public static remove_cacheServerConnectionChanged($value: System.Action$1<UnityEditor.CacheServerConnectionChangedParameters>):void;
+            
+            public static IsConnectedToCacheServer():boolean;
+            
+            public static ResetCacheServerReconnectTimer():void;
+            
+            public static CloseCacheServerConnection():void;
+            
+            public static GetCacheServerAddress():string;
+            
+            public static GetCacheServerPort():number;
+            
+            public static GetCacheServerNamespacePrefix():string;
+            
+            public static GetCacheServerEnableDownload():boolean;
+            
+            public static GetCacheServerEnableUpload():boolean;
+            
+            public static IsDirectoryMonitoringEnabled():boolean;
+            /** Allows you to register a custom dependency that Assets can be dependent on. If you register a custom dependency, and specify that an Asset is dependent on it, then the Asset will get re-imported if the custom dependency changes. * @param dependency Name of dependency. You can use any name you like, but because these names are global across all your Assets, it can be useful to use a naming convention (eg a path-based naming system) to avoid clashes with other custom dependency names.
+             * @param hashOfValue A Hash128 value of the dependency.
+             */
+            public static RegisterCustomDependency($dependency: string, $hashOfValue: UnityEngine.Hash128):void;
+            /** Removes custom dependencies that match the prefixFilter.
+             * @param prefixFilter Prefix filter for the custom dependencies to unregister.
+             * @returns Number of custom dependencies removed. 
+             */
+            public static UnregisterCustomDependencyPrefixFilter($prefixFilter: string):number;
+            
+            public static IsAssetImportWorkerProcess():boolean;
             
         }
         /** Options for querying the version control system status of a file. */
         enum StatusQueryOptions { ForceUpdate = 0, UseCachedIfPossible = 1, UseCachedAsync = 2 }
         /** Asset importing options. */
         enum ImportAssetOptions { Default = 0, ForceUpdate = 1, ForceSynchronousImport = 8, ImportRecursive = 256, DontDownloadFromCacheServer = 8192, ForceUncompressedImport = 16384 }
+        
+        class GUID extends System.ValueType {
+            
+        }
         /** Export package option. Multiple options can be combined together using the | operator. */
         enum ExportPackageOptions { Default = 0, Interactive = 1, Recurse = 2, IncludeDependencies = 4, IncludeLibraryAssets = 8 }
         /** Options for AssetDatabase.ForceReserializeAssets. */
         enum ForceReserializeAssetsOptions { ReserializeAssets = 1, ReserializeMetadata = 2, ReserializeAssetsAndMetadata = 3 }
+        
+        class CacheServerConnectionChangedParameters extends System.ValueType {
+            
+        }
         /** Base class from which asset importers for specific asset types derive. */
         class AssetImporter extends UnityEngine.Object {
             /** The path name of the asset for this importer. (Read Only) */
@@ -1789,8 +1972,12 @@ declare module 'csharp' {
              * @returns Target platform name represented by the passed in BuildTarget. 
              */
             public static GetBuildTargetName($targetPlatform: UnityEditor.BuildTarget):string;
-            
-            public static SetAssetBundleEncryptKey($password: string):void;
+            /** Checks if Unity can append the build.
+             * @param target The BuildTarget to build.
+             * @param location The path where Unity builds the application.
+             * @returns Returns a UnityEditor.CanAppendBuild enum that indicates whether Unity can append the build. 
+             */
+            public static BuildCanBeAppended($target: UnityEditor.BuildTarget, $location: string):UnityEditor.CanAppendBuild;
             /** Builds a player. These overloads are still supported, but will be replaced. Please use BuildPlayer (BuildPlayerOptions buildPlayerOptions)  instead.
              * @param scenes The Scenes to include in the build. If empty, the build only includes the currently open Scene. Paths are relative to the project folder (AssetsMyLevelsMyScene.unity).
              * @param locationPathName The path where the application will be built.
@@ -1812,6 +1999,11 @@ declare module 'csharp' {
              * @returns A BuildReport giving build process information. 
              */
             public static BuildPlayer($buildPlayerOptions: UnityEditor.BuildPlayerOptions):UnityEditor.Build.Reporting.BuildReport;
+            /** Writes out a "boot.config" file that contains configuration information for the very early stages of engine startup. * @param outputFile The location to write the file to.
+             * @param target The platform to target for this build.
+             * @param options Options for this build.
+             */
+            public static WriteBootConfig($outputFile: string, $target: UnityEditor.BuildTarget, $options: UnityEditor.BuildOptions):void;
             /** Build all AssetBundles specified in the editor.
              * @param outputPath Output path for the AssetBundles.
              * @param assetBundleOptions AssetBundle building options.
@@ -1847,12 +2039,16 @@ declare module 'csharp' {
              * @param buildTargetGroup Build target group.
              */
             public static GetPlaybackEngineDirectory($buildTargetGroup: UnityEditor.BuildTargetGroup, $target: UnityEditor.BuildTarget, $options: UnityEditor.BuildOptions):string;
+            /** Returns the mode currently used by players to initiate a connect to the host. */
+            public static GetPlayerConnectionInitiateMode($targetPlatform: UnityEditor.BuildTarget, $buildOptions: UnityEditor.BuildOptions):UnityEditor.PlayerConnectionInitiateMode;
             
         }
         /** Build target group. */
-        enum BuildTargetGroup { Unknown = 0, Standalone = 1, WebPlayer = 2, iPhone = 4, iOS = 4, PS3 = 5, XBOX360 = 6, Android = 7, WebGL = 13, WSA = 14, Metro = 14, WP8 = 15, BlackBerry = 16, Tizen = 17, PSP2 = 18, PS4 = 19, PSM = 20, XboxOne = 21, SamsungTV = 22, N3DS = 23, WiiU = 24, tvOS = 25, Facebook = 26, Switch = 27, Lumin = 28, Stadia = 29, CloudRendering = 30 }
+        enum BuildTargetGroup { Unknown = 0, Standalone = 1, WebPlayer = 2, iPhone = 4, iOS = 4, PS3 = 5, XBOX360 = 6, Android = 7, WebGL = 13, WSA = 14, Metro = 14, WP8 = 15, BlackBerry = 16, Tizen = 17, PSP2 = 18, PS4 = 19, PSM = 20, XboxOne = 21, SamsungTV = 22, N3DS = 23, WiiU = 24, tvOS = 25, Facebook = 26, Switch = 27, Lumin = 28, Stadia = 29, CloudRendering = 30, GameCoreScarlett = 31, GameCoreXboxSeries = 31, GameCoreXboxOne = 32, PS5 = 33 }
         /** Target build platform. */
-        enum BuildTarget { StandaloneOSX = 2, StandaloneOSXUniversal = 3, StandaloneOSXIntel = 4, StandaloneWindows = 5, WebPlayer = 6, WebPlayerStreamed = 7, iOS = 9, PS3 = 10, XBOX360 = 11, Android = 13, StandaloneLinux = 17, StandaloneWindows64 = 19, WebGL = 20, WSAPlayer = 21, StandaloneLinux64 = 24, StandaloneLinuxUniversal = 25, WP8Player = 26, StandaloneOSXIntel64 = 27, BlackBerry = 28, Tizen = 29, PSP2 = 30, PS4 = 31, PSM = 32, XboxOne = 33, SamsungTV = 34, N3DS = 35, WiiU = 36, tvOS = 37, Switch = 38, Lumin = 39, Stadia = 40, CloudRendering = 41, iPhone = -1, BB10 = -1, MetroPlayer = -1, NoTarget = -2 }
+        enum BuildTarget { StandaloneOSX = 2, StandaloneOSXUniversal = 3, StandaloneOSXIntel = 4, StandaloneWindows = 5, WebPlayer = 6, WebPlayerStreamed = 7, iOS = 9, PS3 = 10, XBOX360 = 11, Android = 13, StandaloneLinux = 17, StandaloneWindows64 = 19, WebGL = 20, WSAPlayer = 21, StandaloneLinux64 = 24, StandaloneLinuxUniversal = 25, WP8Player = 26, StandaloneOSXIntel64 = 27, BlackBerry = 28, Tizen = 29, PSP2 = 30, PS4 = 31, PSM = 32, XboxOne = 33, SamsungTV = 34, N3DS = 35, WiiU = 36, tvOS = 37, Switch = 38, Lumin = 39, Stadia = 40, CloudRendering = 41, GameCoreScarlett = 42, GameCoreXboxSeries = 42, GameCoreXboxOne = 43, PS5 = 44, iPhone = -1, BB10 = -1, MetroPlayer = -1, NoTarget = -2 }
+        /** Whether you can append an existing build using BuildOptions.AcceptExternalModificationsToPlayer. */
+        enum CanAppendBuild { Unsupported = 0, Yes = 1, No = 2 }
         /** This class is used for entries in the Scenes list, as displayed in the window. This class contains the Scene path of a Scene and an enabled flag that indicates wether the Scene is enabled in the BuildSettings window or not.
         You can use this class in combination with EditorBuildSettings.scenes to populate the list of Scenes included in the build via script. This is useful when creating custom editor scripts to automate your build pipeline.
         See EditorBuildSettings.scenes for an example script. */
@@ -1860,13 +2056,15 @@ declare module 'csharp' {
             
         }
         /** Building options. Multiple options can be combined together. */
-        enum BuildOptions { None = 0, Development = 1, AutoRunPlayer = 4, ShowBuiltPlayer = 8, BuildAdditionalStreamedScenes = 16, AcceptExternalModificationsToPlayer = 32, InstallInBuildFolder = 64, WebPlayerOfflineDeployment = 128, ConnectWithProfiler = 256, AllowDebugging = 512, SymlinkLibraries = 1024, UncompressedAssetBundle = 2048, StripDebugSymbols = 0, CompressTextures = 0, ConnectToHost = 4096, EnableHeadlessMode = 16384, BuildScriptsOnly = 32768, PatchPackage = 65536, Il2CPP = 0, ForceEnableAssertions = 131072, CompressWithLz4 = 262144, CompressWithLz4HC = 524288, ForceOptimizeScriptCompilation = 0, ComputeCRC = 1048576, StrictMode = 2097152, IncludeTestAssemblies = 4194304, NoUniqueIdentifier = 8388608, WaitForPlayerConnection = 33554432, EnableCodeCoverage = 67108864, EnableDeepProfilingSupport = 268435456 }
+        enum BuildOptions { None = 0, Development = 1, AutoRunPlayer = 4, ShowBuiltPlayer = 8, BuildAdditionalStreamedScenes = 16, AcceptExternalModificationsToPlayer = 32, InstallInBuildFolder = 64, WebPlayerOfflineDeployment = 128, ConnectWithProfiler = 256, AllowDebugging = 512, SymlinkLibraries = 1024, UncompressedAssetBundle = 2048, StripDebugSymbols = 0, CompressTextures = 0, ConnectToHost = 4096, EnableHeadlessMode = 16384, BuildScriptsOnly = 32768, PatchPackage = 65536, Il2CPP = 0, ForceEnableAssertions = 131072, CompressWithLz4 = 262144, CompressWithLz4HC = 524288, ForceOptimizeScriptCompilation = 0, ComputeCRC = 1048576, StrictMode = 2097152, IncludeTestAssemblies = 4194304, NoUniqueIdentifier = 8388608, WaitForPlayerConnection = 33554432, EnableCodeCoverage = 67108864, EnableDeepProfilingSupport = 268435456, DetailedBuildReport = 536870912, ShaderLivelinkSupport = 1073741824 }
         /** Provide various options to control the behavior of BuildPipeline.BuildPlayer. */
         class BuildPlayerOptions extends System.ValueType {
             
         }
         /** Asset Bundle building options. */
-        enum BuildAssetBundleOptions { None = 0, UncompressedAssetBundle = 1, CollectDependencies = 2, CompleteAssets = 4, DisableWriteTypeTree = 8, DeterministicAssetBundle = 16, ForceRebuildAssetBundle = 32, IgnoreTypeTreeChanges = 64, AppendHashToAssetBundleName = 128, ChunkBasedCompression = 256, StrictMode = 512, DryRunBuild = 1024, DisableLoadAssetByFileName = 4096, DisableLoadAssetByFileNameWithExtension = 8192, AssetBundleStripUnityVersion = 32768, EnableProtection = 65536 }
+        enum BuildAssetBundleOptions { None = 0, UncompressedAssetBundle = 1, CollectDependencies = 2, CompleteAssets = 4, DisableWriteTypeTree = 8, DeterministicAssetBundle = 16, ForceRebuildAssetBundle = 32, IgnoreTypeTreeChanges = 64, AppendHashToAssetBundleName = 128, ChunkBasedCompression = 256, StrictMode = 512, DryRunBuild = 1024, DisableLoadAssetByFileName = 4096, DisableLoadAssetByFileNameWithExtension = 8192, AssetBundleStripUnityVersion = 32768 }
+        /** Describes how the player connects to the Editor. */
+        enum PlayerConnectionInitiateMode { None = 0, PlayerConnectsToHost = 1, PlayerListens = 2 }
         /** User build settings for the Editor */
         class EditorUserBuildSettings extends UnityEngine.Object {
             /** The currently selected build target group. */
@@ -1941,12 +2139,6 @@ declare module 'csharp' {
             
             public static get androidBuildType(): UnityEditor.AndroidBuildType;
             public static set androidBuildType(value: UnityEditor.AndroidBuildType);
-            
-            public static get androidDebugMinification(): UnityEditor.AndroidMinification;
-            public static set androidDebugMinification(value: UnityEditor.AndroidMinification);
-            
-            public static get androidReleaseMinification(): UnityEditor.AndroidMinification;
-            public static set androidReleaseMinification(value: UnityEditor.AndroidMinification);
             /** Set to true to create a symbols.zip file in the same location as the .apk or .aab file. */
             public static get androidCreateSymbolsZip(): boolean;
             public static set androidCreateSymbolsZip(value: boolean);
@@ -2012,20 +2204,23 @@ declare module 'csharp' {
             public static get iOSBuildConfigType(): UnityEditor.iOSBuildType;
             public static set iOSBuildConfigType(value: UnityEditor.iOSBuildType);
             
-            public static get switchCreateSolutionFile(): boolean;
-            public static set switchCreateSolutionFile(value: boolean);
-            
             public static get switchCreateRomFile(): boolean;
             public static set switchCreateRomFile(value: boolean);
             
             public static get switchNVNGraphicsDebugger(): boolean;
             public static set switchNVNGraphicsDebugger(value: boolean);
             
+            public static get generateNintendoSwitchShaderInfo(): boolean;
+            public static set generateNintendoSwitchShaderInfo(value: boolean);
+            
             public static get switchNVNShaderDebugging(): boolean;
             public static set switchNVNShaderDebugging(value: boolean);
             
-            public static get switchNVNDrawValidation(): boolean;
-            public static set switchNVNDrawValidation(value: boolean);
+            public static get switchNVNDrawValidation_Light(): boolean;
+            public static set switchNVNDrawValidation_Light(value: boolean);
+            
+            public static get switchNVNDrawValidation_Heavy(): boolean;
+            public static set switchNVNDrawValidation_Heavy(value: boolean);
             
             public static get switchEnableHeapInspector(): boolean;
             public static set switchEnableHeapInspector(value: boolean);
@@ -2035,6 +2230,12 @@ declare module 'csharp' {
             
             public static get switchRedirectWritesToHostMount(): boolean;
             public static set switchRedirectWritesToHostMount(value: boolean);
+            
+            public static get switchHTCSScriptDebugging(): boolean;
+            public static set switchHTCSScriptDebugging(value: boolean);
+            
+            public static get switchUseLegacyNvnPoolAllocator(): boolean;
+            public static set switchUseLegacyNvnPoolAllocator(value: boolean);
             /** Place the built player in the build folder. */
             public static get installInBuildFolder(): boolean;
             public static set installInBuildFolder(value: boolean);
@@ -2079,7 +2280,7 @@ declare module 'csharp' {
         /** Target Xbox build type. */
         enum XboxBuildSubtarget { Development = 0, Master = 1, Debug = 2 }
         
-        enum XboxOneDeployMethod { Push = 0, Pull = 1, RunFromPC = 2, Package = 3, PackageStreaming = 4 }
+        enum XboxOneDeployMethod { Push = 0, RunFromPC = 2, Package = 3, PackageStreaming = 4 }
         
         enum XboxOneDeployDrive { Default = 0, Retail = 1, Development = 2, Ext1 = 3, Ext2 = 4, Ext3 = 5, Ext4 = 6, Ext5 = 7, Ext6 = 8, Ext7 = 9 }
         /** Compressed texture format for target build platform. */
@@ -2090,8 +2291,6 @@ declare module 'csharp' {
         enum AndroidBuildSystem { Internal = 0, Gradle = 1, ADT = 2, VisualStudio = 3 }
         /** Build configurations for the generated project. */
         enum AndroidBuildType { Debug = 0, Development = 1, Release = 2 }
-        /** How to minify the java code of your binary. */
-        enum AndroidMinification { None = 0, Proguard = 1, Gradle = 2 }
         /** Target device type for a Windows Store application to run on. */
         enum WSASubtarget { AnyDevice = 0, PC = 1, Mobile = 2, HoloLens = 3 }
         
@@ -2102,6 +2301,8 @@ declare module 'csharp' {
         enum WSABuildAndRunDeployTarget { LocalMachine = 0, WindowsPhone = 1, DevicePortal = 2 }
         /** Build configurations for the generated Xcode project. */
         enum iOSBuildType { Debug = 0, Release = 1 }
+        /** How to minify the java code of your binary. */
+        enum AndroidMinification { None = 0, Proguard = 1, Gradle = 2 }
         /** SceneAsset is used to reference Scene objects in the Editor. */
         class SceneAsset extends UnityEngine.Object {
             
@@ -2203,31 +2404,42 @@ declare module 'csharp' {
              * @param allowDestroyingAssets Set to true to allow assets to be destroyed.
              */
             public static DestroyImmediate($obj: UnityEngine.Object):void;
-            /** Returns a list of all active loaded objects of Type type.
+            /** Gets a list of all loaded objects of Type type.
              * @param type The type of object to find.
              * @param includeInactive If true, components attached to inactive GameObjects are also included.
              * @returns The array of objects found matching the type specified. 
              */
             public static FindObjectsOfType($type: System.Type):System.Array$1<UnityEngine.Object>;
+            /** Gets a list of all loaded objects of Type type.
+             * @param type The type of object to find.
+             * @param includeInactive If true, components attached to inactive GameObjects are also included.
+             * @returns The array of objects found matching the type specified. 
+             */
+            public static FindObjectsOfType($type: System.Type, $includeInactive: boolean):System.Array$1<UnityEngine.Object>;
             /** Do not destroy the target Object when loading a new Scene. * @param target An Object not destroyed on Scene change.
              */
             public static DontDestroyOnLoad($target: UnityEngine.Object):void;
             /** Returns the first active loaded object of Type type.
              * @param type The type of object to find.
-             * @returns This returns the  Object that matches the specified type. It returns null if no Object matches the type. 
+             * @returns Object The first active loaded object that matches the specified type. It returns null if no Object matches the type. 
              */
             public static FindObjectOfType($type: System.Type):UnityEngine.Object;
+            /** Returns the first active loaded object of Type type.
+             * @param type The type of object to find.
+             * @returns Object The first active loaded object that matches the specified type. It returns null if no Object matches the type. 
+             */
+            public static FindObjectOfType($type: System.Type, $includeInactive: boolean):UnityEngine.Object;
             
             public static op_Equality($x: UnityEngine.Object, $y: UnityEngine.Object):boolean;
             
             public static op_Inequality($x: UnityEngine.Object, $y: UnityEngine.Object):boolean;
             
         }
-        /** Represent the hash value. */
+        /** Represents  a 128-bit hash value. */
         class Hash128 extends System.ValueType {
             
         }
-        /** Base class for texture handling. Contains functionality that is common to both Texture2D and RenderTexture classes. */
+        /** Base class for Texture handling. */
         class Texture extends UnityEngine.Object {
             
         }
@@ -2274,7 +2486,7 @@ declare module 'csharp' {
             public static get dataPath(): string;
             /** The path to the StreamingAssets folder (Read Only). */
             public static get streamingAssetsPath(): string;
-            /** Contains the path to a persistent data directory (Read Only). */
+            /** (Read Only) Contains the path to a persistent data directory. */
             public static get persistentDataPath(): string;
             /** Contains the path to a temporary data / cache directory (Read Only). */
             public static get temporaryCachePath(): string;
@@ -2391,6 +2603,10 @@ declare module 'csharp' {
             
             public static remove_quitting($value: System.Action):void;
             
+            public static add_unloading($value: System.Action):void;
+            
+            public static remove_unloading($value: System.Action):void;
+            
         }
         /** Application installation mode (Read Only). */
         enum ApplicationInstallMode { Unknown = 0, Store = 1, DeveloperBuild = 2, Adhoc = 3, Enterprise = 4, Editor = 5 }
@@ -2413,7 +2629,7 @@ declare module 'csharp' {
         /** Constants to pass to Application.RequestUserAuthorization. */
         enum UserAuthorization { WebCam = 1, Microphone = 2 }
         /** The platform application is running. Returned by Application.platform. */
-        enum RuntimePlatform { OSXEditor = 0, OSXPlayer = 1, WindowsPlayer = 2, OSXWebPlayer = 3, OSXDashboardPlayer = 4, WindowsWebPlayer = 5, WindowsEditor = 7, IPhonePlayer = 8, XBOX360 = 10, PS3 = 9, Android = 11, NaCl = 12, FlashPlayer = 15, LinuxPlayer = 13, LinuxEditor = 16, WebGLPlayer = 17, MetroPlayerX86 = 18, WSAPlayerX86 = 18, MetroPlayerX64 = 19, WSAPlayerX64 = 19, MetroPlayerARM = 20, WSAPlayerARM = 20, WP8Player = 21, BB10Player = 22, BlackBerryPlayer = 22, TizenPlayer = 23, PSP2 = 24, PS4 = 25, PSM = 26, XboxOne = 27, SamsungTVPlayer = 28, WiiU = 30, tvOS = 31, Switch = 32, Lumin = 33, Stadia = 34, CloudRendering = 35 }
+        enum RuntimePlatform { OSXEditor = 0, OSXPlayer = 1, WindowsPlayer = 2, OSXWebPlayer = 3, OSXDashboardPlayer = 4, WindowsWebPlayer = 5, WindowsEditor = 7, IPhonePlayer = 8, XBOX360 = 10, PS3 = 9, Android = 11, NaCl = 12, FlashPlayer = 15, LinuxPlayer = 13, LinuxEditor = 16, WebGLPlayer = 17, MetroPlayerX86 = 18, WSAPlayerX86 = 18, MetroPlayerX64 = 19, WSAPlayerX64 = 19, MetroPlayerARM = 20, WSAPlayerARM = 20, WP8Player = 21, BB10Player = 22, BlackBerryPlayer = 22, TizenPlayer = 23, PSP2 = 24, PS4 = 25, PSM = 26, XboxOne = 27, SamsungTVPlayer = 28, WiiU = 30, tvOS = 31, Switch = 32, Lumin = 33, Stadia = 34, CloudRendering = 35, GameCoreScarlett = 36, GameCoreXboxSeries = 36, GameCoreXboxOne = 37, PS5 = 38 }
         /** The language the user's operating system is running in. Returned by Application.systemLanguage. */
         enum SystemLanguage { Afrikaans = 0, Arabic = 1, Basque = 2, Belarusian = 3, Bulgarian = 4, Catalan = 5, Chinese = 6, Czech = 7, Danish = 8, Dutch = 9, English = 10, Estonian = 11, Faroese = 12, Finnish = 13, French = 14, German = 15, Greek = 16, Hebrew = 17, Hugarian = 18, Icelandic = 19, Indonesian = 20, Italian = 21, Japanese = 22, Korean = 23, Latvian = 24, Lithuanian = 25, Norwegian = 26, Polish = 27, Portuguese = 28, Romanian = 29, Russian = 30, SerboCroatian = 31, Slovak = 32, Slovenian = 33, Spanish = 34, Swedish = 35, Thai = 36, Turkish = 37, Ukrainian = 38, Vietnamese = 39, ChineseSimplified = 40, ChineseTraditional = 41, Unknown = 42, Hungarian = 18 }
         /** Describes network reachability options. */
@@ -2749,7 +2965,12 @@ declare module 'csharp' {
              * @returns The location that RotateTowards generates. 
              */
             public static RotateTowards($current: UnityEngine.Vector3, $target: UnityEngine.Vector3, $maxRadiansDelta: number, $maxMagnitudeDelta: number):UnityEngine.Vector3;
-            /** Linearly interpolates between two points. */
+            /** Linearly interpolates between two points.
+             * @param a Start value, returned when t = 0.
+             * @param b End value, returned when t = 1.
+             * @param t Value used to interpolate between a and b.
+             * @returns Interpolated value, equals to a + (b - a) * t. 
+             */
             public static Lerp($a: UnityEngine.Vector3, $b: UnityEngine.Vector3, $t: number):UnityEngine.Vector3;
             /** Linearly interpolates between two vectors. */
             public static LerpUnclamped($a: UnityEngine.Vector3, $b: UnityEngine.Vector3, $t: number):UnityEngine.Vector3;
@@ -2857,8 +3078,14 @@ declare module 'csharp' {
             public static op_Inequality($lhs: UnityEngine.Vector3, $rhs: UnityEngine.Vector3):boolean;
             
             public ToString():string;
-            /** Returns a nicely formatted string for this vector. */
+            /** Returns a formatted string for this vector. * @param format A numeric format string.
+             * @param formatProvider An object that specifies culture-specific formatting.
+             */
             public ToString($format: string):string;
+            /** Returns a formatted string for this vector. * @param format A numeric format string.
+             * @param formatProvider An object that specifies culture-specific formatting.
+             */
+            public ToString($format: string, $formatProvider: System.IFormatProvider):string;
             
             public constructor();
             
@@ -2927,8 +3154,14 @@ declare module 'csharp' {
             public Normalize():void;
             
             public ToString():string;
-            /** Returns a nicely formatted string for this vector. */
+            /** Returns a formatted string for this vector. * @param format A numeric format string.
+             * @param formatProvider An object that specifies culture-specific formatting.
+             */
             public ToString($format: string):string;
+            /** Returns a formatted string for this vector. * @param format A numeric format string.
+             * @param formatProvider An object that specifies culture-specific formatting.
+             */
+            public ToString($format: string, $formatProvider: System.IFormatProvider):string;
             /** Returns true if the given vector is exactly equal to this vector. */
             public Equals($other: any):boolean;
             
@@ -3018,28 +3251,38 @@ declare module 'csharp' {
             public static Equals($objA: any, $objB: any):boolean;
             
         }
-        /** The interface to get time information from Unity. */
+        /** Provides an interface to get time information from Unity. */
         class Time extends System.Object {
-            /** The time at the beginning of this frame (Read Only). This is the time in seconds since the start of the game. */
+            /** The time at the beginning of this frame (Read Only). */
             public static get time(): number;
-            /** The time this frame has started (Read Only). This is the time in seconds since the last level has been loaded. */
+            /** The double precision time at the beginning of this frame (Read Only). This is the time in seconds since the start of the game. */
+            public static get timeAsDouble(): number;
+            /** The time since this frame started (Read Only). This is the time in seconds since the last non-additive scene has finished loading. */
             public static get timeSinceLevelLoad(): number;
-            /** The completion time in seconds since the last frame (Read Only). */
+            /** The double precision time since this frame started (Read Only). This is the time in seconds since the last non-additive scene has finished loading. */
+            public static get timeSinceLevelLoadAsDouble(): number;
+            /** The interval in seconds from the last frame to the current one (Read Only). */
             public static get deltaTime(): number;
-            /** The time the latest MonoBehaviour.FixedUpdate has started (Read Only). This is the time in seconds since the start of the game. */
+            /** The time since the last MonoBehaviour.FixedUpdate started (Read Only). This is the time in seconds since the start of the game. */
             public static get fixedTime(): number;
-            /** The timeScale-independant time for this frame (Read Only). This is the time in seconds since the start of the game. */
+            /** The double precision time since the last MonoBehaviour.FixedUpdate started (Read Only). This is the time in seconds since the start of the game. */
+            public static get fixedTimeAsDouble(): number;
+            /** The timeScale-independent time for this frame (Read Only). This is the time in seconds since the start of the game. */
             public static get unscaledTime(): number;
-            /** The TimeScale-independant time the latest MonoBehaviour.FixedUpdate has started (Read Only). This is the time in seconds since the start of the game. */
+            /** The double precision timeScale-independent time for this frame (Read Only). This is the time in seconds since the start of the game. */
+            public static get unscaledTimeAsDouble(): number;
+            /** The timeScale-independent time at the beginning of the last MonoBehaviour.FixedUpdate phase (Read Only). This is the time in seconds since the start of the game. */
             public static get fixedUnscaledTime(): number;
+            /** The double precision timeScale-independent time at the beginning of the last MonoBehaviour.FixedUpdate (Read Only). This is the time in seconds since the start of the game. */
+            public static get fixedUnscaledTimeAsDouble(): number;
             /** The timeScale-independent interval in seconds from the last frame to the current one (Read Only). */
             public static get unscaledDeltaTime(): number;
-            /** The timeScale-independent interval in seconds from the last fixed frame to the current one (Read Only). */
+            /** The timeScale-independent interval in seconds from the last MonoBehaviour.FixedUpdate phase to the current one (Read Only). */
             public static get fixedUnscaledDeltaTime(): number;
             /** The interval in seconds at which physics and other fixed frame rate updates (like MonoBehaviour's MonoBehaviour.FixedUpdate) are performed. */
             public static get fixedDeltaTime(): number;
             public static set fixedDeltaTime(value: number);
-            /** The maximum time a frame can take. Physics and other fixed frame rate updates (like MonoBehaviour's MonoBehaviour.FixedUpdate) will be performed only for this duration of time per frame. */
+            /** The maximum value of Time.deltaTime in any given frame. This is a time in seconds that limits the increase of Time.time between two frames. */
             public static get maximumDeltaTime(): number;
             public static set maximumDeltaTime(value: number);
             /** A smoothed out Time.deltaTime (Read Only). */
@@ -3047,16 +3290,18 @@ declare module 'csharp' {
             /** The maximum time a frame can spend on particle updates. If the frame takes longer than this, then updates are split into multiple smaller updates. */
             public static get maximumParticleDeltaTime(): number;
             public static set maximumParticleDeltaTime(value: number);
-            /** The scale at which time passes. This can be used for slow motion effects. */
+            /** The scale at which time passes. */
             public static get timeScale(): number;
             public static set timeScale(value: number);
-            /** The total number of frames that have passed (Read Only). */
+            /** The total number of frames since the start of the game (Read Only). */
             public static get frameCount(): number;
             
             public static get renderedFrameCount(): number;
             /** The real time in seconds since the game started (Read Only). */
             public static get realtimeSinceStartup(): number;
-            /** Slows game playback time to allow screenshots to be saved between frames. */
+            /** The real time in seconds since the game started (Read Only). Double precision version of Time.realtimeSinceStartup.  */
+            public static get realtimeSinceStartupAsDouble(): number;
+            /** Slows your application’s playback time to allow Unity to save screenshots in between frames. */
             public static get captureDeltaTime(): number;
             public static set captureDeltaTime(value: number);
             /** The reciprocal of Time.captureDeltaTime. */
@@ -3143,11 +3388,12 @@ declare module 'csharp' {
             public Translate($translation: UnityEngine.Vector3, $relativeTo: UnityEngine.Transform):void;
             /** Moves the transform by x along the x axis, y along the y axis, and z along the z axis. */
             public Translate($x: number, $y: number, $z: number, $relativeTo: UnityEngine.Transform):void;
-            /** Applies a rotation of eulerAngles.z degrees around the z-axis, eulerAngles.x degrees around the x-axis, and eulerAngles.y degrees around the y-axis (in that order). * @param eulers The rotation to apply.
+            /** Applies a rotation of eulerAngles.z degrees around the z-axis, eulerAngles.x degrees around the x-axis, and eulerAngles.y degrees around the y-axis (in that order). * @param eulers The rotation to apply in euler angles.
              * @param relativeTo Determines whether to rotate the GameObject either locally to  the GameObject or relative to the Scene in world space.
              */
             public Rotate($eulers: UnityEngine.Vector3, $relativeTo: UnityEngine.Space):void;
-            
+            /** Applies a rotation of eulerAngles.z degrees around the z-axis, eulerAngles.x degrees around the x-axis, and eulerAngles.y degrees around the y-axis (in that order). * @param eulers The rotation to apply in euler angles.
+             */
             public Rotate($eulers: UnityEngine.Vector3):void;
             /** The implementation of this method applies a rotation of zAngle degrees around the z axis, xAngle degrees around the x axis, and yAngle degrees around the y axis (in that order). * @param relativeTo Determines whether to rotate the GameObject either locally to the GameObject or relative to the Scene in world space.
              * @param xAngle Degrees to rotate the GameObject around the X axis.
@@ -3155,14 +3401,19 @@ declare module 'csharp' {
              * @param zAngle Degrees to rotate the GameObject around the Z axis.
              */
             public Rotate($xAngle: number, $yAngle: number, $zAngle: number, $relativeTo: UnityEngine.Space):void;
-            
+            /** The implementation of this method applies a rotation of zAngle degrees around the z axis, xAngle degrees around the x axis, and yAngle degrees around the y axis (in that order). * @param xAngle Degrees to rotate the GameObject around the X axis.
+             * @param yAngle Degrees to rotate the GameObject around the Y axis.
+             * @param zAngle Degrees to rotate the GameObject around the Z axis.
+             */
             public Rotate($xAngle: number, $yAngle: number, $zAngle: number):void;
             /** Rotates the object around the given axis by the number of degrees defined by the given angle. * @param angle The degrees of rotation to apply.
              * @param axis The axis to apply rotation to.
              * @param relativeTo Determines whether to rotate the GameObject either locally to the GameObject or relative to the Scene in world space.
              */
             public Rotate($axis: UnityEngine.Vector3, $angle: number, $relativeTo: UnityEngine.Space):void;
-            
+            /** Rotates the object around the given axis by the number of degrees defined by the given angle. * @param axis The axis to apply rotation to.
+             * @param angle The degrees of rotation to apply.
+             */
             public Rotate($axis: UnityEngine.Vector3, $angle: number):void;
             /** Rotates the transform about axis passing through point in world coordinates by angle degrees. */
             public RotateAround($point: UnityEngine.Vector3, $axis: UnityEngine.Vector3, $angle: number):void;
@@ -3244,7 +3495,7 @@ declare module 'csharp' {
             public set tag(value: string);
             
             public constructor();
-            /** Returns the component of Type type if the game object has one attached, null if it doesn't. * @param type The type of Component to retrieve.
+            /** Returns the component of Type type if the GameObject has one attached, null if it doesn't. Will also return disabled components. * @param type The type of Component to retrieve.
              */
             public GetComponent($type: System.Type):UnityEngine.Component;
             /** Gets the component of the specified type, if it exists.
@@ -3253,7 +3504,7 @@ declare module 'csharp' {
              * @returns Returns true if the component is found, false otherwise. 
              */
             public TryGetComponent($type: System.Type, $component: $Ref<UnityEngine.Component>):boolean;
-            /** Returns the component with name type if the game object has one attached, null if it doesn't. */
+            /** Returns the component with name type if the GameObject has one attached, null if it doesn't. */
             public GetComponent($type: string):UnityEngine.Component;
             
             public GetComponentInChildren($t: System.Type, $includeInactive: boolean):UnityEngine.Component;
@@ -3262,8 +3513,8 @@ declare module 'csharp' {
              * @returns A component of the matching type, if found. 
              */
             public GetComponentInChildren($t: System.Type):UnityEngine.Component;
-            /** Returns all components of Type type in the GameObject or any of its children. * @param t The type of Component to retrieve.
-             * @param includeInactive Should Components on inactive GameObjects be included in the found set? includeInactive decides which children of the GameObject will be searched.  The GameObject that you call GetComponentsInChildren on is always searched regardless.
+            /** Returns all components of Type type in the GameObject or any of its children. Works recursively. * @param t The type of Component to retrieve.
+             * @param includeInactive Should Components on inactive GameObjects be included in the found set? includeInactive decides which children of the GameObject will be searched.  The GameObject that you call GetComponentsInChildren on is always searched regardless. Default is false.
              */
             public GetComponentsInChildren($t: System.Type, $includeInactive: boolean):System.Array$1<UnityEngine.Component>;
             
@@ -3652,7 +3903,14 @@ declare module 'csharp' {
              * @returns A component of the matching type, if found. 
              */
             public GetComponentInChildren($type: System.Type):UnityEngine.Component;
-            /** Returns the component of Type type in the GameObject or any of its parents. * @param type Type of component to find.
+            /** Retrieves the component of Type type in the GameObject or any of its parents.
+             * @param type Type of component to find.
+             * @returns Returns a component if a component matching the type is found. Returns null otherwise. 
+             */
+            public GetComponentInParent($type: System.Type, $includeInactive: boolean):UnityEngine.Component;
+            /** Retrieves the component of Type type in the GameObject or any of its parents.
+             * @param type Type of component to find.
+             * @returns Returns a component if a component matching the type is found. Returns null otherwise. 
              */
             public GetComponentInParent($type: System.Type):UnityEngine.Component;
             /** Returns all components of Type type in the GameObject. * @param type The type of component to retrieve.
@@ -3783,6 +4041,8 @@ declare module 'csharp' {
             public get limitVelocityOverLifetime(): UnityEngine.ParticleSystem.LimitVelocityOverLifetimeModule;
             /** Script interface for the InheritVelocityModule of a Particle System. */
             public get inheritVelocity(): UnityEngine.ParticleSystem.InheritVelocityModule;
+            /** Script interface for the Particle System Lifetime By Emitter Speed module. */
+            public get lifetimeByEmitterSpeed(): UnityEngine.ParticleSystem.LifetimeByEmitterSpeedModule;
             /** Script interface for the ForceOverLifetimeModule of a Particle System. */
             public get forceOverLifetime(): UnityEngine.ParticleSystem.ForceOverLifetimeModule;
             /** Script interface for the ColorOverLifetimeModule of a Particle System. */
@@ -3928,6 +4188,13 @@ declare module 'csharp' {
              */
             public static SetMaximumPreMappedBufferCounts($vertexBuffersCount: number, $indexBuffersCount: number):void;
             
+            public AllocateAxisOfRotationAttribute():void;
+            
+            public AllocateMeshIndexAttribute():void;
+            /** Ensures that the ParticleSystemJobs.ParticleSystemJobData.customData1|customData1 and ParticleSystemJobs.ParticleSystemJobData.customData1|customData2 particle attribute arrays are allocated. * @param stream The custom data stream to allocate.
+             */
+            public AllocateCustomDataAttribute($stream: UnityEngine.ParticleSystemCustomData):void;
+            
         }
         /** Representation of RGBA colors in 32 bit format. */
         class Color32 extends System.ValueType {
@@ -3993,6 +4260,8 @@ declare module 'csharp' {
             public set sortingLayerName(value: string);
             /** Returns the Canvas closest to root, by checking through each parent and returning the last canvas found. If no other canvas is found then the canvas will return itself. */
             public get rootCanvas(): UnityEngine.Canvas;
+            /** Returns the canvas display size based on the selected render mode and target display. */
+            public get renderingDisplaySize(): UnityEngine.Vector2;
             /** Camera used for sizing the Canvas when in Screen Space - Camera. Also used as the Camera that events will be sent through for a World Space [[Canvas]. */
             public get worldCamera(): UnityEngine.Camera;
             public set worldCamera(value: UnityEngine.Camera);
@@ -4001,6 +4270,10 @@ declare module 'csharp' {
             public set normalizedSortingGridSize(value: number);
             
             public constructor();
+            
+            public static add_preWillRenderCanvases($value: UnityEngine.Canvas.WillRenderCanvases):void;
+            
+            public static remove_preWillRenderCanvases($value: UnityEngine.Canvas.WillRenderCanvases):void;
             
             public static add_willRenderCanvases($value: UnityEngine.Canvas.WillRenderCanvases):void;
             
@@ -4078,14 +4351,14 @@ declare module 'csharp' {
             public constructor();
             /** Returns a list of all objects of Type type. */
             public static FindObjectsOfTypeAll($type: System.Type):System.Array$1<UnityEngine.Object>;
-            /** Loads an asset stored at path in a Resources folder.
-             * @param path Path to the target resource to load. When using an empty string (i.e., ""), the function loads the entire contents of the Resources folder.
+            /** Loads an asset stored at path in a Resources folder using an optional systemTypeInstance filter.
+             * @param path Path to the target resource to load.
              * @param systemTypeInstance Type filter for objects returned.
              * @returns The requested asset returned as an Object. 
              */
             public static Load($path: string):UnityEngine.Object;
-            /** Loads an asset stored at path in a Resources folder.
-             * @param path Path to the target resource to load. When using an empty string (i.e., ""), the function loads the entire contents of the Resources folder.
+            /** Loads an asset stored at path in a Resources folder using an optional systemTypeInstance filter.
+             * @param path Path to the target resource to load.
              * @param systemTypeInstance Type filter for objects returned.
              * @returns The requested asset returned as an Object. 
              */
@@ -4110,6 +4383,13 @@ declare module 'csharp' {
             public static UnloadAsset($assetToUnload: UnityEngine.Object):void;
             
             public static UnloadUnusedAssets():UnityEngine.AsyncOperation;
+            /** Translates an instance ID to an object reference.
+             * @param instanceID Instance ID of an Object.
+             * @returns Resolved reference or null if the instance ID didn't match anything. 
+             */
+            public static InstanceIDToObject($instanceID: number):UnityEngine.Object;
+            
+            public static InstanceIDToObjectList($instanceIDs: Unity.Collections.NativeArray$1<number>, $objects: System.Collections.Generic.List$1<UnityEngine.Object>):void;
             
         }
         /** Asynchronous load request from the Resources bundle. */
@@ -4120,7 +4400,7 @@ declare module 'csharp' {
         class AssetBundle extends UnityEngine.Object {
             /** Return true if the AssetBundle is a streamed Scene AssetBundle. */
             public get isStreamedSceneAssetBundle(): boolean;
-            /** Unloads all currently loaded Asset Bundles. * @param unloadAllObjects Determines whether the current instances of objects loaded from Asset Bundles will also be unloaded.
+            /** Unloads all currently loaded AssetBundles. * @param unloadAllObjects Determines whether the current instances of objects loaded from AssetBundles will also be unloaded.
              */
             public static UnloadAllAssetBundles($unloadAllObjects: boolean):void;
             
@@ -4185,8 +4465,6 @@ declare module 'csharp' {
             public static LoadFromStream($stream: System.IO.Stream, $crc: number):UnityEngine.AssetBundle;
             
             public static LoadFromStream($stream: System.IO.Stream):UnityEngine.AssetBundle;
-            
-            public static SetAssetBundleDecryptKey($password: string):void;
             /** Check if an AssetBundle contains a specific object. */
             public Contains($name: string):boolean;
             /** Loads asset with name of type T from the bundle. */
@@ -4213,7 +4491,8 @@ declare module 'csharp' {
             public LoadAllAssetsAsync():UnityEngine.AssetBundleRequest;
             /** Loads all assets contained in the asset bundle that inherit from type asynchronously. */
             public LoadAllAssetsAsync($type: System.Type):UnityEngine.AssetBundleRequest;
-            /** Unloads assets in the bundle. */
+            /** Unloads an AssetBundle freeing its data. * @param unloadAllLoadedObjects Determines whether the current instances of objects loaded from the AssetBundle will also be unloaded.
+             */
             public Unload($unloadAllLoadedObjects: boolean):void;
             
             public GetAllAssetNames():System.Array$1<string>;
@@ -4233,7 +4512,7 @@ declare module 'csharp' {
             
         }
         /** Asynchronous load request from an AssetBundle. */
-        class AssetBundleRequest extends UnityEngine.AsyncOperation {
+        class AssetBundleRequest extends UnityEngine.ResourceRequest {
             
         }
         /** Asynchronous AssetBundle recompression from one compression method and level to another. */
@@ -4246,10 +4525,10 @@ declare module 'csharp' {
         }
         /** Text file assets. */
         class TextAsset extends UnityEngine.Object {
-            /** The text contents of the .txt file as a string. (Read Only) */
-            public get text(): string;
             /** The raw bytes of the text asset. (Read Only) */
             public get bytes(): System.Array$1<number>;
+            /** The text contents of the .txt file as a string. (Read Only) */
+            public get text(): string;
             
             public constructor();
             
@@ -4270,7 +4549,7 @@ declare module 'csharp' {
             
         }
         /** Enumeration of the different types of supported touchscreen keyboards. */
-        enum TouchScreenKeyboardType { Default = 0, ASCIICapable = 1, NumbersAndPunctuation = 2, URL = 3, NumberPad = 4, PhonePad = 5, NamePhonePad = 6, EmailAddress = 7, NintendoNetworkAccount = 8, Social = 9, Search = 10, DecimalPad = 11 }
+        enum TouchScreenKeyboardType { Default = 0, ASCIICapable = 1, NumbersAndPunctuation = 2, URL = 3, NumberPad = 4, PhonePad = 5, NamePhonePad = 6, EmailAddress = 7, NintendoNetworkAccount = 8, Social = 9, Search = 10, DecimalPad = 11, OneTimeCode = 12 }
         /** A UnityGUI event. */
         class Event extends System.Object {
             
@@ -4306,7 +4585,7 @@ declare module 'csharp' {
             public static get anyKeyDown(): boolean;
             /** Returns the keyboard input entered this frame. (Read Only) */
             public static get inputString(): string;
-            /** The current mouse position in pixel coordinates. (Read Only) */
+            /** The current mouse position in pixel coordinates. (Read Only). */
             public static get mousePosition(): UnityEngine.Vector3;
             /** The current mouse scroll delta. (Read Only) */
             public static get mouseScrollDelta(): UnityEngine.Vector2;
@@ -4625,6 +4904,14 @@ declare module 'csharp' {
             
             public static DoAction($action: System.Action, $callBack: System.Action):void;
             
+            public static SetActive($trans: UnityEngine.Transform, $state: boolean):void;
+            
+            public static SetActive($name: string, $state: boolean):void;
+            
+            public static PlayAnim($trans: UnityEngine.Transform, $animName: string, $cb: System.Action):void;
+            
+            public static PlayAnim($name: string, $animName: string, $cb: System.Action):void;
+            
         }
         
         class TimelineHelper extends System.Object {
@@ -4912,6 +5199,8 @@ declare module 'csharp' {
         }
         
         class UnityEvent$1<T0> extends UnityEngine.Events.UnityEventBase {
+            
+            public constructor();
             
             public AddListener($call: UnityEngine.Events.UnityAction$1<T0>):void;
             
@@ -5222,6 +5511,10 @@ declare module 'csharp' {
         }
         
         class InheritVelocityModule extends System.ValueType {
+            
+        }
+        
+        class LifetimeByEmitterSpeedModule extends System.ValueType {
             
         }
         
@@ -5540,6 +5833,9 @@ declare module 'csharp' {
             
             public get shouldHideMobileInput(): boolean;
             public set shouldHideMobileInput(value: boolean);
+            
+            public get shouldActivateOnSelect(): boolean;
+            public set shouldActivateOnSelect(value: boolean);
             
             public get text(): string;
             public set text(value: string);

@@ -14,11 +14,9 @@ public class LevelScriptLoader : Puerts.ILoader
     public bool FileExists(string filepath)
     {
         if (filepath.StartsWith("puerts/")) return true;
-#if UNITY_EDITOR
+
         return File.Exists(Path.Combine(Application.streamingAssetsPath, filepath + ".txt").Replace("\\", "/"));
-#else
-	    return File.Exists(Path.Combine(Application.dataPath,"StreamingAssets", filepath + ".txt").Replace("\\", "/"));
-#endif
+
     }
     public string GetScriptDebugPath(string filepath)
     {
@@ -38,7 +36,7 @@ public class LevelScriptLoader : Puerts.ILoader
             return asset.text;
         }
         //Debug.Log(Path.Combine(Application.dataPath,"StreamingAssets", filepath + ".txt").Replace("\\", "/"));
-        return File.ReadAllText(Path.Combine(Application.dataPath,"StreamingAssets", filepath + ".txt").Replace("\\", "/"));
+        return File.ReadAllText(Path.Combine(Application.streamingAssetsPath, filepath + ".txt").Replace("\\", "/"));
 
     }
 
