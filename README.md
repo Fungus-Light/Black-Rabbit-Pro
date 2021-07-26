@@ -2,6 +2,8 @@
 
 **Black-Rabbit-Pro** 是一个拓展性很强的游戏开发框架
 
+### 致力于做游戏开发的JQuery~，（连语法都有相似之处）
+
 基于 fungus、puerts 等优秀的开源项目
 
 [**Black-Rabbit**](https://github.com/Fungus-Light/Black_Rabbit) 的完全升级版
@@ -15,7 +17,7 @@
 此外增加了新的特性：
 
 - 基于puerts，使用typescript作为主要编程语言
-- 为非程序配备了可视化逻辑生成器
+- 为非程序配备了可视化逻辑生成器(实验中)
 - 关卡组织结构便于拓展和更新
 - 程序友好的更精细的流程控制
 - CSharp代码更规范
