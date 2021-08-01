@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/BlackRabbitPro/Scenes/PreLoad.unity
+    guid: d0183c62d7327e449934719b3ae29e07
+  - enabled: 1
     path: Assets/BlackRabbitPro/Scenes/Entrance.unity
     guid: 6ec78fd7c3ff72c45a579f65eb314820
   - enabled: 1

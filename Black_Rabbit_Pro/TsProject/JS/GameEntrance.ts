@@ -29,8 +29,12 @@ class GameEntrance implements IGameLevel {
         if (Config.fullscreen) {
             ScreenMode = FullScreenMode.FullScreenWindow
         }
-
-        SetResolution(Config.resolution.w, Config.resolution.h, ScreenMode, Config.rate)
+        if (Application.platform == UnityEngine.RuntimePlatform.Android) {
+            Application.targetFrameRate = 60;
+        }
+        else {
+            SetResolution(Config.resolution.w, Config.resolution.h, ScreenMode, Config.rate)
+        }
 
         WaitForSeconds(1, () => {
 
@@ -58,8 +62,12 @@ class GameEntrance implements IGameLevel {
                             AssetHelper.Instance.loadType = AssetHelper.LoadType.Bundles
 
                             AssetHelper.Instance.Scenes.Clear()
-
-                            let EntranceBundle = AssetBundle.LoadFromFile(Path.Combine(Application.dataPath, "StreamingAssets", "GamePacks", EntranceBundleName))
+                            let EntranceBundle: AssetBundle = null;
+                            if (Application.platform == UnityEngine.RuntimePlatform.Android) {
+                                EntranceBundle = AssetBundle.LoadFromFile(Path.Combine(Application.persistentDataPath, "GamePacks", EntranceBundleName))
+                            } else {
+                                EntranceBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "GamePacks", EntranceBundleName))
+                            }
                             let ScenePaths = EntranceBundle.GetAllScenePaths();
                             let EntranceScenePath = null;
                             for (let i = 0; i < ScenePaths.Length; i++) {

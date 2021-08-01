@@ -14,9 +14,11 @@ public class LevelScriptLoader : Puerts.ILoader
     public bool FileExists(string filepath)
     {
         if (filepath.StartsWith("puerts/")) return true;
-
+#if UNITY_ANDROID
+        return File.Exists(Path.Combine(Application.persistentDataPath, filepath + ".txt").Replace("\\", "/"));
+#else
         return File.Exists(Path.Combine(Application.streamingAssetsPath, filepath + ".txt").Replace("\\", "/"));
-
+#endif
     }
     public string GetScriptDebugPath(string filepath)
     {
@@ -24,7 +26,7 @@ public class LevelScriptLoader : Puerts.ILoader
         {
             return Path.Combine(Application.dataPath, "BlackRabbitPro/Libs/Puerts/Src/Resources", filepath).Replace("\\", "/") + ".txt";
         }
-        return System.IO.Path.Combine(debugRoot, filepath+ ".txt").Replace("\\", "/");
+        return System.IO.Path.Combine(debugRoot, filepath + ".txt").Replace("\\", "/");
     }
 
     public string ReadFile(string filepath, out string debugpath)
@@ -35,8 +37,13 @@ public class LevelScriptLoader : Puerts.ILoader
             var asset = Resources.Load<TextAsset>(filepath);
             return asset.text;
         }
-        //Debug.Log(Path.Combine(Application.dataPath,"StreamingAssets", filepath + ".txt").Replace("\\", "/"));
+#if UNITY_ANDROID
+        return File.ReadAllText(Path.Combine(Application.persistentDataPath, filepath + ".txt").Replace("\\", "/"));
+#else
         return File.ReadAllText(Path.Combine(Application.streamingAssetsPath, filepath + ".txt").Replace("\\", "/"));
+#endif
+        //Debug.Log(Path.Combine(Application.dataPath,"StreamingAssets", filepath + ".txt").Replace("\\", "/"));
+
 
     }
 

@@ -4858,8 +4858,6 @@ declare module 'csharp' {
             
             public constructor();
             
-            public static ReadTextFile($path: string):string;
-            
             public static ReadStreamTextFile($filepath: string):string;
             
         }

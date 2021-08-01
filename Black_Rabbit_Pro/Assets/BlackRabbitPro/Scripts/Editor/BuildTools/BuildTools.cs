@@ -7,6 +7,14 @@ using Puerts;
 
 public class BuildTools
 {
+    [MenuItem("Build/Clear Persist")]
+    public static void ClearPersist()
+    {
+        DirectoryInfo info = new DirectoryInfo(Application.persistentDataPath);
+        info.Delete(true);
+    }
+
+    
 
     [MenuItem("Build/Init Packs")]
     public static void InitPacks()
