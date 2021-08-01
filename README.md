@@ -24,6 +24,8 @@
 
 此外，**Black-Rabbit-Pro** 依旧保留了对强叙事游戏的优势，可以轻松制作叙事类游戏。
 
+目前支持导出 PC 和 安卓平台（其他平台待测试）
+
 ---
 
 配置方式见[[文档](https://fungus-light.github.io/Black-Rabbit-Pro/)]
