@@ -6,7 +6,7 @@ public class GameObjectPool : MonoBehaviour
 {
     public static GameObjectPool Instance;
     public List<Transform> gameObjectPool;
-    private Dictionary<string, bool> NameDic;
+    private Dictionary<string, Transform> gameObjects;
     void Awake()
     {
         if (Instance == null)
@@ -15,21 +15,21 @@ public class GameObjectPool : MonoBehaviour
         }
         gameObjectPool = new List<Transform>();
 
-        NameDic = new Dictionary<string, bool>();
+        gameObjects = new Dictionary<string, Transform>();
 
         foreach (GameObject go in Resources.FindObjectsOfTypeAll<GameObject>())
         {
             if (go.name.StartsWith("$_") && go.scene.name != null)
             {
                 //Debug.LogWarning(go.scene.name);
-                if (NameDic.ContainsKey(go.name))
+                if (gameObjects.ContainsKey(go.name))
                 {
                     Debug.LogError("Exist Two Or More " + go.name);
                 }
                 else
                 {
                     gameObjectPool.Add(go.transform);
-                    NameDic.Add(go.name, true);
+                    gameObjects.Add(go.name, go.transform);
                 }
             }
         }
@@ -37,18 +37,15 @@ public class GameObjectPool : MonoBehaviour
 
     public Transform Find(string n)
     {
-        if (gameObjectPool.Count <= 0)
+        if (gameObjects.Count <= 0)
         {
             return null;
         }
         else
         {
-            for (int i = 0; i < gameObjectPool.Count; i++)
+            if (gameObjects.ContainsKey(n))
             {
-                if (gameObjectPool[i].name == n)
-                {
-                    return gameObjectPool[i];
-                }
+                return gameObjects[n];
             }
         }
         return null;
