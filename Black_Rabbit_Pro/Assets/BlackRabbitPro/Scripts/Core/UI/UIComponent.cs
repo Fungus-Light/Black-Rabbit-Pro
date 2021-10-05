@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIComponent : MonoBehaviour
 {
     public List<Transform> subObjects;
-    private Dictionary<string, Transform> subObjectsPool;
+    public Dictionary<string, Transform> subObjectsPool;
 
     private void Awake()
     {

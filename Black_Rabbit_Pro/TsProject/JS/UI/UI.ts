@@ -1,5 +1,5 @@
-import { System, UIHelper, UnityEngine } from "csharp"
-import { Debug } from "Utils/Common";
+import { System, UIHelper, UnityEngine,UIComponent, UILoader } from "csharp"
+import { Debug, GameObject, T, Transform } from "Utils/Common";
 
 class Button {
     btn: UnityEngine.UI.Button
@@ -52,11 +52,57 @@ function $Button(name: string): Button {
 
 const $Text = UIHelper.GetText
 
+interface IUIComponet{
+    object:GameObject
+    component:UIComponent
+    uiName:string
+    Show():void
+    Hide():void
+    Close():void
+    Open():void
+}
+class TsUComponent implements IUIComponet{
+    object:GameObject
+    Q(name:string):Transform{
+        return this.component.subObjectsPool.get_Item("#_"+name)
+    }
+    Q_Button(name:string):Button{
+        return new Button(this.Q(name).GetComponent(T(UnityEngine.UI.Button)) as UnityEngine.UI.Button) 
+    }
+    constructor(name:string){
+        this.object = UILoader.LoadUI(name)
+        this.uiName = name
+        this.component = <UIComponent>this.object.GetComponent(T(UIComponent))
+        this.object.SetActive(false)
+    }
+    OnDestroy():void{
+
+    }
+    Close(): void {
+        this.OnDestroy()
+    }
+    Open(): void {
+        this.Init()
+        this.Show()
+    }
+    Init(): void {
+    }
+    Show(): void {
+        this.object.SetActive(true)
+    }
+    Hide(): void {
+        this.object.SetActive(false)
+    }
+    uiName: string;
+    component: UIComponent;
+}
+
 export {
     $InputField,
     InputField,
     $Button,
     Button,
     $Text,
-    Text
+    Text,
+    TsUComponent,
 }

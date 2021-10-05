@@ -18,4 +18,17 @@ public class NameHelper
         }
         EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
     }
+
+    [MenuItem("Tools/Common/Inject to ui %&u")]
+    public static void QuickRenameUI()
+    {
+        foreach (Transform t in Selection.transforms)
+        {
+            if (t.name.StartsWith("#_") == false)
+            {
+                t.name = "#_" + t.name;
+            }
+        }
+        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+    }
 }

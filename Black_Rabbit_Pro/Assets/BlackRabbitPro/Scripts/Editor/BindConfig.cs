@@ -86,7 +86,11 @@ public class BindConfig
 
                 typeof(Tweens),
                 typeof(AssetHelper),
-                typeof(AssetHelper.LoadType)
+                typeof(AssetHelper.LoadType),
+
+                typeof(UILoader),
+                typeof(UIComponent),
+                
             };
         }
     }

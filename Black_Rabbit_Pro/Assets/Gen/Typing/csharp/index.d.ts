@@ -4880,6 +4880,8 @@ declare module 'csharp' {
             
             public Find($n: string):UnityEngine.Transform;
             
+            public RegGameObject($name: string, $obj: UnityEngine.Transform):void;
+            
         }
         
         class CommonJsCall extends UnityEngine.MonoBehaviour {
@@ -5114,6 +5116,10 @@ declare module 'csharp' {
             
             public static Instance: AssetHelper;
             
+            public SceneBundle: UnityEngine.AssetBundle;
+            
+            public UIBundle: UnityEngine.AssetBundle;
+            
             public Scenes: System.Collections.Generic.Dictionary$2<string, string>;
             
             public constructor();
@@ -5121,6 +5127,24 @@ declare module 'csharp' {
             public static GetAssetHelper():AssetHelper;
             
             public GetAllScenes():System.Array$1<string>;
+            
+        }
+        
+        class UILoader extends System.Object {
+            
+            public constructor();
+            
+            public static LoadUI($name: string):UnityEngine.GameObject;
+            
+        }
+        
+        class UIComponent extends UnityEngine.MonoBehaviour {
+            
+            public subObjects: System.Collections.Generic.List$1<UnityEngine.Transform>;
+            
+            public subObjectsPool: System.Collections.Generic.Dictionary$2<string, UnityEngine.Transform>;
+            
+            public constructor();
             
         }
         

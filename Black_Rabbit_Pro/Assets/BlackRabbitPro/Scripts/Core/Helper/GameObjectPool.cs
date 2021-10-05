@@ -50,6 +50,14 @@ public class GameObjectPool : MonoBehaviour
         }
         return null;
     }
+
+    public void RegGameObject(string name,Transform obj){
+        if(gameObjects.ContainsKey(name)){
+            Debug.LogError("Already Exist "+name);
+            return;
+        }
+        gameObjects.Add(name,obj);
+    }
     // Start is called before the first frame update
     void Start()
     {

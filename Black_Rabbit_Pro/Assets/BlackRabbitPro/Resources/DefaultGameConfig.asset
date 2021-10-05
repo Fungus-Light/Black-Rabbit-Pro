@@ -19,7 +19,7 @@ MonoBehaviour:
     h: 720
   fullscreen: 0
   entranceBundle: example
-  mode: 0
+  mode: 1
   rate: 60
   isDebugMode: 0
   Port: 4396

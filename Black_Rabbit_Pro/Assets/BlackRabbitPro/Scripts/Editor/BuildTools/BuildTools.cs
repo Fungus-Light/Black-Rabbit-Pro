@@ -14,7 +14,7 @@ public class BuildTools
         info.Delete(true);
     }
 
-    
+
 
     [MenuItem("Build/Init Packs")]
     public static void InitPacks()
@@ -77,7 +77,7 @@ public class BuildTools
 
                         }
                     }
-                    
+
                     build.assetNames = Assets.ToArray();
                     builds.Add(build);
                 }
@@ -90,12 +90,31 @@ public class BuildTools
             }
 
         }
+        
+        DirectoryInfo uiDir = new DirectoryInfo(Path.Combine(Application.dataPath, "UIs"));
+        AssetBundleBuild uibuild = new AssetBundleBuild();
+        uibuild.assetBundleName = uiDir.Name.ToLower();
+        List<string> UIAssets = new List<string>();
+        foreach (FileInfo file in uiDir.GetFiles())
+        {
+            if (file.Extension == ".prefab")
+            {
+
+                UIAssets.Add(Path.Combine("Assets", uiDir.Name, file.Name).Replace("\\", "/"));
+            }
+        }
+
+        uibuild.assetNames = UIAssets.ToArray();
+        builds.Add(uibuild);
+
         string output = Path.Combine(Application.dataPath, "StreamingAssets", "GamePacks").Replace("\\", "/");
         if (Directory.Exists(output) == false)
         {
             Directory.CreateDirectory(output);
         }
         BuildPipeline.BuildAssetBundles(output, builds.ToArray(), BuildAssetBundleOptions.None, EditorUserBuildSettings.activeBuildTarget);
+
+
         AssetDatabase.Refresh();
     }
 }

@@ -273,7 +273,8 @@ function JumpOverScale(name: string, overscale: number, timescale: number, callb
 }
 
 declare module "JS/UI/UI"{
-import { System, UIHelper, UnityEngine } from "csharp";
+import { System, UIHelper, UnityEngine, UIComponent } from "csharp";
+import { GameObject, Transform } from "JS/Utils/Common";
 class Button {
     btn: UnityEngine.UI.Button;
     constructor(btn: UnityEngine.UI.Button);
@@ -291,6 +292,29 @@ class InputField {
 function $InputField(name: string): InputField;
 function $Button(name: string): Button;
 const $Text: typeof UIHelper.GetText;
+interface IUIComponet {
+    object: GameObject;
+    component: UIComponent;
+    uiName: string;
+    Show(): void;
+    Hide(): void;
+    Close(): void;
+    Open(): void;
+}
+class TsUComponent implements IUIComponet {
+    object: GameObject;
+    Q(name: string): Transform;
+    Q_Button(name: string): Button;
+    constructor(name: string);
+    OnDestroy(): void;
+    Close(): void;
+    Open(): void;
+    Init(): void;
+    Show(): void;
+    Hide(): void;
+    uiName: string;
+    component: UIComponent;
+}
 
 }
 

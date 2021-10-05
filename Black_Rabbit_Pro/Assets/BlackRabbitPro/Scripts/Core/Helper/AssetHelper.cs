@@ -18,6 +18,9 @@ public class AssetHelper : MonoBehaviour
         return Instance;
     }
 
+    public AssetBundle SceneBundle;
+    public AssetBundle UIBundle;
+
     public Dictionary<string, string> Scenes;
 
     public string[] GetAllScenes(){

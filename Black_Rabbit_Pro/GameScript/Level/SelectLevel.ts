@@ -23,6 +23,8 @@ class SelectLevel implements IGameLevel {
 
         let tweenAnimBTN = $Button("tweenAnim")
 
+        let UISystem = $Button("UISystem")
+
         helloBTN.RegClickCallBack("click",()=>{
             $SceneLoader().LoadScene("HelloWorld")
         })
@@ -37,6 +39,10 @@ class SelectLevel implements IGameLevel {
 
         tweenAnimBTN.RegClickCallBack("click", () => {
             $SceneLoader().LoadScene("TweenAnimShow")
+        })
+
+        UISystem.RegClickCallBack("click",()=>{
+            $SceneLoader().LoadScene("ComplexUI")
         })
 
     }

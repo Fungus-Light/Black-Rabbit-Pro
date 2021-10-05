@@ -124,6 +124,7 @@ function RegGameObject(obj: GameObject, newName: string) {
         if ($(newName) == null) {
             obj.name = newName
             GameObjectPool.Instance.gameObjectPool.Add(obj.transform)
+            GameObjectPool.Instance.RegGameObject(newName,obj.transform)
         } else {
             Debug.LogError("Already Exist this name")
         }
