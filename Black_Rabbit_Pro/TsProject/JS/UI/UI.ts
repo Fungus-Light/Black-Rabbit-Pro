@@ -63,6 +63,7 @@ interface IUIComponet{
 }
 class TsUComponent implements IUIComponet{
     object:GameObject
+    needReload:boolean
     Q(name:string):Transform{
         return this.component.subObjectsPool.get_Item("#_"+name)
     }
@@ -74,14 +75,30 @@ class TsUComponent implements IUIComponet{
         this.uiName = name
         this.component = <UIComponent>this.object.GetComponent(T(UIComponent))
         this.object.SetActive(false)
+        this.component.update = this.Update
+        this.component.destroy = this.OnDestroy
+        this.needReload = false
     }
     OnDestroy():void{
-
+        Debug.Log("this will clean")
+        this.object = null
+        this.component = null
+        this.needReload = true
+        Debug.Log("this will clean done")
     }
     Close(): void {
-        this.OnDestroy()
+        
     }
     Open(): void {
+        Debug.Log("reload"+this.needReload)
+        if(this.needReload){
+            Debug.Log("this need reload")
+            this.object = UILoader.LoadUI(this.uiName)
+            this.component = <UIComponent>this.object.GetComponent(T(UIComponent))
+            this.component.update = this.Update
+            this.component.destroy = this.OnDestroy
+            this.needReload = false
+        }
         this.Init()
         this.Show()
     }
@@ -92,6 +109,9 @@ class TsUComponent implements IUIComponet{
     }
     Hide(): void {
         this.object.SetActive(false)
+    }
+    Update():void{
+
     }
     uiName: string;
     component: UIComponent;

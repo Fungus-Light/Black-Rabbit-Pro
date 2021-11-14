@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class UIComponent : MonoBehaviour
 {
     public List<Transform> subObjects;
     public Dictionary<string, Transform> subObjectsPool;
 
+    public Action update,destroy;
     private void Awake()
     {
         subObjectsPool = new Dictionary<string, Transform>();
@@ -37,6 +39,17 @@ public class UIComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (update!=null)
+        {
+            update();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (destroy != null)
+        {
+            destroy();
+        }
     }
 }

@@ -303,6 +303,7 @@ interface IUIComponet {
 }
 class TsUComponent implements IUIComponet {
     object: GameObject;
+    needReload: boolean;
     Q(name: string): Transform;
     Q_Button(name: string): Button;
     constructor(name: string);
@@ -312,6 +313,7 @@ class TsUComponent implements IUIComponet {
     Init(): void;
     Show(): void;
     Hide(): void;
+    Update(): void;
     uiName: string;
     component: UIComponent;
 }

@@ -5144,6 +5144,10 @@ declare module 'csharp' {
             
             public subObjectsPool: System.Collections.Generic.Dictionary$2<string, UnityEngine.Transform>;
             
+            public update: System.Action;
+            
+            public destroy: System.Action;
+            
             public constructor();
             
         }

@@ -1,5 +1,5 @@
 /*================Dont Delete This=========================*/
-import { UIExampleComponent } from "ExampleUI/UIExampleComponent";
+import { $ExampleComponent} from "ExampleUI/UIExampleComponent";
 import { IGameLevel } from "JS/Interface/IGameLevel";
 import { Debug, Transform , $ } from "JS/Utils/Common"
 
@@ -13,6 +13,7 @@ class UISystem implements IGameLevel {
     root: Transform;
     OnStart(): void {
         Debug.LogWarning("Level UISystem Start!!!")
+        let UIExampleComponent = $ExampleComponent()
         UIExampleComponent.Open()
     }
     OnUpdate(): void {
