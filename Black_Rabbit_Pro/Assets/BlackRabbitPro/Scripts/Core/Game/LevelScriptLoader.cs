@@ -11,6 +11,17 @@ public class LevelScriptLoader : Puerts.ILoader
         this.debugRoot = debugRoot;
     }
 
+    private string PathToUse(string filepath)
+    {
+        return
+            // .cjs asset is only supported in unity2018+
+#if UNITY_2018_1_OR_NEWER
+            filepath.EndsWith(".cjs") || filepath.EndsWith(".mjs") ?
+            filepath.Substring(0, filepath.Length - 4) :
+#endif
+                filepath;
+    }
+
     public bool FileExists(string filepath)
     {
         if (filepath.StartsWith("puerts/")) return true;
@@ -20,22 +31,18 @@ public class LevelScriptLoader : Puerts.ILoader
         return File.Exists(Path.Combine(Application.streamingAssetsPath, filepath + ".txt").Replace("\\", "/"));
 #endif
     }
-    public string GetScriptDebugPath(string filepath)
-    {
-        if (filepath.StartsWith("puerts/"))
-        {
-            return Path.Combine(Application.dataPath, "BlackRabbitPro/Libs/Puerts/Src/Resources", filepath).Replace("\\", "/") + ".txt";
-        }
-        return System.IO.Path.Combine(debugRoot, filepath + ".txt").Replace("\\", "/");
-    }
+
 
     public string ReadFile(string filepath, out string debugpath)
     {
-        debugpath = GetScriptDebugPath(filepath);
+
+        debugpath = Path.Combine(debugRoot, filepath);
         if (filepath.StartsWith("puerts/"))
         {
-            var asset = Resources.Load<TextAsset>(filepath);
-            return asset.text;
+            string pathToUse = this.PathToUse(filepath);
+            UnityEngine.TextAsset file = (UnityEngine.TextAsset)UnityEngine.Resources.Load(pathToUse);
+
+            return file == null ? null : file.text;
         }
 #if UNITY_ANDROID
         return File.ReadAllText(Path.Combine(Application.persistentDataPath, filepath + ".txt").Replace("\\", "/"));

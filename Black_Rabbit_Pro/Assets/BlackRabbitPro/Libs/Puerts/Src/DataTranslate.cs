@@ -137,8 +137,16 @@ namespace Puerts
 
         private object JSObjectTranslator(IntPtr isolate, IGetValueFromJs getValueApi, IntPtr value, bool isByRef)
         {
-            IntPtr DLLJSObjectPtr = getValueApi.GetJSObject(isolate, value, isByRef);
-            return jsEnv.jsObjectFactory.GetOrCreateJSObject(DLLJSObjectPtr, jsEnv);
+            var jsValueType = getValueApi.GetJsValueType(isolate, value, isByRef);
+            if (jsValueType == JsValueType.JsObject)
+            {
+                IntPtr DLLJSObjectPtr = getValueApi.GetJSObject(isolate, value, isByRef);
+                return jsEnv.jsObjectFactory.GetOrCreateJSObject(DLLJSObjectPtr, jsEnv);
+            }
+            else
+            {
+                return AnyTranslator(isolate, getValueApi, value, isByRef);
+            }
         }
 
         private object GenericDelegateTranslator(IntPtr isolate, IGetValueFromJs getValueApi, IntPtr value, bool isByRef)
@@ -171,7 +179,7 @@ namespace Puerts
                 case JsValueType.Function:
                     return getValueApi.GetFunction(isolate, value, isByRef);
                 case JsValueType.JsObject:
-                    return getValueApi.GetJSObject(isolate, value, isByRef);
+                    return JSObjectTranslator(isolate, getValueApi, value, isByRef);
                 case JsValueType.NativeObject:
                     var typeId = getValueApi.GetTypeId(isolate, value, isByRef);
                     if (!typeRegister.IsArray(typeId))

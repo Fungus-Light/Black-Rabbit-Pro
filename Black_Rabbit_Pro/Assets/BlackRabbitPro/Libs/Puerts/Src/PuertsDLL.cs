@@ -35,6 +35,11 @@ namespace Puerts
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN || PUERTS_GENERAL || (UNITY_WSA && !UNITY_EDITOR)
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 #endif
+    public delegate string ModuleResolveCallback(string identifer, int jsEnvIdx);
+
+#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN || PUERTS_GENERAL || (UNITY_WSA && !UNITY_EDITOR)
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+#endif
     public delegate void V8DestructorCallback(IntPtr self, long data);
 
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN || PUERTS_GENERAL || (UNITY_WSA && !UNITY_EDITOR)
@@ -45,6 +50,7 @@ namespace Puerts
     [Flags]
     public enum JsValueType
     {
+        Invalid = 0,
         NullOrUndefined = 1,
         BigInt = 2,
         Number = 4,
@@ -57,7 +63,7 @@ namespace Puerts
         Date = 512,
         ArrayBuffer = 1024,
         Unknow = 2048,
-        Any = NullOrUndefined | BigInt | Number | String | Boolean | NativeObject | Array | Function | Date | ArrayBuffer,
+        Any = NullOrUndefined | BigInt | Number | String | Boolean | NativeObject | JsObject | Array | Function | Date | ArrayBuffer,
     };
 
     public class PuertsDLL
@@ -70,6 +76,9 @@ namespace Puerts
 
         [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetLibVersion();
+
+        [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetLibBackend();
 
         [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr CreateJSEngine();
@@ -92,24 +101,35 @@ namespace Puerts
             SetGlobalFunction(isolate, name, fn, data);
         }
 
+        private const int TEMP_STRING_BUFFER_SIZE = 1024;
+
+        [ThreadStatic]
+        private static byte[] s_tempNativeStringBuffer;
+
+        private static byte[] GetTempNativeStringBuff(int strlen)
+        {
+            byte[] buf = s_tempNativeStringBuffer ?? (s_tempNativeStringBuffer = new byte[TEMP_STRING_BUFFER_SIZE]);
+            if (buf.Length < strlen)
+            {
+                return new byte[strlen];
+            }
+            return buf;
+        }
+
+
         private static string GetStringFromNative(IntPtr str, int strlen)
         {
             if (str != IntPtr.Zero)
             {
-#if PUERTS_GENERAL || (UNITY_WSA && !UNITY_EDITOR)
-                byte[] buffer = new byte[strlen];
-                Marshal.Copy(str, buffer, 0, strlen);
-                return Encoding.UTF8.GetString(buffer);
-#else
-                string ret = Marshal.PtrToStringAnsi(str, strlen);
-                if (ret == null)
+#if PUERTS_UNSAFE
+                unsafe
                 {
-                    int len = strlen;
-                    byte[] buffer = new byte[len];
-                    Marshal.Copy(str, buffer, 0, len);
-                    return Encoding.UTF8.GetString(buffer);
+                    return Encoding.UTF8.GetString((byte*)str, strlen);
                 }
-                return ret;
+#else
+                byte[] buffer = GetTempNativeStringBuff(strlen);
+                Marshal.Copy(str, buffer, 0, strlen);
+                return Encoding.UTF8.GetString(buffer, 0, strlen);
 #endif
             }
             else
@@ -143,7 +163,22 @@ namespace Puerts
             SetGeneralDestructor(isolate, fn);
         }
 
-#if PUERTS_GENERAL
+        [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void SetModuleResolver(IntPtr isolate, IntPtr callback, int jsEnvIdx);
+        public static void SetModuleResolver(IntPtr isolate, ModuleResolveCallback callback, int jsEnvIdx)
+        {
+#if PUERTS_GENERAL || (UNITY_WSA && !UNITY_EDITOR)
+            GCHandle.Alloc(callback);
+#endif
+            IntPtr fn = callback == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(callback);
+            SetModuleResolver(isolate, fn, jsEnvIdx);
+        }
+
+
+        [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr ExecuteModule(IntPtr isolate, string path, string exportee);
+
+#if PUERTS_GENERAL && !PUERTS_GENERAL_OSX
         [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr Eval(IntPtr isolate, byte[] code, string path);
 
@@ -170,7 +205,7 @@ namespace Puerts
 #endif
 
         [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int RegisterClass(IntPtr isolate, int BaseTypeId, string fullName, IntPtr constructor, IntPtr destructor, long data);
+        public static extern int _RegisterClass(IntPtr isolate, int BaseTypeId, string fullName, IntPtr constructor, IntPtr destructor, long data);
 
         public static int RegisterClass(IntPtr isolate, int BaseTypeId, string fullName, V8ConstructorCallback constructor, V8DestructorCallback destructor, long data)
         {
@@ -181,7 +216,7 @@ namespace Puerts
             IntPtr fn1 = constructor == null ? IntPtr.Zero: Marshal.GetFunctionPointerForDelegate(constructor);
             IntPtr fn2 = destructor == null ? IntPtr.Zero : Marshal.GetFunctionPointerForDelegate(destructor);
 
-            return RegisterClass(isolate, BaseTypeId, fullName, fn1, fn2, data);
+            return _RegisterClass(isolate, BaseTypeId, fullName, fn1, fn2, data);
         }
 
         [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
@@ -237,7 +272,7 @@ namespace Puerts
         [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ReturnNumber(IntPtr isolate, IntPtr info, double number);
 
-#if PUERTS_GENERAL
+#if PUERTS_GENERAL && !PUERTS_GENERAL_OSX
         [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl, EntryPoint = "ReturnString")]
         public static extern void __ReturnString(IntPtr isolate, IntPtr info, byte[] str);
 #else
@@ -253,7 +288,7 @@ namespace Puerts
             }
             else
             {
-#if PUERTS_GENERAL
+#if PUERTS_GENERAL && !PUERTS_GENERAL_OSX
                 __ReturnString(isolate, info, Encoding.UTF8.GetBytes(str));
 #else
                 __ReturnString(isolate, info, str);
@@ -340,17 +375,35 @@ namespace Puerts
         [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetDateToOutValue(IntPtr isolate, IntPtr value, double date);
 
-#if PUERTS_GENERAL
+#if PUERTS_GENERAL && !PUERTS_GENERAL_OSX
         [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetStringToOutValue(IntPtr isolate, IntPtr value, byte[] str);
 
         public static void SetStringToOutValue(IntPtr isolate, IntPtr value, string str)
         {
-            SetStringToOutValue(isolate, value, Encoding.UTF8.GetBytes(str));
+            if (str == null) 
+            {
+                SetNullToOutValue(isolate, value);
+            }
+            else
+            {
+                SetStringToOutValue(isolate, value, Encoding.UTF8.GetBytes(str));
+            }
         }
 #else
-        [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetStringToOutValue(IntPtr isolate, IntPtr value, string str);
+        [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetStringToOutValue")]
+        protected static extern void __SetStringToOutValue(IntPtr isolate, IntPtr value, string str);
+        public static void SetStringToOutValue(IntPtr isolate, IntPtr value, string str)
+        {
+            if (str == null) 
+            {
+                SetNullToOutValue(isolate, value);
+            }
+            else
+            {
+                __SetStringToOutValue(isolate, value, str);
+            }
+        }
 #endif
 
         [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
@@ -495,6 +548,9 @@ namespace Puerts
 
         [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
         public static extern bool InspectorTick(IntPtr isolate);
+
+        [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void LogicTick(IntPtr isolate);
 
         [DllImport(DLLNAME, CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetLogCallback(IntPtr log, IntPtr logWarning, IntPtr logError);
