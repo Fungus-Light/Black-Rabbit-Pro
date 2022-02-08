@@ -422,6 +422,32 @@ function $Particle(name: string): ParticleSystem;
 
 }
 
+declare module "JS/Utils/EventManager"{
+enum EVENT_INNER {
+    EVENT_NONE = 0,
+    EVENT_END = 50000
+}
+interface TsEvent {
+    Id: number;
+    CallBacks: Map<symbol, Function>;
+    OnceList: Map<symbol, boolean>;
+}
+class EventManagerImplement {
+    EventList: {
+        [index: number]: TsEvent;
+    };
+    constructor();
+    FindEvent(id: number): TsEvent;
+    RegEvent(eventID: number, baseObj: any, callBack: Function): void;
+    RegEvent(eventID: number, baseObj: any, callBack: Function, once: boolean): void;
+    UnRegEvent(eventID: number): void;
+    UnRegEvent(eventID: number, baseObj: any): void;
+    ClearEvent(): void;
+}
+let EventManager: EventManagerImplement;
+
+}
+
 declare module "JS/Utils/GameConfig"{
 import { UnityEngine } from "csharp";
 class GameConfig {
